@@ -1,0 +1,65 @@
+##Dia 25-11-2018 (2 horas) Código
+
+-Foi criado o processo de registo com os diferentes cargos (Admin/Utilizador);
+-HTML feito e php;
+-Implementado verificação de password e segurança da mesma;
+-MD5 BD password;
+-Organização dos ficheiros do projeto;
+
+##Dia 26-11-2018 (Estrutura)
+
+->Hierarquia Admin,Utilizador.
+Diferença do Admin para Utilizador:
+-Admin pode adicionar produtos e adicionar/gerenciar utilizadores da plataforma;
+-Possibilidade de alterar termo Utilizador para Vendedor;
+
+## Dia 27-11-2018 (1h30min) Código/Estrutura
+
+- Página "registarutilizador.php" : os erros dos dados não estão a aparecer de forma correta.
+- Foi corrigido um bug no login , relativamente aos alerts dos erros .
+- Já lista dados dos utilizadores na tabela.
+- Tabela dos clientes criada na BD , falta verificar campos.
+- Adicionar mais dados no "registarutilizador.php" e porventura adicionar perfil de cada utilizador(admin,user)
+de modo que seja editável pelos mesmos. (Por exemplo, alterar nome,NIF,contacto etc.)
+
+
+## Dia 2-12-2018 (2horas) Código/Estrutura
+
+-Alteração de md5 da password para "password_hash($pw1,PASSWORD_BCRYPT)". (segundo pesquisa feita , este hash é mais forte que o do md5)
+-Página "registarutilizador.php" : os erros dos dados não estão a aparecer de forma correta.(CORRIGIDO);
+-criar classe com style para erros;
+
+## Dia 11-12-2018 2 horas (Código e BD)
+
+- Tabela dos clientes criada na BD , falta verificar campos.(FEITO)
+- Adicionar mais dados no "registarutilizador.php" (FEITO) e porventura adicionar perfil de cada utilizador(admin,user)de modo que seja editável pelos mesmos. (Por exemplo, alterar nome,NIF,contacto etc.)
+- BD , tabela clientes alterar campos; adicionar tabela encomendas e produtos. (FEITO)
+- Adicionar h1  na página por exemplo para indicar ao utilizador em que secção está(clientes,utilizador,etc..); (FEITO)
+- Criada as páginas "gerirclientes.php" e "registarcliente.php" só html ; (FALTA PHP)
+- Ver uma maneira caso não se lembre da password utilizador.(Averiguar)
+
+## Dia 12-12-2018 (1h30min) Código/Estrutura
+
+-Admin adiciona clientes de uma forma geral(para todos) enquanto que cada utilizador adiciona para si próprio(em principio);
+-Adicionado um modal de password perdida;
+-Sinalização de página tratada minimamente;
+-Problema nos erros na "Página "registarutilizador.php";(php tem de estar dps do html para style dos warns funcionarem)
+
+
+## Dia 27-12-2018 (1h30min) Código
+
+-"registarcliente.php" php feito , falta relações tabelas , id do utilizador não aparece na tabela dos clientes;
+-envio do id para BD pode ser prob no código, enviar na querie variável global do id.
+
+## Dia 9-01-2019 (1h)
+
+-Página dos produtos apresentar uma tabela com os produtos e os preços.Haver possibilidade de o administrador/gestor alterar o preço dos produtos.(manipular produtos)
+-inicio da página perfil,imagem upload;
+-header registarcliente not working quando cliente adicionado ; "Cannot modify headers information"
+
+## Dia 10-01-2019 (1h)
+
+-Novo script para comparação de passwords;
+-Página perfil melhor estruturada(já vai buscar os values à BD para apresentar nos campos do perfil);
+-Falta algumas funções no perfil;(alterar password,eliminar conta,submeter os campos para a BD); <PHP>
+

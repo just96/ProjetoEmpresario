@@ -4,6 +4,7 @@ session_start();
 if ($_SESSION['role'] != 'admin'){
   header( "Location:../utilizador/log.php" );
 }
+$teste = "null";
 ?>
 <!DOCTYPE html>
 <html lang="en">

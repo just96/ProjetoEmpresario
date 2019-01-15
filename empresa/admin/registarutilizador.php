@@ -225,7 +225,7 @@ if(isset($_POST['add_user'])){
     ?>
     <div class="container">
       <div class="alert alert-danger" role="alert">
-       O Utilizador tem de ter pelo menos 5 caracteres.
+       O nome de utilizador tem de ter pelo menos 5 caracteres.
      </div>
    </div>
    <?php

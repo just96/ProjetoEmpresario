@@ -63,3 +63,8 @@ de modo que seja editável pelos mesmos. (Por exemplo, alterar nome,NIF,contacto 
 -Página perfil melhor estruturada(já vai buscar os values à BD para apresentar nos campos do perfil);
 -Falta algumas funções no perfil;(alterar password,eliminar conta,submeter os campos para a BD); <PHP>
 
+## 14-01-2019 (2h)
+
+-"perfil.php" funcionalidades ainda incompletas.
+-arranjar pagina "404 not found"(ideia).
+-warnings no modal not working.

@@ -6,6 +6,7 @@ if ($_SESSION['role'] != 'admin'){
 
 $id = $_SESSION['id'];
 
+
 include("../conectar_bd.php");
 $sqldata ="SELECT nome_completo,nome,email,num_fiscal,num_telefone,user_type FROM `utilizadores` WHERE id_user='$id'";
 $result= mysqli_query($connection,$sqldata);
@@ -64,7 +65,7 @@ $result= mysqli_query($connection,$sqldata);
 
 </style>
 <body>
-  <?php require('topfooterA.php');?>
+  <?php require('../admin/topfooterA.php');?>
   <div class="container" style="margin-top: 70px;margin-right:250px;">
     <div class="row">
       <div class="col-md-9">
@@ -131,7 +132,7 @@ $result= mysqli_query($connection,$sqldata);
                     </div>
                     <div class="form-group row">
                       <div class="offset-4 col-8">
-                        <button name="submit" type="submit" class="btn btn-primary">Atualizar perfil</button>
+                        <button id="btnpEdit" name="btnpEdit" type="submit" class="btn btn-primary" onclick="return confirm('De certeza que quer editar o seu perfil?');">Atualizar perfil</button>
                       </div>
                     </div>
                     <?php
@@ -142,8 +143,94 @@ $result= mysqli_query($connection,$sqldata);
               }
               ?>
               <hr>
-              <p><a href="#">Alterar password</a></p>
-              <p><a href="#">Eliminar Conta</a></p>
+              <a href="#" data-target="#exampleModalA" data-toggle="modal">Alterar password</a>
+              <form method="POST" action="#">
+                <div class="modal fade" id="exampleModalA" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Alterar password</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="col-md-12">
+                          <div class="panel panel-default">
+                            <div class="panel-body">
+                              <div class="text-center">
+                                <h5>Password atual</h5>
+                                <div class="panel-body">
+                                  <fieldset>
+                                    <div class="form-group">
+                                      <input id ="pwp" class="form-control input-lg" placeholder="Inserir password atual" name="pwp" type="password">
+                                    </div>
+                                    <h5>Password nova</h5>
+                                    <div class="form-group">
+                                      <input id ="pwn1" class="form-control input-lg" placeholder="Inserir password nova" name="pwn1" type="password">
+                                    </div>
+                                    <h5>Confirmar password nova</h5>
+                                    <div class="form-group">
+                                      <input id ="pwn2" class="form-control input-lg" placeholder="Confirmar password" name="pwn2" type="password">
+                                    </div>
+                                  </fieldset>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary" id="btnApw">Alterar password</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <p></p>
+              <a href="#" data-target="#exampleModalE" data-toggle="modal">Eliminar Conta</a>
+              <div class="modal fade" id="exampleModalE" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Eliminar Conta</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="col-md-12">
+                        <div class="panel panel-default">
+                          <div class="panel-body">
+                            <div class="text-center">
+                              <hr>
+                              <div class="alert alert-danger" role="alert">
+                                <strong>Aviso!<p></p></strong>Com esta ação perde o acesso à conta e todos os dados dentro da mesma.
+                              </div>
+                              <hr>
+                              <h5>Password</h5>
+                              <form id="form_acc" method="POST" action="#">
+                                <div class="panel-body">
+                                  <fieldset>
+                                    <div class="form-group">
+                                      <input id="pwe" class="form-control input-lg" placeholder="Inserir password" name="pwe" type="password">
+                                    </div>
+                                  </fieldset>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button name ="btnEacc" id="btnEacc" type="submit" class="btn btn-primary" onclick="return confirm('De certeza que quer apagar o seu perfil?');" >Eliminar conta</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -168,6 +255,11 @@ $result= mysqli_query($connection,$sqldata);
 </html>
 
 <?php
+
+$sql ="SELECT * FROM utilizadores WHERE id_user='$id'";
+$query = mysqli_query($connection,$sql);
+$row = mysqli_fetch_array($query);
+
 // IMAGEM ver dps
 /*$msg ="";
   // se o botão upload foi premido
@@ -188,5 +280,68 @@ if(isset($_POST['upload'])){
     $msg = "Houve um problema no upload da imagem!";
   }
 }*/
+
+if(isset($_POST['btnpEdit'])) {       // Editar perfil
+
+//Instrução SQL para selecionar diferentes dados
+
+   $nome = $_POST['name']; // definir as variáveis , POST
+   $username = $_POST['user'];
+   $email = $_POST['email'];
+   $nif = $_POST['nif'];
+   $ntele = $_POST['ntele'];
+
+  // SQL para fazer update na tabela dos utilizadores
+
+   $sqleditperfil = "UPDATE `utilizadores` SET nome_completo='$nome', nome='$username', email='$email', num_fiscal='$nif', num_telefone='$ntele' WHERE id_user='$id'";
+
+   mysqli_query($connection,$sqleditperfil);
+   ?>  
+   <div class="alert alert-success" role="alert">
+    Alterações guardadas!
+  </div>
+  <?php
+  header("Location=../admin/index.php");
+}
+
+
+if(isset($_POST['btnEacc'])) {   //Eliminar conta
+
+  $password = $_POST['pwe'];
+
+  $bd_password = $row['password'];
+
+  if(empty($password)){
+    ?>
+    <div class="modal-body">
+      <div class="alert alert-warning" role="alert">
+        Insira a sua password!
+      </div>
+    </div>
+    <?php
+  }
+
+  if(password_verify($password,$bd_password)){
+
+    $apagarconta = "DELETE FROM `utilizadores` WHERE id_user='$id'";
+
+    mysqli_query($connection,$apagarconta);
+    ?>
+    <div class="alert alert-success" role="alert">
+      Conta eliminada com sucesso!
+    </div>
+    <?php
+    header("refresh:1;url=../utilizador/logout.php");
+  }else{
+    ?>
+    <div class="container">
+      <div class="alert alert-danger" role="alert">
+        Password errada!
+      </div>
+    </div>
+    <?php
+  }
+}
+
 
 ?>

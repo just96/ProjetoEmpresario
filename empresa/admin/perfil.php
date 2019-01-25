@@ -6,7 +6,6 @@ if ($_SESSION['role'] != 'admin'){
 
 $id = $_SESSION['id'];
 
-
 include("../conectar_bd.php");
 $sqldata ="SELECT nome_completo,nome,email,num_fiscal,num_telefone,user_type FROM `utilizadores` WHERE id_user='$id'";
 $result= mysqli_query($connection,$sqldata);
@@ -319,6 +318,7 @@ if(isset($_POST['btnEacc'])) {   //Eliminar conta
       </div>
     </div>
     <?php
+    return;
   }
 
   if(password_verify($password,$bd_password)){
@@ -331,6 +331,7 @@ if(isset($_POST['btnEacc'])) {   //Eliminar conta
       Conta eliminada com sucesso!
     </div>
     <?php
+    return;
     header("refresh:1;url=../utilizador/logout.php");
   }else{
     ?>
@@ -340,6 +341,7 @@ if(isset($_POST['btnEacc'])) {   //Eliminar conta
       </div>
     </div>
     <?php
+    return;
   }
 }
 

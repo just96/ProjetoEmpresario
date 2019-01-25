@@ -40,7 +40,8 @@ if ($_SESSION['role'] != 'admin'){
 </style>
 
 <body>
-	<?php require('topfooterA.php');?>
+	<?php if ($_SESSION['role'] == 'admin'){ require('topfooterA.php');}
+	else require('topfooter.php');?>
 
 	<div class="container center_div">
 		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

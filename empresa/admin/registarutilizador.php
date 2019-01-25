@@ -209,8 +209,8 @@ if(isset($_POST['add_user'])){
 
   $sql_fetch_username = "SELECT nome FROM utilizadores WHERE nome = '$username'";
   $sql_fetch_email = "SELECT email FROM utilizadores WHERE email = '$email'";
-  $sql_fetch_n_fiscal = "SELECT num_fiscal FROM utilizadores WHERE num_fiscal = '$n_fiscal'";
-  $sql_fetch_n_telefone = "SELECT num_telefone FROM utilizadores WHERE num_telefone  = '$n_telefone'";
+  $sql_fetch_n_fiscal = "SELECT num_fiscal FROM utilizadores WHERE num_fiscal = '$n_fiscal' AND num_fiscal = 'IS NOT NULL'";
+  $sql_fetch_n_telefone = "SELECT num_telefone FROM utilizadores WHERE num_telefone  = '$n_telefone' AND num_telefone = 'IS NOT NULL'";
 
   //usado para comparar o nome/email de utilizador introduzido com os da base de dados.
 
@@ -220,19 +220,41 @@ if(isset($_POST['add_user'])){
   $query_n_telefone = mysqli_query($connection,$sql_fetch_n_telefone);
 
   // if statments para verificar campos
-
-  if (strlen($username)<=4){
+  if(!empty($n_fiscal) AND strlen($n_fiscal)<9)
+  {
     ?>
     <div class="container">
       <div class="alert alert-danger" role="alert">
-       O nome de utilizador tem de ter pelo menos 5 caracteres.
+        NIF tem de ter 9 digitos!
+      </div>
+    </div>
+    <?php
+    return;
+  }
+
+  if(!empty($n_telefone) AND strlen($n_telefone)<9){
+    ?>
+    <div class="container">
+      <div class="alert alert-danger" role="alert">
+       Número de telefone tem de ter 9 digitos!
      </div>
    </div>
    <?php
    return;
  }
 
- if (mysqli_num_rows($query_username)){
+ if (strlen($username)<=4){
+  ?>
+  <div class="w-25 bg-warning">
+    <div class="alert alert-danger" role="alert">
+     O nome de utilizador tem de ter pelo menos 5 caracteres.
+   </div>
+ </div>
+ <?php
+ return;
+}
+
+if (mysqli_num_rows($query_username)){
   ?>
   <div class="container">
     <div class="alert alert-danger" role="alert">
@@ -335,6 +357,6 @@ mysqli_query($connection,"INSERT INTO `utilizadores`(`nome`, `email`, `user_type
   </div>
 </div>
 <?php  
-header("Location:../admin/index.php");
+header("location: index.php");
 }
 ?>

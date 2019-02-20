@@ -417,7 +417,7 @@ if(isset($_POST['btnApw'])){
       </div>
     </div>
     <?php  
-    header("location: index.php");
+    header('refresh:2;url=logout.php');
   }else{
     ?> 
     <div class="container"> 

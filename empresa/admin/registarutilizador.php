@@ -106,7 +106,7 @@ if ($_SESSION['role'] != 'admin'){
                   <hr>
                   <p>
                     <button type="button" class="btn btn-light dropdown-toggle" data-target="#collapseExample" aria-controls="collapseExample" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
-                     Ver política dos dados
+                     Ver política de dados
                    </button>
                  </p>
                  <div class="collapse" id="collapseExample">
@@ -117,7 +117,7 @@ if ($_SESSION['role'] != 'admin'){
                     </dl>
                     <dl>
                       <dt>Password</dt>
-                      <dd>-Mínimo 8 carateres,Máximo 20 e tem de ter pelo menos um símbolo,número,letra minúscula e maiúscula. </dd>
+                      <dd>-Password entre 8 e 20 carateres e tem de ter pelo menos um símbolo,número,letra minúscula e maiúscula. </dd>
                     </dl>
                     <strong>*Campos obrigatórios</strong>
                   </div>

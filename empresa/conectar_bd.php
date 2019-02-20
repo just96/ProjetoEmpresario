@@ -4,7 +4,7 @@
 $host = 'localhost';
 $user = 'root';
 $pass = '';
-$database = 'bd_geral';
+$database = 'bd_empresa';
 
 $connection = mysqli_connect($host, $user, $pass, $database);
 if (!$connection){

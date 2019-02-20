@@ -68,3 +68,12 @@ de modo que seja editável pelos mesmos. (Por exemplo, alterar nome,NIF,contacto 
 -"perfil.php" funcionalidades ainda incompletas.
 -arranjar pagina "404 not found"(ideia).
 -warnings no modal not working.
+
+## 9-02-19 (BD)
+
+- utf8_unicode_ci https://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
+
+## 19-02-19
+
+-ob_start(); (parece resolver problema do "Cannot modify headers information");
+-alterar password e eliminar conta funcional no "perfil.php";

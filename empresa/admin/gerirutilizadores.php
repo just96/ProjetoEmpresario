@@ -8,7 +8,6 @@ include("../conectar_bd.php");
 // SELECT no SQL para selecionar os dados a serem imprimidos na tabela
 $sql = "SELECT nome,email,user_type,num_fiscal,num_telefone FROM `utilizadores`";
 $result = mysqli_query($connection, $sql);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

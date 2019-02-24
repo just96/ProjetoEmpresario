@@ -1,3 +1,13 @@
+Plataforma para empresários com gestão de clientes e encomendas.
+
+2 Intervenientes: Utilizador comum(empresário);Admin
+
+Empresário: gere(adicionar;editar;eliminar) os seus clientes e as suas encomendas, cada empresário tem o seu perfil.
+Admin: gere os clientes comuns a todos os empresários, gere os empresários da plataforma
+
+
+###########
+
 ##Dia 25-11-2018 (2 horas) Código
 
 -Foi criado o processo de registo com os diferentes cargos (Admin/Utilizador);

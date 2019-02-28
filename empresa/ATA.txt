@@ -5,6 +5,8 @@ Plataforma para empresários com gestão de clientes e encomendas.
 Empresário: gere(adicionar;editar;eliminar) os seus clientes e as suas encomendas, cada empresário tem o seu perfil.
 Admin: gere os clientes comuns a todos os empresários, gere os empresários da plataforma
 
+Trabalhar com ficheiros/imagens(gerar pdf,guardar).
+
 
 ###########
 

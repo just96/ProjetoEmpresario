@@ -21,8 +21,6 @@ $result = mysqli_query($connection, $sql);
   <h1 align="center">Utilizadores</h1>
   <hr>
   <div class="container mt-3">
-    <h2>Gestão</h2>
-    <p></p>
     <input class="form-control" id="myInput" type="text" placeholder="Procurar...">
     <br>
     <?php if ($result->num_rows > 0) {?>

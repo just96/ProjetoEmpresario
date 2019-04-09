@@ -22,8 +22,6 @@ $result = mysqli_query($connection, $sql);
   <h1 align="center">Clientes</h1>
   <hr>
   <div class="container mt-3">
-    <h2>Gestão</h2>
-    <p></p>
     <input class="form-control" id="myInput" type="text" placeholder="Procurar...">
     <br>
     <?php if ($result->num_rows > 0) {?>
@@ -47,7 +45,15 @@ $result = mysqli_query($connection, $sql);
           }?>
         </tbody>
       </table>
-    <?php }?>
+    <?php }else{?>
+      <div class="container">
+        <div class="alert alert-danger" style="top:10px;" role="alert">
+          <strong>Não há clientes registados!</strong>
+        </div> 
+      </div>
+      <?php
+    }
+    ?>
   </div>
   <script> // Script para método Search , procurar dados na tabela.
   $(document).ready(function(){

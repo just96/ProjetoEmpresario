@@ -56,7 +56,8 @@ ob_start();
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="../admin/encomenda.php">Nota de Encomenda</a>
-              <a class="dropdown-item" href="#">Histórico de Encomendas</a>
+              <a class="dropdown-item" href="../admin/ver_encomendas.php">Ver Encomendas</a>
+              <a class="dropdown-item" href="../admin/hist_encomendas.php">Histórico de Encomendas</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -73,8 +74,8 @@ ob_start();
               Produtos
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Ver Produtos</a>
-              <a class="dropdown-item" href="#">Adicionar Produtos</a>
+              <a class="dropdown-item" href="../admin/add_produto.php">Adicionar Produtos</a>
+              <a class="dropdown-item" href="../admin/ver_produtos.php">Ver Produtos</a>
             </div>
           </li>
           <li class="nav-item dropdown">

@@ -14,7 +14,7 @@ $row=mysqli_fetch_array($result);
 </head>
 <?php require('topfooterA.php');?>
 <body>
-	<h1 align="center">Encomenda</h1>
+	<h1 align="center">Encomendas</h1>
 	<hr>
 	<?php if ($result->num_rows > 0) {?>
 		<div class="container">
@@ -39,7 +39,15 @@ $row=mysqli_fetch_array($result);
 					</div>
 				</div>
 			</form>
-		<?php }?>
+		<?php }else{?>
+			<div class="container">
+				<div class="alert alert-danger" style="top:10px;" role="alert">
+					<strong>Não há clientes registados!</strong>
+				</div> 
+			</div>
+			<?php
+		}
+		?>
 	</div>
 </body>
 </html>

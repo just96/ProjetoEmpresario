@@ -4,6 +4,7 @@ session_start();
 if ($_SESSION['role'] != 'admin'){
   header( "Location:../utilizador/log.php" );
 }
+$id = $_SESSION['id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +30,7 @@ if ($_SESSION['role'] != 'admin'){
           <div class="card-body">
             <div class="row">
               <div class="col-md-12">
-                <h4>Registo</h4>
+                <h4>Registar Cliente</h4>
                 <hr>
               </div>
             </div>
@@ -237,7 +238,7 @@ if(isset($_POST['add_client'])){
     return;
   }
 
-  mysqli_query($connection,"INSERT INTO `clientes`(`nome_fiscal`, `nome_comercial`, `tipo`, `morada`, `localidade`, `codigo_postal`, `num_fiscal`, `num_telefone`, `email`,`obs`) VALUES ('$nome_fiscal','$nome_comercial','$tipo','$morada','$localidade','$codigo_postal','$num_fiscal','$num_telefone','$email','$comentario')") or die(mysqli_error($connection));
+  mysqli_query($connection,"INSERT INTO `clientes`(`id_utilizador`,`nome_fiscal`, `nome_comercial`, `tipo`, `morada`, `localidade`, `codigo_postal`, `num_fiscal`, `num_telefone`, `email`,`obs`) VALUES ('$id','$nome_fiscal','$nome_comercial','$tipo','$morada','$localidade','$codigo_postal','$num_fiscal','$num_telefone','$email','$comentario')") or die(mysqli_error($connection));
 
   ?>
   <div class="container">
@@ -247,6 +248,6 @@ if(isset($_POST['add_client'])){
   </div>
 
   <?php  
-  header("refresh:1;url=../admin/index.php");
+  header('Refresh:1; url=index.php');
 }
 ?>

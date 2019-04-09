@@ -31,7 +31,7 @@ if ($_SESSION['role'] != 'admin'){
           <div class="card-body">
             <div class="row">
               <div class="col-md-12">
-                <h4>Registo</h4>
+                <h4>Registar Utilizador</h4>
                 <hr>
               </div>
             </div>
@@ -158,7 +158,7 @@ if(isset($_POST['add_user'])){
 
   include("../conectar_bd.php");
 
-  $username = strip_tags($_POST['username']);   //strip_tags para retirar das variais exemplo <b>
+  $username = strip_tags($_POST['username']);   // remove tags de html e php exemplo <br>
   $email = strip_tags($_POST['email']);
   $cargo = strip_tags($_POST['role']);
   $n_fiscal = strip_tags($_POST['n_fiscal']);
@@ -334,6 +334,6 @@ mysqli_query($connection,"INSERT INTO `utilizadores`(`nome`, `email`, `user_type
   </div>
 </div>
 <?php  
-header("refresh:1;location: index.php");
+header("Refresh:1; url=index.php");
 }
 ?>

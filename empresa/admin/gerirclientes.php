@@ -17,14 +17,15 @@ $result = mysqli_query($connection, $sql);
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
-  <?php require('topfooterA.php');?>
-  <h1 align="center">Clientes</h1>
-  <hr>
-  <div class="container mt-3">
-    <input class="form-control" id="myInput" type="text" placeholder="Procurar...">
-    <br>
-    <?php if ($result->num_rows > 0) {?>
+
+<?php require('topfooterA.php');
+if ($result->num_rows > 0) {?>
+  <body>
+    <h1 align="center">Clientes</h1>
+    <hr>
+    <div class="container-fluid">
+      <input class="form-control" id="myInput" type="text" placeholder="Procurar...">
+      <br>
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -37,24 +38,30 @@ $result = mysqli_query($connection, $sql);
             <th>NIF</th>
             <th>Telefone</th>
             <th>Email</th>
+            <th>Editar</th>
+            <th>Apagar</th>
           </tr>
         </thead>
         <tbody id="myTable">
           <?php while($row = $result->fetch_assoc()) {
-            echo "<tr><td>" . $row["nome_fiscal"]. "</td><td>" . $row["nome_comercial"]. "</td><td>" . $row["tipo"]. "</td><td>". $row["morada"]. "</td><td>" . $row["localidade"]. "</td><td>" . $row["codigo_postal"]. "</td><td>" . $row["num_fiscal"]. "</td><td>" . $row["num_telefone"]."</td><td>" . $row["email"] ."</td></tr>";
-          }?>
-        </tbody>
-      </table>
-    <?php }else{?>
-      <div class="container">
-        <div class="alert alert-danger" style="top:10px;" role="alert">
-          <strong>Não há clientes registados!</strong>
-        </div> 
-      </div>
-      <?php
-    }
-    ?>
-  </div>
+            echo "<tr><td>" . $row["nome_fiscal"]. "</td><td>" . $row["nome_comercial"]. "</td><td>" . $row["tipo"]. "</td><td>". $row["morada"]. "</td><td>" . $row["localidade"]. "</td><td>" . $row["codigo_postal"]. "</td><td>" . $row["num_fiscal"]. "</td><td>" . $row["num_telefone"]."</td><td>" . $row["email"] ."</td>"?><td><a href="#"><img border="0" src="../img/baseline_edit_black_18dp.png" href="#"></a></td>
+              <td><a href="#"><img border="0" src="../img/baseline_delete_black_18dp.png" href="#"></a></td></tr><?php
+            };?>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-warning">Gerar PDF&nbsp<img src="../img/pdf.png" width="30" height="30"></img></button>
+        </div>
+      <?php }else{?>
+        <div class="container">
+          <div class="alert alert-danger" style="top:10px;" role="alert">
+            <strong>Não há clientes registados!</strong>
+          </div> 
+        </div>
+        <?php
+      }
+      ?>
+    </div>
   <script> // Script para método Search , procurar dados na tabela.
   $(document).ready(function(){
     $("#myInput").on("keyup", function() {

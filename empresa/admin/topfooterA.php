@@ -13,7 +13,6 @@ ob_start();
 
   <title>TopFooter</title>
 
-  
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -29,6 +28,7 @@ ob_start();
 
   <!-- Responsive CSS -->
   <link href="css/responsive.css" rel="stylesheet"> 
+  <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -75,7 +75,7 @@ ob_start();
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="../admin/add_produto.php">Adicionar Produtos</a>
-              <a class="dropdown-item" href="../admin/ver_produtos.php">Ver Produtos</a>
+              <a class="dropdown-item" href="../admin/ver_produtos.php">Gerir Produtos</a>
             </div>
           </li>
           <li class="nav-item dropdown">

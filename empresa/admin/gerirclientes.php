@@ -6,7 +6,7 @@ if ($_SESSION['role'] != 'admin'){
 }
 include("../conectar_bd.php");
 // SELECT no SQL para selecionar os dados a serem imprimidos na tabela
-$sql = "SELECT nome_fiscal,nome_comercial,tipo,morada,localidade,codigo_postal,num_fiscal,num_telefone,email FROM `clientes`";
+$sql = "SELECT id_cliente,nome_fiscal,nome_comercial,tipo,morada,localidade,codigo_postal,num_fiscal,num_telefone,email FROM `clientes`";
 $result = mysqli_query($connection, $sql);
 ?>
 
@@ -44,8 +44,8 @@ if ($result->num_rows > 0) {?>
         </thead>
         <tbody id="myTable">
           <?php while($row = $result->fetch_assoc()) {
-            echo "<tr><td>" . $row["nome_fiscal"]. "</td><td>" . $row["nome_comercial"]. "</td><td>" . $row["tipo"]. "</td><td>". $row["morada"]. "</td><td>" . $row["localidade"]. "</td><td>" . $row["codigo_postal"]. "</td><td>" . $row["num_fiscal"]. "</td><td>" . $row["num_telefone"]."</td><td>" . $row["email"] ."</td>"?><td><a href="#"><img border="0" src="../img/baseline_edit_black_18dp.png" href="#"></a></td>
-              <td><a href="#"><img border="0" src="../img/baseline_delete_black_18dp.png" href="#"></a></td></tr><?php
+            echo "<tr><td>". $row["nome_fiscal"]. "</td><td>" . $row["nome_comercial"]. "</td><td>" . $row["tipo"]. "</td><td>". $row["morada"]. "</td><td>" . $row["localidade"]. "</td><td>" . $row["codigo_postal"]. "</td><td>" . $row["num_fiscal"]. "</td><td>" . $row["num_telefone"]."</td><td>" . $row["email"] ."</td>"?><td><a href="#"><img border="0" src="../img/baseline_edit_black_18dp.png" href="#"></a></td>
+              <td><a onclick="return confirm('Deseja apagar este cliente?')" href="funcoes.php?funcao=ApagarCliente&id_geral=<?php echo $row["id_cliente"]?>"><img border="0" src="../img/baseline_delete_black_18dp.png" href="#"></a></td></tr><?php
             };?>
           </tbody>
         </table>

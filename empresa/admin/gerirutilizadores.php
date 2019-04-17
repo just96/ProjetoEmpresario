@@ -6,7 +6,7 @@ if ($_SESSION['role'] != 'admin'){
 }
 include("../conectar_bd.php");
 // SELECT no SQL para selecionar os dados a serem imprimidos na tabela
-$sql = "SELECT nome,email,user_type,num_fiscal,num_telefone FROM `utilizadores`";
+$sql = "SELECT id_user,nome,email,user_type,num_fiscal,num_telefone FROM `utilizadores`";
 $result = mysqli_query($connection, $sql);
 ?>
 <!DOCTYPE html>
@@ -39,7 +39,7 @@ if ($result->num_rows > 0) {?>
         <tbody id="myTable">
           <?php while($row = $result->fetch_assoc()) {
             echo "<tr><td>" . $row["nome"]. "</td><td>" . $row["email"]. "</td><td>" . $row["user_type"]. "</td><td>" . $row["num_fiscal"]. "</td><td>" . $row["num_telefone"]. "</td>"?><td><a href="#"><img border="0" src="../img/baseline_edit_black_18dp.png" href="#"></a></td>
-              <td><a href="#"><img border="0" src="../img/baseline_delete_black_18dp.png" href="#"></a></td></tr><?php
+              <td><a onclick="return confirm('Deseja apagar este utilizador?')" href="funcoes.php?funcao=ApagarUtilizador&id_geral=<?php echo $row["id_user"] ?>"><img border="0" src="../img/baseline_delete_black_18dp.png" href="#"></a></td></tr><?php
             };?>
           </tbody>
         </table>

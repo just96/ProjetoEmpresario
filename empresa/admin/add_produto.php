@@ -70,8 +70,8 @@ if(isset($_POST['add_produto'])){
 
 	//usado para comparar o nome/email de utilizador introduzido com os da base de dados.
 
-	$query_nome_produto = mysqli_query($connection,$sql_fetch_nome_produto); 
-	$query_codigo_produto = mysqli_query($connection,$sql_fetch_codigo_produto);
+	$query_nome_produto = mysqli_query($connection,$sql_fetch_nome_produto) or die(mysql_error());; 
+	$query_codigo_produto = mysqli_query($connection,$sql_fetch_codigo_produto) or die(mysql_error());;
 
 	if (mysqli_num_rows($query_nome_produto)){
 		?>
@@ -102,6 +102,6 @@ if(isset($_POST['add_produto'])){
 		</div>
 	</div>
 	<?php  
-	header("Refresh:1; url=add_produto.php");
+	header("Refresh:2; url=ver_produtos.php");
 }
 ?>

@@ -6,8 +6,8 @@ if ($_SESSION['role'] != 'admin'){
 }
 include("../conectar_bd.php");
 // SELECT no SQL para selecionar os dados a serem imprimidos na tabela
-$sql = "SELECT nome_produto,valor,codigo_produto,descricao,data FROM `produtos`";
-$result = mysqli_query($connection, $sql);
+$sql = "SELECT id_produto,nome_produto,valor,codigo_produto,descricao,data FROM `produtos` ORDER BY id_produto ASC;";
+$result = mysqli_query($connection, $sql) or die(mysql_error());
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,7 +29,7 @@ if ($result->num_rows > 0) {
 						<th>Referência</th>
 						<th>Nome do Produto</th>
 						<th>Descrição do Produto</th>
-						<th>Preço</th>
+						<th>Preço €</th>
 						<th>Data em que foi adicionado</th>
 						<th>Editar</th>
 						<th>Apagar</th>
@@ -37,9 +37,10 @@ if ($result->num_rows > 0) {
 				</thead>
 				<tbody id="myTable">
 					<?php while($row = $result->fetch_assoc()) {
-						echo "<tr><td>" . $row["codigo_produto"]. "</td><td>" . $row["nome_produto"]. "</td><td>" . $row["descricao"]. "</td><td>". $row["valor"]. "</td><td>" . $row["data"]. "</td>"?><td><a href="#"><img border="0" src="../img/baseline_edit_black_18dp.png" href="#"></a></td>
-							<td><a href="#"><img border="0" src="../img/baseline_delete_black_18dp.png" href="#"></a></td></tr><?php
-						};?>
+						echo "<tr><td>". $row["codigo_produto"]. "</td><td>" . $row["nome_produto"]. "</td><td>" . $row["descricao"]. "</td><td>". $row["valor"]. "</td><td>" . $row["data"]. "</td>"?><td>
+							<a href="#"><img border="0" src="../img/baseline_edit_black_18dp.png"></a></td>
+							<td><a onclick="return confirm('Deseja apagar este produto?')" href="funcoes.php?funcao=ApagarProduto&id_geral=<?php echo $row["id_produto"] ?>"><img border="0" src="../img/baseline_delete_black_18dp.png"></a></td></tr><?php
+						};?> 
 					</tbody>
 				</table>
 				<div class="d-flex justify-content-center">
@@ -55,6 +56,7 @@ if ($result->num_rows > 0) {
 			}
 			?>
 		</div>
+
   <script> // Script para método Search , procurar dados na tabela.
   $(document).ready(function(){
   	$("#myInput").on("keyup", function() {
@@ -64,7 +66,11 @@ if ($result->num_rows > 0) {
   		});
   	});
   });
+
 </script>
 </body>
 
 </html>
+
+
+

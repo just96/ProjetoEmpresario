@@ -101,7 +101,7 @@ $id = $_SESSION['id'];
                   </div>
                   <div class="form-group row">
                     <div class="offset-4 col-8">
-                      <button name="add_client" type="submit" class="btn btn-primary">Adicionar Cliente</button>
+                      <button onclick="return confirm('Tem a certeza que quer adicionar?')" name="add_client" type="submit" class="btn btn-primary">Adicionar Cliente</button>
                     </div>
                   </div>
                   <hr>

@@ -33,7 +33,7 @@ if ($_SESSION['role'] != 'admin'){
 				<label for="descricao" class="col-4 col-form-label">Descrição do Produto</label> 
 				<textarea class="form-control here" row="10" cols="60" name="descricao"></textarea>
 			</div>
-			<button name ="add_produto" type="submit" class="btn btn-primary">Adicionar Produto</button>
+			<button onclick="return confirm('Tem a certeza que quer adicionar?')" name ="add_produto" type="submit" class="btn btn-primary">Adicionar Produto</button>
 		</form>
 	</div>
 

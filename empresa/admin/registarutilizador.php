@@ -86,7 +86,7 @@ if ($_SESSION['role'] != 'admin'){
                   </div> 
                   <div class="form-group row">
                     <div class="offset-4 col-8">
-                      <button name="add_user" type="submit" class="btn btn-primary">Adicionar Cliente</button>
+                      <button onclick="return confirm('Tem a certeza que quer adicionar?')" name="add_user" type="submit" class="btn btn-primary">Adicionar Utilizador</button>
                     </div>
                   </div>
                   <hr>

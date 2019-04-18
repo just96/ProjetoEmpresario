@@ -169,7 +169,7 @@ $result= mysqli_query($connection,$sqldata);
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                          <button type="submit" class="btn btn-primary" id="btnApw" name="btnApw">Alterar password</button>
+                          <button onclick="return confirm('Alterar a password?')" type="submit" class="btn btn-primary" id="btnApw" name="btnApw">Alterar password</button>
                         </div>
                       </div>
                     </div>

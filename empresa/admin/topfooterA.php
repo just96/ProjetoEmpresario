@@ -39,7 +39,7 @@ ob_start();
 </style>
 
 <body>
-
+  
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
     <a class="navbar-brand" href="../admin/index.php"><img src="../img/home.png" alt="Avatar" width="35" height="35"></a>
@@ -78,6 +78,15 @@ ob_start();
               <a class="dropdown-item" href="../admin/ver_produtos.php">Gerir Produtos</a>
             </div>
           </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Materiais de Apoio
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Adicionar Material de Apoio</a>
+              <a class="dropdown-item" href="#">Gerir Materiais de Apoio</a>
+            </div>
+          </li> 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Utilizadores

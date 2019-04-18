@@ -38,7 +38,7 @@ if ($result->num_rows > 0) {
 				<tbody id="myTable">
 					<?php while($row = $result->fetch_assoc()) {
 						echo "<tr><td>". $row["codigo_produto"]. "</td><td>" . $row["nome_produto"]. "</td><td>" . $row["descricao"]. "</td><td>". $row["valor"]. "</td><td>" . $row["data"]. "</td>"?><td>
-							<a href="#"><img border="0" src="../img/baseline_edit_black_18dp.png"></a></td>
+							<a onclick="return confirm('Editar este produto?')" href="funcoes.php?funcao=EditarProduto&id_geral=<?php echo $row["id_produto"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png"></a></td>
 							<td><a onclick="return confirm('Deseja apagar este produto?')" href="funcoes.php?funcao=ApagarProduto&id_geral=<?php echo $row["id_produto"] ?>"><img border="0" src="../img/baseline_delete_black_18dp.png"></a></td></tr><?php
 						};?> 
 					</tbody>

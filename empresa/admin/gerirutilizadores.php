@@ -12,15 +12,16 @@ $result = mysqli_query($connection, $sql);
 
 <title>Gerir Utilizadores</title>
 
+
 <?php require('topfooterA.php');
+require('filtros.php');
 if ($result->num_rows > 0) {?>
   <body>
     <h1 align="center">Utilizadores</h1>
     <hr>
+    <br>
     <div class="container-fluid">
-      <input class="form-control" id="myInput" type="text" placeholder="Procurar...">
-      <br>
-      <table class="table table-bordered">
+      <table id ="minhaTabela" class="table table-bordered">
         <thead>
           <tr>
             <th>Nome</th>
@@ -52,16 +53,5 @@ if ($result->num_rows > 0) {?>
       }
       ?>
     </div>
-  <script> // Script para método Search , procurar dados na tabela.
-  $(document).ready(function(){
-    $("#myInput").on("keyup", function() {
-      var value = $(this).val().toLowerCase();
-      $("#myTable tr").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-      });
-    });
-  });
-</script>
-
-</body>
-</html>
+  </body>
+  </html>

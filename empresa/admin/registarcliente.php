@@ -1,24 +1,12 @@
 <?php
 session_start();
 // VERIFICA SESSÃO
-if ($_SESSION['role'] != 'admin'){
+if ($_SESSION['role'] != 'Gestor'){
   header( "Location:../utilizador/log.php" );
 }
 $id = $_SESSION['id'];
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<!--Perfil do User-->
-<head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="perfil">
-  <meta name="author" content="Tiago Moura">
-
-  <title>Registar Cliente</title>
-
-</head>
+<title>Adicionar Cliente</title>
 <body>
   <?php require('topfooterA.php');?>
   <h1 align="center">Clientes</h1>
@@ -29,10 +17,6 @@ $id = $_SESSION['id'];
         <div class="card">
           <div class="card-body">
             <div class="row">
-              <div class="col-md-12">
-                <h4>Registar Cliente</h4>
-                <hr>
-              </div>
             </div>
             <div class="row">
               <div class="col-md-12">
@@ -157,6 +141,9 @@ if(isset($_POST['add_client'])){
   $email = mysqli_real_escape_string($connection,$email); 
   $comentario = mysqli_real_escape_string($connection,$comentario); 
 
+  date_default_timezone_set('Europe/Lisbon');
+  $data = date('Y-m-d H:i:s');
+
    //Instrução SQL para selecionar diferentes dados
 
   $sql_fetch_nome_fiscal = "SELECT nome_fiscal FROM clientes WHERE nome_fiscal = '$nome_fiscal'";
@@ -238,7 +225,7 @@ if(isset($_POST['add_client'])){
     return;
   }
 
-  mysqli_query($connection,"INSERT INTO `clientes`(`id_utilizador`,`nome_fiscal`, `nome_comercial`, `tipo`, `morada`, `localidade`, `codigo_postal`, `num_fiscal`, `num_telefone`, `email`,`obs`) VALUES ('$id','$nome_fiscal','$nome_comercial','$tipo','$morada','$localidade','$codigo_postal','$num_fiscal','$num_telefone','$email','$comentario')") or die(mysqli_error($connection));
+  mysqli_query($connection,"INSERT INTO `clientes`(`id_utilizador`,`nome_fiscal`, `nome_comercial`, `tipo`, `morada`, `localidade`, `codigo_postal`, `num_fiscal`, `num_telefone`, `email`,`obs`,`data`) VALUES ('$id','$nome_fiscal','$nome_comercial','$tipo','$morada','$localidade','$codigo_postal','$num_fiscal','$num_telefone','$email','$comentario','$data')") or die(mysqli_error($connection));
 
   ?>
   <div class="container">

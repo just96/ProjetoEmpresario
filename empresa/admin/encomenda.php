@@ -1,17 +1,17 @@
 <?php
 session_start();
 
+if ($_SESSION['role'] != 'Gestor'){
+	header( "Location:../utilizador/log.php" );
+}
+
 include("../conectar_bd.php");
 $sql = "SELECT nome_comercial FROM `clientes`";
 $result = mysqli_query($connection, $sql);
 $row=mysqli_fetch_array($result);
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Encomenda</title>
-</head>
+<title>Fazer Encomenda</title>
 <?php require('topfooterA.php');?>
 <body>
 	<h1 align="center">Encomendas</h1>

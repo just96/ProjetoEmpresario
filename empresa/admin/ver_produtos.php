@@ -1,7 +1,7 @@
 <?php
 session_start();
 // VERIFICA SESSÃO
-if ($_SESSION['role'] != 'admin'){
+if ($_SESSION['role'] != 'Gestor'){
 	header( "Location:../utilizador/log.php" );
 }
 include("../conectar_bd.php");
@@ -9,11 +9,9 @@ include("../conectar_bd.php");
 $sql = "SELECT id_produto,nome_produto,valor,codigo_produto,descricao,data FROM `produtos` ORDER BY id_produto ASC;";
 $result = mysqli_query($connection, $sql) or die(mysql_error());
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Ver Produtos</title>
-</head>
+
+<title>Gerir Produtos</title>
+
 <?php require('topfooterA.php');
 if ($result->num_rows > 0) {
 	?>
@@ -37,7 +35,7 @@ if ($result->num_rows > 0) {
 				</thead>
 				<tbody id="myTable">
 					<?php while($row = $result->fetch_assoc()) {
-						echo "<tr><td>". $row["codigo_produto"]. "</td><td>" . $row["nome_produto"]. "</td><td>" . $row["descricao"]. "</td><td>". $row["valor"]. "</td><td>" . $row["data"]. "</td>"?><td>
+						echo "<tr><td>". $row["codigo_produto"]. "</td><td>" . $row["nome_produto"]. "</td><td>" . $row["descricao"]. "</td><td>". $row["valor"]."&euro;</td><td>" . $row["data"]. "</td>"?><td>
 							<a onclick="return confirm('Editar este produto?')" href="funcoes.php?funcao=EditarProduto&id_geral=<?php echo $row["id_produto"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png"></a></td>
 							<td><a onclick="return confirm('Deseja apagar este produto?')" href="funcoes.php?funcao=ApagarProduto&id_geral=<?php echo $row["id_produto"] ?>"><img border="0" src="../img/baseline_delete_black_18dp.png"></a></td></tr><?php
 						};?> 

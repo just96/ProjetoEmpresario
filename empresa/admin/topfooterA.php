@@ -6,12 +6,12 @@ ob_start();
 <!--classe da barra de navegação-->
 <head>
 
-  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="topbar">
   <meta name="author" content="Tiago Moura">
 
-  <title>TopFooter</title>
+  <title>TopBar</title>
 
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -39,7 +39,7 @@ ob_start();
 </style>
 
 <body>
-  
+
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
     <a class="navbar-brand" href="../admin/index.php"><img src="../img/home.png" alt="Avatar" width="35" height="35"></a>
@@ -55,7 +55,7 @@ ob_start();
               Encomendas
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="../admin/encomenda.php">Nota de Encomenda</a>
+              <a class="dropdown-item" href="../admin/encomenda.php">Fazer Encomenda</a>
               <a class="dropdown-item" href="../admin/ver_encomendas.php">Ver Encomendas</a>
               <a class="dropdown-item" href="../admin/hist_encomendas.php">Histórico de Encomendas</a>
             </div>
@@ -79,13 +79,9 @@ ob_start();
             </div>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Materiais de Apoio
+            <a class="nav-link" href="../admin/material.php" id="navbarDropdown" role="button">
+              Material de Apoio
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Adicionar Material de Apoio</a>
-              <a class="dropdown-item" href="#">Gerir Materiais de Apoio</a>
-            </div>
           </li> 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

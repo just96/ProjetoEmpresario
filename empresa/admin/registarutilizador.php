@@ -1,24 +1,12 @@
 <?php
 session_start();
 // VERIFICA SESSÃO
-if ($_SESSION['role'] != 'admin'){
+if ($_SESSION['role'] != 'Gestor'){
   header( "Location:../utilizador/log.php" );
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
+<title>Adicionar Utilizador</title>
 
-<head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="Tiago Moura">
-
-  <title>Registar Utilizador</title>
-
-
-</head>
 <?php require('topfooterA.php');?>
 <body>
 
@@ -30,10 +18,6 @@ if ($_SESSION['role'] != 'admin'){
         <div class="card">
           <div class="card-body">
             <div class="row">
-              <div class="col-md-12">
-                <h4>Registar Utilizador</h4>
-                <hr>
-              </div>
             </div>
             <div class="row">
               <div class="col-md-12">
@@ -54,8 +38,8 @@ if ($_SESSION['role'] != 'admin'){
                     <label for="select" class="col-4 col-form-label">Cargo*</label> 
                     <div class="col-8">
                       <select id="role" name="role" class="custom-select" required="required">
-                        <option value="utilizador">Utilizador</option>
-                        <option value="admin">Admin</option>
+                        <option value="Utilizador">Utilizador</option>
+                        <option value="Gestor">Gestor</option>
                       </select>
                     </div>
                   </div>
@@ -181,6 +165,9 @@ if(isset($_POST['add_user'])){
   $n_telefone = mysqli_real_escape_string($connection,$n_telefone);
   $pw1 = mysqli_real_escape_string($connection,$pw1);
   $pw2 = mysqli_real_escape_string($connection,$pw2);
+
+  date_default_timezone_set('Europe/Lisbon');
+  $data = date('Y-m-d H:i:s');
 
   //Instrução SQL para selecionar diferentes dados
 
@@ -325,7 +312,7 @@ if($error){
 }
 
 $hash = password_hash($pw1,PASSWORD_BCRYPT);
-mysqli_query($connection,"INSERT INTO `utilizadores`(`nome`, `email`, `user_type`, `num_fiscal` , `num_telefone`, `password`) VALUES ('$username','$email','$cargo','$n_fiscal','$n_telefone','$hash')") or die(mysqli_error($connection));
+mysqli_query($connection,"INSERT INTO `utilizadores`(`nome`, `email`, `user_type`, `num_fiscal` , `num_telefone`, `password`,`data`) VALUES ('$username','$email','$cargo','$n_fiscal','$n_telefone','$hash','$data')") or die(mysqli_error($connection));
 
 ?>
 <div class="container">

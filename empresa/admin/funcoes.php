@@ -6,6 +6,8 @@ include("topfooterA.php");
 $tarefa = $_GET["funcao"];
 $id = $_GET["id_geral"];   
 
+// Funcões Apagar
+
 if($tarefa == "ApagarProduto"){
 
 
@@ -36,6 +38,16 @@ if($tarefa == "ApagarProduto"){
 	</div>
 	<?php
 	header('refresh:2;url=gerirutilizadores.php');
+
+}elseif($tarefa == "ApagarMaterial"){
+
+	$deletematerial= "DELETE FROM material_apoio WHERE id_material='$id'";
+	mysqli_query($connection,$deletematerial) or die($deletematerial); ?>
+	<div class="container alert alert-success" role="alert">
+		Material eliminado com sucesso!
+	</div>
+	<?php
+	header('refresh:2;url=material.php');
 
 }elseif($tarefa == "EditarProduto"){
 
@@ -258,6 +270,16 @@ if($tarefa == "ApagarProduto"){
 												</div>
 											</div>
 											<div class="form-group row">
+												<label for="select" class="col-4 col-form-label">Cargo*</label> 
+												<div class="col-8">
+													<select id="role" name="role" class="custom-select" required="required">
+														<option value ="<?php echo $row["user_type"]; ?>"></option>
+														<option value="Utilizador">Utilizador</option>
+														<option value="Gestor">Gestor</option>
+													</select>
+												</div>
+											</div>
+											<div class="form-group row">
 												<label for="name" class="col-4 col-form-label">Email</label> 
 												<div class="col-8">
 													<input value="<?php echo $row["email"]; ?>" name="email" class="form-control here" type="email">
@@ -342,11 +364,68 @@ if($tarefa == "ApagarProduto"){
 			header('refresh:1;url=gerirutilizadores.php');
 		}
 	}
-}
-?>
-<script type="text/javascript">
-	function checkPass()
-	{
+}elseif ($tarefa == "EditarMaterial"){
+
+	$sql = "SELECT nome_material FROM material_apoio WHERE id_material='$id'";
+	$result= mysqli_query($connection,$sql);
+
+	?>
+	<h1 align="center">Material de Apoio</h1>
+	<hr>
+	<div class="container">
+		<?php if ($result->num_rows > 0) { 
+			?>
+			<form class ="form-inline" method="POST" action="#">
+				<?php while($row=mysqli_fetch_assoc($result)){
+					?>
+					<div class="form-row">
+						<div class="form-group mx-sm-3 mb-2">
+							<input name ="nome_material" type="text" class="form-control" value="<?php echo $row["nome_material"]; ?>" required>
+						</div>
+						<button onclick="return confirm('Tem a certeza que quer editar?')" name ="edit_material" type="submit" class="btn btn-primary mb-2">Editar material</button>
+					</form>
+				</div>
+
+				<?php
+			}
+		}
+		if(isset($_POST['edit_material'])) { 
+			$nome_material = $_POST['nome_material']; 
+
+			//Instrução SQL para selecionar diferentes dados
+
+			$sql_fetch_nome_material = "SELECT nome_material FROM material_apoio WHERE nome_material = '$nome_material'";
+
+	//usado para comparar os dados introduzidos com os da base de dados.
+
+
+			$query_nome_material = mysqli_query($connection,$sql_fetch_nome_material) or die(mysql_error());
+
+			if (mysqli_num_rows($query_nome_material)){
+				?>
+				<div class="container">
+					<div class="alert alert-danger" role="alert">
+						<strong>Nome de material já em uso!</strong> 
+					</div>
+				</div>
+				<?php
+				return;
+			}
+			mysqli_query($connection,"UPDATE `material_apoio` SET nome_material = '$nome_material'");
+			?>
+			<div class="container">
+				<div class="alert alert-success" role="alert">
+					<strong>Material editado com sucesso!</strong>
+				</div>
+			</div>
+			<?php  
+			header("Refresh:2; url=material.php");
+		}
+	}
+	?>
+	<script type="text/javascript">
+		function checkPass()
+		{
     //Store the password field objects into variables ...
     var pass1 = document.getElementById('pw1');
     var pass2 = document.getElementById('pw2');

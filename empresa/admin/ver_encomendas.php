@@ -1,8 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Ver Encomendas</title>
-</head>
+
+<title>Gerir Encomendas</title>
+
 <?php require('topfooterA.php');?>
 
 <body>
@@ -10,4 +8,3 @@
 	<hr>
 </body>
 
-</html>

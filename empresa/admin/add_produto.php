@@ -1,17 +1,17 @@
 <?php
 session_start();
-if ($_SESSION['role'] != 'admin'){
+if ($_SESSION['role'] != 'Gestor'){
 	header( "Location:../utilizador/log.php" );
 }
+
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Adicionar Produtos</title>
-</head>
-<?php require('topfooterA.php');?>
+
+<title>Adicionar Produtos</title>
+
+<?php require('topfooterA.php');
+?>
 <body>
-	<h1 align="center">Adicionar Produto</h1>
+	<h1 align="center">Produtos</h1>
 	<hr>
 	<div class="container">
 		<form method="POST" action="add_produto.php">
@@ -21,8 +21,8 @@ if ($_SESSION['role'] != 'admin'){
 					<input name ="nome_produto" type="text" class="form-control" placeholder="Nome do Produto" required>
 				</div>
 				<div class="form-group col-md-6">
-					<label for="valor">Preço</label>
-					<input name ="valor" class="form-control"placeholder="Preço"  type="number" min="1" max="10000" step="any" required>
+					<label for="valor">Preço &euro;</label>
+					<input name ="valor" class="form-control"placeholder="Preço &euro;" type="number" min="1" max="10000" step="any" required>
 				</div>
 			</div>
 			<div class="form-group">
@@ -51,7 +51,9 @@ if(isset($_POST['add_produto'])){
 	$valor =strip_tags($_POST['valor']); 
 	$codigo_produto =strip_tags($_POST['codigo_produto']); 
 	$descricao =strip_tags($_POST['descricao']); 
-	$date = date('Y-m-d H:i:s');
+	date_default_timezone_set('Europe/Lisbon');
+	$data = date('Y-m-d H:i:s');
+	
 
 	$nome_produto =stripcslashes($nome_produto);	// esta função remove a barra invertida da string
 	$valor =stripcslashes($valor);
@@ -68,7 +70,7 @@ if(isset($_POST['add_produto'])){
 	$sql_fetch_nome_produto = "SELECT nome_produto FROM produtos WHERE nome_produto = '$nome_produto'";
 	$sql_fetch_codigo_produto = "SELECT codigo_produto FROM produtos WHERE codigo_produto = '$codigo_produto'";
 
-	//usado para comparar o nome/email de utilizador introduzido com os da base de dados.
+	//usado para comparar os dados introduzidos com os da base de dados.
 
 	$query_nome_produto = mysqli_query($connection,$sql_fetch_nome_produto) or die(mysql_error());; 
 	$query_codigo_produto = mysqli_query($connection,$sql_fetch_codigo_produto) or die(mysql_error());;
@@ -94,7 +96,7 @@ if(isset($_POST['add_produto'])){
 		return;
 	}
 
-	mysqli_query($connection,"INSERT INTO `produtos`(`nome_produto`, `valor`, `codigo_produto`, `descricao` , `data`) VALUES ('$nome_produto','$valor','$codigo_produto','$descricao','$date')") or die(mysqli_error($connection));
+	mysqli_query($connection,"INSERT INTO `produtos`(`nome_produto`, `valor`, `codigo_produto`, `descricao` , `data`) VALUES ('$nome_produto','$valor','$codigo_produto','$descricao','$data')") or die(mysqli_error($connection));
 	?>
 	<div class="container">
 		<div class="alert alert-success" role="alert">

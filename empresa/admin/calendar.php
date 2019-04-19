@@ -1,23 +1,10 @@
 <?php
 session_start();
-if ($_SESSION['role'] != 'admin'){
+if ($_SESSION['role'] != 'Gestor'){
   header( "Location:../utilizador/log.php" );
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<!--Calendário google-->
-<head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Calendario">
-  <meta name="author" content="Tiago Moura">
-
-  <title>Calendário Google</title>
-
-</head>
-
+<title>Calendário</title>
 <body>
   <?php require('topfooterA.php');?>
   <div class="container" style="

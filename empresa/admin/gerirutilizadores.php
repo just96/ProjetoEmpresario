@@ -1,7 +1,7 @@
 <?php
 session_start();
 // VERIFICA SESSÃO
-if ($_SESSION['role'] != 'admin'){
+if ($_SESSION['role'] != 'Gestor'){
   header( "Location:../utilizador/log.php" );
 }
 include("../conectar_bd.php");
@@ -9,13 +9,9 @@ include("../conectar_bd.php");
 $sql = "SELECT id_user,nome,email,user_type,num_fiscal,num_telefone FROM `utilizadores`";
 $result = mysqli_query($connection, $sql);
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Gestão</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
+
+<title>Gerir Utilizadores</title>
+
 <?php require('topfooterA.php');
 if ($result->num_rows > 0) {?>
   <body>

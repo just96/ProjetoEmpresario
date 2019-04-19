@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['role'] != 'admin'){
+if ($_SESSION['role'] != 'Gestor'){
 	header( "Location:../utilizador/log.php" );
 }
 ?>
@@ -14,15 +14,15 @@ if ($_SESSION['role'] != 'admin'){
 	<meta name="description" content="estrutura inicial">
 	<meta name="author" content="Tiago Moura">
 
-	<title>Menu Admin</title>
+	<title>Menu Gestor</title>
 
 </head>
 
 <style>
 	.center_div{
-		margin-top: 80px;
+		margin-top: 50px;
 		width:auto;
-		height: 362px; /* value of your choice which suits your alignment */
+		height: auto; /* value of your choice which suits your alignment */
 	}
 </style>
 <?php require('topfooterA.php')?>

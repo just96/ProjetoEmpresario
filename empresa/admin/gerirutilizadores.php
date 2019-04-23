@@ -41,7 +41,7 @@ if ($result->num_rows > 0) {?>
           </tbody>
         </table>
         <div class="d-flex justify-content-center">
-          <button type="button" class="btn btn-warning">Gerar PDF&nbsp<img src="../img/pdf.png" width="30" height="30"></img></button>
+          <button onclick="window.location.href='../fpdf/pdf_users.php'" type="submit" class="btn btn-warning">Gerar PDF&nbsp<img src="../img/pdf.png" width="30" height="30"></img></button>
         </div>
       <?php }else{?>
         <div class="container">

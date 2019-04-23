@@ -6,7 +6,7 @@ include("topfooterA.php");
 $tarefa = $_GET["funcao"];
 $id = $_GET["id_geral"];   
 
-// Funcões Apagar
+// Funcões APAGAR
 
 if($tarefa == "ApagarProduto"){
 
@@ -48,6 +48,8 @@ if($tarefa == "ApagarProduto"){
 	</div>
 	<?php
 	header('refresh:2;url=material.php');
+
+	// Funcões EDITAR
 
 }elseif($tarefa == "EditarProduto"){
 
@@ -366,7 +368,7 @@ if($tarefa == "ApagarProduto"){
 	}
 }elseif ($tarefa == "EditarMaterial"){
 
-	$sql = "SELECT nome_material FROM material_apoio WHERE id_material='$id'";
+	$sql = "SELECT nome_material,tipo FROM material_apoio WHERE id_material='$id'";
 	$result= mysqli_query($connection,$sql);
 
 	?>
@@ -375,12 +377,16 @@ if($tarefa == "ApagarProduto"){
 	<div class="container">
 		<?php if ($result->num_rows > 0) { 
 			?>
-			<form class ="form-inline" method="POST" action="#">
+			<form align="center" class ="form-inline" method="POST" action="#">
 				<?php while($row=mysqli_fetch_assoc($result)){
 					?>
-					<div class="form-row">
+					<div class="form-group mx-sm-3 mb-2">
 						<div class="form-group mx-sm-3 mb-2">
-							<input name ="nome_material" type="text" class="form-control" value="<?php echo $row["nome_material"]; ?>" required>
+							<input size="50" name ="nome_material" type="text" class="form-control" value="<?php echo $row["nome_material"]; ?>" required>
+						</div>
+						<div class="form-group mx-sm-3 mb-2">
+							<label for="select" class="col-1 col-form-label">Tipo</label> 
+							<input name ="tipo" type="text" class="form-control" value="<?php echo $row["tipo"]; ?>" required>
 						</div>
 						<button onclick="return confirm('Tem a certeza que quer editar?')" name ="edit_material" type="submit" class="btn btn-primary mb-2">Editar material</button>
 					</form>

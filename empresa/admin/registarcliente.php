@@ -24,7 +24,7 @@ $id = $_SESSION['id'];
                   <div class="form-group row">
                     <label for="text" class="col-4 col-form-label">Nome Fiscal*</label> 
                     <div class="col-8">
-                      <input name="nome_fiscal" placeholder="Nome Fiscal" class="form-control here" required="required" type="text">
+                      <input name="nome_fiscal" placeholder="Nome Fiscal" class="form-control here" required type="text">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -36,7 +36,7 @@ $id = $_SESSION['id'];
                   <div class="form-group row">
                     <label for="select" class="col-4 col-form-label">Tipo*</label> 
                     <div class="col-8">
-                      <select name="tipo" name="tipo" class="custom-select" required="required">
+                      <select name="tipo" name="tipo" class="custom-select" required>
                         <option value="Farmácia">Farmácia</option>
                         <option value="Parafarmácia">Parafarmácia</option>
                         <option value="Ouriversaria">Ouriversaria</option>
@@ -46,7 +46,7 @@ $id = $_SESSION['id'];
                   <div class="form-group row">
                     <label for="text" class="col-4 col-form-label">Morada*</label> 
                     <div class="col-8">
-                      <input name="morada" placeholder="Morada" class="form-control here" type="text">
+                      <input required name="morada" placeholder="Morada" class="form-control here" type="text">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -64,19 +64,19 @@ $id = $_SESSION['id'];
                   <div class="form-group row">
                     <label for="text" class="col-4 col-form-label">NIF*</label> 
                     <div class="col-8">
-                      <input name="num_fiscal" placeholder="Número de Identificação Fiscal" class="form-control here" required="required" type="int" maxlength="9">
+                      <input name="num_fiscal" placeholder="Número de Identificação Fiscal" class="form-control here" required type="int" maxlength="9">
                     </div>
                   </div>  
                   <div class="form-group row">
                     <label for="text" class="col-4 col-form-label">Telefone*</label> 
                     <div class="col-8">
-                      <input name="num_telefone"  placeholder="Número de Telefone" class="form-control here" required="required" type="int" maxlength="9">
+                      <input name="num_telefone"  placeholder="Número de Telefone" class="form-control here" required type="int" maxlength="9">
                     </div>
                   </div> 
                   <div class="form-group row">
                     <label for="text" class="col-4 col-form-label">Email*</label> 
                     <div class="col-8">
-                      <input name="email" placeholder="Email" class="form-control here" type="email" required="required">
+                      <input name="email" placeholder="Email" class="form-control here" type="email" required>
                     </div>
                   </div>
                   <div class="form-group row">

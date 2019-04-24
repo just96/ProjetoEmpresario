@@ -14,7 +14,13 @@ if ($_SESSION['role'] != 'Gestor'){
 	<h1 align="center">Produtos</h1>
 	<hr>
 	<div class="container">
-		<form method="POST" action="add_produto.php">
+		<form method="POST" action="add_produto.php" enctype="multipart/form-data">
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="imagem">Adicionar Imagem</label>
+					<input type="file" name="uploadfile">
+				</div>
+			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="nome_produto">Nome do Produto</label>
@@ -42,9 +48,10 @@ if ($_SESSION['role'] != 'Gestor'){
 </html>
 
 <?php
+
 // ADICIONAR PRODUTO
 if(isset($_POST['add_produto'])){
-	
+
 	include("../conectar_bd.php");
 
 	$nome_produto =strip_tags($_POST['nome_produto']); 	//remove tags de html e php exemplo <br>
@@ -53,6 +60,13 @@ if(isset($_POST['add_produto'])){
 	$descricao =strip_tags($_POST['descricao']); 
 	date_default_timezone_set('Europe/Lisbon');
 	$data = date('Y-m-d H:i:s');
+	$filename = $_FILES['uploadfile']['name'];
+	$filetmpname = $_FILES['uploadfile']['tmp_name'];
+
+	//folder where images will be uploaded
+	$folder = '/xampp/htdocs/empresa/img/';
+	//function for saving the uploaded images in a specific folder
+	move_uploaded_file($filetmpname, $folder.$filename);
 	
 
 	$nome_produto =stripcslashes($nome_produto);	// esta função remove a barra invertida da string
@@ -96,7 +110,7 @@ if(isset($_POST['add_produto'])){
 		return;
 	}
 
-	mysqli_query($connection,"INSERT INTO `produtos`(`nome_produto`, `valor`, `codigo_produto`, `descricao` , `data`) VALUES ('$nome_produto','$valor','$codigo_produto','$descricao','$data')") or die(mysqli_error($connection));
+	mysqli_query($connection,"INSERT INTO `produtos`(`nome_produto`,`imagem`,`valor`, `codigo_produto`, `descricao` , `data`) VALUES ('$nome_produto','$filename','$valor','$codigo_produto','$descricao','$data')") or die(mysqli_error($connection));
 	?>
 	<div class="container">
 		<div class="alert alert-success" role="alert">

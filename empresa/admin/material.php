@@ -10,8 +10,12 @@ require('filtros.php');
 <body>
 	<h1 align="center">Material de Apoio</h1>
 	<hr>
-	<div class="container">
-		<form align="center" class ="form-inline" method="POST" action="material.php">
+	<div class="container-fluid">
+		<form align="center" class ="form-inline" method="POST" action="material.php" enctype="multipart/form-data">
+			<div class="form-group mx-sm-3 mb-2">
+				<h4 align="center" for="imagem">Adicionar Imagem</h4>
+				<input type="file" name="uploadfile">
+			</div>
 			<div class="form-group mx-sm-3 mb-2">
 				<input  size="50" name ="nome_material" type="text" class="form-control" placeholder="Nome do Material" required>
 			</div>
@@ -44,9 +48,16 @@ if(isset($_POST['add_material'])){
 	$tipo =stripcslashes($tipo);
 	$nome_material = mysqli_real_escape_string($connection,$nome_material);
 	$tipo = mysqli_real_escape_string($connection,$tipo);
+	$filename = $_FILES['uploadfile']['name'];
+	$filetmpname = $_FILES['uploadfile']['tmp_name'];
 
 	date_default_timezone_set('Europe/Lisbon');
 	$data = date('Y-m-d H:i:s');
+
+		//folder where images will be uploaded
+	$folder = '/xampp/htdocs/empresa/img/';
+	//function for saving the uploaded images in a specific folder
+	move_uploaded_file($filetmpname, $folder.$filename);
 
 		//Instrução SQL para selecionar diferentes dados
 
@@ -68,7 +79,7 @@ if(isset($_POST['add_material'])){
 		return;
 	}
 
-	mysqli_query($connection,"INSERT INTO `material_apoio`(`nome_material`,`tipo`,`data`) VALUES ('$nome_material','$tipo','$data')")or die(mysqli_error($connection));
+	mysqli_query($connection,"INSERT INTO `material_apoio`(`nome_material`,`imagem`,`tipo`,`data`) VALUES ('$nome_material','$filename','$tipo','$data')")or die(mysqli_error($connection));
 
 	?>
 	<div class="container">
@@ -84,7 +95,7 @@ if(isset($_POST['add_material'])){
 <?php
 
 include("../conectar_bd.php");
-$sql = "SELECT id_material,nome_material,tipo,data FROM `material_apoio` ORDER BY id_material ASC;";
+$sql = "SELECT id_material,nome_material,imagem,tipo,data FROM `material_apoio` ORDER BY id_material ASC;";
 $result = mysqli_query($connection, $sql) or die(mysql_error());
 
 if ($result->num_rows > 0) {
@@ -96,6 +107,7 @@ if ($result->num_rows > 0) {
 			<table id="minhaTabela" class="table table-bordered">
 				<thead>
 					<tr>
+						<th>Imagem</th>
 						<th>Nome do Material</th>
 						<th>Tipo</th>
 						<th>Data em que foi adicionado</th>
@@ -105,22 +117,26 @@ if ($result->num_rows > 0) {
 				</thead>
 				<tbody id="myTable">
 					<?php while($row = $result->fetch_assoc()) {
-						echo "<tr><td>". $row["nome_material"]. "</td><td>" . $row["tipo"]."</td><td>" . $row["data"]. "</td>"?><td>
-							<a onclick="return confirm('Editar este material?')" href="funcoes.php?funcao=EditarMaterial&id_geral=<?php echo $row["id_material"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png"></a></td>
-							<td><a onclick="return confirm('Deseja apagar este material?')" href="funcoes.php?funcao=ApagarMaterial&id_geral=<?php echo $row["id_material"] ?>"><img border="0" src="../img/baseline_delete_black_18dp.png"></a></td></tr><?php
-						};?> 
-					</tbody>
-				</table>
-				<div class="d-flex justify-content-center">
-					<button  onclick="window.location.href='../fpdf/pdf_materiais.php'" type="submit" class="btn btn-warning">Gerar PDF&nbsp<img src="../img/pdf.png" width="30" height="30"></img></button>
-				</div>
-			<?php }else{?>
-				<div class="container">
-					<div class="alert alert-danger" style="top:10px;" role="alert">
-						<strong>Não há material registado!</strong>
-					</div> 
-				</div>
-				<?php
-			}
-			?>
-		</div>
+						echo "<tr><td><img class='rounded' height='100' width='150' src='../img/"
+						.$row["imagem"]."'></td><td>"
+						. $row["nome_material"]. "</td><td>" 
+						. $row["tipo"]."</td><td>"
+					. $row["data"]. "</td>"?><td>
+						<a onclick="return confirm('Editar este material?')" href="funcoes.php?funcao=EditarMaterial&id_geral=<?php echo $row["id_material"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png"></a></td>
+						<td><a onclick="return confirm('Deseja apagar este material?')" href="funcoes.php?funcao=ApagarMaterial&id_geral=<?php echo $row["id_material"] ?>"><img border="0" src="../img/baseline_delete_black_18dp.png"></a></td></tr><?php
+					};?> 
+				</tbody>
+			</table>
+			<div class="d-flex justify-content-center">
+				<button  onclick="window.location.href='../fpdf/pdf_materiais.php'" type="submit" class="btn btn-warning">Gerar PDF&nbsp<img src="../img/pdf.png" width="30" height="30"></img></button>
+			</div>
+		<?php }else{?>
+			<div class="container">
+				<div class="alert alert-danger" style="top:10px;" role="alert">
+					<strong>Não há material registado!</strong>
+				</div> 
+			</div>
+			<?php
+		}
+		?>
+	</div>

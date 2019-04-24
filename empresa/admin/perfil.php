@@ -7,7 +7,7 @@ if ($_SESSION['role'] != 'Gestor'){
 $id = $_SESSION['id'];
 
 include("../conectar_bd.php");
-$sqldata ="SELECT nome_completo,nome,email,num_fiscal,num_telefone,user_type FROM `utilizadores` WHERE id_user='$id'";
+$sqldata ="SELECT nome_completo,nome,imagem,email,num_fiscal,num_telefone,user_type FROM `utilizadores` WHERE id_user='$id'";
 $result= mysqli_query($connection,$sqldata);
 ?>
 
@@ -49,14 +49,6 @@ $result= mysqli_query($connection,$sqldata);
               <div class="col-md-12">
                 <h4>Perfil</h4>
                 <hr>
-                <form method="POST" action="perfil.php" >
-                  <div class="user one">
-                    <img src="../img/gusto.jpg" class="user one">
-                  </div>
-                  <input type="file" name="image">
-                  <input type="submit" name="upload" value="Upload image">
-                </form>
-                <hr>
               </div>
             </div>
             <?php
@@ -64,10 +56,19 @@ $result= mysqli_query($connection,$sqldata);
               ?>
               <div class="row">
                 <div class="col-md-12">
-                  <form method="POST" action="perfil.php">
-                   <?php
-                   while($row=mysqli_fetch_assoc($result)){
-                    ?>
+                 <?php
+                 while($row=mysqli_fetch_assoc($result)){
+                  ?>
+                  <form method="POST" action="perfil.php" enctype="multipart/form-data">
+                    <div class="form-row">
+                      <img class="rounded-circle" height='180' width='200' src='../img/<?php echo $row["imagem"]?>'>
+                    </div>
+                    <div class="form-row">
+                      <p></p>
+                    </div>
+                    <div class="form-group row">
+                      <input type="file" name="uploadfile">
+                    </div>
                     <div class="form-group row">
                       <label for="ntele" class="col-4 col-form-label">Cargo</label> 
                       <div class="col-8">
@@ -190,23 +191,22 @@ $result= mysqli_query($connection,$sqldata);
                               <h5>Password</h5>
                               <form id="form_acc" method="POST" action="#">
                                 <div class="panel-body">
-                                  <fieldset>
-                                    <div class="form-group">
-                                      <input id="pwe" class="form-control input-md" placeholder="Inserir password" name="pwe" type="password">
-                                    </div>
-                                  </fieldset>
-                                </div>
+                                 <fieldset>
+                                  <div class="form-group">
+                                    <input id="pwe" class="form-control input-md" placeholder="Inserir password" name="pwe" type="password">
+                                  </div>
+                                </fieldset>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button name ="btnEacc" id="btnEacc" type="submit" class="btn btn-primary" onclick="return confirm('De certeza que quer apagar o seu perfil?');" >Eliminar conta</button>
-                      </div>
-                    </form>
-                  </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                      <button name ="btnEacc" id="btnEacc" type="submit" class="btn btn-primary" onclick="return confirm('De certeza que quer apagar o seu perfil?');" >Eliminar conta</button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -216,10 +216,11 @@ $result= mysqli_query($connection,$sqldata);
     </div>
   </div>
 </div>
+</div>
 
-<script>// Script para comparar as duas passwords do formulário com o intuito de avisar o utilizador se estas estão diferentes.
-function checkPass()
-{
+                    <script>// Script para comparar as duas passwords do formulário com o intuito de avisar o utilizador se estas estão diferentes.
+                    function checkPass()
+                    {
     //Store the password field objects into variables ...
     var pass1 = document.getElementById('pwn1');
     var pass2 = document.getElementById('pwn2');
@@ -262,48 +263,35 @@ $sql ="SELECT * FROM utilizadores WHERE id_user='$id'";
 $query = mysqli_query($connection,$sql);
 $row = mysqli_fetch_array($query);
 
-// IMAGEM ver dps
-/*$msg ="";
-  // se o botão upload foi premido
-if(isset($_POST['upload'])){
-  include("../conectar_bd.php");
-    // caminho para guardar a imagem na bd
-  $caminho ="../img/".basename($_FILES['image']['name']);
-
-  $image = $_FILES['image']['name'];
-
-  $sql = "INSERT INTO `utilizadores` (`image`) VALUES ('$image') WHERE id= 'id_user'";
-  mysqli_query($connection,$sql);
-
-  // mover a imagem para a respetiva pasta
-  if(move_uploaded_file($_FILES('image')['tmp_name'],$caminho)){
-    $msg = "Upload da imagem feito com sucesso!";
-  }else{
-    $msg = "Houve um problema no upload da imagem!";
-  }
-}*/
-
-if(isset($_POST['btnpEdit'])) {       // Editar perfil
+ if(isset($_POST['btnpEdit'])) {       // Editar perfil
 
 //Instrução SQL para selecionar diferentes dados
 
-   $nome = $_POST['name']; // definir as variáveis , POST
-   $username = $_POST['user'];
-   $email = $_POST['email'];
-   $nif = $_POST['nif'];
-   $ntele = $_POST['ntele'];
+$nome = $_POST['name']; // definir as variáveis , POST
+$username = $_POST['user'];
+$email = $_POST['email'];
+$nif = $_POST['nif'];
+$ntele = $_POST['ntele'];
+$filename = $_FILES['uploadfile']['name'];
+$filetmpname = $_FILES['uploadfile']['tmp_name'];
+
+   //folder where images will be uploaded
+$folder = '/xampp/htdocs/empresa/img/';
+  //function for saving the uploaded images in a specific folder
+move_uploaded_file($filetmpname, $folder.$filename);
+
 
   // SQL para fazer update na tabela dos utilizadores
 
-   $sqleditperfil = "UPDATE `utilizadores` SET nome_completo='$nome', nome='$username', email='$email', num_fiscal='$nif', num_telefone='$ntele' WHERE id_user='$id'";
+$sqleditperfil = "UPDATE `utilizadores` SET nome_completo='$nome', nome='$username', imagem='$filename',email='$email', num_fiscal='$nif', num_telefone='$ntele' WHERE id_user='$id'";
 
-   mysqli_query($connection,$sqleditperfil);
-   ?>  
-   <div class="alert alert-success" role="alert">
-    Alterações guardadas!
-  </div>
-  <?php
-  header('refresh:2;url=perfil.php');
+mysqli_query($connection,$sqleditperfil);
+?>  
+<div class="alert alert-success" role="alert">
+ Alterações guardadas!
+</div>
+<?php
+header('refresh:2;url=perfil.php');
 }
 
 if(isset($_POST['btnApw'])){
@@ -394,43 +382,43 @@ if(isset($_POST['btnApw'])){
 
 }
 
-if(isset($_POST['btnEacc'])) {   //Eliminar conta
+  if(isset($_POST['btnEacc'])) {   //Eliminar conta
 
-  $password = $_POST['pwe'];
+    $password = $_POST['pwe'];
 
-  $bd_password = $row['password'];
+    $bd_password = $row['password'];
 
-  if(empty($password)){
-    ?>
-    <div class="modal-body">
-      <div class="alert alert-warning" role="alert">
-        Insira a sua password!
+    if(empty($password)){
+      ?>
+      <div class="modal-body">
+        <div class="alert alert-warning" role="alert">
+          Insira a sua password!
+        </div>
       </div>
-    </div>
-    <?php
-    return;
-  }
+      <?php
+      return;
+    }
 
-  if(password_verify($password,$bd_password)){
+    if(password_verify($password,$bd_password)){
 
-    $apagarconta = "DELETE FROM `utilizadores` WHERE id_user='$id'";
+      $apagarconta = "DELETE FROM `utilizadores` WHERE id_user='$id'";
 
-    mysqli_query($connection,$apagarconta);
-    ?>
-    <div class="alert alert-success" role="alert">
-      Conta eliminada com sucesso!
-    </div>
-    <?php
-    header('refresh:2;url=logout.php');
-  }else{
-    ?>
-    <div class="container">
-      <div class="alert alert-danger" role="alert">
-        Password errada!
+      mysqli_query($connection,$apagarconta);
+      ?>
+      <div class="alert alert-success" role="alert">
+        Conta eliminada com sucesso!
       </div>
-    </div>
-    <?php
-    return;
+      <?php
+      header('refresh:2;url=logout.php');
+    }else{
+      ?>
+      <div class="container">
+        <div class="alert alert-danger" role="alert">
+          Password errada!
+        </div>
+      </div>
+      <?php
+      return;
+    }
   }
-}
-?>
+  ?>

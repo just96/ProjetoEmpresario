@@ -18,6 +18,9 @@ if ($result->num_rows > 0) {?>
   <body>
     <h1 align="center">Clientes</h1>
     <hr>
+    <div class="d-flex justify-content-center">
+      <button onclick="window.location.href='../fpdf/pdf_clientes.php'" type="submit" class="btn btn-warning">Gerar PDF&nbsp<img src="../img/pdf.png" width="30" height="30"></img></button>
+    </div>
     <div class="container-fluid">
       <br>
       <table id="minhaTabela" class="table table-bordered">
@@ -43,9 +46,6 @@ if ($result->num_rows > 0) {?>
             };?>
           </tbody>
         </table>
-        <div class="d-flex justify-content-center">
-          <button onclick="window.location.href='../fpdf/pdf_clientes.php'" type="submit" class="btn btn-warning">Gerar PDF&nbsp<img src="../img/pdf.png" width="30" height="30"></img></button>
-        </div>
       <?php }else{?>
         <div class="container">
           <div class="alert alert-danger" style="top:10px;" role="alert">

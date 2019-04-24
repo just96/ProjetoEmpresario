@@ -6,7 +6,7 @@ if ($_SESSION['role'] != 'Gestor'){
 }
 include("../conectar_bd.php");
 // SELECT no SQL para selecionar os dados a serem imprimidos na tabela
-$sql = "SELECT id_produto,nome_produto,valor,codigo_produto,descricao,data FROM `produtos` ORDER BY id_produto ASC;";
+$sql = "SELECT id_produto,nome_produto,imagem,valor,codigo_produto,descricao,data FROM `produtos` ORDER BY id_produto ASC;";
 $result = mysqli_query($connection, $sql) or die(mysql_error());
 ?>
 
@@ -20,10 +20,14 @@ if ($result->num_rows > 0) {
 		<h1 align="center">Produtos</h1>
 		<hr>
 		<br>
+		<div class="d-flex justify-content-center">
+			<button onclick="window.location.href='../fpdf/pdf_produtos.php'" type="submit" class="btn btn-warning" name="gerar_pdf">Gerar PDF&nbsp<img src="../img/pdf.png" width="30" height="30"></img></button>
+		</div>
 		<div class="container-fluid">
 			<table id="minhaTabela" class="table table-bordered">
 				<thead>
 					<tr>
+						<th>Imagem</th>
 						<th>Referência</th>
 						<th>Nome do Produto</th>
 						<th>Descrição do Produto</th>
@@ -35,29 +39,32 @@ if ($result->num_rows > 0) {
 				</thead>
 				<tbody id="myTable">
 					<?php while($row = $result->fetch_assoc()) {
-						echo "<tr><td>". $row["codigo_produto"]. "</td><td>" . $row["nome_produto"]. "</td><td>" . $row["descricao"]. "</td><td>". $row["valor"]."&euro;</td><td>" . $row["data"]. "</td>"?><td>
-							<a onclick="return confirm('Editar este produto?')" href="funcoes.php?funcao=EditarProduto&id_geral=<?php echo $row["id_produto"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png"></a></td>
-							<td><a onclick="return confirm('Deseja apagar este produto?')" href="funcoes.php?funcao=ApagarProduto&id_geral=<?php echo $row["id_produto"] ?>"><img border="0" src="../img/baseline_delete_black_18dp.png"></a></td></tr><?php
-						};?> 
-					</tbody>
-				</table>
-				<div class="d-flex justify-content-center">
-					<button onclick="window.location.href='../fpdf/pdf_produtos.php'" type="submit" class="btn btn-warning" name="gerar_pdf">Gerar PDF&nbsp<img src="../img/pdf.png" width="30" height="30"></img></button>
-				</div>
-			<?php }else{?>
-				<div class="container">
-					<div class="alert alert-danger" style="top:10px;" role="alert">
-						<strong>Não há produtos registados!</strong>
-					</div> 
-				</div>
-				<?php
-			}
-			?>
-		</div>
+						echo "<tr><td><img class='rounded' height='100' width='150' src='../img/"
+						.$row["imagem"]."'></td><td>"
+						. $row["codigo_produto"]. "</td><td>" 
+						. $row["nome_produto"]. "</td><td>" 
+						. $row["descricao"]. "</td><td>"
+						. $row["valor"]."&euro;</td><td>" 
+					. $row["data"]. "</td>"?><td>
+						<a onclick="return confirm('Editar este produto?')" href="funcoes.php?funcao=EditarProduto&id_geral=<?php echo $row["id_produto"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png"></a></td>
+						<td><a onclick="return confirm('Deseja apagar este produto?')" href="funcoes.php?funcao=ApagarProduto&id_geral=<?php echo $row["id_produto"] ?>"><img border="0" src="../img/baseline_delete_black_18dp.png"></a></td></tr><?php
+					};?> 
+				</tbody>
+			</table>
+		<?php }else{?>
+			<div class="container">
+				<div class="alert alert-danger" style="top:10px;" role="alert">
+					<strong>Não há produtos registados!</strong>
+				</div> 
+			</div>
+			<?php
+		}
+		?>
+	</div>
 
-	</body>
+</body>
 
-	</html>
+</html>
 
 
 

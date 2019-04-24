@@ -6,7 +6,7 @@ if ($_SESSION['role'] != 'Gestor'){
 }
 include("../conectar_bd.php");
 // SELECT no SQL para selecionar os dados a serem imprimidos na tabela
-$sql = "SELECT id_user,nome,email,user_type,num_fiscal,num_telefone FROM `utilizadores`";
+$sql = "SELECT id_user,nome,imagem,email,user_type,num_fiscal,num_telefone FROM `utilizadores`";
 $result = mysqli_query($connection, $sql);
 ?>
 
@@ -20,10 +20,14 @@ if ($result->num_rows > 0) {?>
     <h1 align="center">Utilizadores</h1>
     <hr>
     <br>
+    <div class="d-flex justify-content-center">
+      <button onclick="window.location.href='../fpdf/pdf_users.php'" type="submit" class="btn btn-warning">Gerar PDF&nbsp<img src="../img/pdf.png" width="30" height="30"></img></button>
+    </div>
     <div class="container-fluid">
       <table id ="minhaTabela" class="table table-bordered">
         <thead>
           <tr>
+            <th>Imagem</th>
             <th>Nome</th>
             <th>Email</th>
             <th>Cargo</th>
@@ -35,23 +39,26 @@ if ($result->num_rows > 0) {?>
         </thead>
         <tbody id="myTable">
           <?php while($row = $result->fetch_assoc()) {
-            echo "<tr><td>" . $row["nome"]. "</td><td>" . $row["email"]. "</td><td>" . $row["user_type"]. "</td><td>" . $row["num_fiscal"]. "</td><td>" . $row["num_telefone"]. "</td>"?><td><a onclick="return confirm('Deseja editar este utilizador?')" href="funcoes.php?funcao=EditarUtilizador&id_geral=<?php echo $row["id_user"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png" href="#"></a></td>
-              <td><a onclick="return confirm('Deseja apagar este utilizador?')" href="funcoes.php?funcao=ApagarUtilizador&id_geral=<?php echo $row["id_user"] ?>"><img border="0" src="../img/baseline_delete_black_18dp.png" href="#"></a></td></tr><?php
-            };?>
-          </tbody>
-        </table>
-        <div class="d-flex justify-content-center">
-          <button onclick="window.location.href='../fpdf/pdf_users.php'" type="submit" class="btn btn-warning">Gerar PDF&nbsp<img src="../img/pdf.png" width="30" height="30"></img></button>
-        </div>
-      <?php }else{?>
-        <div class="container">
-          <div class="alert alert-danger" style="top:10px;" role="alert">
-            <strong>Não há clientes registados!</strong>
-          </div> 
-        </div>
-        <?php
-      }
-      ?>
+            echo "<tr><td><img class='rounded' height='100' width='150' src='../img/"
+            .$row["imagem"]."'></td><td>"
+            . $row["nome"]. "</td><td>" 
+            . $row["email"]. "</td><td>" 
+            . $row["user_type"]. "</td><td>" 
+            . $row["num_fiscal"]. "</td><td>" 
+          . $row["num_telefone"]. "</td>"?><td><a onclick="return confirm('Deseja editar este utilizador?')" href="funcoes.php?funcao=EditarUtilizador&id_geral=<?php echo $row["id_user"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png" href="#"></a></td>
+          <td><a onclick="return confirm('Deseja apagar este utilizador?')" href="funcoes.php?funcao=ApagarUtilizador&id_geral=<?php echo $row["id_user"] ?>"><img border="0" src="../img/baseline_delete_black_18dp.png" href="#"></a></td></tr><?php
+        };?>
+      </tbody>
+    </table>
+  <?php }else{?>
+    <div class="container">
+      <div class="alert alert-danger" style="top:10px;" role="alert">
+        <strong>Não há clientes registados!</strong>
+      </div> 
     </div>
-  </body>
-  </html>
+    <?php
+  }
+  ?>
+</div>
+</body>
+</html>

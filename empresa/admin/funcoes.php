@@ -53,7 +53,7 @@ if($tarefa == "ApagarProduto"){
 
 }elseif($tarefa == "EditarProduto"){
 
-	$sqldata ="SELECT nome_produto,valor,codigo_produto,descricao FROM `produtos` WHERE id_produto='$id'";
+	$sqldata ="SELECT nome_produto,imagem,valor,codigo_produto,descricao FROM `produtos` WHERE id_produto='$id'";
 	$result= mysqli_query($connection,$sqldata);
 	?>
 	<body>
@@ -62,9 +62,17 @@ if($tarefa == "ApagarProduto"){
 		if(mysqli_num_rows($result)>0){
 			?>
 			<div class="container">
-				<form method="POST" action="#">
+				<form method="POST" action="#" enctype="multipart/form-data">
 					<?php while($row=mysqli_fetch_assoc($result)){
 						?>
+						<div class="form-row">
+							<div class="form-group col-md-3">
+								<img class="rounded" height='180' width='200' src='../img/<?php echo $row["imagem"]?>'>
+								<p></p>
+								<h4 for="imagem">Editar Imagem</h4>
+								<input type="file" name="uploadfile">
+							</div>
+						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="nome_produto">Nome do Produto</label>
@@ -93,9 +101,16 @@ if($tarefa == "ApagarProduto"){
 				$valor = $_POST['valor'];
 				$codigo_produto = $_POST['codigo_produto'];
 				$descricao = $_POST['descricao'];
+				$filename = $_FILES['uploadfile']['name'];
+				$filetmpname = $_FILES['uploadfile']['tmp_name'];
+
+				   //folder where images will be uploaded
+				$folder = '/xampp/htdocs/empresa/img/';
+  //function for saving the uploaded images in a specific folder
+				move_uploaded_file($filetmpname, $folder.$filename);
 
 
-				$sqleditproduto = "UPDATE `produtos` SET nome_produto='$nome_produto', valor='$valor', codigo_produto='$codigo_produto', descricao='$descricao' WHERE id_produto='$id'";
+				$sqleditproduto = "UPDATE `produtos` SET nome_produto='$nome_produto', imagem='$filename', valor='$valor', codigo_produto='$codigo_produto', descricao='$descricao' WHERE id_produto='$id'";
 				mysqli_query($connection,$sqleditproduto);
 				?>  
 				<div class="container alert alert-success" role="alert">
@@ -228,7 +243,7 @@ if($tarefa == "ApagarProduto"){
 
 		$sqleditcliente = "UPDATE `clientes` SET nome_fiscal='$nome_fiscal', nome_comercial='$nome_comercial', tipo='$tipo', morada='$morada', localidade='$localidade', codigo_postal='$codigo_postal' , num_fiscal='$num_fiscal' , num_telefone='$num_telefone' , email='$email' , obs='$comentario' WHERE id_cliente='$id'";
 		mysqli_query($connection,$sqleditcliente);
-		?>  
+		?> 
 		<div class="container alert alert-success" role="alert">
 			Alterações guardadas!
 		</div>
@@ -368,7 +383,7 @@ if($tarefa == "ApagarProduto"){
 	}
 }elseif ($tarefa == "EditarMaterial"){
 
-	$sql = "SELECT nome_material,tipo FROM material_apoio WHERE id_material='$id'";
+	$sql = "SELECT nome_material,imagem,tipo FROM material_apoio WHERE id_material='$id'";
 	$result= mysqli_query($connection,$sql);
 
 	?>
@@ -377,34 +392,68 @@ if($tarefa == "ApagarProduto"){
 	<div class="container">
 		<?php if ($result->num_rows > 0) { 
 			?>
-			<form align="center" class ="form-inline" method="POST" action="#">
+			<form align="center" class ="form-inline" method="POST" action="#" enctype="multipart/form-data">
 				<?php while($row=mysqli_fetch_assoc($result)){
 					?>
 					<div class="form-group mx-sm-3 mb-2">
 						<div class="form-group mx-sm-3 mb-2">
+							<img class="rounded" height='150' width='200' src='../img/<?php echo $row["imagem"]?>'>
+							<h4 align="center" for="imagem">Editar Imagem</h4>
+							<input type="file" name="uploadfile">
+						</div>
+					</div>
+					<div class="form-group mx-sm-3 mb-2">
+						<h6 align="center" for="imagem">Nome do Material</h6><br>
+						<div class="form-group mx-sm-3 mb-2">
 							<input size="50" name ="nome_material" type="text" class="form-control" value="<?php echo $row["nome_material"]; ?>" required>
 						</div>
 						<div class="form-group mx-sm-3 mb-2">
-							<label for="select" class="col-1 col-form-label">Tipo</label> 
-							<input name ="tipo" type="text" class="form-control" value="<?php echo $row["tipo"]; ?>" required>
-						</div>
-						<button onclick="return confirm('Tem a certeza que quer editar?')" name ="edit_material" type="submit" class="btn btn-primary mb-2">Editar material</button>
-					</form>
+							<h6 align="center" for="imagem">Tipo</h6><br>
+							<div class="form-group mx-sm-3 mb-2">
+								<input name ="tipo" type="text" class="form-control" value="<?php echo $row["tipo"]; ?>" required>
+							</div>
+							<button onclick="return confirm('Tem a certeza que quer editar?')" name ="edit_material" type="submit" class="btn btn-primary mb-2">Editar material</button>
+						</form>
+					</div>
 				</div>
+			</div>
 
-				<?php
-			}
+
+			<?php
 		}
-		if(isset($_POST['edit_material'])) { 
-			$nome_material = $_POST['nome_material']; 
+	}
+	if(isset($_POST['edit_material'])) { 
 
+		$sql_img = "SELECT nome_material,imagem,tipo FROM material_apoio WHERE id_material='$id'";
+		$result_img= mysqli_query($connection,$sql_img);
+		$row=mysqli_fetch_assoc($result_img);
+
+		$nome_material = $_POST['nome_material']; 
+		$filename = $_FILES['uploadfile']['name'];
+		$filetmpname = $_FILES['uploadfile']['tmp_name'];
+
+
+
+   //folder where images will be uploaded
+		$folder = '/xampp/htdocs/empresa/img/';
+  //function for saving the uploaded images in a specific folder
+		move_uploaded_file($filetmpname, $folder.$filename);
+
+		
+		if ($nome_material = $row['nome_material']){
+			mysqli_query($connection,"UPDATE `material_apoio` SET imagem='$filename' WHERE id_material='$id'");
+			?>
+			<div class="container">
+				<div class="alert alert-success" role="alert">
+					<strong>Material editado com sucesso!</strong>
+				</div>
+			</div>
+			<?php  
+			header("Refresh:2; url=material.php");
+		}else{
 			//Instrução SQL para selecionar diferentes dados
 
 			$sql_fetch_nome_material = "SELECT nome_material FROM material_apoio WHERE nome_material = '$nome_material'";
-
-	//usado para comparar os dados introduzidos com os da base de dados.
-
-
 			$query_nome_material = mysqli_query($connection,$sql_fetch_nome_material) or die(mysql_error());
 
 			if (mysqli_num_rows($query_nome_material)){
@@ -417,21 +466,16 @@ if($tarefa == "ApagarProduto"){
 				<?php
 				return;
 			}
-			mysqli_query($connection,"UPDATE `material_apoio` SET nome_material = '$nome_material'");
-			?>
-			<div class="container">
-				<div class="alert alert-success" role="alert">
-					<strong>Material editado com sucesso!</strong>
-				</div>
-			</div>
-			<?php  
-			header("Refresh:2; url=material.php");
+
 		}
+
+
 	}
-	?>
-	<script type="text/javascript">
-		function checkPass()
-		{
+}
+?>
+<script type="text/javascript">
+	function checkPass()
+	{
     //Store the password field objects into variables ...
     var pass1 = document.getElementById('pw1');
     var pass2 = document.getElementById('pw2');

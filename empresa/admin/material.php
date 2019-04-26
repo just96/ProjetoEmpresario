@@ -52,14 +52,14 @@ if(isset($_POST['add_material'])){
 	$filetmpname = $_FILES['uploadfile']['tmp_name'];
 
 	date_default_timezone_set('Europe/Lisbon');
-	$data = date('Y-m-d H:i:s');
+	$criado = date('Y-m-d H:i:s');
 
 		//folder where images will be uploaded
 	$folder = '/xampp/htdocs/empresa/img/';
 	//function for saving the uploaded images in a specific folder
 	move_uploaded_file($filetmpname, $folder.$filename);
 
-		//Instrução SQL para selecionar diferentes dados
+	//Instrução SQL para selecionar diferentes dados
 
 	$sql_fetch_nome_material = "SELECT nome_material FROM material_apoio WHERE nome_material = '$nome_material'";
 
@@ -79,7 +79,7 @@ if(isset($_POST['add_material'])){
 		return;
 	}
 
-	mysqli_query($connection,"INSERT INTO `material_apoio`(`nome_material`,`imagem`,`tipo`,`data`) VALUES ('$nome_material','$filename','$tipo','$data')")or die(mysqli_error($connection));
+	mysqli_query($connection,"INSERT INTO `material_apoio`(`nome_material`,`imagem`,`tipo`,`criado`) VALUES ('$nome_material','$filename','$tipo','$criado')")or die(mysqli_error($connection));
 
 	?>
 	<div class="container">
@@ -95,7 +95,7 @@ if(isset($_POST['add_material'])){
 <?php
 
 include("../conectar_bd.php");
-$sql = "SELECT id_material,nome_material,imagem,tipo,data FROM `material_apoio` ORDER BY id_material ASC;";
+$sql = "SELECT id_material,nome_material,imagem,tipo,criado,editado FROM `material_apoio` ORDER BY id_material ASC;";
 $result = mysqli_query($connection, $sql) or die(mysql_error());
 
 if ($result->num_rows > 0) {
@@ -103,6 +103,9 @@ if ($result->num_rows > 0) {
 	<body>
 		<hr>
 		<div class="container-fluid">
+			<div class="d-flex justify-content-center">
+				<button  onclick="window.location.href='../fpdf/pdf_materiais.php'" type="submit" class="btn btn-warning">Gerar PDF&nbsp<img src="../img/pdf.png" width="30" height="30"></img></button>
+			</div>
 			<br>
 			<table id="minhaTabela" class="table table-bordered">
 				<thead>
@@ -111,6 +114,7 @@ if ($result->num_rows > 0) {
 						<th>Nome do Material</th>
 						<th>Tipo</th>
 						<th>Data em que foi adicionado</th>
+						<th>Data em que foi editado</th>
 						<th>Editar</th>
 						<th>Apagar</th>
 					</tr>
@@ -121,15 +125,13 @@ if ($result->num_rows > 0) {
 						.$row["imagem"]."'></td><td>"
 						. $row["nome_material"]. "</td><td>" 
 						. $row["tipo"]."</td><td>"
-					. $row["data"]. "</td>"?><td>
+						. $row["criado"]. "</td><td>"
+					.$row["editado"]. "</td>"?><td>
 						<a onclick="return confirm('Editar este material?')" href="funcoes.php?funcao=EditarMaterial&id_geral=<?php echo $row["id_material"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png"></a></td>
 						<td><a onclick="return confirm('Deseja apagar este material?')" href="funcoes.php?funcao=ApagarMaterial&id_geral=<?php echo $row["id_material"] ?>"><img border="0" src="../img/baseline_delete_black_18dp.png"></a></td></tr><?php
 					};?> 
 				</tbody>
 			</table>
-			<div class="d-flex justify-content-center">
-				<button  onclick="window.location.href='../fpdf/pdf_materiais.php'" type="submit" class="btn btn-warning">Gerar PDF&nbsp<img src="../img/pdf.png" width="30" height="30"></img></button>
-			</div>
 		<?php }else{?>
 			<div class="container">
 				<div class="alert alert-danger" style="top:10px;" role="alert">

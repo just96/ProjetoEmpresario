@@ -62,6 +62,42 @@ if($tarefa == "ApagarProduto"){
 		if(mysqli_num_rows($result)>0){
 			?>
 			<div class="container">
+				<a href="#" data-target="#exampleModAvatar" data-toggle="modal">Alterar imagem do produto</a>
+				<form method="POST" action="#" enctype="multipart/form-data">
+					<div class="modal fade" id="exampleModAvatar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Alterar imagem do produto</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<div class="col-md-12">
+										<div class="panel panel-default">
+											<div class="panel-body">
+												<div class="text-center">
+													<div class="panel-body">
+														<div class="form-row">
+															<div class="form-group col-md-6">
+																<input type="file" name="uploadfile">
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+									<button onclick="return confirm('Alterar imagem do produto?')" type="submit" class="btn btn-primary" id="btnAI" name="btnAI">Alterar imagem do produto</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
 				<form method="POST" action="#" enctype="multipart/form-data">
 					<?php while($row=mysqli_fetch_assoc($result)){
 						?>
@@ -69,8 +105,6 @@ if($tarefa == "ApagarProduto"){
 							<div class="form-group col-md-3">
 								<img class="rounded" height='180' width='200' src='../img/<?php echo $row["imagem"]?>'>
 								<p></p>
-								<h4 for="imagem">Editar Imagem</h4>
-								<input type="file" name="uploadfile">
 							</div>
 						</div>
 						<div class="form-row">
@@ -101,16 +135,12 @@ if($tarefa == "ApagarProduto"){
 				$valor = $_POST['valor'];
 				$codigo_produto = $_POST['codigo_produto'];
 				$descricao = $_POST['descricao'];
-				$filename = $_FILES['uploadfile']['name'];
-				$filetmpname = $_FILES['uploadfile']['tmp_name'];
 
-				   //folder where images will be uploaded
-				$folder = '/xampp/htdocs/empresa/img/';
-  //function for saving the uploaded images in a specific folder
-				move_uploaded_file($filetmpname, $folder.$filename);
+				date_default_timezone_set('Europe/Lisbon');
+				$editado = date('Y-m-d H:i:s');
 
 
-				$sqleditproduto = "UPDATE `produtos` SET nome_produto='$nome_produto', imagem='$filename', valor='$valor', codigo_produto='$codigo_produto', descricao='$descricao' WHERE id_produto='$id'";
+				$sqleditproduto = "UPDATE `produtos` SET nome_produto='$nome_produto', valor='$valor', codigo_produto='$codigo_produto', descricao='$descricao' , editado = '$editado' WHERE id_produto='$id'";
 				mysqli_query($connection,$sqleditproduto);
 				?>  
 				<div class="container alert alert-success" role="alert">
@@ -118,6 +148,29 @@ if($tarefa == "ApagarProduto"){
 				</div>
 				<?php
 				header('refresh:2;url=ver_produtos.php');
+			}
+			if(isset($_POST['btnAI'])){
+
+				$filename = $_FILES['uploadfile']['name'];
+				$filetmpname = $_FILES['uploadfile']['tmp_name'];
+				date_default_timezone_set('Europe/Lisbon');
+				$editado = date('Y-m-d H:i:s');
+
+				//folder where images will be uploaded
+				$folder = '/xampp/htdocs/empresa/img/';
+	//function for saving the uploaded images in a specific folder
+				move_uploaded_file($filetmpname, $folder.$filename);
+
+				mysqli_query($connection,"UPDATE `produtos` SET imagem = '$filename' , editado = '$editado' WHERE id_produto='$id' ") or die(mysqli_error($connection));
+				?>
+				<div class="container">
+					<div class="alert alert-success" role="alert">
+						<strong>Imagem editada com sucesso!</strong>
+					</div>
+				</div>
+				<?php  
+				header("Refresh:2; url=ver_produtos.php");
+
 			}
 			?>
 		</body> 
@@ -241,7 +294,10 @@ if($tarefa == "ApagarProduto"){
 		$email = $_POST['email']; 
 		$comentario = $_POST['comentario'];
 
-		$sqleditcliente = "UPDATE `clientes` SET nome_fiscal='$nome_fiscal', nome_comercial='$nome_comercial', tipo='$tipo', morada='$morada', localidade='$localidade', codigo_postal='$codigo_postal' , num_fiscal='$num_fiscal' , num_telefone='$num_telefone' , email='$email' , obs='$comentario' WHERE id_cliente='$id'";
+		date_default_timezone_set('Europe/Lisbon');
+		$editado = date('Y-m-d H:i:s');
+
+		$sqleditcliente = "UPDATE `clientes` SET nome_fiscal='$nome_fiscal', nome_comercial='$nome_comercial', tipo='$tipo', morada='$morada', localidade='$localidade', codigo_postal='$codigo_postal' , num_fiscal='$num_fiscal' , num_telefone='$num_telefone' , email='$email' , obs='$comentario' , editado = '$editado' WHERE id_cliente='$id'";
 		mysqli_query($connection,$sqleditcliente);
 		?> 
 		<div class="container alert alert-success" role="alert">
@@ -290,9 +346,8 @@ if($tarefa == "ApagarProduto"){
 												<label for="select" class="col-4 col-form-label">Cargo*</label> 
 												<div class="col-8">
 													<select id="role" name="role" class="custom-select" required="required">
-														<option value ="<?php echo $row["user_type"]; ?>"></option>
-														<option value="Utilizador">Utilizador</option>
-														<option value="Gestor">Gestor</option>
+														<option value="Utilizador" <?php if($row["user_type"]=="Utilizador") echo 'selected="selected"';?>>Utilizador</option>
+														<option value="Gestor" <?php if($row["user_type"]=="Gestor") echo 'selected="selected"';?>>Gestor</option>
 													</select>
 												</div>
 											</div>
@@ -353,6 +408,10 @@ if($tarefa == "ApagarProduto"){
 		$num_telefone = $_POST['num_telefone']; 
 		$pw1 = $_POST['pw1'];
 		$pw2 = $_POST['pw2'];
+		$role = $_POST['role'];
+
+		date_default_timezone_set('Europe/Lisbon');
+		$editado = date('Y-m-d H:i:s');
 
 		$sql_pw = "SELECT * FROM `utilizadores` WHERE id_user='$id'";
 		$sql_query=mysqli_query($connection,$sql_pw);
@@ -361,7 +420,7 @@ if($tarefa == "ApagarProduto"){
 
 		if((empty($pw1)) || (empty($pw2))){
 
-			$sqledituser1 = "UPDATE `utilizadores` SET nome_completo='$nome_completo', nome='$username', email='$email', num_fiscal='$num_fiscal', num_telefone='$num_telefone', password='$pw' WHERE id_user='$id'";
+			$sqledituser1 = "UPDATE `utilizadores` SET nome_completo='$nome_completo', nome='$username', email='$email', num_fiscal='$num_fiscal', num_telefone='$num_telefone', password='$pw' , editado = '$editado' , user_type = '$role' WHERE id_user='$id'";
 			mysqli_query($connection,$sqledituser1);
 			?>  
 			<div class="container alert alert-success" role="alert">
@@ -371,7 +430,7 @@ if($tarefa == "ApagarProduto"){
 			header('refresh:1;url=gerirutilizadores.php');
 		}else{
 			$hash = password_hash($pw1,PASSWORD_BCRYPT);
-			$sqledituser2 = "UPDATE `utilizadores` SET nome_completo='$nome_completo', nome='$username', email='$email', num_fiscal='$num_fiscal', num_telefone='$num_telefone', password='$hash' WHERE id_user='$id'";
+			$sqledituser2 = "UPDATE `utilizadores` SET nome_completo='$nome_completo', nome='$username', email='$email', num_fiscal='$num_fiscal', num_telefone='$num_telefone', password='$hash' , editado = '$editado' WHERE id_user='$id'";
 			mysqli_query($connection,$sqledituser2);
 			?>  
 			<div class="container alert alert-success" role="alert">
@@ -389,7 +448,43 @@ if($tarefa == "ApagarProduto"){
 	?>
 	<h1 align="center">Material de Apoio</h1>
 	<hr>
-	<div class="container">
+	<div class="container-fluid" align="center">
+		<a href="#" data-target="#exampleModAvatar" data-toggle="modal">Alterar imagem do material</a>
+		<form method="POST" action="#" enctype="multipart/form-data">
+			<div class="modal fade" id="exampleModAvatar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Alterar imagem do material</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="col-md-12">
+								<div class="panel panel-default">
+									<div class="panel-body">
+										<div class="text-center">
+											<div class="panel-body">
+												<div class="form-row">
+													<div class="form-group col-md-6">
+														<input type="file" name="uploadfile">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+							<button onclick="return confirm('Alterar imagem do material?')" type="submit" class="btn btn-primary" id="btnAIM" name="btnAIM">Alterar imagem do material</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
 		<?php if ($result->num_rows > 0) { 
 			?>
 			<form align="center" class ="form-inline" method="POST" action="#" enctype="multipart/form-data">
@@ -398,8 +493,6 @@ if($tarefa == "ApagarProduto"){
 					<div class="form-group mx-sm-3 mb-2">
 						<div class="form-group mx-sm-3 mb-2">
 							<img class="rounded" height='150' width='200' src='../img/<?php echo $row["imagem"]?>'>
-							<h4 align="center" for="imagem">Editar Imagem</h4>
-							<input type="file" name="uploadfile">
 						</div>
 					</div>
 					<div class="form-group mx-sm-3 mb-2">
@@ -409,68 +502,65 @@ if($tarefa == "ApagarProduto"){
 						</div>
 						<div class="form-group mx-sm-3 mb-2">
 							<h6 align="center" for="imagem">Tipo</h6><br>
-							<div class="form-group mx-sm-3 mb-2">
-								<input name ="tipo" type="text" class="form-control" value="<?php echo $row["tipo"]; ?>" required>
+							<div class="col-8">
+								<select id="tipo" name="tipo" class="custom-select" required="required">
+									<option value="Mostruarios" <?php if($row["tipo"]=="Mostruarios") echo 'selected="selected"';?>>Mostruarios</option>
+									<option value="Expositores" <?php if($row["tipo"]=="Expositores") echo 'selected="selected"';?>>Expositores</option>
+									<option value="Folhetos" <?php if($row["tipo"]=="Folhetos") echo 'selected="selected"';?>>Folhetos</option>
+									<option value="MaterialTecnico" <?php if($row["tipo"]=="MaterialTecnico") echo 'selected="selected"';?>>Material Tecnico</option>
+								</select>
 							</div>
-							<button onclick="return confirm('Tem a certeza que quer editar?')" name ="edit_material" type="submit" class="btn btn-primary mb-2">Editar material</button>
-						</form>
-					</div>
+						</div>
+						<button onclick="return confirm('Tem a certeza que quer editar?')" name ="edit_material" type="submit" class="btn btn-primary mb-2">Editar material</button>
+					</form>
 				</div>
 			</div>
+		</div>
 
 
-			<?php
-		}
+		<?php
 	}
-	if(isset($_POST['edit_material'])) { 
+}
+if(isset($_POST['edit_material'])) { 
 
-		$sql_img = "SELECT nome_material,imagem,tipo FROM material_apoio WHERE id_material='$id'";
-		$result_img= mysqli_query($connection,$sql_img);
-		$row=mysqli_fetch_assoc($result_img);
+	$nome_material = $_POST['nome_material']; 
+	$tipo = $_POST['tipo'];
+	date_default_timezone_set('Europe/Lisbon');
+	$editado = date('Y-m-d H:i:s');
 
-		$nome_material = $_POST['nome_material']; 
-		$filename = $_FILES['uploadfile']['name'];
-		$filetmpname = $_FILES['uploadfile']['tmp_name'];
+	mysqli_query($connection,"UPDATE `material_apoio` SET nome_material = '$nome_material' ,tipo = '$tipo' , editado ='$editado' WHERE id_material='$id'");
+	?>
+	<div class="container">
+		<div class="alert alert-success" role="alert">
+			<strong>Material editado com sucesso!</strong>
+		</div>
+	</div>
+	<?php  
+	header("Refresh:2; url=material.php");
+}
+if(isset($_POST['btnAIM'])){
 
+	$filename = $_FILES['uploadfile']['name'];
+	$filetmpname = $_FILES['uploadfile']['tmp_name'];
+	date_default_timezone_set('Europe/Lisbon');
+	$editado = date('Y-m-d H:i:s');
 
+				//folder where images will be uploaded
+	$folder = '/xampp/htdocs/empresa/img/';
+	//function for saving the uploaded images in a specific folder
+	move_uploaded_file($filetmpname, $folder.$filename);
 
-   //folder where images will be uploaded
-		$folder = '/xampp/htdocs/empresa/img/';
-  //function for saving the uploaded images in a specific folder
-		move_uploaded_file($filetmpname, $folder.$filename);
+	mysqli_query($connection,"UPDATE `material_apoio` SET imagem = '$filename' , editado = '$editado' WHERE id_material='$id' ") or die(mysqli_error($connection));
+	?>
+	<div class="container">
+		<div class="alert alert-success" role="alert">
+			<strong>Imagem editada com sucesso!</strong>
+		</div>
+	</div>
+	<?php  
+	header("Refresh:2; url=material.php");
 
-		
-		if ($nome_material = $row['nome_material']){
-			mysqli_query($connection,"UPDATE `material_apoio` SET imagem='$filename' WHERE id_material='$id'");
-			?>
-			<div class="container">
-				<div class="alert alert-success" role="alert">
-					<strong>Material editado com sucesso!</strong>
-				</div>
-			</div>
-			<?php  
-			header("Refresh:2; url=material.php");
-		}else{
-			//Instrução SQL para selecionar diferentes dados
-
-			$sql_fetch_nome_material = "SELECT nome_material FROM material_apoio WHERE nome_material = '$nome_material'";
-			$query_nome_material = mysqli_query($connection,$sql_fetch_nome_material) or die(mysql_error());
-
-			if (mysqli_num_rows($query_nome_material)){
-				?>
-				<div class="container">
-					<div class="alert alert-danger" role="alert">
-						<strong>Nome de material já em uso!</strong> 
-					</div>
-				</div>
-				<?php
-				return;
-			}
-
-		}
-
-
-	}
+}
 }
 ?>
 <script type="text/javascript">

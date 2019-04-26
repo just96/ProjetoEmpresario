@@ -167,7 +167,7 @@ if(isset($_POST['add_user'])){
   $pw2 = mysqli_real_escape_string($connection,$pw2);
 
   date_default_timezone_set('Europe/Lisbon');
-  $data = date('Y-m-d H:i:s');
+  $criado = date('Y-m-d H:i:s');
 
   //Instrução SQL para selecionar diferentes dados
 
@@ -312,7 +312,7 @@ if($error){
 }
 
 $hash = password_hash($pw1,PASSWORD_BCRYPT);
-mysqli_query($connection,"INSERT INTO `utilizadores`(`nome`, `email`, `user_type`, `num_fiscal` , `num_telefone`, `password`,`data`) VALUES ('$username','$email','$cargo','$n_fiscal','$n_telefone','$hash','$data')") or die(mysqli_error($connection));
+mysqli_query($connection,"INSERT INTO `utilizadores`(`nome`, `email`, `user_type`, `num_fiscal` , `num_telefone`, `password`,`criado`) VALUES ('$username','$email','$cargo','$n_fiscal','$n_telefone','$hash','$criado')") or die(mysqli_error($connection));
 
 ?>
 <div class="container">

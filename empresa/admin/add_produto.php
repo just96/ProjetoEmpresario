@@ -59,7 +59,7 @@ if(isset($_POST['add_produto'])){
 	$codigo_produto =strip_tags($_POST['codigo_produto']); 
 	$descricao =strip_tags($_POST['descricao']); 
 	date_default_timezone_set('Europe/Lisbon');
-	$data = date('Y-m-d H:i:s');
+	$criado = date('Y-m-d H:i:s');
 	$filename = $_FILES['uploadfile']['name'];
 	$filetmpname = $_FILES['uploadfile']['tmp_name'];
 
@@ -67,6 +67,7 @@ if(isset($_POST['add_produto'])){
 	$folder = '/xampp/htdocs/empresa/img/';
 	//function for saving the uploaded images in a specific folder
 	move_uploaded_file($filetmpname, $folder.$filename);
+
 	
 
 	$nome_produto =stripcslashes($nome_produto);	// esta função remove a barra invertida da string
@@ -110,7 +111,7 @@ if(isset($_POST['add_produto'])){
 		return;
 	}
 
-	mysqli_query($connection,"INSERT INTO `produtos`(`nome_produto`,`imagem`,`valor`, `codigo_produto`, `descricao` , `data`) VALUES ('$nome_produto','$filename','$valor','$codigo_produto','$descricao','$data')") or die(mysqli_error($connection));
+	mysqli_query($connection,"INSERT INTO `produtos`(`nome_produto`,`imagem`,`valor`, `codigo_produto`, `descricao` , `criado`) VALUES ('$nome_produto','$filename','$valor','$codigo_produto','$descricao','$criado')") or die(mysqli_error($connection));
 	?>
 	<div class="container">
 		<div class="alert alert-success" role="alert">

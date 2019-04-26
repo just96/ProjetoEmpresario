@@ -6,7 +6,7 @@ if ($_SESSION['role'] != 'Gestor'){
 }
 include("../conectar_bd.php");
 // SELECT no SQL para selecionar os dados a serem imprimidos na tabela
-$sql = "SELECT id_produto,nome_produto,imagem,valor,codigo_produto,descricao,data FROM `produtos` ORDER BY id_produto ASC;";
+$sql = "SELECT id_produto,nome_produto,imagem,valor,codigo_produto,descricao,criado,editado FROM `produtos` ORDER BY id_produto ASC;";
 $result = mysqli_query($connection, $sql) or die(mysql_error());
 ?>
 
@@ -33,6 +33,7 @@ if ($result->num_rows > 0) {
 						<th>Descrição do Produto</th>
 						<th>Preço €</th>
 						<th>Data em que foi adicionado</th>
+						<th>Data em que foi editado</th>
 						<th>Editar</th>
 						<th>Apagar</th>
 					</tr>
@@ -45,7 +46,8 @@ if ($result->num_rows > 0) {
 						. $row["nome_produto"]. "</td><td>" 
 						. $row["descricao"]. "</td><td>"
 						. $row["valor"]."&euro;</td><td>" 
-					. $row["data"]. "</td>"?><td>
+						. $row["criado"]. "</td><td>"
+					.$row["editado"]."</td>"?><td>
 						<a onclick="return confirm('Editar este produto?')" href="funcoes.php?funcao=EditarProduto&id_geral=<?php echo $row["id_produto"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png"></a></td>
 						<td><a onclick="return confirm('Deseja apagar este produto?')" href="funcoes.php?funcao=ApagarProduto&id_geral=<?php echo $row["id_produto"] ?>"><img border="0" src="../img/baseline_delete_black_18dp.png"></a></td></tr><?php
 					};?> 

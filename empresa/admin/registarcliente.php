@@ -142,7 +142,7 @@ if(isset($_POST['add_client'])){
   $comentario = mysqli_real_escape_string($connection,$comentario); 
 
   date_default_timezone_set('Europe/Lisbon');
-  $data = date('Y-m-d H:i:s');
+  $criado = date('Y-m-d H:i:s');
 
    //Instrução SQL para selecionar diferentes dados
 
@@ -225,7 +225,7 @@ if(isset($_POST['add_client'])){
     return;
   }
 
-  mysqli_query($connection,"INSERT INTO `clientes`(`id_utilizador`,`nome_fiscal`, `nome_comercial`, `tipo`, `morada`, `localidade`, `codigo_postal`, `num_fiscal`, `num_telefone`, `email`,`obs`,`data`) VALUES ('$id','$nome_fiscal','$nome_comercial','$tipo','$morada','$localidade','$codigo_postal','$num_fiscal','$num_telefone','$email','$comentario','$data')") or die(mysqli_error($connection));
+  mysqli_query($connection,"INSERT INTO `clientes`(`id_utilizador`,`nome_fiscal`, `nome_comercial`, `tipo`, `morada`, `localidade`, `codigo_postal`, `num_fiscal`, `num_telefone`, `email`,`obs`,`criado`) VALUES ('$id','$nome_fiscal','$nome_comercial','$tipo','$morada','$localidade','$codigo_postal','$num_fiscal','$num_telefone','$email','$comentario','$criado')") or die(mysqli_error($connection));
 
   ?>
   <div class="container">

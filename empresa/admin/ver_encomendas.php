@@ -1,5 +1,5 @@
 
-<title>Gerir Encomendas</title>
+<title>Menu Gestor - Gerir Encomendas</title>
 
 <?php require('topfooterA.php');?>
 

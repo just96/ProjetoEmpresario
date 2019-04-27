@@ -10,7 +10,7 @@ $sql = "SELECT id_user,nome,imagem,email,user_type,num_fiscal,num_telefone FROM 
 $result = mysqli_query($connection, $sql);
 ?>
 
-<title>Gerir Utilizadores</title>
+<title>Menu Gestor - Gerir Utilizadores</title>
 
 
 <?php require('topfooterA.php');
@@ -51,11 +51,9 @@ if ($result->num_rows > 0) {?>
       </tbody>
     </table>
   <?php }else{?>
-    <div class="container">
-      <div class="alert alert-danger" style="top:10px;" role="alert">
-        <strong>Não há clientes registados!</strong>
-      </div> 
-    </div>
+    <div class=" alert alert-danger" style="top:10px;" role="alert">
+      <strong>Não há clientes registados!</strong>
+    </div> 
     <?php
   }
   ?>

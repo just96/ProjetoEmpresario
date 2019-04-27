@@ -10,7 +10,7 @@ $sql = "SELECT id_cliente,nome_fiscal,nome_comercial,tipo,morada,localidade,codi
 $result = mysqli_query($connection, $sql);
 ?>
 
-<title>Gerir Clientes</title>
+<title>Menu Gestor - Gerir Clientes</title>
 
 <?php require('topfooterA.php');
 require('filtros.php');
@@ -47,11 +47,9 @@ if ($result->num_rows > 0) {?>
           </tbody>
         </table>
       <?php }else{?>
-        <div class="container">
-          <div class="alert alert-danger" style="top:10px;" role="alert">
-            <strong>Não há clientes registados!</strong>
-          </div> 
-        </div>
+        <div class=" alert alert-danger" style="top:10px;" role="alert">
+          <strong>Não há clientes registados!</strong>
+        </div> 
         <?php
       }
       ?>

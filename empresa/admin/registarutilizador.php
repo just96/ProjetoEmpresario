@@ -5,7 +5,7 @@ if ($_SESSION['role'] != 'Gestor'){
   header( "Location:../utilizador/log.php" );
 }
 ?>
-<title>Adicionar Utilizador</title>
+<title>Menu Gestor - Adicionar Utilizador</title>
 
 <?php require('topfooterA.php');?>
 <body>
@@ -187,10 +187,8 @@ if(isset($_POST['add_user'])){
   if(!empty($n_fiscal) AND strlen($n_fiscal)<9)
   {
     ?>
-    <div class="container">
-      <div class="alert alert-danger" role="alert">
-        NIF tem de ter 9 digitos!
-      </div>
+    <div class=" alert alert-danger" role="alert">
+      NIF tem de ter 9 digitos!
     </div>
     <?php
     return;
@@ -198,10 +196,8 @@ if(isset($_POST['add_user'])){
 
   if(!empty($n_telefone) AND strlen($n_telefone)<9){
     ?>
-    <div class="container">
-      <div class="alert alert-danger" role="alert">
-       Número de telefone tem de ter 9 digitos!
-     </div>
+    <div class=" alert alert-danger" role="alert">
+     Número de telefone tem de ter 9 digitos!
    </div>
    <?php
    return;
@@ -209,10 +205,8 @@ if(isset($_POST['add_user'])){
 
  if (strlen($username)<=4){
   ?>
-  <div class="w-25 bg-warning">
-    <div class="alert alert-danger" role="alert">
-     O nome de utilizador tem de ter pelo menos 5 caracteres.
-   </div>
+  <div class=" alert alert-danger" role="alert">
+   O nome de utilizador tem de ter pelo menos 5 caracteres.
  </div>
  <?php
  return;
@@ -220,10 +214,8 @@ if(isset($_POST['add_user'])){
 
 if (mysqli_num_rows($query_username)){
   ?>
-  <div class="container">
-    <div class="alert alert-danger" role="alert">
-      <strong>Nome de utilizador em uso!</strong> 
-    </div>
+  <div class=" alert alert-danger" role="alert">
+    <strong>Nome de utilizador em uso!</strong> 
   </div>
   <?php
   return;
@@ -231,10 +223,8 @@ if (mysqli_num_rows($query_username)){
 
 if (mysqli_num_rows($query_email)){
   ?>
-  <div class="container">
-    <div class="alert alert-danger" role="alert">
-     <strong>Email já em uso!</strong>
-   </div>
+  <div class=" alert alert-danger" role="alert">
+   <strong>Email já em uso!</strong>
  </div>
  <?php
  return;
@@ -242,10 +232,8 @@ if (mysqli_num_rows($query_email)){
 
 if (mysqli_num_rows($query_n_telefone)){
   ?>
-  <div class="container">
-    <div class="alert alert-danger" role="alert">
-     <strong>Número de Telefone já em uso!</strong>
-   </div>
+  <div class=" alert alert-danger" role="alert">
+   <strong>Número de Telefone já em uso!</strong>
  </div>
  <?php
  return;
@@ -253,10 +241,8 @@ if (mysqli_num_rows($query_n_telefone)){
 
 if (mysqli_num_rows($query_n_fiscal)){
   ?>
-  <div class="container">
-    <div class="alert alert-danger" role="alert">
-      <strong>Número de Identificação Fiscal já em uso!</strong>
-    </div>
+  <div class=" alert alert-danger" role="alert">
+    <strong>Número de Identificação Fiscal já em uso!</strong>
   </div>
   <?php
   return;
@@ -299,13 +285,11 @@ if( !preg_match("#\W+#", $pw1)){
 
 if($error){
   ?>
-  <div class="container">
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <strong>Validação da Password(password fraca):</strong><?php echo "<dd>$error</dd>" ;?>
-    </div>
+  <div class=" alert alert-danger alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Validação da Password(password fraca):</strong><?php echo "<dd>$error</dd>" ;?>
   </div>
   <?php
   return;
@@ -315,10 +299,8 @@ $hash = password_hash($pw1,PASSWORD_BCRYPT);
 mysqli_query($connection,"INSERT INTO `utilizadores`(`nome`, `email`, `user_type`, `num_fiscal` , `num_telefone`, `password`,`criado`) VALUES ('$username','$email','$cargo','$n_fiscal','$n_telefone','$hash','$criado')") or die(mysqli_error($connection));
 
 ?>
-<div class="container">
-  <div class="alert alert-success" role="alert">
-    <strong>Registo efetuado com sucesso!</strong>
-  </div>
+<div class=" alert alert-success" role="alert">
+  <strong>Registo efetuado com sucesso!</strong>
 </div>
 <?php  
 header("Refresh:1; url=index.php");

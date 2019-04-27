@@ -10,7 +10,7 @@ $sql = "SELECT id_produto,nome_produto,imagem,valor,codigo_produto,descricao,cri
 $result = mysqli_query($connection, $sql) or die(mysql_error());
 ?>
 
-<title>Gerir Produtos</title>
+<title>Menu Gestor - Gerir Produtos</title>
 
 <?php require('topfooterA.php');
 require('filtros.php');
@@ -54,11 +54,9 @@ if ($result->num_rows > 0) {
 				</tbody>
 			</table>
 		<?php }else{?>
-			<div class="container">
-				<div class="alert alert-danger" style="top:10px;" role="alert">
-					<strong>Não há produtos registados!</strong>
-				</div> 
-			</div>
+			<div class=" alert alert-danger" style="top:10px;" role="alert">
+				<strong>Não há produtos registados!</strong>
+			</div> 
 			<?php
 		}
 		?>

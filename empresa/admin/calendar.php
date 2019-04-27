@@ -4,7 +4,7 @@ if ($_SESSION['role'] != 'Gestor'){
   header( "Location:../utilizador/log.php" );
 }
 ?>
-<title>Calendário</title>
+<title>Menu Gestor - Calendário</title>
 <body>
   <?php require('topfooterA.php');?>
   <div class="container" style="

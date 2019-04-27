@@ -12,7 +12,7 @@ $result= mysqli_query($connection,$sqldata);
 ?>
 
 
-<title>Perfil</title>
+<title>Menu Gestor - Perfil</title>
 
 <style>
   .user {
@@ -314,7 +314,7 @@ $sqleditperfil = "UPDATE `utilizadores` SET nome_completo='$nome', nome='$userna
 
 mysqli_query($connection,$sqleditperfil);
 ?>  
-<div class="alert alert-success" role="alert">
+<div class=" alert alert-success" role="alert">
  Alterações guardadas!
 </div>
 <?php
@@ -370,13 +370,11 @@ if(isset($_POST['btnApw'])){
 
     if($error){
       ?>
-      <div class="container">
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <strong>Validação da Password(password fraca):</strong><?php echo "<dd>$error</dd>" ;?>
-        </div>
+      <div class=" alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Validação da Password(password fraca):</strong><?php echo "<dd>$error</dd>" ;?>
       </div>
       <?php
       return;
@@ -393,19 +391,15 @@ if(isset($_POST['btnApw'])){
       mysqli_query($connection,$sqleditpw);
     }
     ?>
-    <div class="container">
-      <div class="alert alert-success" role="alert">
-        <strong>Password alterada com sucesso!</strong>
-      </div>
+    <div class=" alert alert-success" role="alert">
+      <strong>Password alterada com sucesso!</strong>
     </div>
     <?php  
     header('Refresh:2; url=logout.php');
   }else{
     ?> 
-    <div class="container"> 
-      <div class="alert alert-danger" role="alert">
-        Password atual errada!
-      </div>
+    <div class=" alert alert-warning" role="alert">
+      Password atual errada!
     </div>
     <?php
   }
@@ -420,10 +414,8 @@ if(isset($_POST['btnApw'])){
 
     if(empty($password)){
       ?>
-      <div class="modal-body">
-        <div class="alert alert-warning" role="alert">
-          Insira a sua password!
-        </div>
+      <div class=" alert alert-warning" role="alert" >
+        Insira a sua password!
       </div>
       <?php
       return;
@@ -435,17 +427,15 @@ if(isset($_POST['btnApw'])){
 
       mysqli_query($connection,$apagarconta);
       ?>
-      <div class="alert alert-success" role="alert">
+      <div class=" alert alert-success" role="alert">
         Conta eliminada com sucesso!
       </div>
       <?php
       header('refresh:2;url=logout.php');
     }else{
       ?>
-      <div class="container">
-        <div class="alert alert-danger" role="alert">
-          Password errada!
-        </div>
+      <div class=" alert alert-warning" role="alert">
+        Password errada!
       </div>
       <?php
       return;
@@ -465,10 +455,8 @@ if(isset($_POST['btnApw'])){
 
     mysqli_query($connection,"UPDATE `utilizadores` SET imagem = '$filename' , editado = '$editado' WHERE id_user='$id' ") or die(mysqli_error($connection));
     ?>
-    <div class="container">
-      <div class="alert alert-success" role="alert">
-        <strong>Imagem editada com sucesso!</strong>
-      </div>
+    <div class="  alert alert-success" role="alert">
+      <strong>Imagem editada com sucesso!</strong>
     </div>
     <?php  
     header("Refresh:2; url=perfil.php");

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Histórico de Encomendas</title>
+	<title>Menu Gestor - Histórico de Encomendas</title>
 </head>
 <?php require('topfooterA.php');?>
 

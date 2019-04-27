@@ -13,7 +13,7 @@ if($tarefa == "ApagarProduto"){
 
 	$deleteproduto= "DELETE FROM produtos WHERE id_produto='$id'";
 	mysqli_query($connection,$deleteproduto) or die($deleteproduto); ?>
-	<div class="container alert alert-success" role="alert">
+	<div class=" alert alert-success" role="alert">
 		Produto eliminado com sucesso!
 	</div>
 	<?php
@@ -23,7 +23,7 @@ if($tarefa == "ApagarProduto"){
 
 	$deletecliente= "DELETE FROM clientes WHERE id_cliente='$id'";
 	mysqli_query($connection,$deletecliente) or die($deletecliente); ?>
-	<div class="container alert alert-success" role="alert">
+	<div class=" alert alert-success" role="alert">
 		Cliente eliminado com sucesso!
 	</div>
 	<?php
@@ -33,7 +33,7 @@ if($tarefa == "ApagarProduto"){
 
 	$deleteuser= "DELETE FROM utilizadores WHERE id_user='$id'";
 	mysqli_query($connection,$deleteuser) or die($deleteuser); ?>
-	<div class="container alert alert-success" role="alert">
+	<div class=" alert alert-success" role="alert">
 		Utilizador eliminado com sucesso!
 	</div>
 	<?php
@@ -43,7 +43,7 @@ if($tarefa == "ApagarProduto"){
 
 	$deletematerial= "DELETE FROM material_apoio WHERE id_material='$id'";
 	mysqli_query($connection,$deletematerial) or die($deletematerial); ?>
-	<div class="container alert alert-success" role="alert">
+	<div class=" alert alert-success" role="alert">
 		Material eliminado com sucesso!
 	</div>
 	<?php
@@ -143,7 +143,7 @@ if($tarefa == "ApagarProduto"){
 				$sqleditproduto = "UPDATE `produtos` SET nome_produto='$nome_produto', valor='$valor', codigo_produto='$codigo_produto', descricao='$descricao' , editado = '$editado' WHERE id_produto='$id'";
 				mysqli_query($connection,$sqleditproduto);
 				?>  
-				<div class="container alert alert-success" role="alert">
+				<div class=" alert alert-success" role="alert">
 					Alterações guardadas!
 				</div>
 				<?php
@@ -163,10 +163,8 @@ if($tarefa == "ApagarProduto"){
 
 				mysqli_query($connection,"UPDATE `produtos` SET imagem = '$filename' , editado = '$editado' WHERE id_produto='$id' ") or die(mysqli_error($connection));
 				?>
-				<div class="container">
-					<div class="alert alert-success" role="alert">
-						<strong>Imagem editada com sucesso!</strong>
-					</div>
+				<div class=" alert alert-success" role="alert">
+					<strong>Imagem editada com sucesso!</strong>
 				</div>
 				<?php  
 				header("Refresh:2; url=ver_produtos.php");
@@ -300,7 +298,7 @@ if($tarefa == "ApagarProduto"){
 		$sqleditcliente = "UPDATE `clientes` SET nome_fiscal='$nome_fiscal', nome_comercial='$nome_comercial', tipo='$tipo', morada='$morada', localidade='$localidade', codigo_postal='$codigo_postal' , num_fiscal='$num_fiscal' , num_telefone='$num_telefone' , email='$email' , obs='$comentario' , editado = '$editado' WHERE id_cliente='$id'";
 		mysqli_query($connection,$sqleditcliente);
 		?> 
-		<div class="container alert alert-success" role="alert">
+		<div class=" alert alert-success" role="alert">
 			Alterações guardadas!
 		</div>
 		<?php
@@ -423,9 +421,9 @@ if($tarefa == "ApagarProduto"){
 			$sqledituser1 = "UPDATE `utilizadores` SET nome_completo='$nome_completo', nome='$username', email='$email', num_fiscal='$num_fiscal', num_telefone='$num_telefone', password='$pw' , editado = '$editado' , user_type = '$role' WHERE id_user='$id'";
 			mysqli_query($connection,$sqledituser1);
 			?>  
-			<div class="container alert alert-success" role="alert">
-				Alterações guardadas!
-			</div>
+				<div class="alert alert-success" role="alert">
+					Alterações guardadas!
+				</div>
 			<?php
 			header('refresh:1;url=gerirutilizadores.php');
 		}else{
@@ -433,7 +431,7 @@ if($tarefa == "ApagarProduto"){
 			$sqledituser2 = "UPDATE `utilizadores` SET nome_completo='$nome_completo', nome='$username', email='$email', num_fiscal='$num_fiscal', num_telefone='$num_telefone', password='$hash' , editado = '$editado' WHERE id_user='$id'";
 			mysqli_query($connection,$sqledituser2);
 			?>  
-			<div class="container alert alert-success" role="alert">
+			<div class=" alert alert-success" role="alert">
 				Alterações guardadas!
 			</div>
 			<?php
@@ -530,10 +528,8 @@ if(isset($_POST['edit_material'])) {
 
 	mysqli_query($connection,"UPDATE `material_apoio` SET nome_material = '$nome_material' ,tipo = '$tipo' , editado ='$editado' WHERE id_material='$id'");
 	?>
-	<div class="container">
-		<div class="alert alert-success" role="alert">
-			<strong>Material editado com sucesso!</strong>
-		</div>
+	<div class=" alert alert-success" role="alert">
+		<strong>Material editado com sucesso!</strong>
 	</div>
 	<?php  
 	header("Refresh:2; url=material.php");
@@ -552,10 +548,8 @@ if(isset($_POST['btnAIM'])){
 
 	mysqli_query($connection,"UPDATE `material_apoio` SET imagem = '$filename' , editado = '$editado' WHERE id_material='$id' ") or die(mysqli_error($connection));
 	?>
-	<div class="container">
-		<div class="alert alert-success" role="alert">
-			<strong>Imagem editada com sucesso!</strong>
-		</div>
+	<div class=" alert alert-success" role="alert">
+		<strong>Imagem editada com sucesso!</strong>
 	</div>
 	<?php  
 	header("Refresh:2; url=material.php");

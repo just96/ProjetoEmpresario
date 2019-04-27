@@ -1,4 +1,4 @@
-<title>Material de Apoio</title>
+<title>Menu Gestor - Material de Apoio</title>
 <?php
 session_start();
 if ($_SESSION['role'] != 'Gestor'){
@@ -70,10 +70,8 @@ if(isset($_POST['add_material'])){
 
 	if (mysqli_num_rows($query_nome_material)){
 		?>
-		<div class="container">
-			<div class="alert alert-danger" role="alert">
-				<strong>Nome de material já em uso!</strong> 
-			</div>
+		<div class=" alert alert-danger" role="alert">
+			<strong>Nome de material já em uso!</strong> 
 		</div>
 		<?php
 		return;
@@ -82,10 +80,8 @@ if(isset($_POST['add_material'])){
 	mysqli_query($connection,"INSERT INTO `material_apoio`(`nome_material`,`imagem`,`tipo`,`criado`) VALUES ('$nome_material','$filename','$tipo','$criado')")or die(mysqli_error($connection));
 
 	?>
-	<div class="container">
-		<div class="alert alert-success" role="alert">
-			<strong>Material adicionado com sucesso!</strong>
-		</div>
+	<div class=" alert alert-success" role="alert">
+		<strong>Material adicionado com sucesso!</strong>
 	</div>
 	<?php  
 	header("Refresh:2; url=material.php");
@@ -133,11 +129,9 @@ if ($result->num_rows > 0) {
 				</tbody>
 			</table>
 		<?php }else{?>
-			<div class="container">
-				<div class="alert alert-danger" style="top:10px;" role="alert">
-					<strong>Não há material registado!</strong>
-				</div> 
-			</div>
+			<div class=" alert alert-danger" style="top:10px;" role="alert">
+				<strong>Não há material registado!</strong>
+			</div> 
 			<?php
 		}
 		?>

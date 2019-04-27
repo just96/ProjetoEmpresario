@@ -6,7 +6,7 @@ if ($_SESSION['role'] != 'Gestor'){
 
 ?>
 
-<title>Adicionar Produtos</title>
+<title>Menu Gestor - Adicionar Produtos</title>
 
 <?php require('topfooterA.php');
 ?>
@@ -92,20 +92,16 @@ if(isset($_POST['add_produto'])){
 
 	if (mysqli_num_rows($query_nome_produto)){
 		?>
-		<div class="container">
-			<div class="alert alert-danger" role="alert">
-				<strong>Nome de produto já em uso!</strong> 
-			</div>
+		<div class=" alert alert-danger" role="alert">
+			<strong>Nome de produto já em uso!</strong> 
 		</div>
 		<?php
 		return;
 	}
 	if (mysqli_num_rows($query_codigo_produto)){
 		?>
-		<div class="container">
-			<div class="alert alert-danger" role="alert">
-				<strong>Referência já em uso</strong> 
-			</div>
+		<div class=" alert alert-danger" role="alert">
+			<strong>Referência já em uso</strong> 
 		</div>
 		<?php
 		return;
@@ -113,10 +109,8 @@ if(isset($_POST['add_produto'])){
 
 	mysqli_query($connection,"INSERT INTO `produtos`(`nome_produto`,`imagem`,`valor`, `codigo_produto`, `descricao` , `criado`) VALUES ('$nome_produto','$filename','$valor','$codigo_produto','$descricao','$criado')") or die(mysqli_error($connection));
 	?>
-	<div class="container">
-		<div class="alert alert-success" role="alert">
-			<strong>Produto adicionado com sucesso!</strong>
-		</div>
+	<div class=" alert alert-success" role="alert">
+		<strong>Produto adicionado com sucesso!</strong>
 	</div>
 	<?php  
 	header("Refresh:2; url=ver_produtos.php");

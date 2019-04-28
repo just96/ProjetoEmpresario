@@ -104,7 +104,7 @@ if ($result->num_rows > 0) {
 			</div>
 			<br>
 			<table id="minhaTabela" class="table table-bordered">
-				<thead>
+				<thead class="thead-dark">
 					<tr>
 						<th>Imagem</th>
 						<th>Nome do Material</th>
@@ -115,7 +115,7 @@ if ($result->num_rows > 0) {
 						<th>Apagar</th>
 					</tr>
 				</thead>
-				<tbody id="myTable">
+				<tbody>
 					<?php while($row = $result->fetch_assoc()) {
 						echo "<tr><td><img class='rounded' height='100' width='150' src='../img/"
 						.$row["imagem"]."'></td><td>"

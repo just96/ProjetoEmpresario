@@ -421,14 +421,14 @@ if($tarefa == "ApagarProduto"){
 			$sqledituser1 = "UPDATE `utilizadores` SET nome_completo='$nome_completo', nome='$username', email='$email', num_fiscal='$num_fiscal', num_telefone='$num_telefone', password='$pw' , editado = '$editado' , user_type = '$role' WHERE id_user='$id'";
 			mysqli_query($connection,$sqledituser1);
 			?>  
-				<div class="alert alert-success" role="alert">
-					Alterações guardadas!
-				</div>
+			<div class="alert alert-success" role="alert">
+				Alterações guardadas!
+			</div>
 			<?php
 			header('refresh:1;url=gerirutilizadores.php');
 		}else{
 			$hash = password_hash($pw1,PASSWORD_BCRYPT);
-			$sqledituser2 = "UPDATE `utilizadores` SET nome_completo='$nome_completo', nome='$username', email='$email', num_fiscal='$num_fiscal', num_telefone='$num_telefone', password='$hash' , editado = '$editado' WHERE id_user='$id'";
+			$sqledituser2 = "UPDATE `utilizadores` SET nome_completo='$nome_completo', nome='$username', email='$email', num_fiscal='$num_fiscal', num_telefone='$num_telefone', password='$hash' , editado = '$editado' , user_type = '$role' WHERE id_user='$id'";
 			mysqli_query($connection,$sqledituser2);
 			?>  
 			<div class=" alert alert-success" role="alert">

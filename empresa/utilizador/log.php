@@ -44,7 +44,7 @@ if(isset($_POST['login_btn'])) {      // LOGIN
     $_SESSION['role'] = $role;
     $_SESSION['Utilizador'] = $nome;
     $_SESSION['id'] = $id ;
-    if ($_SESSION['role'] == 'utilizador'){
+    if ($_SESSION['role'] == 'Utilizador'){
       header("refresh:1;url=../utilizador/index.php");
     } else if($_SESSION['role'] == 'Gestor'){
       header("refresh:1;url=../admin/index.php");

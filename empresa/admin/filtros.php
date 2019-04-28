@@ -8,7 +8,20 @@
       $('#minhaTabela').DataTable({
         "language": {
           "lengthMenu": "_MENU_ registos por página",
-          "zeroRecords": "Nada encontrado",
+          "zeroRecords": "Nenhum registo encontrado!",
+          "info": "Página _PAGE_ de _PAGES_",
+          "infoEmpty": "Nenhum registo disponível",
+          "infoFiltered": "(filtrado de _MAX_ registos no total)"
+        }
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function(){
+      $('#myTable').DataTable({
+        "language": {
+          "lengthMenu": "_MENU_ registos por página",
+          "zeroRecords": "Nenhum registo encontrado!",
           "info": "Página _PAGE_ de _PAGES_",
           "infoEmpty": "Nenhum registo disponível",
           "infoFiltered": "(filtrado de _MAX_ registos no total)"

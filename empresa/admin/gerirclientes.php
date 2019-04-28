@@ -24,7 +24,7 @@ if ($result->num_rows > 0) {?>
     <div class="container-fluid">
       <br>
       <table id="minhaTabela" class="table table-bordered">
-        <thead>
+        <thead class="thead-dark">
           <tr>
             <th>Nome Fiscal</th>
             <th>Nome Comercial</th>
@@ -39,7 +39,7 @@ if ($result->num_rows > 0) {?>
             <th>Apagar</th>
           </tr>
         </thead>
-        <tbody id="myTable">
+        <tbody>
           <?php while($row = $result->fetch_assoc()) {
             echo "<tr><td>". $row["nome_fiscal"]. "</td><td>" . $row["nome_comercial"]. "</td><td>" . $row["tipo"]. "</td><td>". $row["morada"]. "</td><td>" . $row["localidade"]. "</td><td>" . $row["codigo_postal"]. "</td><td>" . $row["num_fiscal"]. "</td><td>" . $row["num_telefone"]."</td><td>" . $row["email"] ."</td>"?><td><a onclick="return confirm('Editar este cliente?')" href="funcoes.php?funcao=EditarCliente&id_geral=<?php echo $row["id_cliente"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png" href="#"></a></td>
               <td><a onclick="return confirm('Deseja apagar este cliente?')" href="funcoes.php?funcao=ApagarCliente&id_geral=<?php echo $row["id_cliente"]?>"><img border="0" src="../img/baseline_delete_black_18dp.png" href="#"></a></td></tr><?php

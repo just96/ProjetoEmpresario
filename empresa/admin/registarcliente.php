@@ -166,7 +166,7 @@ if(isset($_POST['add_client'])){
   
   if (mysqli_num_rows($query_nome_fiscal)){
     ?>
-    <div class=" alert alert-danger" role="alert">
+    <div class="container alert alert-danger" role="alert">
       <strong>Nome Fiscal em uso!</strong> 
     </div>
     <?php
@@ -174,7 +174,7 @@ if(isset($_POST['add_client'])){
   }
   if (mysqli_num_rows($query_nome_comercial)){
     ?>
-    <div class=" alert alert-danger" role="alert">
+    <div class="container alert alert-danger" role="alert">
       <strong>Nome Comercial em uso!</strong> 
     </div>
     <?php
@@ -182,7 +182,7 @@ if(isset($_POST['add_client'])){
   }
   if (mysqli_num_rows($query_morada)){
     ?>
-    <div class=" alert alert-danger" role="alert">
+    <div class="container alert alert-danger" role="alert">
       <strong>Morada em uso!</strong> 
     </div>
     <?php
@@ -190,7 +190,7 @@ if(isset($_POST['add_client'])){
   }
   if (mysqli_num_rows($query_num_fiscal)){
     ?>
-    <div class=" alert alert-danger" role="alert">
+    <div class="container alert alert-danger" role="alert">
       <strong>Número Fiscal em uso!</strong> 
     </div>
     <?php
@@ -198,7 +198,7 @@ if(isset($_POST['add_client'])){
   }
   if (mysqli_num_rows($query_num_telefone)){
     ?>
-    <div class=" alert alert-danger" role="alert">
+    <div class="container alert alert-danger" role="alert">
       <strong>Número de Telefone em uso!</strong> 
     </div>
     <?php
@@ -206,7 +206,7 @@ if(isset($_POST['add_client'])){
   }
   if (mysqli_num_rows($query_email)){
     ?>
-    <div class=" alert alert-danger" role="alert">
+    <div class="container alert alert-danger" role="alert">
       <strong>Email em uso!</strong> 
     </div>
     <?php
@@ -216,7 +216,7 @@ if(isset($_POST['add_client'])){
   mysqli_query($connection,"INSERT INTO `clientes`(`id_utilizador`,`nome_fiscal`, `nome_comercial`, `tipo`, `morada`, `localidade`, `codigo_postal`, `num_fiscal`, `num_telefone`, `email`,`obs`,`criado`) VALUES ('$id','$nome_fiscal','$nome_comercial','$tipo','$morada','$localidade','$codigo_postal','$num_fiscal','$num_telefone','$email','$comentario','$criado')") or die(mysqli_error($connection));
 
   ?>
-  <div class=" alert alert-success" role="alert">
+  <div class="container alert alert-success" role="alert">
     <strong>Registo efetuado com sucesso!</strong>
   </div>
 

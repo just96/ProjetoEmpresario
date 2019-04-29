@@ -187,7 +187,7 @@ if(isset($_POST['add_user'])){
   if(!empty($n_fiscal) AND strlen($n_fiscal)<9)
   {
     ?>
-    <div class=" alert alert-danger" role="alert">
+    <div class="container alert alert-danger" role="alert">
       NIF tem de ter 9 digitos!
     </div>
     <?php
@@ -196,7 +196,7 @@ if(isset($_POST['add_user'])){
 
   if(!empty($n_telefone) AND strlen($n_telefone)<9){
     ?>
-    <div class=" alert alert-danger" role="alert">
+    <div class="container alert alert-danger" role="alert">
      Número de telefone tem de ter 9 digitos!
    </div>
    <?php
@@ -205,7 +205,7 @@ if(isset($_POST['add_user'])){
 
  if (strlen($username)<=4){
   ?>
-  <div class=" alert alert-danger" role="alert">
+  <div class="container alert alert-danger" role="alert">
    O nome de utilizador tem de ter pelo menos 5 caracteres.
  </div>
  <?php
@@ -214,7 +214,7 @@ if(isset($_POST['add_user'])){
 
 if (mysqli_num_rows($query_username)){
   ?>
-  <div class=" alert alert-danger" role="alert">
+  <div class="container alert alert-danger" role="alert">
     <strong>Nome de utilizador em uso!</strong> 
   </div>
   <?php
@@ -223,7 +223,7 @@ if (mysqli_num_rows($query_username)){
 
 if (mysqli_num_rows($query_email)){
   ?>
-  <div class=" alert alert-danger" role="alert">
+  <div class="container alert alert-danger" role="alert">
    <strong>Email já em uso!</strong>
  </div>
  <?php
@@ -232,7 +232,7 @@ if (mysqli_num_rows($query_email)){
 
 if (mysqli_num_rows($query_n_telefone)){
   ?>
-  <div class=" alert alert-danger" role="alert">
+  <div class="container alert alert-danger" role="alert">
    <strong>Número de Telefone já em uso!</strong>
  </div>
  <?php
@@ -241,7 +241,7 @@ if (mysqli_num_rows($query_n_telefone)){
 
 if (mysqli_num_rows($query_n_fiscal)){
   ?>
-  <div class=" alert alert-danger" role="alert">
+  <div class="container alert alert-danger" role="alert">
     <strong>Número de Identificação Fiscal já em uso!</strong>
   </div>
   <?php
@@ -285,7 +285,7 @@ if( !preg_match("#\W+#", $pw1)){
 
 if($error){
   ?>
-  <div class=" alert alert-danger alert-dismissible fade show" role="alert">
+  <div class="container alert alert-danger alert-dismissible fade show" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -295,11 +295,22 @@ if($error){
   return;
 }
 
+if($pw1 != $pw2){
+
+  ?>
+  <div class="container alert alert-danger" role="alert">
+    <strong>Passwords diferentes!</strong>
+  </div>
+  <?php  
+  return;
+}
+
+
 $hash = password_hash($pw1,PASSWORD_BCRYPT);
 mysqli_query($connection,"INSERT INTO `utilizadores`(`nome`, `email`, `user_type`, `num_fiscal` , `num_telefone`, `password`,`criado`) VALUES ('$username','$email','$cargo','$n_fiscal','$n_telefone','$hash','$criado')") or die(mysqli_error($connection));
 
 ?>
-<div class=" alert alert-success" role="alert">
+<div class="container alert alert-success" role="alert">
   <strong>Registo efetuado com sucesso!</strong>
 </div>
 <?php  

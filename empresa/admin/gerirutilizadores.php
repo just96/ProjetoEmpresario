@@ -51,7 +51,7 @@ if ($result->num_rows > 0) {?>
       </tbody>
     </table>
   <?php }else{?>
-    <div class=" alert alert-danger" style="top:10px;" role="alert">
+    <div class="container alert alert-danger" style="top:10px;" role="alert">
       <strong>Não há clientes registados!</strong>
     </div> 
     <?php

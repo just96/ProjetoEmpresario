@@ -92,7 +92,7 @@ if(isset($_POST['add_produto'])){
 
 	if (mysqli_num_rows($query_nome_produto)){
 		?>
-		<div class=" alert alert-danger" role="alert">
+		<div class="container alert alert-danger" role="alert">
 			<strong>Nome de produto já em uso!</strong> 
 		</div>
 		<?php
@@ -100,7 +100,7 @@ if(isset($_POST['add_produto'])){
 	}
 	if (mysqli_num_rows($query_codigo_produto)){
 		?>
-		<div class=" alert alert-danger" role="alert">
+		<div class="container alert alert-danger" role="alert">
 			<strong>Referência já em uso</strong> 
 		</div>
 		<?php
@@ -109,7 +109,7 @@ if(isset($_POST['add_produto'])){
 
 	mysqli_query($connection,"INSERT INTO `produtos`(`nome_produto`,`imagem`,`valor`, `codigo_produto`, `descricao` , `criado`) VALUES ('$nome_produto','$filename','$valor','$codigo_produto','$descricao','$criado')") or die(mysqli_error($connection));
 	?>
-	<div class=" alert alert-success" role="alert">
+	<div class="container alert alert-success" role="alert">
 		<strong>Produto adicionado com sucesso!</strong>
 	</div>
 	<?php  

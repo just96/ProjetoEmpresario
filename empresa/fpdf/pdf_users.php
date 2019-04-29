@@ -42,7 +42,7 @@ class myPDF extends FPDF{
 
 $pdf = new myPDF();
 $pdf->AliasNbPages();
-$pdf->AddPage('L','A4',0);
+$pdf->AddPage('P','A4',0);
 $pdf->headerTable();
 $pdf->viewTable($db);
 $pdf->Output('I','tabelaprodutos.pdf');

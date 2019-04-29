@@ -20,8 +20,6 @@ class myPDF extends FPDF{
         $this->SetFont('Times','B',10);
         $this->Cell(30,10,'Tipo',1,0,'C');
         $this->Cell(70,10,'Nome do Material',1,0,'C');
-        $this->Cell(60,10,'Data em que foi adicionado',1,0,'C');
-        $this->Cell(60,10,'Data em que foi editado',1,0,'C');
         $this->Ln();
     }
     function viewTable($db){
@@ -30,8 +28,6 @@ class myPDF extends FPDF{
         while($data = $stmt->fetch(PDO::FETCH_OBJ)){
             $this->Cell(30,10,$data->tipo,1,0,'L');
             $this->Cell(70,10,$data->nome_material,1,0,'L');
-            $this->Cell(60,10,$data->criado,1,0,'L');
-            $this->Cell(60,10,$data->editado,1,0,'L');
             $this->Ln();
         }
     }
@@ -39,7 +35,7 @@ class myPDF extends FPDF{
 
 $pdf = new myPDF();
 $pdf->AliasNbPages();
-$pdf->AddPage('L','A4',0);
+$pdf->AddPage('P','A4',0);
 $pdf->headerTable();
 $pdf->viewTable($db);
 $pdf->Output('I','tabelaprodutos.pdf');

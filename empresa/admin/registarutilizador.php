@@ -7,136 +7,7 @@ if ($_SESSION['role'] != 'Gestor'){
 ?>
 <title>Menu Gestor - Adicionar Utilizador</title>
 
-<?php require('topfooterA.php');?>
-<body>
-
-  <h1 align="center">Utilizadores</h1>
-  <hr>
-  <div class="container" style="margin-top: 70px;margin-right:250px;">
-    <div class="row">
-      <div class="col-md-9">
-        <div class="card">
-          <div class="card-body">
-            <div class="row">
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <form method="POST" action="registarutilizador.php">
-                  <div class="form-group row">
-                    <label for="username" class="col-4 col-form-label">Username*</label> 
-                    <div class="col-8">
-                      <input name="username" placeholder="Nome do Utilizador" class="form-control here" required="required" type="text">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="name" class="col-4 col-form-label">Email</label> 
-                    <div class="col-8">
-                      <input name="email" placeholder="Email" class="form-control here" type="email">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="select" class="col-4 col-form-label">Cargo*</label> 
-                    <div class="col-8">
-                      <select id="role" name="role" class="custom-select" required="required">
-                        <option value="Utilizador">Utilizador</option>
-                        <option value="Gestor">Gestor</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="username" class="col-4 col-form-label">NIF</label> 
-                    <div class="col-8">
-                      <input name="n_fiscal" placeholder="Número de Identificação Fiscal" class="form-control here" type="int" maxlength="9">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="username" class="col-4 col-form-label">Telefone</label> 
-                    <div class="col-8">
-                      <input name="n_telefone"  placeholder="Número de Telefone" class="form-control here" type="int" maxlength="9">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="text" class="col-4 col-form-label">Password*</label> 
-                    <div class="col-8">
-                      <input id="pw1" name="pw1" placeholder="Password" class="form-control here" required="required" type="password">
-                    </div>
-                  </div>  
-                  <div class="form-group row">
-                    <label for="text" class="col-4 col-form-label">Confirmar Password*</label> 
-                    <div class="col-8">
-                      <input id="pw2" name="pw2" placeholder="Confirmar Password" class="form-control here" required="required" type="password" onkeyup="checkPass();">
-                      <span id="confirmMessage" class="confirmMessage"></span>
-                    </div>
-                  </div> 
-                  <div class="form-group row">
-                    <div class="offset-4 col-8">
-                      <button onclick="return confirm('Tem a certeza que quer adicionar?')" name="add_user" type="submit" class="btn btn-primary">Adicionar Utilizador</button>
-                    </div>
-                  </div>
-                  <hr>
-                  <p>
-                    <button type="button" class="btn btn-light dropdown-toggle" data-target="#collapseExample" aria-controls="collapseExample" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
-                     Ver política de dados
-                   </button>
-                 </p>
-                 <div class="collapse" id="collapseExample">
-                  <div class="card card-body">
-                    <dl>
-                      <dt>Nome de Utilizador</dt>
-                      <dd>-Tem de ter pelo menos 5 carateres.</dd>
-                    </dl>
-                    <dl>
-                      <dt>Password</dt>
-                      <dd>-Password entre 8 e 20 carateres e tem de ter pelo menos um símbolo,número,letra minúscula e maiúscula. </dd>
-                    </dl>
-                    <strong>*Campos obrigatórios</strong>
-                  </div>
-                </div>  
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>// Script para comparar as duas passwords do formulário com o intuito de avisar o utilizador se estas estão diferentes.
-function checkPass()
-{
-    //Store the password field objects into variables ...
-    var pass1 = document.getElementById('pw1');
-    var pass2 = document.getElementById('pw2');
-    //Store the Confimation Message Object ...
-    var message = document.getElementById('confirmMessage');
-    //Set the colors we will be using ...
-    var goodColor = "#66cc66";
-    var badColor = "#FF9999";
-    //Compare the values in the password field 
-    //and the confirmation field
-    if(pass1.value == pass2.value){
-        //The passwords match. 
-        //Set the color to the good color and inform
-        //the user that they have entered the correct password 
-        pass2.style.backgroundColor = goodColor;
-        message.style.color = goodColor;
-        message.innerHTML = "Passwords Iguais!"
-      }else{
-        //The passwords do not match.
-        //Set the color to the bad color and
-        //notify the user.
-        pass2.style.backgroundColor = badColor;
-        message.style.color = badColor;
-        message.innerHTML = "Passwords Diferentes!"
-      }
-    }  
-  </script>
-
-
-</body>
-</html>
-
-<?php
+<?php require('topfooterA.php');
 // ADICIONAR UTILIZADOR
 if(isset($_POST['add_user'])){
 
@@ -317,3 +188,131 @@ mysqli_query($connection,"INSERT INTO `utilizadores`(`nome`, `email`, `user_type
 header("Refresh:1; url=index.php");
 }
 ?>
+
+<body>
+
+  <h1 align="center">Utilizadores</h1>
+  <hr>
+  <div class="container" style="margin-top: 70px;margin-right:250px;">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <form method="POST" action="registarutilizador.php">
+                  <div class="form-group row">
+                    <label for="username" class="col-4 col-form-label">Username*</label> 
+                    <div class="col-8">
+                      <input name="username" placeholder="Nome do Utilizador" class="form-control here" required="required" type="text">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="name" class="col-4 col-form-label">Email</label> 
+                    <div class="col-8">
+                      <input name="email" placeholder="Email" class="form-control here" type="email">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="select" class="col-4 col-form-label">Cargo*</label> 
+                    <div class="col-8">
+                      <select id="role" name="role" class="custom-select" required="required">
+                        <option value="Utilizador">Utilizador</option>
+                        <option value="Gestor">Gestor</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="username" class="col-4 col-form-label">NIF</label> 
+                    <div class="col-8">
+                      <input name="n_fiscal" placeholder="Número de Identificação Fiscal" class="form-control here" type="int" maxlength="9">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="username" class="col-4 col-form-label">Telefone</label> 
+                    <div class="col-8">
+                      <input name="n_telefone"  placeholder="Número de Telefone" class="form-control here" type="int" maxlength="9">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="text" class="col-4 col-form-label">Password*</label> 
+                    <div class="col-8">
+                      <input id="pw1" name="pw1" placeholder="Password" class="form-control here" required="required" type="password">
+                    </div>
+                  </div>  
+                  <div class="form-group row">
+                    <label for="text" class="col-4 col-form-label">Confirmar Password*</label> 
+                    <div class="col-8">
+                      <input id="pw2" name="pw2" placeholder="Confirmar Password" class="form-control here" required="required" type="password" onkeyup="checkPass();">
+                      <span id="confirmMessage" class="confirmMessage"></span>
+                    </div>
+                  </div> 
+                  <div class="form-group row">
+                    <div class="offset-4 col-8">
+                      <button onclick="return confirm('Tem a certeza que quer adicionar?')" name="add_user" type="submit" class="btn btn-primary">Adicionar Utilizador</button>
+                    </div>
+                  </div>
+                  <hr>
+                  <p>
+                    <button type="button" class="btn btn-light dropdown-toggle" data-target="#collapseExample" aria-controls="collapseExample" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
+                     Ver política de dados
+                   </button>
+                 </p>
+                 <div class="collapse" id="collapseExample">
+                  <div class="card card-body">
+                    <dl>
+                      <dt>Nome de Utilizador</dt>
+                      <dd>-Tem de ter pelo menos 5 carateres.</dd>
+                    </dl>
+                    <dl>
+                      <dt>Password</dt>
+                      <dd>-Password entre 8 e 20 carateres e tem de ter pelo menos um símbolo,número,letra minúscula e maiúscula. </dd>
+                    </dl>
+                    <strong>*Campos obrigatórios</strong>
+                  </div>
+                </div>  
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>// Script para comparar as duas passwords do formulário com o intuito de avisar o utilizador se estas estão diferentes.
+function checkPass()
+{
+    //Store the password field objects into variables ...
+    var pass1 = document.getElementById('pw1');
+    var pass2 = document.getElementById('pw2');
+    //Store the Confimation Message Object ...
+    var message = document.getElementById('confirmMessage');
+    //Set the colors we will be using ...
+    var goodColor = "#66cc66";
+    var badColor = "#FF9999";
+    //Compare the values in the password field 
+    //and the confirmation field
+    if(pass1.value == pass2.value){
+        //The passwords match. 
+        //Set the color to the good color and inform
+        //the user that they have entered the correct password 
+        pass2.style.backgroundColor = goodColor;
+        message.style.color = goodColor;
+        message.innerHTML = "Passwords Iguais!"
+      }else{
+        //The passwords do not match.
+        //Set the color to the bad color and
+        //notify the user.
+        pass2.style.backgroundColor = badColor;
+        message.style.color = badColor;
+        message.innerHTML = "Passwords Diferentes!"
+      }
+    }  
+  </script>
+
+
+</body>
+</html>

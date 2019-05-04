@@ -100,7 +100,8 @@ if ($result->num_rows > 0) {
 		<hr>
 		<div class="container-fluid">
 			<div class="d-flex justify-content-center">
-				<button  onclick="window.location.href='../fpdf/pdf_materiais.php'" type="submit" class="btn btn-warning">Gerar PDF&nbsp<img src="../img/pdf.png" width="30" height="30"></img></button>
+				<button onclick="window.location.href='../fpdf/pdf_materiais.php'" type="submit" class="btn btn-warning">Gerar PDF&nbsp<img src="../img/pdf.png" width="25" height="25"></img></button>
+				<button onclick="window.location.href='../admin/encomenda_material.php'" name="add_encomenda" type="submit" class="btn btn-primary" value="Fazer encomenda">Encomendar Material</button>
 			</div>
 			<br>
 			<table id="minhaTabela" class="table table-bordered">
@@ -123,8 +124,8 @@ if ($result->num_rows > 0) {
 						. $row["tipo"]."</td><td>"
 						. $row["criado"]. "</td><td>"
 					.$row["editado"]. "</td>"?><td>
-						<a onclick="return confirm('Editar este material?')" href="funcoes.php?funcao=EditarMaterial&id_geral=<?php echo $row["id_material"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png"></a></td>
-						<td><a onclick="return confirm('Deseja apagar este material?')" href="funcoes.php?funcao=ApagarMaterial&id_geral=<?php echo $row["id_material"] ?>"><img border="0" src="../img/baseline_delete_black_18dp.png"></a></td></tr><?php
+						<a onclick="return confirm('Editar este material?')" href="../funcoes/editar_material.php?&id_geral=<?php echo $row["id_material"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png"></a></td>
+						<td><a onclick="return confirm('Deseja apagar este material?')" href="../funcoes/apagar_material.php?&id_geral=<?php echo $row["id_material"] ?>"><img border="0" src="../img/baseline_delete_black_18dp.png"></a></td></tr><?php
 					};?> 
 				</tbody>
 			</table>

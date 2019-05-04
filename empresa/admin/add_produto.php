@@ -4,50 +4,6 @@ if ($_SESSION['role'] != 'Gestor'){
 	header( "Location:../utilizador/log.php" );
 }
 
-?>
-
-<title>Menu Gestor - Adicionar Produtos</title>
-
-<?php require('topfooterA.php');
-?>
-<body>
-	<h1 align="center">Produtos</h1>
-	<hr>
-	<div class="container">
-		<form method="POST" action="add_produto.php" enctype="multipart/form-data">
-			<div class="form-row">
-				<div class="form-group col-md-6">
-					<label for="imagem">Adicionar Imagem</label>
-					<input type="file" name="uploadfile">
-				</div>
-			</div>
-			<div class="form-row">
-				<div class="form-group col-md-6">
-					<label for="nome_produto">Nome do Produto</label>
-					<input name ="nome_produto" type="text" class="form-control" placeholder="Nome do Produto" required>
-				</div>
-				<div class="form-group col-md-6">
-					<label for="valor">Preço &euro;</label>
-					<input name ="valor" class="form-control"placeholder="Preço &euro;" type="number" min="1" max="10000" step="any" required>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="codigo_produto">Referência</label>
-				<input name ="codigo_produto" type="text" class="form-control" placeholder="Referência" required>
-			</div>
-			<div class="form-group row">
-				<label for="descricao" class="col-4 col-form-label">Descrição do Produto</label> 
-				<textarea class="form-control here" row="10" cols="60" name="descricao"></textarea>
-			</div>
-			<button onclick="return confirm('Tem a certeza que quer adicionar?')" name ="add_produto" type="submit" class="btn btn-primary">Adicionar Produto</button>
-		</form>
-	</div>
-
-</body>
-
-</html>
-
-<?php
 
 // ADICIONAR PRODUTO
 if(isset($_POST['add_produto'])){
@@ -116,3 +72,44 @@ if(isset($_POST['add_produto'])){
 	header("Refresh:2; url=ver_produtos.php");
 }
 ?>
+
+<title>Menu Gestor - Adicionar Produtos</title>
+
+<?php require('topfooterA.php');
+?>
+<body>
+	<h1 align="center">Produtos</h1>
+	<hr>
+	<div class="container">
+		<form method="POST" action="add_produto.php" enctype="multipart/form-data">
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="imagem">Adicionar Imagem</label>
+					<input type="file" name="uploadfile">
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="nome_produto">Nome do Produto</label>
+					<input name ="nome_produto" type="text" class="form-control" placeholder="Nome do Produto" required>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="valor">Preço &euro;</label>
+					<input name ="valor" class="form-control"placeholder="Preço &euro;" type="number" min="1" max="10000" step="any" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="codigo_produto">Referência</label>
+				<input name ="codigo_produto" type="text" class="form-control" placeholder="Referência" required>
+			</div>
+			<div class="form-group row">
+				<label for="descricao" class="col-4 col-form-label">Descrição do Produto</label> 
+				<textarea class="form-control here" row="10" cols="60" name="descricao"></textarea>
+			</div>
+			<button onclick="return confirm('Tem a certeza que quer adicionar?')" name ="add_produto" type="submit" class="btn btn-primary">Adicionar Produto</button>
+		</form>
+	</div>
+
+</body>
+
+</html>

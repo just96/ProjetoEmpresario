@@ -1,5 +1,7 @@
 <?php
 session_start();
+require('topfooterA.php');
+require('filtros.php');
 
 if ($_SESSION['role'] != 'Gestor'){
 	header( "Location:../utilizador/log.php" );
@@ -7,141 +9,124 @@ if ($_SESSION['role'] != 'Gestor'){
 
 include("../conectar_bd.php");
 // SQL DOS CLIENTES
-$sql_clientes = "SELECT * FROM `clientes` ORDER BY id_cliente ASC ";
+$sql_clientes = "SELECT * FROM `clientes`";
 $result_clientes = mysqli_query($connection, $sql_clientes);
 $row_clientes=mysqli_fetch_array($result_clientes);
 // SQL DOS produtos
 $qury = "SELECT * FROM produtos ORDER BY id_produto ASC";
 $result = mysqli_query($connection,$qury);
-// SQL DO Material de Apoio
-$query = "SELECT * FROM material_apoio ORDER BY id_material ASC";
-$resultM = mysqli_query($connection,$query);
 
+$id = $_SESSION ['id'];
+
+if (isset($_POST['add_encomenda']) && $_POST['add_encomenda']=="Fazer encomenda") {
+
+	include("../conectar_bd.php");
+
+		//dados
+	date_default_timezone_set('Europe/Lisbon');
+	$data_encomenda = date('Y-m-d H:i:s',time());
+	$comentario_encomenda = $_POST['comentario_encomenda'];
+	$cliente = $_POST['cliente'];
+		//SQL
+	$sql_enc = "SELECT id_encomenda FROM encomendas ORDER BY id_encomenda DESC LIMIT 1";
+	$result_enc = mysqli_query($connection, $sql_enc);
+	$row_enc=mysqli_fetch_array($result_enc);
+	$id_encomenda = $row_enc['id_encomenda'];
+	$id_encomenda++;
+
+	foreach($_POST['qntP'] as $index=>$value){
+		if($value > 0){
+			$total = $index * $value;
+			mysqli_query($connection,"INSERT INTO `encomendas`(`id_encomenda`,`id_utilizador`,`id_cliente`,`id_produto`,`quantidadeP`,`data_encomenda`,`comentario`,`total`,`autorizada`) VALUES ('$id_encomenda','$id','$cliente',".$_POST['id_produto'][$index].",".$value.",'$data_encomenda','$comentario_encomenda','$total','0')") or die(mysqli_error($connection));
+		}
+	}
+	?><div class="container">
+		<div class="alert alert-success" role="alert">
+			<strong>Encomenda feita com sucesso!</strong>
+		</div> 
+	</div>
+	<?php
+	header('Refresh:2; url=ver_encomendas.php');
+};
 
 ?>
 
-<style>
-	#myInput {
-		width: 100%;
-		font-size: 16px;
-		padding: 12px 20px 12px 40px;
-		border: 1px solid #ddd;
-		margin-bottom: 12px;
-	}
-
-</style>
-
 <title>Menu Gestor - Fazer Encomenda</title>
-<?php require('topfooterA.php');
-require('filtros.php');?>
 <body>
 	<h1 align="center">Encomendas</h1>
 	<hr>
-	<?php if ($result_clientes->num_rows > 0) {?>
+	<?php 
+	if ($result_clientes->num_rows > 0) {?>
 		<div class="container">
 			<form method="POST" action="encomenda.php">
 				<h4>Clientes</h4>
 				<div class="form-group row">
 					<div class="col-8">
-						<select name="cliente" class="custom-select" required="required">
-							<?php while($row_clientes= mysqli_fetch_array($result_clientes,MYSQLI_ASSOC)){?>
-								<option value="select">Selecionar</option>
-								<option value="<?php echo $row_clientes["nome_fiscal"];?>"><?php echo $row_clientes["nome_fiscal"];?></option>
-								<input type="hidden" value="<?php echo $row_clientes["id_cliente"];?>">
-							</select>
-						</div>
+						<select name="cliente" class="custom-select" required>
+							<option value=""><?php echo $row_clientes["nome_fiscal"];?></option>
+							<?php while($row_clientes = mysqli_fetch_array($result_clientes,MYSQLI_ASSOC)){
+								?>
+								<option value="<?php echo $row_clientes["id_cliente"];?>"><?php echo $row_clientes["nome_fiscal"];?></option>
+							<?php }?>
+						</select>
 					</div>
-				<?php }}else{?>
-					<div class="alert alert-danger" style="top:10px;" role="alert">
-						<strong>Não há clientes registados!</strong>
-					</div> 
-				</div> ?>
-				<?php
-			}
-			if(mysqli_num_rows($result) >0)
-			{
-				?>
-				<hr>
+				</div>
+			<?php }else{?>
+				<div class="alert alert-danger" style="top:10px;" role="alert">
+					<strong>Não há clientes registados!</strong>
+				</div> 
+			</div> ?>
+			<?php
+		}
+		if(mysqli_num_rows($result) >0)
+		{
+			?>
+			<hr>
+			<br>
+			<div class="container">
 				<h4>Produtos</h4>	
-				<br>
-				<div class="container">
-					<table id="minhaTabela" class="table table-bordered">
-						<thead class="thead-dark">
+				<table id="minhaTabela" class="table table-bordered">
+					<thead class="thead-dark">
+						<tr>
+							<th>Id</th>
+							<th>Imagem</th>
+							<th>Referência</th>
+							<th>Nome do Produto</th>
+							<th>Preço( € )</th>
+							<th>Quantidade</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php while($row = $result->fetch_assoc()) {
+							?>
 							<tr>
-								<th>Imagem</th>
-								<th>Referência</th>
-								<th>Nome do Produto</th>
-								<th>Preço( € )</th>
-								<th>Quantidade</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php while($row = $result->fetch_assoc()) {
-								echo "<tr><td><img class='rounded' height='50' width='60' src='../img/"
-								. $row["imagem"]."'></td><td>"
-								. $row["codigo_produto"]. "</td><td>" 
-								. $row["nome_produto"]. "</td><td>"
-								. $row["valor"]."&euro;</td><td>
-								<input type='number' style='width:20px;'
-								</td></tr>";
+								<?php	
+								$id_produto = $row["id_produto"];
+								?>
+								<td><?php echo $row["id_produto"];?><input type="hidden" name="id_produto[]" value="<?php echo $id_produto; ?>"></td>
+								<td><img class="img-responsive" width="70" height="55" src="../img/<?php echo $row['imagem'];?>"></td>
+								<td><?php echo $row["codigo_produto"]; ?></td>
+								<td><?php echo $row["nome_produto"]; ?></td>
+								<td><?php echo $row["valor"];?>&euro;<input type="hidden" name="valor" value="<?php echo $row["valor"]; ?>"></td>
+								<td><input size='1' type="text" value="0" min='0' name="qntP[]" max='10'></td></tr>
+								<?php
 							}}?> 
 						</tbody>
 					</table>
 				</div>
 				<hr>
-
-				<?php
-				if(mysqli_num_rows($resultM) >0)
-				{
-					?>
-					<h4>Material de Apoio</h4>
-					<br>
-					<div class="container">
-						<table id="myTable" class="table table-bordered">
-							<thead class="thead-dark">
-								<tr>
-									<th>Imagem</th>
-									<th>Nome do Material</th>
-									<th>Tipo</th>
-									<th>Quantidade</th>
-								</tr>
-							</thead>
-							<tbody>
-								<?php while($rowM = $resultM->fetch_assoc()) {
-									echo "<tr><td><img class='rounded' height='50' width='60' src='../img/"
-									.$rowM["imagem"]."'></td><td>"
-									. $rowM["nome_material"]. "</td><td>" 
-									. $rowM["tipo"]."</td><td>
-									<input type='number' min='0' max='10'></td></tr>";
-								}};?> 
-							</tbody>
-						</table>
-						<label class="total">Total</label>
-						<input type="text" id="Total" readonly>
-						<a href="javascript:document.tax_form.submit();">Submit</a>
+				<div class="container">
+					<div class="form-group row">
+						<label for="text" class="col-4 col-form-label">Observações</label> 
+						<textarea class="form-control here" row="10" cols="60" name="comentario_encomenda"></textarea>
 					</div>
-					<hr>
-					<div class="container">
-						<div class="form-group row">
-							<label for="text" class="col-4 col-form-label">Observações</label> 
-							<textarea class="form-control here" row="10" cols="60" name="comentario_encomenda"></textarea>
-						</div>
-						<div class="form-group row">
-							<div class="offset-4 col-8">
-								<button onclick="return confirm('Tem a certeza que quer fazer a encomenda?')" name="add_encomenda" type="submit" class="btn btn-primary">Submeter Encomenda</button>
-							</div>
+					<div class="form-group row">
+						<div class="offset-4 col-8">
+							<button onclick="return confirm('Tem a certeza que quer fazer a encomenda?')" name="add_encomenda" type="submit" class="btn btn-primary" value="Fazer encomenda">Submeter Encomenda</button>
 						</div>
 					</div>
-				</form>
-			</div>
-		</body>
-		</html>
-
-		<?php
-		if(isset($_POST['add_encomenda'])) {
-
-			include("../conectar_bd.php");
-
-		}
-
-		?>
+				</div>
+			</form>
+		</div>
+	</body>
+	</html>

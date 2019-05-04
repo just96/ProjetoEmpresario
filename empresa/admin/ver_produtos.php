@@ -48,8 +48,8 @@ if ($result->num_rows > 0) {
 						. $row["valor"]."&euro;</td><td>" 
 						. $row["criado"]. "</td><td>"
 					.$row["editado"]."</td>"?><td>
-						<a onclick="return confirm('Editar este produto?')" href="funcoes.php?funcao=EditarProduto&id_geral=<?php echo $row["id_produto"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png"></a></td>
-						<td><a onclick="return confirm('Deseja apagar este produto?')" href="funcoes.php?funcao=ApagarProduto&id_geral=<?php echo $row["id_produto"] ?>"><img border="0" src="../img/baseline_delete_black_18dp.png"></a></td></tr><?php
+						<a onclick="return confirm('Editar este produto?')" href="../funcoes/editar_produto.php?&id_geral=<?php echo $row["id_produto"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png"></a></td>
+						<td><a onclick="return confirm('Deseja apagar este produto?')" href="../funcoes/apagar_produto.php?&id_geral=<?php echo $row["id_produto"] ?>"><img border="0" src="../img/baseline_delete_black_18dp.png"></a></td></tr><?php
 					};?> 
 				</tbody>
 			</table>

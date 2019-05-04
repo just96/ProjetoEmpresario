@@ -45,8 +45,8 @@ if ($result->num_rows > 0) {?>
             . $row["email"]. "</td><td>" 
             . $row["user_type"]. "</td><td>" 
             . $row["num_fiscal"]. "</td><td>" 
-          . $row["num_telefone"]. "</td>"?><td><a onclick="return confirm('Deseja editar este utilizador?')" href="funcoes.php?funcao=EditarUtilizador&id_geral=<?php echo $row["id_user"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png" href="#"></a></td>
-          <td><a onclick="return confirm('Deseja apagar este utilizador?')" href="funcoes.php?funcao=ApagarUtilizador&id_geral=<?php echo $row["id_user"] ?>"><img border="0" src="../img/baseline_delete_black_18dp.png" href="#"></a></td></tr><?php
+          . $row["num_telefone"]. "</td>"?><td><a onclick="return confirm('Deseja editar este utilizador?')" href="../funcoes/editar_utilizador.php?&id_geral=<?php echo $row["id_user"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png" href="#"></a></td>
+          <td><a onclick="return confirm('Deseja apagar este utilizador?')" href="../funcoes/apagar_utilizador.php?&id_geral=<?php echo $row["id_user"] ?>"><img border="0" src="../img/baseline_delete_black_18dp.png" href="#"></a></td></tr><?php
         };?>
       </tbody>
     </table>

@@ -1,12 +1,8 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['Utilizador']) && !isset($_SESSION['id']) ){
-	header( "Location:log.php" );
-}
-
-if ($_SESSION['role'] == 'admin'){
-	header( "Location:../admin/index.php" );
+if ($_SESSION['role'] != 'Utilizador'){
+	header( "Location:../utilizador/log.php" );
 }
 
 ?>
@@ -32,7 +28,7 @@ if ($_SESSION['role'] == 'admin'){
 		height: 362px; /* value of your choice which suits your alignment */
 	}
 </style>
-<?php require('topfooter.php')?>
+<?php require('topfooterU.php')?>
 
 <body>
 	

@@ -1,5 +1,8 @@
 <?php
 ob_start();
+if ($_SESSION['role'] != 'Gestor'){
+  header( "Location:../utilizador/log.php" );
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,8 +13,6 @@ ob_start();
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="topbar">
   <meta name="author" content="Tiago Moura">
-
-  <title>TopBar</title>
 
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -53,44 +54,44 @@ ob_start();
         <ul class="navbar-nav mr-auto">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Encomendas
+              Produtos
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="../admin/encomenda.php">Fazer Encomenda</a>
-              <a class="dropdown-item" href="../admin/ver_encomendas.php">Ver Encomendas</a>
-              <a class="dropdown-item" href="../admin/hist_encomendas.php">Histórico de Encomendas</a>
+              <a class="dropdown-item" href="../admin/adicionar_produto.php">Adicionar</a>
+              <a class="dropdown-item" href="../admin/gerir_produtos.php">Gerir</a>
+              <a class="dropdown-item" href="../admin/encomendar_produtos.php">Encomendar</a>
+              <a class="dropdown-item" href="../admin/ver_encomendas_produtos.php">Ver Encomendas</a>
+              <a class="dropdown-item" href="../admin/hist_encomendas_produtos.php">Histórico de Encomendas</a>
             </div>
           </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Material de Apoio
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="../admin/adicionar_material.php">Adicionar</a>
+              <a class="dropdown-item" href="../admin/gerir_material.php">Gerir</a>
+              <a class="dropdown-item" href="../admin/encomendar_material.php">Encomendar</a>
+              <a class="dropdown-item" href="../admin/ver_encomendas_material.php">Ver Encomendas</a>
+              <a class="dropdown-item" href="../admin/hist_encomendas_material.php">Histórico de Encomendas</a>
+            </div>
+          </li> 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Clientes
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="../admin/registarcliente.php">Adicionar Clientes</a>
-              <a class="dropdown-item" href="../admin/gerirclientes.php">Gerir Clientes</a>
+              <a class="dropdown-item" href="../admin/adicionar_cliente.php">Adicionar</a>
+              <a class="dropdown-item" href="../admin/gerir_clientes.php">Gerir</a>
             </div>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Produtos
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="../admin/add_produto.php">Adicionar Produtos</a>
-              <a class="dropdown-item" href="../admin/ver_produtos.php">Gerir Produtos</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link" href="../admin/material.php" id="navbarDropdown" role="button">
-              Material de Apoio
-            </a>
-          </li> 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Utilizadores
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="../admin/registarutilizador.php">Adicionar Utilizador</a>
-              <a class="dropdown-item" href="../admin/gerirutilizadores.php">Gerir Utilizadores</a>
+              <a class="dropdown-item" href="../admin/adicionar_utilizador.php">Adicionar</a>
+              <a class="dropdown-item" href="../admin/gerir_utilizadores.php">Gerir</a>
             </div>
           </li>
         </ul>

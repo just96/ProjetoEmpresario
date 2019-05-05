@@ -1,7 +1,9 @@
 <?php
 session_start();
 // verifica se existe sessao do utiliador 
-if (isset($_SESSION['Utilizador']) && isset($_SESSION['id']) ){
+if (isset($_SESSION['role']) == 'Gestor' ){
+  header("Location:../admin/index.php");
+}elseif(isset($_SESSION['role']) == 'Utilizador' ){
   header("Location:../utilizador/index.php");
 }
 
@@ -19,6 +21,7 @@ if(isset($_POST['login_btn'])) {      // LOGIN
   $nome = mysqli_real_escape_string($connection,$nome); // esta função esquece os carateres especiais para a string ser usada numa instrução de SQL
   $password = mysqli_real_escape_string($connection,$password);
 
+  $password=md5($password);
   // SQL
 
   $sql_select="SELECT * FROM `utilizadores` WHERE nome='$nome'";
@@ -32,8 +35,7 @@ if(isset($_POST['login_btn'])) {      // LOGIN
   $bd_password=$row['password']; // busca a password da bd
   $role=$row['user_type'];
 
-  if(password_verify($password,$bd_password)){
-
+  if($password == $bd_password){
     ?>
     <div class="container">
       <div class="alert alert-success" style="top:10px;" role="alert">
@@ -58,6 +60,7 @@ if(isset($_POST['login_btn'])) {      // LOGIN
       </div> 
     </div>
     <?php
+    header("refresh:2;url=../utilizador/log.php");
   }
 }
 
@@ -146,7 +149,7 @@ if(isset($_POST['login_btn'])) {      // LOGIN
 
 <body>
   <div class="login-clean">
-    <form method="POST" action="#"> 
+    <form method="POST" action="log.php"> 
       <h2>Área Pessoal</h2>
       <p></p>
       <h2 class="sr-only">Login Form</h2>

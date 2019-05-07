@@ -62,6 +62,7 @@ if(isset($_POST['add_user'])){
       NIF tem de ter 9 digitos!
     </div>
     <?php
+    header("Refresh:2;url=adicionar_utilizador.php");
     return;
   }
 
@@ -71,6 +72,7 @@ if(isset($_POST['add_user'])){
      Número de telefone tem de ter 9 digitos!
    </div>
    <?php
+   header("Refresh:2;url=adicionar_utilizador.php");
    return;
  }
 
@@ -80,6 +82,7 @@ if(isset($_POST['add_user'])){
    O nome de utilizador tem de ter pelo menos 5 caracteres.
  </div>
  <?php
+ header("Refresh:2;url=adicionar_utilizador.php");
  return;
 }
 
@@ -89,6 +92,7 @@ if (mysqli_num_rows($query_username)){
     <strong>Nome de utilizador em uso!</strong> 
   </div>
   <?php
+  header("Refresh:2;url=adicionar_utilizador.php");
   return;
 }
 
@@ -98,6 +102,7 @@ if (mysqli_num_rows($query_email)){
    <strong>Email já em uso!</strong>
  </div>
  <?php
+ header("Refresh:2;url=adicionar_utilizador.php");
  return;
 }
 
@@ -107,6 +112,7 @@ if (mysqli_num_rows($query_n_telefone)){
    <strong>Número de Telefone já em uso!</strong>
  </div>
  <?php
+ header("Refresh:2;url=adicionar_utilizador.php");
  return;
 }
 
@@ -116,6 +122,7 @@ if (mysqli_num_rows($query_n_fiscal)){
     <strong>Número de Identificação Fiscal já em uso!</strong>
   </div>
   <?php
+  header("Refresh:2;url=adicionar_utilizador.php");
   return;
 }
 
@@ -163,8 +170,9 @@ if($error){
     <strong>Validação da Password(password fraca):</strong><?php echo "<dd>$error</dd>" ;?>
   </div>
   <?php
-  return;
+  header("Refresh:2;url=adicionar_utilizador.php");
 }
+
 
 if($pw1 != $pw2){
 
@@ -172,7 +180,8 @@ if($pw1 != $pw2){
   <div class="container alert alert-danger" role="alert">
     <strong>Passwords diferentes!</strong>
   </div>
-  <?php  
+  <?php 
+  header("Refresh:2;url=adicionar_utilizador.php"); 
   return;
 }
 
@@ -212,9 +221,9 @@ header("Refresh:1; url=gerir_utilizadores.php");
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="name" class="col-4 col-form-label">Email</label> 
+                    <label for="name" class="col-4 col-form-label">Email*</label> 
                     <div class="col-8">
-                      <input name="email" placeholder="Email" class="form-control here" type="email">
+                      <input name="email" placeholder="Email" class="form-control here" type="email" required>
                     </div>
                   </div>
                   <div class="form-group row">

@@ -1,22 +1,21 @@
 <?php
 session_start();
-if ($_SESSION['role'] != 'Gestor'){
+if ($_SESSION['role'] != 'Utilizador'){
 	header( "Location:../utilizador/log.php" );
 }
 include("../conectar_bd.php");
-include("../admin/topfooterA.php"); 
+include("../utilizador/topfooterU.php"); 
 
 $id = $_GET["id_geral"]; 
 
 
 	// SQL ENCOMENDA
-	$sql_encomenda = "SELECT * FROM `encomendas` INNER JOIN `clientes` ON encomendas.id_cliente = clientes.id_cliente INNER JOIN `produtos` ON encomendas.id_produto = produtos.id_produto WHERE id_encomenda='$id'"; // query inner join para ir buscar id do cliente com determinado id encomenda
+	$sql_encomenda = "SELECT * FROM `encomendas` INNER JOIN `clientes` ON encomendas.id_cliente = clientes.id_cliente INNER JOIN `material_apoio` ON encomendas.id_material = material_apoio.id_material WHERE id_encomenda='$id'"; // query inner join para ir buscar id do cliente com determinado id encomenda
 	$result_encomenda = mysqli_query($connection, $sql_encomenda);
 	// get cliente
 	$row_cliente= mysqli_fetch_array($result_encomenda);
 	$id_cliente = $row_cliente['nome_fiscal'];
 	$data = $row_cliente['data_encomenda'];
-
 
 
 	if(mysqli_num_rows($result_encomenda) > 0 )
@@ -31,23 +30,21 @@ $id = $_GET["id_geral"];
 			<h5>Data em que foi feita a encomenda</h5>
 			<input class="form-control" type="text" disabled="" value="<?php echo $data ?>">
 			<hr>
-			<h4>Produtos</h4>	
+			<h4>Material</h4>	
 			<table id="minhaTabela" class="table table-bordered">
 				<thead class="thead-dark">
 					<tr>
 						<th>Id</th>
 						<th>Imagem</th>
-						<th>Referência</th>
-						<th>Nome do Produto</th>
-						<th>Preço( € )</th>
+						<th>Nome do Material</th>
+						<th>Tipo</th>
 						<th>Quantidade</th>
 					</tr>
 					<tr>
-						<td><?php echo $row_cliente["id_produto"];?></td>
+						<td><?php echo $row_cliente["id_material"];?></td>
 						<td><img class="img-responsive" width="70" height="55" src="../img/<?php echo $row_cliente['imagem'];?>"></td>
-						<td><?php echo $row_cliente["codigo_produto"]; ?></td>
-						<td><?php echo $row_cliente["nome_produto"]; ?></td>
-						<td><?php echo $row_cliente["valor"];?>&euro;</td>
+						<td><?php echo $row_cliente["nome_material"]; ?></td>
+						<td><?php echo $row_cliente["tipo"]; ?></td>
 						<td><input size='1' disabled type="text" value="<?php echo $row_cliente["quantidadeP"]; ?>" min='0' name="qntP[]" max='10'></td></tr>
 					</thead>
 					<tbody>
@@ -55,11 +52,10 @@ $id = $_GET["id_geral"];
 						while($row_encomenda = mysqli_fetch_array($result_encomenda)){
 							?>
 							<tr>
-								<td><?php echo $row_encomenda["id_produto"];?></td>
+								<td><?php echo $row_encomenda["id_material"];?></td>
 								<td><img class="img-responsive" width="70" height="55" src="../img/<?php echo $row_encomenda['imagem'];?>"></td>
-								<td><?php echo $row_encomenda["codigo_produto"]; ?></td>
-								<td><?php echo $row_encomenda["nome_produto"]; ?></td>
-								<td><?php echo $row_encomenda["valor"];?>&euro;</td>
+								<td><?php echo $row_encomenda["nome_material"]; ?></td>
+								<td><?php echo $row_encomenda["tipo"]; ?></td>
 								<td><input size='1' disabled type="text" value="<?php echo $row_encomenda["quantidadeP"]; ?>" min='0' name="qntP[]" max='10'></td></tr>
 								<?php
 							}

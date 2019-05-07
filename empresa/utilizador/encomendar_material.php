@@ -6,6 +6,7 @@
 	}
 	require('topfooterU.php');
 	include("../conectar_bd.php");
+	require('filtros.php');
 	// SQL DO Material de Apoio
 	$query = "SELECT * FROM material_apoio ORDER BY id_material ASC";
 	$resultM = mysqli_query($connection,$query);

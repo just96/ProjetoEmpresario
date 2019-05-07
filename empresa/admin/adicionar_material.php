@@ -74,6 +74,7 @@ if(isset($_POST['add_material'])){
 			<strong>Nome de material já em uso!</strong> 
 		</div>
 		<?php
+		header("Refresh:2;url=adicionar_material.php");
 		return;
 	}
 

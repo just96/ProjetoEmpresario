@@ -20,6 +20,7 @@ if(isset($_POST['edit_user'])) {
 	$pw1 = $_POST['pw1'];
 	$pw2 = $_POST['pw2'];
 	$role = $_POST['role'];
+	$_SESSION['role'] = $role;
 
 	date_default_timezone_set('Europe/Lisbon');
 	$editado = date('Y-m-d H:i:s');
@@ -81,13 +82,13 @@ if(isset($_POST['edit_user'])) {
 										<div class="form-group row">
 											<label for="username" class="col-4 col-form-label">Username</label> 
 											<div class="col-8">
-												<input value="<?php echo $row["nome"]; ?>"name="username" class="form-control here" type="text">
+												<input <?php if($row["nome"]=='admin'){?> disabled <?php }?> value="<?php echo $row["nome"]; ?>" name="username" class="form-control here" type="text">
 											</div>
 										</div>
 										<div class="form-group row">
 											<label for="select" class="col-4 col-form-label">Cargo*</label> 
 											<div class="col-8">
-												<select id="role" name="role" class="custom-select" required="required">
+												<select <?php if($row["nome"]=='admin'){?> disabled <?php }?> id="role" name="role" class="custom-select" required="required">
 													<option value="Utilizador" <?php if($row["user_type"]=="Utilizador") echo 'selected="selected"';?>>Utilizador</option>
 													<option value="Gestor" <?php if($row["user_type"]=="Gestor") echo 'selected="selected"';?>>Gestor</option>
 												</select>

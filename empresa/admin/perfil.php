@@ -48,9 +48,10 @@ if(isset($_POST['btnApw'])){
   $bd_password=$row['password'];
   date_default_timezone_set('Europe/Lisbon');
   $editado = date('Y-m-d H:i:s');
+  $passwordA=md5($passwordA);
 
 
-  if(password_verify($passwordA,$bd_password)){
+  if($passwordA == $bd_password){
 
     $error="";
 
@@ -87,6 +88,7 @@ if(isset($_POST['btnApw'])){
       ";
     }
 
+
     if($error){
       ?>
       <div class="container alert alert-danger alert-dismissible fade show" role="alert">
@@ -99,13 +101,13 @@ if(isset($_POST['btnApw'])){
       return;
     }
 
-    if($passwordN=$passwordN2){
+    if($passwordN == $passwordN2){
 
-      $hash = password_hash($passwordN,PASSWORD_BCRYPT);
+      $passwordN = md5($passwordN);
 
   // SQL para fazer update na tabela dos utilizadores
 
-      $sqleditpw = "UPDATE `utilizadores` SET password = '$hash' , editado = '$editado' WHERE id_user='$id' ";
+      $sqleditpw = "UPDATE `utilizadores` SET password = '$passwordN' , editado = '$editado' WHERE id_user='$id' ";
 
       mysqli_query($connection,$sqleditpw);
     }
@@ -128,6 +130,7 @@ if(isset($_POST['btnApw'])){
   if(isset($_POST['btnEacc'])) {   //Eliminar conta
 
     $password = $_POST['pwe'];
+    $password = md5($password);
 
     $bd_password = $row['password'];
 
@@ -140,7 +143,7 @@ if(isset($_POST['btnApw'])){
       return;
     }
 
-    if(password_verify($password,$bd_password)){
+    if($password == $bd_password){
 
       $apagarconta = "DELETE FROM `utilizadores` WHERE id_user='$id'";
 
@@ -255,7 +258,7 @@ if(isset($_POST['btnApw'])){
                       <div class="form-group row">
                         <label for="user" class="col-4 col-form-label">Nome de Utilizador</label> 
                         <div class="col-8">
-                          <input id="user" name="user" class="form-control here" type="text" value="<?php echo $row["nome"]; ?>">
+                          <input <?php if($row["nome"]=='admin'){?>disabled <?php }?> id="user" name="user" class="form-control here" type="text" value="<?php echo $row["nome"]; ?>">
                         </div>
                       </div>
                       <div class="form-group row">

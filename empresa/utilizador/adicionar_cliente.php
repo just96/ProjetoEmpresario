@@ -73,7 +73,7 @@ if(isset($_POST['add_client'])){
       <strong>Nome Fiscal em uso!</strong> 
     </div>
     <?php
-    header('Refresh:1; url=adicionar_cliente.php');
+    header('Refresh:2; url=adicionar_cliente.php');
     return;
   }
   if (mysqli_num_rows($query_nome_comercial)){
@@ -82,7 +82,7 @@ if(isset($_POST['add_client'])){
       <strong>Nome Comercial em uso!</strong> 
     </div>
     <?php
-    header('Refresh:1; url=adicionar_cliente.php');
+    header('Refresh:2; url=adicionar_cliente.php');
     return;
   }
   if (mysqli_num_rows($query_morada)){
@@ -91,7 +91,7 @@ if(isset($_POST['add_client'])){
       <strong>Morada em uso!</strong> 
     </div>
     <?php
-    header('Refresh:1; url=adicionar_cliente.php');
+    header('Refresh:2; url=adicionar_cliente.php');
     return;
   }
   if (mysqli_num_rows($query_num_fiscal)){
@@ -100,7 +100,7 @@ if(isset($_POST['add_client'])){
       <strong>Número Fiscal em uso!</strong> 
     </div>
     <?php
-    header('Refresh:1; url=adicionar_cliente.php');
+    header('Refresh:2; url=adicionar_cliente.php');
     return;
   }
   if (mysqli_num_rows($query_num_telefone)){
@@ -109,7 +109,7 @@ if(isset($_POST['add_client'])){
       <strong>Número de Telefone em uso!</strong> 
     </div>
     <?php
-    header('Refresh:1; url=adicionar_cliente.php');
+    header('Refresh:2; url=adicionar_cliente.php');
     return;
   }
   if (mysqli_num_rows($query_email)){
@@ -118,7 +118,7 @@ if(isset($_POST['add_client'])){
       <strong>Email em uso!</strong> 
     </div>
     <?php
-    header('Refresh:1; url=adicionar_cliente.php');
+    header('Refresh:2; url=adicionar_cliente.php');
     return;
   }
 
@@ -130,7 +130,7 @@ if(isset($_POST['add_client'])){
   </div>
 
   <?php  
-  header('Refresh:1; url=gerir_clientes.php');
+  header('Refresh:2; url=gerir_clientes.php');
 }
 ?>
 <title>Menu Utilizador-Adicionar Clientes</title>

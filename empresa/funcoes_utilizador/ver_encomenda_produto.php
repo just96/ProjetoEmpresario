@@ -1,10 +1,10 @@
 <?php
 session_start();
-if ($_SESSION['role'] != 'Gestor'){
+if ($_SESSION['role'] != 'Utilizador'){
 	header( "Location:../utilizador/log.php" );
 }
 include("../conectar_bd.php");
-include("../admin/topfooterA.php"); 
+include("../utilizador/topfooterU.php"); 
 
 $id = $_GET["id_geral"]; 
 

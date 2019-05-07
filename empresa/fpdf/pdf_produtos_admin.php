@@ -45,4 +45,4 @@ $pdf->AliasNbPages();
 $pdf->AddPage('P','A4',0);
 $pdf->headerTable();
 $pdf->viewTable($db);
-$pdf->Output('I','tabelaprodutos.pdf');
+$pdf->Output('I','tabela_produtos.pdf');

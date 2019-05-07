@@ -49,6 +49,7 @@ if(isset($_POST['add_produto'])){
 			<strong>Nome de produto já em uso!</strong> 
 		</div>
 		<?php
+		header("Refresh:2;url=adicionar_produto.php");
 		return;
 	}
 	if (mysqli_num_rows($query_codigo_produto)){
@@ -57,6 +58,7 @@ if(isset($_POST['add_produto'])){
 			<strong>Referência já em uso</strong> 
 		</div>
 		<?php
+		header("Refresh:2;url=adicionar_produto.php");
 		return;
 	}
 

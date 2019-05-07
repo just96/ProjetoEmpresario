@@ -156,44 +156,8 @@ if(isset($_POST['login_btn'])) {      // LOGIN
       <div class="form-group"><i class="fa fa-user icon"></i><input class="form-control" required="required" type="text" name="nome" placeholder="Nome"></div>
       <div class="form-group"><i class="fa fa-key icon"></i><input class="form-control" required="required" type="password" name="password" placeholder="Password"></div>
       <div class="form-group"><button class="btn btn-primary btn-block" type="submit" name ="login_btn" >Log In</button></div>
-      <a href="#" data-target="#exampleModal" data-toggle="modal">Esqueci a minha password</a>
     </div>
   </form>
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Esqueci a minha password</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="col-md-12">
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <div class="text-center">
-                  <p>Escreva o seu email</p>
-                  <div class="panel-body">
-                    <fieldset>
-                      <div class="form-group">
-                        <input class="form-control input-lg" placeholder="E-mail" name="email" type="email">
-                      </div>
-                    </fieldset>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-          <button type="button" class="btn btn-primary">Enviar</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>

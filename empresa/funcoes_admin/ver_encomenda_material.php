@@ -15,6 +15,7 @@ $id = $_GET["id_geral"];
 	// get cliente
 	$row_cliente= mysqli_fetch_array($result_encomenda);
 	$id_cliente = $row_cliente['nome_fiscal'];
+	$data = $row_cliente['data_encomenda'];
 
 
 	if(mysqli_num_rows($result_encomenda) > 0 )
@@ -25,8 +26,11 @@ $id = $_GET["id_geral"];
 		<div class="container">
 			<h4>Cliente a que foi feito a encomenda</h4>	
 			<input class="form-control" type="text" disabled="" value="<?php echo $id_cliente ?>">
-			<br>
-			<h4>Produtos</h4>	
+			<hr>
+			<h5>Data em que foi feita a encomenda</h5>
+			<input class="form-control" type="text" disabled="" value="<?php echo $data ?>">
+			<hr>
+			<h4>Material</h4>	
 			<table id="minhaTabela" class="table table-bordered">
 				<thead class="thead-dark">
 					<tr>

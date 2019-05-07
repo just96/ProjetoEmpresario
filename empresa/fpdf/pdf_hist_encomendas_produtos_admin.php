@@ -43,4 +43,4 @@ $pdf->AliasNbPages();
 $pdf->AddPage('L','A4',0);
 $pdf->headerTable();
 $pdf->viewTable($db);
-$pdf->Output('I','tabela_hist_enc.pdf');
+$pdf->Output('I','tabela_hist_enc_produtos.pdf');

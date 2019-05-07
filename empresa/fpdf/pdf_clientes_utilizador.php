@@ -1,7 +1,9 @@
 <?php 
+session_start();
 require "fpdf.php";
-$db = new PDO('mysql:host=localhost;dbname=bd_empresa','root','');
+include("../conectar_bd.php");
 
+$id_utilizador = $_SESSION['id'];
 
 class myPDF extends FPDF{
     function header(){
@@ -30,10 +32,10 @@ class myPDF extends FPDF{
         $this->Cell(35,10,'Email',1,0,'C');
         $this->Ln();
     }
-    function viewTable($db){
+    function viewTable($query){
         $this->SetFont('Times','',10);
-        $stmt = $db->query('select * from clientes ORDER BY nome_fiscal ASC');
-        while($data = $stmt->fetch(PDO::FETCH_OBJ)){
+        $query=mysqli_query($connection,"SELECT * FROM `clientes` INNER JOIN `utilizadores` ON clientes.id_utilizador = utilizadores.id_user WHERE utilizadores.user_type = Gestor OR id_utilizador=$id_utilizador");
+        while($data=mysqli_fetch_array($query)){
             $this->Cell(30,10,$data->nome_fiscal,1,0,'L');
             $this->Cell(32,10,$data->nome_comercial,1,0,'L');
             $this->Cell(30,10,$data->tipo,1,0,'L');
@@ -47,10 +49,9 @@ class myPDF extends FPDF{
         }
     }
 }
-
 $pdf = new myPDF();
 $pdf->AliasNbPages();
 $pdf->AddPage('L','A4',0);
 $pdf->headerTable();
-$pdf->viewTable($db);
+$pdf->viewTable($query);
 $pdf->Output('I','tabela_clientes.pdf');

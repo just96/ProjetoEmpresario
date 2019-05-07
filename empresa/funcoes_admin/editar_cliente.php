@@ -1,9 +1,11 @@
 <?php
+session_start();
 if ($_SESSION['role'] != 'Gestor'){
 	header( "Location:../utilizador/log.php" );
 }
+require("../admin/topfooterA.php"); 
 include("../conectar_bd.php");
-include("../admin/topfooterA.php"); 
+
 
 $id = $_GET["id_geral"];   
 $sqldata ="SELECT nome_fiscal,nome_comercial,tipo,morada,localidade,codigo_postal,num_fiscal,num_telefone,email,obs FROM `clientes` WHERE id_cliente ='$id'";
@@ -31,7 +33,7 @@ if(isset($_POST['edit_client'])) {
 		Alterações guardadas!
 	</div>
 	<?php
-	header('refresh:2;url=../admin/gerirclientes.php');
+	header('refresh:2;url=../admin/gerir_clientes.php');
 }
 
 ?>

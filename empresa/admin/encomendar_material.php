@@ -6,6 +6,7 @@
 	}
 	require('topfooterA.php');
 	include("../conectar_bd.php");
+	require('filtros.php');
 	// SQL DO Material de Apoio
 	$query = "SELECT * FROM material_apoio ORDER BY id_material ASC";
 	$resultM = mysqli_query($connection,$query);
@@ -116,7 +117,7 @@
 									<td><img class="img-responsive" width="70" height="55" src="../img/<?php echo $row['imagem'];?>"></td>
 									<td><?php echo $row["nome_material"]; ?></td>
 									<td><?php echo $row["tipo"]; ?></td>
-									<td><input size='1' type="text" value="0" min='0' name="qntP[]" max='10'></td></tr>
+									<td><input size='1' type="number" value="0" min='0' name="qntP[]" max='10'></td></tr>
 									<?php
 								}}?> 
 							</tbody>

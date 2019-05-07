@@ -1,4 +1,5 @@
 <?php
+session_start();
 if ($_SESSION['role'] != 'Gestor'){
 	header( "Location:../utilizador/log.php" );
 }
@@ -27,7 +28,7 @@ if(isset($_POST['edit_prod'])) {
 		Alterações guardadas!
 	</div>
 	<?php
-	header('refresh:2;url=../admin/ver_produtos.php');
+	header('refresh:2;url=../admin/gerir_produtos.php');
 }
 if(isset($_POST['btnAI'])){
 
@@ -47,7 +48,7 @@ if(isset($_POST['btnAI'])){
 		<strong>Imagem editada com sucesso!</strong>
 	</div>
 	<?php  
-	header("Refresh:2; url=../admin/ver_produtos.php");
+	header("Refresh:2; url=../admin/gerir_produtos.php");
 
 }
 ?>

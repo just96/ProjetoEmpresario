@@ -45,7 +45,7 @@ if ($result->num_rows > 0) {
 							<td><?php echo $row["comentario"]; ?></td>
 							<td><?php echo $row["nome_fiscal"]; ?></td>
 							<td><a onclick="return confirm('Ver esta encomenda?')" href="../funcoes_admin/ver_encomenda_material.php?&id_geral=<?php echo $row["id_encomenda"]?>"><img height="35" width="35" border="0" src="../img/ver_encomenda.png"></a></td>
-							<td><a onclick="return confirm('Autorizar esta encomenda?')" href="../funcoes_admin/autorizar_encomenda.php?&id_geral=<?php echo $row["id_encomenda"] ?>"><img height="35" width="35" border="0" src="../img/check.png"></td>
+							<td><a onclick="return confirm('Autorizar esta encomenda?')" href="../funcoes_admin/autorizar_encomenda_material.php?&id_geral=<?php echo $row["id_encomenda"] ?>"><img height="35" width="35" border="0" src="../img/check.png"></td>
 								<td><a onclick="return confirm('Deseja apagar esta encomenda?')" href="../funcoes_admin/apagar_encomenda.php?&id_geral=<?php echo $row["id_encomenda"] ?>"><img height="35" width="35" border="0" src="../img/baseline_delete_black_18dp.png"></a></td></tr>
 								<?php
 							}?> 

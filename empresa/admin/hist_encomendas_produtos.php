@@ -21,7 +21,7 @@ if ($result->num_rows > 0) {
 		<hr>
 		<br>
 		<div class="d-flex justify-content-center">
-			<button onclick="window.location.href='../fpdf/pdf_hist_encomendas_admin.php'" type="submit" class="btn btn-warning" name="gerar_pdf">Gerar PDF&nbsp<img src="../img/pdf.png" width="30" height="30"></img></button>
+			<button onclick="window.location.href='../fpdf/pdf_hist_encomendas_produtos_admin.php'" type="submit" class="btn btn-warning" name="gerar_pdf">Gerar PDF&nbsp<img src="../img/pdf.png" width="30" height="30"></img></button>
 		</div>
 		<div class="container-fluid">
 			<table id="minhaTabela" class="table table-bordered">
@@ -47,7 +47,7 @@ if ($result->num_rows > 0) {
 							<td><?php echo $row["comentario"]; ?></td>
 							<td><?php echo $row["nome_fiscal"]; ?></td>
 							<td><a onclick="return confirm('Ver esta encomenda?')" href="../funcoes_admin/ver_encomenda.php?&id_geral=<?php echo $row["id_encomenda"];?>"><img height="35" width="35" border="0" src="../img/ver_encomenda.png"></a></td>
-							<td><a onclick="return confirm('Gerar pdf?')" href="../fpdf/pdf_encomenda.php?&id_geral=<?php echo $row["id_encomenda"];?>"><img height="35" width="35" border="0" src="../img/pdf.png"></a></td></tr>
+							<td><a onclick="return confirm('Gerar pdf?')" href="../fpdf/pdf_encomenda_admin.php?&id_geral=<?php echo $row["id_encomenda"];?>"><img height="35" width="35" border="0" src="../img/pdf.png"></a></td></tr>
 							<?php
 						}?> 
 					</tbody>

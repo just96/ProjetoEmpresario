@@ -41,7 +41,8 @@ if ($result->num_rows > 0) {
 						. $row["criado"]. "</td><td>"
 					.$row["editado"]. "</td>"?><td>
 						<a onclick="return confirm('Editar este material?')" href="../funcoes_admin/editar_material.php?&id_geral=<?php echo $row["id_material"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png"></a></td>
-						<td><a onclick="return confirm('Deseja apagar este material?')" href="../funcoes_admin/apagar_material.php?&id_geral=<?php echo $row["id_material"] ?>"><img border="0" src="../img/baseline_delete_black_18dp.png"></a></td></tr><?php
+						<td><a onclick="return confirm('Deseja apagar este material?')" href="../funcoes_admin/apagar_material.php?&id_geral=<?php echo $row["id_material"] ?>"><img border="0" src="../img/baseline_delete_black_18dp.png"></a></td></tr>
+						<?php
 					};?> 
 				</tbody>
 			</table>

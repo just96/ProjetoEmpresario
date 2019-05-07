@@ -23,8 +23,7 @@ class myPDF extends FPDF{
         $this->SetFont('Times','B',10);
         $this->Cell(40,10,'Numero da Encomenda',1,0,'C');
         $this->Cell(40,10,'Data',1,0,'C');
-        $this->Cell(40,10,'Nome do Produto',1,0,'C');
-        $this->Cell(40,10,'Valor',1,0,'C');
+        $this->Cell(40,10,'Nome do Material',1,0,'C');
         $this->Cell(40,10,'Quantidade',1,0,'C');
         $this->Cell(40,10,'Cliente',1,0,'C');
         $this->Cell(40,10,'Comentario',1,0,'C');
@@ -32,13 +31,12 @@ class myPDF extends FPDF{
     }
     function viewTable($db){
         $this->SetFont('Times','',10);
-        $stmt = $db->query('SELECT * FROM `encomendas` INNER JOIN `clientes` ON encomendas.id_cliente = clientes.id_cliente INNER JOIN `produtos` ON encomendas.id_produto = produtos.id_produto WHERE id_encomenda="$id"');
+        $stmt = $db->query('SELECT * FROM `encomendas` INNER JOIN `clientes` ON encomendas.id_cliente = clientes.id_cliente INNER JOIN `material_apoio` ON encomendas.id_material = material_apoio.id_material WHERE id_encomenda="$id"');
         while($data = $stmt->fetch(PDO::FETCH_OBJ)){
             $this->Cell(40,10,$data->id_encomenda,1,0,'L');
             $this->Cell(40,10,$data->data_encomenda,1,0,'L');
-            $this->Cell(40,10,$data->nome_produto,1,0,'L');
-            $this->Cell(40,10,$data->valor,1,0,'L');
-            $this->Cell(40,10,$data->quantidade,1,0,'L');
+            $this->Cell(40,10,$data->nome_material,1,0,'L');
+            $this->Cell(40,10,$data->quantidadeP,1,0,'L');
             $this->Cell(40,10,$data->nome_fiscal,1,0,'L');
             $this->Cell(40,10,$data->comentario,1,0,'L');
             $this->Ln();

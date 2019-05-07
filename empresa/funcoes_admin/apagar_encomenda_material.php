@@ -1,4 +1,5 @@
 <?php
+session_start();
 if ($_SESSION['role'] != 'Gestor'){
 	header( "Location:../utilizador/log.php" );
 }
@@ -13,5 +14,5 @@ mysqli_query($connection,$deletematerial) or die($deletematerial); ?>
 	Encomenda eliminada com sucesso!
 </div>
 <?php
-header('refresh:2;url=../admin/index.php');
+header('refresh:2;url=../admin/ver_encomendas_material.php');
 ?>

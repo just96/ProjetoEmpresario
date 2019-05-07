@@ -1,4 +1,5 @@
 <?php
+session_start();
 if ($_SESSION['role'] != 'Gestor'){
 	header( "Location:../utilizador/log.php" );
 }
@@ -47,11 +48,10 @@ $id = $_GET["id_geral"];
 						while($row_encomenda = mysqli_fetch_array($result_encomenda)){
 							?>
 							<tr>
-								<td><?php echo $row_encomenda["id_produto"];?></td>
+								<td><?php echo $row_encomenda["id_material"];?></td>
 								<td><img class="img-responsive" width="70" height="55" src="../img/<?php echo $row_encomenda['imagem'];?>"></td>
-								<td><?php echo $row_encomenda["codigo_produto"]; ?></td>
-								<td><?php echo $row_encomenda["nome_produto"]; ?></td>
-								<td><?php echo $row_encomenda["valor"];?>&euro;</td>
+								<td><?php echo $row_encomenda["nome_material"]; ?></td>
+								<td><?php echo $row_encomenda["tipo"]; ?></td>
 								<td><input size='1' disabled type="text" value="<?php echo $row_encomenda["quantidadeP"]; ?>" min='0' name="qntP[]" max='10'></td></tr>
 								<?php
 							}

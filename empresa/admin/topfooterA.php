@@ -102,7 +102,6 @@ if ($_SESSION['role'] != 'Gestor'){
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
               <a class="dropdown-item" href="../admin/perfil.php">Perfil</a>
-              <a class="dropdown-item" href="../admin/calendar.php">Calendário</a>
               <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal" >Terminar Sessão</a>
             </div>
           </li>

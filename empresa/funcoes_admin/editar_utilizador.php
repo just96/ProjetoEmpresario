@@ -1,4 +1,5 @@
 <?php
+session_start();
 if ($_SESSION['role'] != 'Gestor'){
 	header( "Location:../utilizador/log.php" );
 }
@@ -37,7 +38,7 @@ if(isset($_POST['edit_user'])) {
 			Alterações guardadas!
 		</div>
 		<?php
-		header('refresh:2;url=../admin/gerirutilizadores.php');
+		header('refresh:2;url=../admin/gerir_utilizadores.php');
 	}else{
 		$pw1= md5($pw1);
 		$pw2 = md5($pw2);
@@ -48,7 +49,7 @@ if(isset($_POST['edit_user'])) {
 			Alterações guardadas!
 		</div>
 		<?php
-		header('refresh:2;url=../admin/gerirutilizadores.php');
+		header('refresh:2;url=../admin/gerir_utilizadores.php');
 	}
 }
 ?>

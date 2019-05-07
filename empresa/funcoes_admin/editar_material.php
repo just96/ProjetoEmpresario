@@ -1,4 +1,5 @@
 <?php
+session_start();
 if ($_SESSION['role'] != 'Gestor'){
 	header( "Location:../utilizador/log.php" );
 }
@@ -23,7 +24,7 @@ if(isset($_POST['edit_material'])) {
 		<strong>Material editado com sucesso!</strong>
 	</div>
 	<?php  
-	header("Refresh:2;url=../admin/material.php");
+	header("Refresh:2;url=../admin/gerir_material.php");
 }
 if(isset($_POST['btnAIM'])){
 
@@ -43,7 +44,7 @@ if(isset($_POST['btnAIM'])){
 		<strong>Imagem editada com sucesso!</strong>
 	</div>
 	<?php  
-	header("Refresh:2; url=../admin/material.php");
+	header("Refresh:2; url=../admin/gerir_material.php");
 
 }
 

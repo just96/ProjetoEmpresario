@@ -123,7 +123,7 @@ if (isset($_POST['add_encomenda']) && $_POST['add_encomenda']=="Fazer encomenda"
 								<td><?php echo $row["codigo_produto"]; ?></td>
 								<td><?php echo $row["nome_produto"]; ?></td>
 								<td><?php echo $row["valor"];?>&euro;<input type="hidden" name="valor" value="<?php echo $row["valor"]; ?>"></td>
-								<td><input size='1' type="text" value="0" min='0' name="qntP[]" max='10'></td></tr>
+								<td><input size='1' type="number" value="0" min='0' name="qntP[]" max='10'></td></tr>
 								<?php
 							}}?> 
 						</tbody>

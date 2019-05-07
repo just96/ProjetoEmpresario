@@ -1,4 +1,5 @@
 <?php
+session_start();
 if ($_SESSION['role'] != 'Gestor'){
 	header( "Location:../utilizador/log.php" );
 }
@@ -7,12 +8,11 @@ include("../admin/topfooterA.php");
 
 $id = $_GET["id_geral"];   
 
-$sql_update_aut = "UPDATE `encomendas` SET autorizada = '1' WHERE id_encomenda = '$id'";
-mysqli_query($connection,$sql_update_aut);
-?>  
+$deletematerial= "DELETE FROM encomendas WHERE id_encomenda='$id'";
+mysqli_query($connection,$deletematerial) or die($deletematerial); ?>
 <div class="container alert alert-success" role="alert">
-	Encomenda autorizada!
+	Encomenda eliminada com sucesso!
 </div>
 <?php
-header('refresh:2;url=../admin/ver_encomendas.php');
+header('refresh:2;url=../admin/ver_encomendas_produtos.php');
 ?>

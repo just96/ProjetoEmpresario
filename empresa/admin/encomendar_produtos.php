@@ -47,7 +47,7 @@ if (isset($_POST['add_encomenda']) && $_POST['add_encomenda']=="Fazer encomenda"
 	}
 	foreach($_POST['qntP'] as $index=>$value){
 		if($value > 0){
-			$total = $index * $value;
+			
 			mysqli_query($connection,"INSERT INTO `encomendas`(`id_encomenda`,`id_utilizador`,`id_cliente`,`id_produto`,`quantidadeP`,`data_encomenda`,`comentario`,`total`,`autorizada`) VALUES ('$id_encomenda','$id','$cliente',".$_POST['id_produto'][$index].",".$value.",'$data_encomenda','$comentario_encomenda','$total','0')") or die(mysqli_error($connection));
 		}
 	}
@@ -133,7 +133,7 @@ if (isset($_POST['add_encomenda']) && $_POST['add_encomenda']=="Fazer encomenda"
 				<div class="container">
 					<div class="form-group row">
 						<label for="text" class="col-4 col-form-label">Observações</label> 
-						<textarea class="form-control here" row="10" cols="60" name="comentario_encomenda"></textarea>
+						<textarea class="form-control here" row="10" cols="60" maxlength="50" name="comentario_encomenda"></textarea>
 					</div>
 					<div class="form-group row">
 						<div class="offset-4 col-8">

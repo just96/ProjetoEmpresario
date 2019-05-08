@@ -7,7 +7,7 @@ class myPDF extends FPDF{
     function header(){
         $this->image('../img/white-logo.png',10,6);
         $this->SetFont('Arial','B',14);
-        $this->Cell(276,5,'Historico de Encomendas',0,0,'C');
+        $this->Cell(276,5,'Historico de Encomendas-Material',0,0,'C');
         $this->Ln();
         $this->SetFont('Times','',12);
         $this->Ln(20);

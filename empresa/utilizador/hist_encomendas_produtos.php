@@ -22,7 +22,7 @@ if ($result->num_rows > 0) {
 		<hr>
 		<br>
 		<div class="d-flex justify-content-center">
-			<button onclick="window.location.href='../fpdf/pdf_hist_encomendas_produtos_utilizador.php'" type="submit" class="btn btn-warning" name="gerar_pdf">Gerar PDF&nbsp<img src="../img/pdf.png" width="30" height="30"></img></button>
+			<button onclick="window.location.href='../fpdf/pdf_hist_encomendas_produto_utilizador.php'" type="submit" class="btn btn-warning" name="gerar_pdf">Gerar PDF&nbsp<img src="../img/pdf.png" width="30" height="30"></img></button>
 		</div>
 		<div class="container-fluid">
 			<table id="minhaTabela" class="table table-bordered">

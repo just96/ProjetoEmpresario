@@ -236,105 +236,157 @@ if(isset($_POST['btnApw'])){
                    <?php
                    while($row=mysqli_fetch_assoc($result)){
                     ?>
-                    <form method="POST" action="perfil.php" enctype="multipart/form-data">
-                      <div class="form-row">
-                        <img class="rounded-circle" height='180' width='200' src='../img/<?php echo $row["imagem"]?>'>
-                      </div>
-                      <div class="form-row">
-                        <p></p>
-                      </div>
-                      <div class="form-group row">
-                        <label for="ntele" class="col-4 col-form-label">Cargo</label> 
-                        <div class="col-8">
-                          <input  disabled id="cargo" name="cargo" class="form-control here" value="<?php echo $row["user_type"]; ?>">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="name" class="col-4 col-form-label">Nome Completo</label> 
-                        <div class="col-8">
-                          <input id="name" name="name" class="form-control here" type="text" value="<?php echo $row["nome_completo"]; ?>">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="user" class="col-4 col-form-label">Nome de Utilizador</label> 
-                        <div class="col-8">
-                          <input <?php if($row["nome"]=='admin'){?>disabled <?php }?> id="user" name="user" class="form-control here" type="text" value="<?php echo $row["nome"]; ?>">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="email" class="col-4 col-form-label">Email</label> 
-                        <div class="col-8">
-                          <input id="email" name="email" class="form-control here" type="email" value="<?php echo $row["email"]; ?>">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="nif" class="col-4 col-form-label">NIF</label> 
-                        <div class="col-8">
-                          <input id="nif" name="nif" class="form-control here" type="int" maxlength="9" value="<?php echo $row["num_fiscal"]; ?>">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="ntele" class="col-4 col-form-label">Número Telefone</label> 
-                        <div class="col-8">
-                          <input id="ntele" name="ntele" class="form-control here" type="int" maxlength="9" value="<?php echo $row["num_telefone"]; ?>">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <div class="offset-4 col-8">
-                          <button id="btnpEdit" name="btnpEdit" type="submit" class="btn btn-primary" onclick="return confirm('De certeza que quer editar o seu perfil?');">Atualizar perfil</button>
-                        </div>
-                      </div>
-                      <?php
-                    }
-                    ?>
-                  </form>
-                  <?php
-                }
-                ?>
-                <hr>
-                <a href="#" data-target="#exampleModAvatar" data-toggle="modal">Alterar imagem de perfil</a>
-                <form method="POST" action="#" enctype="multipart/form-data">
-                 <div class="modal fade" id="exampleModAvatar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Alterar imagem de perfil</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="col-md-12">
-                          <div class="panel panel-default">
-                            <div class="panel-body">
-                              <div class="text-center">
+                    <div class="form-row">
+                      <img class="rounded-circle" height='180' width='200' src='../img/<?php echo $row["imagem"]?>'>
+                    </div>
+                    <hr>
+                    <a href="#" data-target="#exampleModAvatar" data-toggle="modal">Alterar imagem de perfil</a>
+                    <form method="POST" action="#" enctype="multipart/form-data">
+                     <div class="modal fade" id="exampleModAvatar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Alterar imagem de perfil</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="col-md-12">
+                              <div class="panel panel-default">
                                 <div class="panel-body">
-                                  <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                      <input type="file" name="uploadfile">
+                                  <div class="text-center">
+                                    <div class="panel-body">
+                                      <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                          <input type="file" name="uploadfile">
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            <button onclick="return confirm('Alterar imagem de perfil?')" type="submit" class="btn btn-primary" id="btnAI" name="btnAI">Alterar imagem de perfil</button>
+                          </div>
                         </div>
                       </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button onclick="return confirm('Alterar imagem de perfil?')" type="submit" class="btn btn-primary" id="btnAI" name="btnAI">Alterar imagem de perfil</button>
+                    </div>
+                  </form>
+                  <form method="POST" action="#">
+                    <a href="#" data-target="#exampleModalA" data-toggle="modal">Alterar password</a>
+                    <div class="modal fade" id="exampleModalA" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Alterar password</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="col-md-12">
+                              <div class="panel panel-default">
+                                <div class="panel-body">
+                                  <div class="text-center">
+                                    <div class="alert alert-info" role="alert">
+                                      <strong>Info<p></p></strong>Password entre 8 e 20 carateres e tem de ter pelo menos um símbolo,número,letra minúscula e maiúscula.
+                                    </div>
+                                    <h5>Password atual</h5>
+                                    <div class="panel-body">
+                                      <fieldset>
+                                        <div class="form-group">
+                                          <input id ="pwp" class="form-control input-md" placeholder="Inserir password atual" name="pwp" type="password">
+                                        </div>
+                                        <h5>Password nova</h5>
+                                        <div class="form-group">
+                                          <input id ="pwn1" class="form-control input-md" placeholder="Inserir password nova" name="pwn1" type="password">
+                                        </div>
+                                        <h5>Confirmar password nova</h5>
+                                        <div class="form-group">
+                                          <input id ="pwn2" class="form-control input-md" placeholder="Confirmar password" name="pwn2" type="password" onkeyup="checkPass();">
+                                          <span id="confirmMessage" class="confirmMessage"></span>
+                                        </div>
+                                      </fieldset>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            <button onclick="return confirm('Alterar a password?')" type="submit" class="btn btn-primary" id="btnApw" name="btnApw">Alterar password</button>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </form>
-              <a href="#" data-target="#exampleModalA" data-toggle="modal">Alterar password</a>
-              <form method="POST" action="#">
-                <div class="modal fade" id="exampleModalA" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  </form>
+                  <form action="#" method="POST">
+                    <div class="form-group row">
+                      <label for="ntele" class="col-4 col-form-label">Cargo</label> 
+                      <div class="col-8">
+                        <input readonly="readonly" id="cargo" name="cargo" class="form-control here" value="<?php echo $row["user_type"]; ?>">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="name" class="col-4 col-form-label">Nome Completo</label> 
+                      <div class="col-8">
+                        <input id="name" name="name" class="form-control here" type="text" value="<?php echo $row["nome_completo"]; ?>">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="user" class="col-4 col-form-label">Nome de Utilizador</label> 
+                      <div class="col-8">
+                        <input <?php if($row["nome"]=='admin'){?> readonly="readonly" <?php }?> id="user" name="user" class="form-control here" type="text" value="<?php echo $row["nome"]; ?>">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="email" class="col-4 col-form-label">Email</label> 
+                      <div class="col-8">
+                        <input id="email" name="email" class="form-control here" type="email" value="<?php echo $row["email"]; ?>">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="nif" class="col-4 col-form-label">NIF</label> 
+                      <div class="col-8">
+                        <input id="nif" name="nif" class="form-control here" type="int" maxlength="9" value="<?php echo $row["num_fiscal"]; ?>">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="ntele" class="col-4 col-form-label">Número Telefone</label> 
+                      <div class="col-8">
+                        <input id="ntele" name="ntele" class="form-control here" type="int" maxlength="9" value="<?php echo $row["num_telefone"]; ?>">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="offset-4 col-8">
+                        <button name="btnpEdit" type="submit" class="btn btn-primary" onclick="return confirm('De certeza que quer editar o seu perfil?');">Atualizar perfil</button>
+                      </div>
+                    </div>
+                  </form>
+                  <?php
+                }
+              }
+              ?>
+              <p>
+                <?php
+                // query para ver se é admin
+                $query_ad = "SELECT * FROM utilizadores WHERE id_user = $id";
+                $result_ad = mysqli_query($connection,$query_ad);
+                $row_ad = mysqli_fetch_array($result_ad);
+                ?>
+                <button <?php if($row_ad["nome"] == 'admin'){?> disabled <?php }?>class="btn btn-link" type="button" data-target="#exampleModalE" data-toggle="modal">Eliminar Conta</button>
+              </p>
+              <form action="#" method="POST">
+                <div class="modal fade" id="exampleModalE" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Alterar password</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Eliminar Conta</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -344,23 +396,17 @@ if(isset($_POST['btnApw'])){
                           <div class="panel panel-default">
                             <div class="panel-body">
                               <div class="text-center">
-                                <div class="alert alert-info" role="alert">
-                                  <strong>Info<p></p></strong>Password entre 8 e 20 carateres e tem de ter pelo menos um símbolo,número,letra minúscula e maiúscula.
+                                <hr>
+                                <div class="alert alert-danger" role="alert">
+                                  <strong>Aviso!<p></p></strong>Com esta ação perde o acesso à conta e todos os dados da mesma.
                                 </div>
-                                <h5>Password atual</h5>
-                                <div class="panel-body">
-                                  <fieldset>
+                                <hr>
+                                <h5>Password</h5>
+                                <form id="form_acc" method="POST" action="#">
+                                  <div class="panel-body">
+                                   <fieldset>
                                     <div class="form-group">
-                                      <input id ="pwp" class="form-control input-md" placeholder="Inserir password atual" name="pwp" type="password">
-                                    </div>
-                                    <h5>Password nova</h5>
-                                    <div class="form-group">
-                                      <input id ="pwn1" class="form-control input-md" placeholder="Inserir password nova" name="pwn1" type="password">
-                                    </div>
-                                    <h5>Confirmar password nova</h5>
-                                    <div class="form-group">
-                                      <input id ="pwn2" class="form-control input-md" placeholder="Confirmar password" name="pwn2" type="password" onkeyup="checkPass();">
-                                      <span id="confirmMessage" class="confirmMessage"></span>
+                                      <input id="pwe" class="form-control input-md" placeholder="Inserir password" name="pwe" type="password">
                                     </div>
                                   </fieldset>
                                 </div>
@@ -371,52 +417,10 @@ if(isset($_POST['btnApw'])){
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button onclick="return confirm('Alterar a password?')" type="submit" class="btn btn-primary" id="btnApw" name="btnApw">Alterar password</button>
+                        <button name ="btnEacc" id="btnEacc" type="submit" class="btn btn-primary" onclick="return confirm('De certeza que quer apagar o seu perfil?');" >Eliminar conta</button>
                       </div>
-                    </div>
+                    </form>
                   </div>
-                </div>
-              </form>
-              <p></p>
-              <a href="#" data-target="#exampleModalE" data-toggle="modal">Eliminar Conta</a>
-              <div class="modal fade" id="exampleModalE" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Eliminar Conta</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <div class="col-md-12">
-                        <div class="panel panel-default">
-                          <div class="panel-body">
-                            <div class="text-center">
-                              <hr>
-                              <div class="alert alert-danger" role="alert">
-                                <strong>Aviso!<p></p></strong>Com esta ação perde o acesso à conta e todos os dados da mesma.
-                              </div>
-                              <hr>
-                              <h5>Password</h5>
-                              <form id="form_acc" method="POST" action="#">
-                                <div class="panel-body">
-                                 <fieldset>
-                                  <div class="form-group">
-                                    <input id="pwe" class="form-control input-md" placeholder="Inserir password" name="pwe" type="password">
-                                  </div>
-                                </fieldset>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                      <button name ="btnEacc" id="btnEacc" type="submit" class="btn btn-primary" onclick="return confirm('De certeza que quer apagar o seu perfil?');" >Eliminar conta</button>
-                    </div>
-                  </form>
                 </div>
               </div>
             </div>
@@ -425,7 +429,6 @@ if(isset($_POST['btnApw'])){
       </div>
     </div>
   </div>
-</div>
 </div>
 
 <script>// Script para comparar as duas passwords do formulário com o intuito de avisar o utilizador se estas estão diferentes.

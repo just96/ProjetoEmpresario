@@ -15,5 +15,5 @@ mysqli_query($connection,$deletecliente) or die($deletecliente);
 	Cliente eliminado com sucesso!
 </div>
 <?php
-header('refresh:2;url=../admin/gerir_clientes.php');
+header('refresh:2;url=../utilizador/gerir_clientes.php');
 ?>

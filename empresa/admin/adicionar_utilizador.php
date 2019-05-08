@@ -18,12 +18,14 @@ if(isset($_POST['add_user'])){
   $cargo = strip_tags($_POST['role']);
   $n_fiscal = strip_tags($_POST['n_fiscal']);
   $n_telefone = strip_tags($_POST['n_telefone']);
+  $comentario = strip_tags($_POST['comentario']);
   $pw1 = strip_tags($_POST['pw1']);
   $pw2 = strip_tags($_POST['pw2']);
 
   $username = stripcslashes($username);   // esta função remove a barra invertida da string
   $email = stripcslashes($email);
   $cargo = stripcslashes($cargo);
+  $comentario = stripcslashes($comentario);
   $n_fiscal = stripcslashes($n_fiscal);
   $n_telefone = stripcslashes($n_telefone);
   $pw1 = stripcslashes($pw1);
@@ -32,6 +34,7 @@ if(isset($_POST['add_user'])){
   $username = mysqli_real_escape_string($connection,$username);   // esta função esquece os carateres especiais para a string ser usada numa instrução de SQL
   $email = mysqli_real_escape_string($connection,$email);
   $cargo = mysqli_real_escape_string($connection,$cargo);
+  $comentario = mysqli_real_escape_string($connection,$comentario);
   $n_fiscal = mysqli_real_escape_string($connection,$n_fiscal);
   $n_telefone = mysqli_real_escape_string($connection,$n_telefone);
   $pw1 = mysqli_real_escape_string($connection,$pw1);
@@ -189,7 +192,7 @@ if($pw1 != $pw2){
 $pw1= md5($pw1);
 $pw2 = md5($pw2);
 
-mysqli_query($connection,"INSERT INTO `utilizadores`(`nome`, `email`, `user_type`, `num_fiscal` , `num_telefone`, `password`,`criado`) VALUES ('$username','$email','$cargo','$n_fiscal','$n_telefone','$pw1','$criado')") or die(mysqli_error($connection));
+mysqli_query($connection,"INSERT INTO `utilizadores`(`nome`, `email`, `user_type`, `num_fiscal` , `num_telefone`, `password`,`criado`,`obs`) VALUES ('$username','$email','$cargo','$n_fiscal','$n_telefone','$pw1','$criado','$comentario')") or die(mysqli_error($connection));
 
 ?>
 <div class="container alert alert-success" role="alert">
@@ -205,85 +208,87 @@ header("Refresh:1; url=gerir_utilizadores.php");
   <h1 align="center">Adicionar Utilizadores</h1>
   <hr>
   <div class="container" style="margin-top: 70px;margin-right:250px;">
-    <div class="row">
-      <div class="col-md-9">
-        <div class="card">
-          <div class="card-body">
-            <div class="row">
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <form method="POST" action="#">
-                  <div class="form-group row">
-                    <label for="username" class="col-4 col-form-label">Username*</label> 
-                    <div class="col-8">
-                      <input name="username" placeholder="Nome do Utilizador" class="form-control here" required="required" type="text">
-                    </div>
+    <button type="button" class="btn btn-light dropdown-toggle" data-target="#collapseExample" aria-controls="collapseExample" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
+     Ver política de dados
+   </button>
+   <hr>
+   <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+      <dl>
+        <dt>Nome de Utilizador</dt>
+        <dd>-Tem de ter pelo menos 5 carateres.</dd>
+      </dl>
+      <dl>
+        <dt>Password</dt>
+        <dd>-Password entre 8 e 20 carateres e tem de ter pelo menos um símbolo,número,letra minúscula e maiúscula. </dd>
+      </dl>
+      <strong>*Campos obrigatórios</strong>
+    </div>
+  </div> 
+  <div class="row">
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <form method="POST" action="#">
+                <div class="form-group row">
+                  <label for="username" class="col-4 col-form-label">Username*</label> 
+                  <div class="col-8">
+                    <input name="username" placeholder="Nome do Utilizador" class="form-control here" required="required" type="text">
                   </div>
-                  <div class="form-group row">
-                    <label for="name" class="col-4 col-form-label">Email*</label> 
-                    <div class="col-8">
-                      <input name="email" placeholder="Email" class="form-control here" type="email" required>
-                    </div>
+                </div>
+                <div class="form-group row">
+                  <label for="name" class="col-4 col-form-label">Email*</label> 
+                  <div class="col-8">
+                    <input name="email" placeholder="Email" class="form-control here" type="email" required>
                   </div>
-                  <div class="form-group row">
-                    <label for="select" class="col-4 col-form-label">Cargo*</label> 
-                    <div class="col-8">
-                      <select id="role" name="role" class="custom-select" required="required">
-                        <option value="Utilizador">Utilizador</option>
-                        <option value="Gestor">Gestor</option>
-                      </select>
-                    </div>
+                </div>
+                <div class="form-group row">
+                  <label for="select" class="col-4 col-form-label">Cargo*</label> 
+                  <div class="col-8">
+                    <select id="role" name="role" class="custom-select" required="required">
+                      <option value="Utilizador">Utilizador</option>
+                      <option value="Gestor">Gestor</option>
+                    </select>
                   </div>
-                  <div class="form-group row">
-                    <label for="username" class="col-4 col-form-label">NIF</label> 
-                    <div class="col-8">
-                      <input name="n_fiscal" placeholder="Número de Identificação Fiscal" class="form-control here" type="int" maxlength="9">
-                    </div>
+                </div>
+                <div class="form-group row">
+                  <label for="username" class="col-4 col-form-label">NIF</label> 
+                  <div class="col-8">
+                    <input name="n_fiscal" placeholder="Número de Identificação Fiscal" class="form-control here" type="int" maxlength="9">
                   </div>
-                  <div class="form-group row">
-                    <label for="username" class="col-4 col-form-label">Telefone</label> 
-                    <div class="col-8">
-                      <input name="n_telefone"  placeholder="Número de Telefone" class="form-control here" type="int" maxlength="9">
-                    </div>
+                </div>
+                <div class="form-group row">
+                  <label for="username" class="col-4 col-form-label">Telefone</label> 
+                  <div class="col-8">
+                    <input name="n_telefone"  placeholder="Número de Telefone" class="form-control here" type="int" maxlength="9">
                   </div>
-                  <div class="form-group row">
-                    <label for="text" class="col-4 col-form-label">Password*</label> 
-                    <div class="col-8">
-                      <input id="pw1" name="pw1" placeholder="Password" class="form-control here" required="required" type="password">
-                    </div>
-                  </div>  
-                  <div class="form-group row">
-                    <label for="text" class="col-4 col-form-label">Confirmar Password*</label> 
-                    <div class="col-8">
-                      <input id="pw2" name="pw2" placeholder="Confirmar Password" class="form-control here" required="required" type="password" onkeyup="checkPass();">
-                      <span id="confirmMessage" class="confirmMessage"></span>
-                    </div>
-                  </div> 
-                  <div class="form-group row">
-                    <div class="offset-4 col-8">
-                      <button onclick="return confirm('Tem a certeza que quer adicionar?')" name="add_user" type="submit" class="btn btn-primary">Adicionar Utilizador</button>
-                    </div>
-                  </div>
-                  <hr>
-                  <p>
-                    <button type="button" class="btn btn-light dropdown-toggle" data-target="#collapseExample" aria-controls="collapseExample" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
-                     Ver política de dados
-                   </button>
-                 </p>
-                 <div class="collapse" id="collapseExample">
-                  <div class="card card-body">
-                    <dl>
-                      <dt>Nome de Utilizador</dt>
-                      <dd>-Tem de ter pelo menos 5 carateres.</dd>
-                    </dl>
-                    <dl>
-                      <dt>Password</dt>
-                      <dd>-Password entre 8 e 20 carateres e tem de ter pelo menos um símbolo,número,letra minúscula e maiúscula. </dd>
-                    </dl>
-                    <strong>*Campos obrigatórios</strong>
+                </div>
+                <div class="form-group row">
+                  <label for="text" class="col-4 col-form-label">Password*</label> 
+                  <div class="col-8">
+                    <input id="pw1" name="pw1" placeholder="Password" class="form-control here" required="required" type="password">
                   </div>
                 </div>  
+                <div class="form-group row">
+                  <label for="text" class="col-4 col-form-label">Confirmar Password*</label> 
+                  <div class="col-8">
+                    <input id="pw2" name="pw2" placeholder="Confirmar Password" class="form-control here" required="required" type="password" onkeyup="checkPass();">
+                    <span id="confirmMessage" class="confirmMessage"></span>
+                  </div>
+                </div> 
+                <div class="form-group row">
+                  <label for="text" class="col-4 col-form-label" maxlength="50">Observações</label> 
+                  <textarea class="form-control here" row="10" cols="60" name="comentario"></textarea>
+                </div>
+                <div class="form-group row">
+                  <div class="offset-4 col-8">
+                    <button onclick="return confirm('Tem a certeza que quer adicionar?')" name="add_user" type="submit" class="btn btn-primary">Adicionar Utilizador</button>
+                  </div>
+                </div>
               </form>
             </div>
           </div>

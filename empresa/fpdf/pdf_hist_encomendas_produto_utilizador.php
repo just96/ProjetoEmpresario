@@ -1,13 +1,14 @@
 <?php 
+session_start();
 require "fpdf.php";
 $db = new PDO('mysql:host=localhost;dbname=bd_empresa','root','');
-
+$id_utilizador = $_SESSION['id'];
 
 class myPDF extends FPDF{
     function header(){
         $this->image('../img/white-logo.png',10,6);
         $this->SetFont('Arial','B',14);
-        $this->Cell(276,5,'Historico de Encomendas',0,0,'C');
+        $this->Cell(276,5,'Historico de Encomendas-Produtos',0,0,'C');
         $this->Ln();
         $this->SetFont('Times','',12);
         $this->Ln(20);
@@ -27,7 +28,7 @@ class myPDF extends FPDF{
     }
     function viewTable($db){
         $this->SetFont('Times','',10);
-        $stmt = $db->query('SELECT id_encomenda, nome_fiscal,data_encomenda,comentario,autorizada FROM `encomendas` INNER JOIN `clientes` ON encomendas.id_cliente = clientes.id_cliente WHERE autorizada LIKE 1 AND id_material IS NULL GROUP BY id_encomenda ASC;');
+        $stmt = $db->query('SELECT * FROM `encomendas` INNER JOIN `clientes` ON encomendas.id_cliente = clientes.id_cliente INNER JOIN `utilizadores` ON encomendas.id_utilizador = utilizadores.id_user WHERE autorizada LIKE 1 AND encomendas.id_utilizador = "$id_utilizador" AND "id_material" IS NULL GROUP BY id_encomenda ASC;');
         while($data = $stmt->fetch(PDO::FETCH_OBJ)){
             $this->Cell(40,10,$data->id_encomenda,1,0,'L');
             $this->Cell(32,10,$data->data_encomenda,1,0,'L');

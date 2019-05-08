@@ -6,7 +6,7 @@ if ($_SESSION['role'] != 'Gestor'){
 }
 include("../conectar_bd.php");
 // SELECT no SQL para selecionar os dados a serem imprimidos na tabela
-$sql = "SELECT id_encomenda,id_material,nome_fiscal,data_encomenda,comentario,autorizada FROM `encomendas` INNER JOIN `clientes` ON encomendas.id_cliente = clientes.id_cliente WHERE autorizada LIKE '0' AND id_material IS NULL GROUP BY id_encomenda ASC;";
+$sql = "SELECT id_encomenda,nome,id_material,nome_fiscal,data_encomenda,comentario,autorizada FROM `encomendas` INNER JOIN `clientes` ON encomendas.id_cliente = clientes.id_cliente INNER JOIN `utilizadores` ON encomendas.id_utilizador = utilizadores.id_user WHERE autorizada LIKE '0' AND id_material IS NULL GROUP BY id_encomenda ASC;";
 $result = mysqli_query($connection, $sql) or die(mysql_error());
 ?>
 
@@ -28,6 +28,7 @@ if ($result->num_rows > 0) {
 						<th>Data em que foi feita</th>
 						<th>Comentário</th>
 						<th>Cliente</th>
+						<th>Utilizador</th>
 						<th>Ver Encomenda</th>
 						<th>Autorizar Encomenda</th>	
 						<th>Apagar</th>
@@ -44,6 +45,7 @@ if ($result->num_rows > 0) {
 							<td><?php echo $row["data_encomenda"]; ?></td>
 							<td><?php echo $row["comentario"]; ?></td>
 							<td><?php echo $row["nome_fiscal"]; ?></td>
+							<td><?php echo $row["nome"]; ?></td>
 							<td><a onclick="return confirm('Ver esta encomenda?')" href="../funcoes_admin/ver_encomenda_produto.php?&id_geral=<?php echo $row["id_encomenda"]?>"><img height="35" width="35" border="0" src="../img/ver_encomenda.png"></a></td>
 							<td><a onclick="return confirm('Autorizar esta encomenda?')" href="../funcoes_admin/autorizar_encomenda_produto.php?&id_geral=<?php echo $row["id_encomenda"] ?>"><img height="35" width="35" border="0" src="../img/check.png"></td>
 								<td><a onclick="return confirm('Deseja apagar esta encomenda?')" href="../funcoes_admin/apagar_encomenda.php?&id_geral=<?php echo $row["id_encomenda"] ?>"><img height="35" width="35" border="0" src="../img/baseline_delete_black_18dp.png"></a></td></tr>

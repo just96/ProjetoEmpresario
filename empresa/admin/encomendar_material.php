@@ -44,11 +44,11 @@
 		}
 		foreach($_POST['qntP'] as $index=>$value){
 			if($value > 0){
-				$total = $index * $value;
-				mysqli_query($connection,"INSERT INTO `encomendas`(`id_encomenda`,`id_utilizador`,`id_cliente`,`id_material`,`quantidadeP`,`data_encomenda`,`comentario`,`total`,`autorizada`) VALUES ('$id_encomenda','$id','$cliente',".$_POST['id_material'][$index].",".$value.",'$data_encomenda','$comentario_encomenda','$total','0')") or die(mysqli_error($connection));
+				mysqli_query($connection,"INSERT INTO `encomendas`(`id_encomenda`,`id_utilizador`,`id_cliente`,`id_material`,`quantidadeP`,`data_encomenda`,`comentario`,`total`,`autorizada`) VALUES ('$id_encomenda','$id','$cliente',".$_POST['id_material'][$index].",".$value.",'$data_encomenda','$comentario_encomenda','','0')") or die(mysqli_error($connection));
 			}
 		}
-		?><div class="container">
+		?>
+		<div class="container">
 			<div class="alert alert-success" role="alert">
 				<strong>Encomenda feita com sucesso!</strong>
 			</div> 
@@ -117,7 +117,7 @@
 									<td><img class="img-responsive" width="70" height="55" src="../img/<?php echo $row['imagem'];?>"></td>
 									<td><?php echo $row["nome_material"]; ?></td>
 									<td><?php echo $row["tipo"]; ?></td>
-									<td><input size='1' type="number" value="0" min='0' name="qntP[]" max='10'></td></tr>
+									<td><input class ="productTextInput" size='1' type="number" value="0" min='0' name="qntP[]" max='10'></td></tr>
 									<?php
 								}}?> 
 							</tbody>
@@ -127,7 +127,7 @@
 					<div class="container">
 						<div class="form-group row">
 							<label for="text" class="col-4 col-form-label">Observações</label> 
-							<textarea class="form-control here" row="10" cols="60" name="comentario_encomenda"></textarea>
+							<textarea class="form-control here" row="10" cols="60" maxlength="50" name="comentario_encomenda"></textarea>
 						</div>
 						<div class="form-group row">
 							<div class="offset-4 col-8">

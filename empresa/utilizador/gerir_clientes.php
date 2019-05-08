@@ -20,7 +20,7 @@ if ($result->num_rows > 0) {?>
     <h1 align="center">Gestão de Clientes</h1>
     <hr>
     <div class="d-flex justify-content-center">
-      <button onclick="window.location.href='../fpdf/pdf_clientes_utilizador.php'" type="submit" class="btn btn-warning">Gerar PDF&nbsp<img src="../img/pdf.png" width="30" height="30"></img></button>
+      <button onclick="window.location.href='../fpdf/pdf_clientes_utilizador.php?&id_geral=<?php echo $id_utilizador;?>'" type="submit" class="btn btn-warning">Gerar PDF&nbsp<img src="../img/pdf.png" width="30" height="30"></img></button>
     </div>
     <div class="container-fluid">
       <br>

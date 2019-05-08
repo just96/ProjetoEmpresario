@@ -33,7 +33,7 @@ if(isset($_POST['edit_client'])) {
 		Alterações guardadas!
 	</div>
 	<?php
-	header('refresh:2;url=../admin/gerir_clientes.php');
+	header('refresh:2;url=../utilizador/gerir_clientes.php');
 }
 
 ?>
@@ -73,8 +73,8 @@ if(isset($_POST['edit_client'])) {
 												<label for="select" class="col-4 col-form-label">Tipo*</label> 
 												<div class="col-8">
 													<select name="tipo" class="custom-select" required="required">
-														<option value="Farmácia"<?php if($row["tipo"]=="Farmácia") echo 'selected="selected"';?>>Farmácia</option>
-														<option value="Parafarmácia"<?php if($row["tipo"]=="Parafarmácia") echo 'selected="selected"';?>>Parafarmácia</option>
+														<option value="Farmacia"<?php if($row["tipo"]=="Farmácia") echo 'selected="selected"';?>>Farmácia</option>
+														<option value="Parafarmacia"<?php if($row["tipo"]=="Parafarmácia") echo 'selected="selected"';?>>Parafarmácia</option>
 														<option value="Ouriversaria"<?php if($row["tipo"]=="Ouriversaria") echo 'selected="selected"';?>>Ouriversaria</option>
 													</select>
 												</div>

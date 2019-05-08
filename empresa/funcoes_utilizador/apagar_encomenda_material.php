@@ -14,5 +14,5 @@ mysqli_query($connection,$deletematerial) or die($deletematerial); ?>
 	Encomenda eliminada com sucesso!
 </div>
 <?php
-header('refresh:2;url=../admin/ver_encomendas_material.php');
+header('refresh:2;url=../utilizador/ver_encomendas_material.php');
 ?>

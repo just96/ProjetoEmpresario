@@ -17,8 +17,6 @@ $id = $_GET["id_geral"];
 	$id_cliente = $row_cliente['nome_fiscal'];
 	$data = $row_cliente['data_encomenda'];
 
-
-
 	if(mysqli_num_rows($result_encomenda) > 0 )
 	{
 		?>

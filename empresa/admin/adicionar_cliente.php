@@ -144,7 +144,9 @@ if(isset($_POST['add_client'])){
         <div class="card">
           <div class="card-body">
             <div class="row">
+              <strong>*Campos obrigatórios</strong>
             </div>
+            <hr>
             <div class="row">
               <div class="col-md-12">
                 <form method="POST" action="#">
@@ -164,8 +166,8 @@ if(isset($_POST['add_client'])){
                     <label for="select" class="col-4 col-form-label">Tipo*</label> 
                     <div class="col-8">
                       <select name="tipo" name="tipo" class="custom-select" required>
-                        <option value="Farmácia">Farmácia</option>
-                        <option value="Parafarmácia">Parafarmácia</option>
+                        <option value="Farmacia">Farmácia</option>
+                        <option value="Parafarmacia">Parafarmácia</option>
                         <option value="Ouriversaria">Ouriversaria</option>
                       </select>
                     </div>
@@ -208,15 +210,13 @@ if(isset($_POST['add_client'])){
                   </div>
                   <div class="form-group row">
                     <label for="text" class="col-4 col-form-label">Observações</label> 
-                    <textarea class="form-control here" row="10" cols="60" name="comentario"></textarea>
+                    <textarea class="form-control here" row="10" cols="60" maxlength="50" name="comentario"></textarea>
                   </div>
                   <div class="form-group row">
                     <div class="offset-4 col-8">
                       <button onclick="return confirm('Tem a certeza que quer adicionar?')" name="add_client" type="submit" class="btn btn-primary">Adicionar Cliente</button>
                     </div>
                   </div>
-                  <hr>
-                  <strong>*Campos obrigatórios</strong>
                 </form>
               </div>
             </div>

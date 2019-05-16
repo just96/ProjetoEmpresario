@@ -7,11 +7,12 @@
 	require('topfooterU.php');
 	include("../conectar_bd.php");
 	require('filtros.php');
+	$id_utilizador = $_SESSION['id'];
 	// SQL DO Material de Apoio
 	$query = "SELECT * FROM material_apoio ORDER BY id_material ASC";
 	$resultM = mysqli_query($connection,$query);
 	// SQL DOS CLIENTES
-	$sql_clientes = "SELECT * FROM `clientes`";
+	$sql_clientes = "SELECT * FROM `clientes` INNER JOIN `utilizadores` ON clientes.id_utilizador = utilizadores.id_user WHERE utilizadores.user_type = 'Gestor' OR id_utilizador='$id_utilizador'";
 	$result_clientes = mysqli_query($connection, $sql_clientes);
 	$row_clientes=mysqli_fetch_array($result_clientes);
 

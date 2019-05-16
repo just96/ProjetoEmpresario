@@ -6,7 +6,6 @@ if ($_SESSION['role'] != 'Gestor'){
 require("../admin/topfooterA.php"); 
 include("../conectar_bd.php");
 
-
 $id = $_GET["id_geral"];   
 $sqldata ="SELECT nome_fiscal,nome_comercial,tipo,morada,localidade,codigo_postal,num_fiscal,num_telefone,email,obs FROM `clientes` WHERE id_cliente ='$id'";
 $result= mysqli_query($connection,$sqldata);
@@ -23,6 +22,82 @@ if(isset($_POST['edit_client'])) {
 	$email = $_POST['email']; 
 	$comentario = $_POST['comentario'];
 
+	// COMPARAR DADOS NA EDIÇÃO
+ 	//Instrução SQL para selecionar diferentes dados
+
+	$sql_fetch_nome_fiscal = "SELECT nome_fiscal FROM clientes WHERE id_cliente NOT IN ('$id') AND nome_fiscal = '$nome_fiscal'";
+	$sql_fetch_nome_comercial = "SELECT nome_comercial FROM clientes WHERE id_cliente NOT IN ('$id') AND nome_comercial = '$nome_comercial'";
+	$sql_fetch_morada = "SELECT morada FROM clientes WHERE id_cliente NOT IN ('$id') AND morada = '$morada'";
+	$sql_fetch_num_fiscal = "SELECT num_fiscal FROM clientes WHERE id_cliente NOT IN ('$id') AND num_fiscal = '$num_fiscal'";
+	$sql_fetch_num_telefone = "SELECT num_telefone FROM clientes WHERE id_cliente NOT IN ('$id') AND num_telefone = '$num_telefone'";
+	$sql_fetch_email = "SELECT email FROM clientes WHERE id_cliente NOT IN ('$id') AND email = '$email'";
+
+  //usado para comparar dados introduzidos com os da base de dados.
+
+	$query_nome_fiscal = mysqli_query($connection,$sql_fetch_nome_fiscal); 
+	$query_nome_comercial = mysqli_query($connection,$sql_fetch_nome_comercial);
+	$query_morada = mysqli_query($connection,$sql_fetch_morada);
+	$query_num_fiscal = mysqli_query($connection,$sql_fetch_num_fiscal);
+	$query_num_telefone = mysqli_query($connection,$sql_fetch_num_telefone);
+	$query_email = mysqli_query($connection,$sql_fetch_email);
+
+  // if statments para verificar campos
+
+	if (mysqli_num_rows($query_nome_fiscal)){
+		?>
+		<div class="container alert alert-danger" role="alert">
+			<strong>Nome Fiscal em uso!</strong> 
+		</div>
+		<?php
+		header('Refresh:2');
+		return;
+	}
+	if (mysqli_num_rows($query_nome_comercial)){
+		?>
+		<div class="container alert alert-danger" role="alert">
+			<strong>Nome Comercial em uso!</strong> 
+		</div>
+		<?php
+		header('Refresh:2');
+		return;
+	}
+	if (mysqli_num_rows($query_morada)){
+		?>
+		<div class="container alert alert-danger" role="alert">
+			<strong>Morada em uso!</strong> 
+		</div>
+		<?php
+		header('Refresh:2');
+		return;
+	}
+	if (mysqli_num_rows($query_num_fiscal)){
+		?>
+		<div class="container alert alert-danger" role="alert">
+			<strong>Número Fiscal em uso!</strong> 
+		</div>
+		<?php
+		header('Refresh:2');
+		return;
+	}
+	if (mysqli_num_rows($query_num_telefone)){
+		?>
+		<div class="container alert alert-danger" role="alert">
+			<strong>Número de Telefone em uso!</strong> 
+		</div>
+		<?php
+		header('Refresh:2');
+		return;
+	}
+	if (mysqli_num_rows($query_email)){
+		?>
+		<div class="container alert alert-danger" role="alert">
+			<strong>Email em uso!</strong> 
+		</div>
+		<?php
+		header('Refresh:2');
+		return;
+	}
+
 	date_default_timezone_set('Europe/Lisbon');
 	$editado = date('Y-m-d H:i:s');
 
@@ -33,8 +108,10 @@ if(isset($_POST['edit_client'])) {
 		Alterações guardadas!
 	</div>
 	<?php
-	header('refresh:2;url=../admin/gerir_clientes.php');
+	header('refresh:2;url=../admin/gerir_clientes.php');	
 }
+
+
 
 ?>
 <body>

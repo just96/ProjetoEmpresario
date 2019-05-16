@@ -5,7 +5,7 @@ if ($_SESSION['role'] != 'Gestor'){
 }
 
 $id = $_SESSION['id'];
-
+require('topfooterA.php');
 include("../conectar_bd.php");
 $sqldata ="SELECT nome_completo,nome,imagem,email,num_fiscal,num_telefone,user_type FROM `utilizadores` WHERE id_user='$id'";
 $result= mysqli_query($connection,$sqldata);
@@ -26,6 +26,93 @@ $nif = $_POST['nif'];
 $ntele = $_POST['ntele'];
 date_default_timezone_set('Europe/Lisbon');
 $editado = date('Y-m-d H:i:s');
+
+// COMPARAR DADOS NA EDIÇÃO
+
+  //Instrução SQL para selecionar diferentes dados
+$sql_fetch_nome_completo = "SELECT nome FROM utilizadores WHERE id_user NOT IN ('$id') AND nome_completo = '$nome'";
+$sql_fetch_username = "SELECT nome FROM utilizadores WHERE id_user NOT IN ('$id') AND nome = '$username'";
+$sql_fetch_email = "SELECT email FROM utilizadores WHERE id_user NOT IN ('$id') AND email = '$email'";
+$sql_fetch_n_fiscal = "SELECT num_fiscal FROM utilizadores WHERE id_user NOT IN ('$id') AND num_fiscal = '$nif'";
+$sql_fetch_n_telefone = "SELECT num_telefone FROM utilizadores WHERE id_user NOT IN ('$id') AND num_telefone  = '$ntele'";
+
+  //usado para comparar o nome/email de utilizador introduzido com os da base de dados.
+
+$query_username = mysqli_query($connection,$sql_fetch_username); 
+$query_email = mysqli_query($connection,$sql_fetch_email);
+$query_n_fiscal = mysqli_query($connection,$sql_fetch_n_fiscal);
+$query_n_telefone = mysqli_query($connection,$sql_fetch_n_telefone);
+
+  // if statments para verificar campos
+if(!empty($nif) AND strlen($nif)<9)
+{
+  ?>
+  <div class="container alert alert-danger" role="alert">
+    NIF tem de ter 9 digitos!
+  </div>
+  <?php
+  header("Refresh:2");
+  return;
+}
+
+if(!empty($ntele) AND strlen($ntele)<9){
+  ?>
+  <div class="container alert alert-danger" role="alert">
+    Número de telefone tem de ter 9 digitos!
+  </div>
+  <?php
+  header("Refresh:2");
+  return;
+}
+
+if (strlen($username)<=4){
+  ?>
+  <div class="container alert alert-danger" role="alert">
+    O nome de utilizador tem de ter pelo menos 5 caracteres.
+  </div>
+  <?php
+  header("Refresh:2");
+  return;
+}
+
+if (mysqli_num_rows($query_username)){
+  ?>
+  <div class="container alert alert-danger" role="alert">
+    <strong>Nome de utilizador em uso!</strong> 
+  </div>
+  <?php
+  header("Refresh:2");
+  return;
+}
+
+if (mysqli_num_rows($query_email)){
+  ?>
+  <div class="container alert alert-danger" role="alert">
+    <strong>Email já em uso!</strong>
+  </div>
+  <?php
+  header("Refresh:2");
+  return;
+}
+
+if (mysqli_num_rows($query_n_telefone)){
+  ?>
+  <div class="container alert alert-danger" role="alert">
+    <strong>Número de Telefone já em uso!</strong>
+  </div>
+  <?php
+  header("Refresh:2");
+  return;
+}
+if (mysqli_num_rows($query_n_fiscal)){
+  ?>
+  <div class="container alert alert-danger" role="alert">
+    <strong>Número de Identificação Fiscal já em uso!</strong>
+  </div>
+  <?php
+  header("Refresh:2");
+  return;
+}
 
   // SQL para fazer update na tabela dos utilizadores
 
@@ -216,7 +303,6 @@ if(isset($_POST['btnApw'])){
 
   </style>
   <body>
-    <?php require('topfooterA.php');?>
     <div class="container" style="margin-top: 70px;margin-right:250px;">
       <div class="row">
         <div class="col-md-9">

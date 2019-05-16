@@ -6,10 +6,10 @@ require('filtros.php');
 if ($_SESSION['role'] != 'Utilizador'){
 	header( "Location:../utilizador/log.php" );
 }
-
+$id_utilizador = $_SESSION['id'];
 include("../conectar_bd.php");
 // SQL DOS CLIENTES
-$sql_clientes = "SELECT * FROM `clientes`";
+$sql_clientes = "SELECT * FROM `clientes` INNER JOIN `utilizadores` ON clientes.id_utilizador = utilizadores.id_user WHERE utilizadores.user_type = 'Gestor' OR id_utilizador='$id_utilizador'";
 $result_clientes = mysqli_query($connection, $sql_clientes);
 $row_clientes=mysqli_fetch_array($result_clientes);
 // SQL DOS produtos

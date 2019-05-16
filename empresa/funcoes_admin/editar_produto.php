@@ -12,6 +12,7 @@ $sqldata ="SELECT nome_produto,imagem,valor,codigo_produto,descricao FROM `produ
 $result= mysqli_query($connection,$sqldata);
 // EDITAR PRODUTO
 if(isset($_POST['edit_prod'])) { 
+
 	$nome_produto = $_POST['nome_produto']; 
 	$valor = $_POST['valor'];
 	$codigo_produto = $_POST['codigo_produto'];
@@ -20,6 +21,47 @@ if(isset($_POST['edit_prod'])) {
 	date_default_timezone_set('Europe/Lisbon');
 	$editado = date('Y-m-d H:i:s');
 
+
+	// COMPARAR DADOS NA EDIÇÃO
+	//Instrução SQL para selecionar diferentes dados
+
+	$sql_fetch_nome_produto = "SELECT nome_produto FROM produtos WHERE id_produto NOT IN ('$id') AND nome_produto = '$nome_produto'";
+	$sql_fetch_codigo_produto = "SELECT codigo_produto FROM produtos WHERE id_produto NOT IN ('$id') AND codigo_produto = '$codigo_produto'";
+	$sql_fetch_descricao = "SELECT descricao FROM produtos WHERE id_produto NOT IN ('$id') AND descricao = '$descricao'";
+
+	//usado para comparar os dados introduzidos com os da base de dados.
+
+	$query_nome_produto = mysqli_query($connection,$sql_fetch_nome_produto) or die(mysql_error());; 
+	$query_codigo_produto = mysqli_query($connection,$sql_fetch_codigo_produto) or die(mysql_error());;
+	$query_descricao = mysqli_query($connection,$sql_fetch_descricao) or die(mysql_error());;
+
+	if (mysqli_num_rows($query_nome_produto)){
+		?>
+		<div class="container alert alert-danger" role="alert">
+			<strong>Nome de produto já em uso!</strong> 
+		</div>
+		<?php
+		header("Refresh:2");
+		return;
+	}
+	if (mysqli_num_rows($query_codigo_produto)){
+		?>
+		<div class="container alert alert-danger" role="alert">
+			<strong>Referência já em uso</strong> 
+		</div>
+		<?php
+		header("Refresh:2");
+		return;
+	}
+	if (mysqli_num_rows($query_descricao)){
+		?>
+		<div class="container alert alert-danger" role="alert">
+			<strong>Descrição já em uso</strong> 
+		</div>
+		<?php
+		header("Refresh:2");
+		return;
+	}
 
 	$sqleditproduto = "UPDATE `produtos` SET nome_produto='$nome_produto', valor='$valor', codigo_produto='$codigo_produto', descricao='$descricao' , editado = '$editado' WHERE id_produto='$id'";
 	mysqli_query($connection,$sqleditproduto);

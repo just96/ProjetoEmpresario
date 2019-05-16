@@ -1,5 +1,4 @@
 <?php
-
 if ($_SESSION['role'] != 'Gestor'){
 	header( "Location:../utilizador/log.php" );
 }

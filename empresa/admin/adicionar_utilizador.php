@@ -47,8 +47,8 @@ if(isset($_POST['add_user'])){
 
   $sql_fetch_username = "SELECT nome FROM utilizadores WHERE nome = '$username'";
   $sql_fetch_email = "SELECT email FROM utilizadores WHERE email = '$email'";
-  $sql_fetch_n_fiscal = "SELECT num_fiscal FROM utilizadores WHERE num_fiscal = '$n_fiscal' AND num_fiscal = 'IS NOT NULL'";
-  $sql_fetch_n_telefone = "SELECT num_telefone FROM utilizadores WHERE num_telefone  = '$n_telefone' AND num_telefone = 'IS NOT NULL'";
+  $sql_fetch_n_fiscal = "SELECT num_fiscal FROM utilizadores WHERE num_fiscal = '$n_fiscal'";
+  $sql_fetch_n_telefone = "SELECT num_telefone FROM utilizadores WHERE num_telefone  = '$n_telefone'";
 
   //usado para comparar o nome/email de utilizador introduzido com os da base de dados.
 
@@ -256,15 +256,15 @@ header("Refresh:1; url=gerir_utilizadores.php");
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="username" class="col-4 col-form-label">NIF</label> 
+                  <label for="username" class="col-4 col-form-label">NIF*</label> 
                   <div class="col-8">
-                    <input name="n_fiscal" placeholder="Número de Identificação Fiscal" class="form-control here" type="int" maxlength="9">
+                    <input name="n_fiscal" placeholder="Número de Identificação Fiscal" class="form-control here" type="int" maxlength="9" required>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="username" class="col-4 col-form-label">Telefone</label> 
+                  <label for="username" class="col-4 col-form-label">Telefone*</label> 
                   <div class="col-8">
-                    <input name="n_telefone"  placeholder="Número de Telefone" class="form-control here" type="int" maxlength="9">
+                    <input name="n_telefone"  placeholder="Número de Telefone" class="form-control here" type="int" maxlength="9" required>
                   </div>
                 </div>
                 <div class="form-group row">

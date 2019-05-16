@@ -44,10 +44,13 @@ if(isset($_POST['add_material'])){
 
 	$nome_material = strip_tags($_POST['nome_material']);
 	$tipo = strip_tags($_POST['tipo']);
+
 	$nome_material =stripcslashes($nome_material);
 	$tipo =stripcslashes($tipo);
+
 	$nome_material = mysqli_real_escape_string($connection,$nome_material);
 	$tipo = mysqli_real_escape_string($connection,$tipo);
+
 	$filename = $_FILES['uploadfile']['name'];
 	$filetmpname = $_FILES['uploadfile']['tmp_name'];
 
@@ -70,7 +73,7 @@ if(isset($_POST['add_material'])){
 
 	if (mysqli_num_rows($query_nome_material)){
 		?>
-		<div class=" alert alert-danger" role="alert">
+		<div class="container alert alert-danger" role="alert">
 			<strong>Nome de material já em uso!</strong> 
 		</div>
 		<?php
@@ -81,7 +84,7 @@ if(isset($_POST['add_material'])){
 	mysqli_query($connection,"INSERT INTO `material_apoio`(`nome_material`,`imagem`,`tipo`,`criado`) VALUES ('$nome_material','$filename','$tipo','$criado')")or die(mysqli_error($connection));
 
 	?>
-	<div class=" alert alert-success" role="alert">
+	<div class="container alert alert-success" role="alert">
 		<strong>Material adicionado com sucesso!</strong>
 	</div>
 	<?php  

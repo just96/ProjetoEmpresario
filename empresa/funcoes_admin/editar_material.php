@@ -18,6 +18,25 @@ if(isset($_POST['edit_material'])) {
 	date_default_timezone_set('Europe/Lisbon');
 	$editado = date('Y-m-d H:i:s');
 
+	// COMPARAR DADOS NA EDIÇÃO
+	//Instrução SQL para selecionar diferentes dados
+
+	$sql_fetch_nome_material = "SELECT nome_material FROM material_apoio WHERE id_material NOT IN ('$id') AND nome_material = '$nome_material'";
+
+	//usado para comparar os dados introduzidos com os da base de dados.
+
+	$query_nome_material = mysqli_query($connection,$sql_fetch_nome_material) or die(mysql_error());
+
+	if (mysqli_num_rows($query_nome_material)){
+		?>
+		<div class="container alert alert-danger" role="alert">
+			<strong>Nome de material já em uso!</strong> 
+		</div>
+		<?php
+		header("Refresh:2");
+		return;
+	}
+
 	mysqli_query($connection,"UPDATE `material_apoio` SET nome_material = '$nome_material' ,tipo = '$tipo' , editado ='$editado' WHERE id_material='$id'");
 	?>
 	<div class="container alert alert-success" role="alert">

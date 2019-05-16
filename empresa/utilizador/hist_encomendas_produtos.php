@@ -53,6 +53,9 @@ if ($result->num_rows > 0) {
 						}?> 
 					</tbody>
 				</table>
+				<div class="d-flex justify-content-center">
+					<h4>Valor total de encomendas:</h4>
+				</div>
 			<?php }else{?>
 				<div class="container alert alert-danger" style="top:10px;" role="alert">
 					<strong>Não há encomendas registadas!</strong>
@@ -61,7 +64,6 @@ if ($result->num_rows > 0) {
 			}
 			?>
 		</div>
-
 	</body>
 
 	</html>

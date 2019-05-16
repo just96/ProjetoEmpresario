@@ -144,7 +144,9 @@ if(isset($_POST['add_client'])){
         <div class="card">
           <div class="card-body">
             <div class="row">
+              <strong>*Campos obrigatórios</strong>
             </div>
+            <hr>
             <div class="row">
               <div class="col-md-12">
                 <form method="POST" action="#">
@@ -215,8 +217,6 @@ if(isset($_POST['add_client'])){
                       <button onclick="return confirm('Tem a certeza que quer adicionar?')" name="add_client" type="submit" class="btn btn-primary">Adicionar Cliente</button>
                     </div>
                   </div>
-                  <hr>
-                  <strong>*Campos obrigatórios</strong>
                 </form>
               </div>
             </div>

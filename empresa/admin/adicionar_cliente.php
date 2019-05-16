@@ -66,71 +66,92 @@ if(isset($_POST['add_client'])){
   $query_email = mysqli_query($connection,$sql_fetch_email);
 
   // if statments para verificar campos
-  
-  if (mysqli_num_rows($query_nome_fiscal)){
+
+  if(!empty($num_fiscal) AND strlen($num_fiscal)<9)
+  {
     ?>
     <div class="container alert alert-danger" role="alert">
-      <strong>Nome Fiscal em uso!</strong> 
-    </div>
-    <?php
-    header('Refresh:2; url=adicionar_cliente.php');
-    return;
-  }
-  if (mysqli_num_rows($query_nome_comercial)){
-    ?>
-    <div class="container alert alert-danger" role="alert">
-      <strong>Nome Comercial em uso!</strong> 
-    </div>
-    <?php
-    header('Refresh:2; url=adicionar_cliente.php');
-    return;
-  }
-  if (mysqli_num_rows($query_morada)){
-    ?>
-    <div class="container alert alert-danger" role="alert">
-      <strong>Morada em uso!</strong> 
-    </div>
-    <?php
-    header('Refresh:2; url=adicionar_cliente.php');
-    return;
-  }
-  if (mysqli_num_rows($query_num_fiscal)){
-    ?>
-    <div class="container alert alert-danger" role="alert">
-      <strong>Número Fiscal em uso!</strong> 
-    </div>
-    <?php
-    header('Refresh:2; url=adicionar_cliente.php');
-    return;
-  }
-  if (mysqli_num_rows($query_num_telefone)){
-    ?>
-    <div class="container alert alert-danger" role="alert">
-      <strong>Número de Telefone em uso!</strong> 
-    </div>
-    <?php
-    header('Refresh:2; url=adicionar_cliente.php');
-    return;
-  }
-  if (mysqli_num_rows($query_email)){
-    ?>
-    <div class="container alert alert-danger" role="alert">
-      <strong>Email em uso!</strong> 
+      NIF tem de ter 9 digitos!
     </div>
     <?php
     header('Refresh:2; url=adicionar_cliente.php');
     return;
   }
 
-  mysqli_query($connection,"INSERT INTO `clientes`(`id_utilizador`,`nome_fiscal`, `nome_comercial`, `tipo`, `morada`, `localidade`, `codigo_postal`, `num_fiscal`, `num_telefone`, `email`,`obs`,`criado`) VALUES ('$id','$nome_fiscal','$nome_comercial','$tipo','$morada','$localidade','$codigo_postal','$num_fiscal','$num_telefone','$email','$comentario','$criado')") or die(mysqli_error($connection));
+  if(!empty($num_telefone) AND strlen($num_telefone)<9){
+    ?>
+    <div class="container alert alert-danger" role="alert">
+     Número de telefone tem de ter 9 digitos!
+   </div>
+   <?php
+   header('Refresh:2; url=adicionar_cliente.php');
+   return;
+ }
 
+ if (mysqli_num_rows($query_nome_fiscal)){
   ?>
-  <div class="container alert alert-success" role="alert">
-    <strong>Registo efetuado com sucesso!</strong>
+  <div class="container alert alert-danger" role="alert">
+    <strong>Nome Fiscal em uso!</strong> 
   </div>
+  <?php
+  header('Refresh:2; url=adicionar_cliente.php');
+  return;
+}
+if (mysqli_num_rows($query_nome_comercial)){
+  ?>
+  <div class="container alert alert-danger" role="alert">
+    <strong>Nome Comercial em uso!</strong> 
+  </div>
+  <?php
+  header('Refresh:2; url=adicionar_cliente.php');
+  return;
+}
+if (mysqli_num_rows($query_morada)){
+  ?>
+  <div class="container alert alert-danger" role="alert">
+    <strong>Morada em uso!</strong> 
+  </div>
+  <?php
+  header('Refresh:2; url=adicionar_cliente.php');
+  return;
+}
+if (mysqli_num_rows($query_num_fiscal)){
+  ?>
+  <div class="container alert alert-danger" role="alert">
+    <strong>Número Fiscal em uso!</strong> 
+  </div>
+  <?php
+  header('Refresh:2; url=adicionar_cliente.php');
+  return;
+}
+if (mysqli_num_rows($query_num_telefone)){
+  ?>
+  <div class="container alert alert-danger" role="alert">
+    <strong>Número de Telefone em uso!</strong> 
+  </div>
+  <?php
+  header('Refresh:2; url=adicionar_cliente.php');
+  return;
+}
+if (mysqli_num_rows($query_email)){
+  ?>
+  <div class="container alert alert-danger" role="alert">
+    <strong>Email em uso!</strong> 
+  </div>
+  <?php
+  header('Refresh:2; url=adicionar_cliente.php');
+  return;
+}
 
-  <?php  
-  header('Refresh:2; url=gerir_clientes.php');
+mysqli_query($connection,"INSERT INTO `clientes`(`id_utilizador`,`nome_fiscal`, `nome_comercial`, `tipo`, `morada`, `localidade`, `codigo_postal`, `num_fiscal`, `num_telefone`, `email`,`obs`,`criado`) VALUES ('$id','$nome_fiscal','$nome_comercial','$tipo','$morada','$localidade','$codigo_postal','$num_fiscal','$num_telefone','$email','$comentario','$criado')") or die(mysqli_error($connection));
+
+?>
+<div class="container alert alert-success" role="alert">
+  <strong>Registo efetuado com sucesso!</strong>
+</div>
+
+<?php  
+header('Refresh:2; url=gerir_clientes.php');
 }
 ?>
 <title>Menu Gestor-Adicionar Clientes</title>

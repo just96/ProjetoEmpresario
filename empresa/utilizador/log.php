@@ -1,12 +1,10 @@
 <?php
 session_start();
-// verifica se existe sessao do utiliador 
 if (isset($_SESSION['role']) == 'Gestor' ){
   header("Location:../admin/index.php");
 }elseif(isset($_SESSION['role']) == 'Utilizador' ){
   header("Location:../utilizador/index.php");
 }
-
 if(isset($_POST['login_btn'])) {      // LOGIN
   include("../conectar_bd.php");
 

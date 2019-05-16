@@ -8,7 +8,7 @@ include("../admin/topfooterA.php");
 
 $id = $_GET["id_geral"];   
 
-$sqldata ="SELECT nome_completo,nome,email,num_fiscal,num_telefone,user_type,password FROM `utilizadores` WHERE id_user ='$id'";
+$sqldata ="SELECT id_user,nome_completo,nome,email,num_fiscal,num_telefone,user_type,password FROM `utilizadores` WHERE id_user ='$id'";
 $result= mysqli_query($connection,$sqldata);
 $row=mysqli_fetch_assoc($result);
 
@@ -125,9 +125,9 @@ if(isset($_POST['edit_user'])) {
 
 	// guarda a password antiga se os campos desta estiverem vazios
 	$sql_pw = "SELECT * FROM `utilizadores` WHERE id_user='$id'";
-	$sql_query=mysqli_query($connection,$sql_pw);
-	$row=mysqli_fetch_array($sql_query);
-	$pw=$row['password'];
+	$result_pw=mysqli_query($connection,$sql_pw);
+	$row_pw=mysqli_fetch_array($result_pw);
+	$pw=$row_pw['password'];
 
 	if((empty($pw1)) || (empty($pw2))){
 
@@ -138,8 +138,9 @@ if(isset($_POST['edit_user'])) {
 			Alterações guardadas!
 		</div>
 		<?php
-		if($row['id_user'] == '$id' && $role == 'Utilizador'){
-			header('refresh:2;url=../admin/logout.php');
+		$_SESSION['role'] = $role;
+		if($_SESSION['id'] == '$id' && $role == 'Utilizador'){
+			header('Location:../admin/logout.php');
 		}else{
 			header('refresh:2;url=../admin/gerir_utilizadores.php');
 		}
@@ -153,7 +154,8 @@ if(isset($_POST['edit_user'])) {
 			Alterações guardadas!
 		</div>
 		<?php
-		if($row['id_user'] == '$id' && $role == 'Utilizador'){
+		$_SESSION['role'] = $role;
+		if($_SESSION['id'] == '$id' && $role == 'Utilizador'){
 			header('refresh:2;url=../admin/logout.php');
 		}else{
 			header('refresh:2;url=../admin/gerir_utilizadores.php');
@@ -162,87 +164,80 @@ if(isset($_POST['edit_user'])) {
 }
 
 ?>
+<html>
 <body>
 	<h1 align="center">Editar Utilizador</h1>
 	<hr>
 	<div class="container" style="margin-top: 70px;margin-right:250px;">
-		<?php if ($result->num_rows > 0) { 
-			?>
-			<div class="row">
-				<div class="col-md-9">
-					<div class="card">
-						<div class="card-body">
-							<div class="row">
-								<div class="col-md-12">
-									<hr>
-								</div>
+		<div class="row">
+			<div class="col-md-9">
+				<div class="card">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-12">
+								<hr>
 							</div>
-							<div class="row">
-								<div class="col-md-12">
-									<form method="POST" action="#">
-										<?php while($row=mysqli_fetch_assoc($result)){
-											?>
-											<div class="form-group row">
-												<label for="username" class="col-4 col-form-label">Nome Completo</label> 
-												<div class="col-8">
-													<input value="<?php echo $row["nome_completo"]; ?>" name="nome_completo" class="form-control here" type="text">
-												</div>
-											</div>
-											<div class="form-group row">
-												<label for="username" class="col-4 col-form-label">Username</label> 
-												<div class="col-8">
-													<input value="<?php echo $row["nome"]; ?>" name="username" class="form-control here" type="text">
-												</div>
-											</div>
-											<div class="form-group row">
-												<label for="select" class="col-4 col-form-label">Cargo</label> 
-												<div class="col-8">
-													<select id="role" name="role" class="custom-select">
-														<option value="Utilizador" <?php if($row["user_type"]=="Utilizador") echo 'selected="selected"';?>>Utilizador</option>
-														<option value="Gestor" <?php if($row["user_type"]=="Gestor") echo 'selected="selected"';?>>Gestor</option>
-													</select>
-												</div>
-											</div>
-											<div class="form-group row">
-												<label for="name" class="col-4 col-form-label">Email</label> 
-												<div class="col-8">
-													<input value="<?php echo $row["email"]; ?>" name="email" class="form-control here" type="email">
-												</div>
-											</div>
-											<div class="form-group row">
-												<label for="username" class="col-4 col-form-label">NIF</label> 
-												<div class="col-8">
-													<input value="<?php echo $row["num_fiscal"]; ?>"  name="num_fiscal" class="form-control here" type="int" maxlength="9">
-												</div>
-											</div>
-											<div class="form-group row">
-												<label for="username" class="col-4 col-form-label">Telefone</label> 
-												<div class="col-8">
-													<input value="<?php echo $row["num_telefone"]; ?>" name="num_telefone" class="form-control here" type="int" maxlength="9">
-												</div>
-											</div>
-											<div class="form-group row">
-												<label for="text" class="col-4 col-form-label">Password</label> 
-												<div class="col-8">
-													<input id="pw1" name="pw1" placeholder="Password" class="form-control here" type="password">
-												</div>
-											</div>  
-											<div class="form-group row">
-												<label for="text" class="col-4 col-form-label">Confirmar Password</label> 
-												<div class="col-8">
-													<input id="pw2" name="pw2" placeholder="Confirmar Password" class="form-control here" type="password" onkeyup="checkPass();">
-													<span id="confirmMessage" class="confirmMessage"></span>
-												</div>
-											</div> 
-											<div class="form-group row">
-												<div class="offset-4 col-8">
-													<button onclick="return confirm('Tem a certeza que quer editar este utilizador?')" name="edit_user" type="submit" class="btn btn-primary">Editar Utilizador</button>
-												</div>
-											</div>
-											<?php
-										}
-									}
-									?>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<form method="POST" action="#">
+									<div class="form-group row">
+										<label for="username" class="col-4 col-form-label">Nome Completo</label> 
+										<div class="col-8">
+											<input value="<?php echo $row["nome_completo"]; ?>" name="nome_completo" class="form-control here" type="text">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="username" class="col-4 col-form-label">Username</label> 
+										<div class="col-8">
+											<input value="<?php echo $row["nome"]; ?>" name="username" class="form-control here" type="text">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="select" class="col-4 col-form-label">Cargo</label> 
+										<div class="col-8">
+											<select id="role" name="role" class="custom-select">
+												<option value="Utilizador" <?php if($row["user_type"]=="Utilizador") echo 'selected="selected"';?>>Utilizador</option>
+												<option value="Gestor" <?php if($row["user_type"]=="Gestor") echo 'selected="selected"';?>>Gestor</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="name" class="col-4 col-form-label">Email</label> 
+										<div class="col-8">
+											<input value="<?php echo $row["email"]; ?>" name="email" class="form-control here" type="email">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="username" class="col-4 col-form-label">NIF</label> 
+										<div class="col-8">
+											<input value="<?php echo $row["num_fiscal"]; ?>"  name="num_fiscal" class="form-control here" type="int" maxlength="9">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="username" class="col-4 col-form-label">Telefone</label> 
+										<div class="col-8">
+											<input value="<?php echo $row["num_telefone"]; ?>" name="num_telefone" class="form-control here" type="int" maxlength="9">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="text" class="col-4 col-form-label">Password</label> 
+										<div class="col-8">
+											<input id="pw1" name="pw1" placeholder="Password" class="form-control here" type="password">
+										</div>
+									</div>  
+									<div class="form-group row">
+										<label for="text" class="col-4 col-form-label">Confirmar Password</label> 
+										<div class="col-8">
+											<input id="pw2" name="pw2" placeholder="Confirmar Password" class="form-control here" type="password" onkeyup="checkPass();">
+											<span id="confirmMessage" class="confirmMessage"></span>
+										</div>
+									</div> 
+									<div class="form-group row">
+										<div class="offset-4 col-8">
+											<button onclick="return confirm('Tem a certeza que quer editar este utilizador?')" name="edit_user" type="submit" class="btn btn-primary">Editar Utilizador</button>
+										</div>
+									</div>
 								</form>
 							</div>
 						</div>
@@ -252,6 +247,7 @@ if(isset($_POST['edit_user'])) {
 		</div>
 	</div>
 </body>
+</html>
 
 
 <script type="text/javascript">

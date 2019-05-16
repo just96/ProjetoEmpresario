@@ -67,6 +67,9 @@ $id = $_GET["id_geral"];
 					</tbody>
 				</table>
 			</div>
+			<div class="d-flex justify-content-center">
+				<h6>Valor total da encomenda:</h6>
+			</div>
 			<hr>
 			<div class="container">
 				<div class="form-group row">

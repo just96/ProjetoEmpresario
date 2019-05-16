@@ -1,10 +1,8 @@
 <?php
 session_start();
-
 if ($_SESSION['role'] != 'Utilizador'){
 	header( "Location:../utilizador/log.php" );
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

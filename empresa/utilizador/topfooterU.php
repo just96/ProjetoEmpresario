@@ -85,6 +85,7 @@ if ($_SESSION['role'] != 'Utilizador'){
         <ul class="navbar-nav ml-auto">
           <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <h9><?php echo $_SESSION['Utilizador']?></h9>
               <img src="../img/avatar.png" alt="Avatar" width="40" height="40" >
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">

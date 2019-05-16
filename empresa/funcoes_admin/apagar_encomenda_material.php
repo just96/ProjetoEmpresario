@@ -9,8 +9,9 @@ include("../admin/topfooterA.php");
 $id = $_GET["id_geral"];   
 
 $deletematerial= "DELETE FROM encomendas WHERE id_encomenda='$id'";
-mysqli_query($connection,$deletematerial) or die($deletematerial); ?>
-<div class="container alert alert-success" role="alert">
+mysqli_query($connection,$deletematerial) or die($deletematerial); 
+?>
+<div class="alert alert-success" role="alert">
 	Encomenda eliminada com sucesso!
 </div>
 <?php

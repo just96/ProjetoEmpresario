@@ -20,11 +20,9 @@ class myPDF extends FPDF{
     }
     function headerTable(){
         $this->SetFont('Times','B',10);
-        $this->Cell(30,10,'Nome Fiscal',1,0,'C');
-        $this->Cell(32,10,'Nome Comercial',1,0,'C');
-        $this->Cell(30,10,'Tipo',1,0,'C');
-        $this->Cell(30,10,'Morada',1,0,'C');
-        $this->Cell(30,10,'Localidade',1,0,'C');
+        $this->Cell(50,10,'Nome Fiscal',1,0,'C');
+        $this->Cell(50,10,'Nome Comercial',1,0,'C');
+        $this->Cell(60,10,'Morada',1,0,'C');
         $this->Cell(30,10,'Codigo-Postal',1,0,'C');
         $this->Cell(30,10,'NIF',1,0,'C');
         $this->Cell(30,10,'Telefone',1,0,'C');
@@ -35,11 +33,9 @@ class myPDF extends FPDF{
         $this->SetFont('Times','',10);
         $stmt = $db->query('SELECT * FROM `clientes` INNER JOIN `utilizadores` ON clientes.id_utilizador = utilizadores.id_user WHERE utilizadores.user_type = "Gestor" OR id_utilizador="$id";');
         while($data = $stmt->fetch(PDO::FETCH_OBJ)){
-            $this->Cell(30,10,$data->nome_fiscal,1,0,'L');
-            $this->Cell(32,10,$data->nome_comercial,1,0,'L');
-            $this->Cell(30,10,$data->tipo,1,0,'L');
-            $this->Cell(30,10,$data->morada,1,0,'L');
-            $this->Cell(30,10,$data->localidade,1,0,'L');
+            $this->Cell(50,10,$data->nome_fiscal,1,0,'L');
+            $this->Cell(50,10,$data->nome_comercial,1,0,'L');
+            $this->Cell(60,10,$data->morada,1,0,'L');
             $this->Cell(30,10,$data->codigo_postal,1,0,'L');
             $this->Cell(30,10,$data->num_fiscal,1,0,'L');
             $this->Cell(30,10,$data->num_telefone,1,0,'L');

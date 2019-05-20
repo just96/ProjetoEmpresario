@@ -27,6 +27,7 @@ if (isset($_POST['add_encomenda']) && $_POST['add_encomenda']=="Fazer encomenda"
 	$data_encomenda = date('Y-m-d H:i:s',time());
 	$comentario_encomenda = $_POST['comentario_encomenda'];
 	$cliente = $_POST['cliente'];
+	$tipo_pagamento = $_POST['tipo_pagamento'];
 		//SQL
 	$sql_enc = "SELECT id_encomenda FROM encomendas ORDER BY id_encomenda DESC LIMIT 1";
 	$result_enc = mysqli_query($connection, $sql_enc);
@@ -45,10 +46,21 @@ if (isset($_POST['add_encomenda']) && $_POST['add_encomenda']=="Fazer encomenda"
 		header('Refresh:2; url=encomendar_produtos.php');
 		return;
 	}
+	if($tipo_pagamento =='null'){
+		?>
+		<div class="container">
+			<div class="alert alert-warning" role="alert">
+				<strong>Selecione um tipo de pagamento!</strong>
+			</div> 
+		</div>
+		<?php
+		header('Refresh:2; url=encomendar_produtos.php');
+		return;
+	}
 	foreach($_POST['qntP'] as $index=>$value){
 		if($value > 0){
 			$total = $index * $value;
-			mysqli_query($connection,"INSERT INTO `encomendas`(`id_encomenda`,`id_utilizador`,`id_cliente`,`id_produto`,`quantidadeP`,`data_encomenda`,`comentario`,`total`,`autorizada`) VALUES ('$id_encomenda','$id','$cliente',".$_POST['id_produto'][$index].",".$value.",'$data_encomenda','$comentario_encomenda','$total','0')") or die(mysqli_error($connection));
+			mysqli_query($connection,"INSERT INTO `encomendas`(`id_encomenda`,`id_utilizador`,`id_cliente`,`id_produto`,`quantidadeP`,`tipo_pagamento`,`data_encomenda`,`comentario`,`total_s_iva`,`autorizada`) VALUES ('$id_encomenda','$id','$cliente',".$_POST['id_produto'][$index].",".$value.",'$tipo_pagamento','$data_encomenda','$comentario_encomenda','$total','0')") or die(mysqli_error($connection));
 		}
 	}
 	?><div class="container">
@@ -57,7 +69,8 @@ if (isset($_POST['add_encomenda']) && $_POST['add_encomenda']=="Fazer encomenda"
 		</div> 
 	</div>
 	<?php
-	header('Refresh:2; url=ver_encomendas_produtos.php');
+	$url= "ver_encomenda_produto.php?id_geral=$id_encomenda";
+	header('Refresh:2; url=../funcoes_utilizador/'.$url);
 	return;
 };
 
@@ -65,7 +78,7 @@ if (isset($_POST['add_encomenda']) && $_POST['add_encomenda']=="Fazer encomenda"
 
 <title>Menu Utilizador - Encomendar Produtos</title>
 <body>
-	<h1 align="center">Encomendar Produtos</h1>
+	<h1 align="center">Nota de Encomenda - Produtos</h1>
 	<hr>
 	<?php 
 	if ($result_clientes->num_rows > 0) {?>
@@ -81,6 +94,16 @@ if (isset($_POST['add_encomenda']) && $_POST['add_encomenda']=="Fazer encomenda"
 								?>
 								<option value="<?php echo $row_clientes["id_cliente"];?>"><?php echo $row_clientes["nome_fiscal"];?></option>
 							<?php }?>
+						</select>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-4">
+						<h4>Tipo de Pagamento</h4>
+						<select name="tipo_pagamento" class="custom-select" required>
+							<option value="null">Selecione o tipo de pagamento</option>
+							<option value="Pronto Pagamento Contra Entrega - c/ Desconto">Pronto Pagamento Contra Entrega - c/ Desconto</option>
+							<option value="Cheque a 30 Dias - s/ Desconto">Cheque a 30 Dias - s/ Desconto</option>
 						</select>
 					</div>
 				</div>
@@ -107,7 +130,7 @@ if (isset($_POST['add_encomenda']) && $_POST['add_encomenda']=="Fazer encomenda"
 							<th>Imagem</th>
 							<th>Referência</th>
 							<th>Nome do Produto</th>
-							<th>Preço( € )</th>
+							<th>Valor s/ IVA</th>
 							<th>Quantidade</th>
 						</tr>
 					</thead>
@@ -122,8 +145,8 @@ if (isset($_POST['add_encomenda']) && $_POST['add_encomenda']=="Fazer encomenda"
 								<td><img class="img-responsive" width="70" height="55" src="../img/<?php echo $row['imagem'];?>"></td>
 								<td><?php echo $row["codigo_produto"]; ?></td>
 								<td><?php echo $row["nome_produto"]; ?></td>
-								<td><?php echo $row["valor"];?>&euro;<input type="hidden" name="valor" value="<?php echo $row["valor"]; ?>"></td>
-								<td><input size='1' type="text" value="0" min='0' name="qntP[]" max='10'></td></tr>
+								<td><?php echo $row["valor_s_iva"];?>&euro;<input type="hidden" name="valor" value="<?php echo $row["valor"]; ?>"></td>
+								<td><input size='1' type="number" value="0" min='0' name="qntP[]" max='10'></td></tr>
 								<?php
 							}}?> 
 						</tbody>

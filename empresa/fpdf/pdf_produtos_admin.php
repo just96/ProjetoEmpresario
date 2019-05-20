@@ -24,7 +24,7 @@ class myPDF extends FPDF{
         $this->Cell(20,10,'Referencia',1,0,'C');
         $this->Cell(40,10,'Nome do Produto',1,0,'C');
         $this->Cell(40,10,'Descricao do Produto',1,0,'C');
-        $this->Cell(30,10,'Preco '.EURO,1,0,'C');
+        $this->Cell(30,10,'Valor s/ IVA'.EURO,1,0,'C');
         $this->Ln();
     }
     function viewTable($db){
@@ -34,7 +34,7 @@ class myPDF extends FPDF{
             $this->Cell(20,10,$data->codigo_produto,1,0,'L');
             $this->Cell(40,10,$data->nome_produto,1,0,'L');
             $this->Cell(40,10,$data->descricao,1,0,'L');
-            $this->Cell(30,10,$data->valor.EURO,1,0,'L');
+            $this->Cell(30,10,$data->valor_s_iva.EURO,1,0,'L');
             $this->Ln();
         }
     }

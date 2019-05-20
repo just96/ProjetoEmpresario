@@ -16,19 +16,39 @@ $id = $_GET["id_geral"];
 	$row_cliente= mysqli_fetch_array($result_encomenda);
 	$id_cliente = $row_cliente['nome_fiscal'];
 	$data = $row_cliente['data_encomenda'];
+	$autorizada = $row_cliente['autorizada'];
 
-
+	if($autorizada == '1'){?>
+		<div class="container alert alert-primary" role="alert">
+			Esta encomenda já foi aprovada pelo gestor!
+		</div>
+		<?php
+	}else{
+		?>
+		<div class="container alert alert-info" role="alert">
+			Encomenda em espera para ser aprovada pelo gestor!
+		</div>
+		<?php
+	}
 	if(mysqli_num_rows($result_encomenda) > 0 )
 	{
 		?>
 		<hr>
 		<br>
 		<div class="container">
-			<h4>Cliente a que foi feito a encomenda</h4>	
-			<input class="form-control" type="text" disabled="" value="<?php echo $id_cliente ?>">
+			<h5>Cliente a que foi feito a encomenda</h5>	
+			<div class="form-group row">
+				<div class="col-4">	
+					<input class="form-control" type="text" disabled="" value="<?php echo $id_cliente ?>">
+				</div>
+			</div>
 			<hr>
-			<h5>Data em que foi feita a encomenda</h5>
-			<input class="form-control" type="text" disabled="" value="<?php echo $data ?>">
+			<h5>Data da encomenda</h5>
+			<div class="form-group row">
+				<div class="col-4">	
+					<input class="form-control" type="text" disabled="" value="<?php echo $data ?>">
+				</div>
+			</div>
 			<hr>
 			<h4>Material</h4>	
 			<table id="minhaTabela" class="table table-bordered">

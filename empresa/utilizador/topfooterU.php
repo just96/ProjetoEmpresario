@@ -57,7 +57,7 @@ if ($_SESSION['role'] != 'Utilizador'){
               Produtos
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="../utilizador/encomendar_produtos.php">Encomendar</a>
+              <a class="dropdown-item" href="../utilizador/encomendar_produtos.php">Nota de Encomenda</a>
               <a class="dropdown-item" href="../utilizador/ver_encomendas_produtos.php">Ver Encomendas</a>
               <a class="dropdown-item" href="../utilizador/hist_encomendas_produtos.php">Histórico de Encomendas</a>
             </div>
@@ -67,7 +67,7 @@ if ($_SESSION['role'] != 'Utilizador'){
               Material de Apoio
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="../utilizador/encomendar_material.php">Encomendar</a>
+              <a class="dropdown-item" href="../utilizador/encomendar_material.php">Nota de Encomenda</a>
               <a class="dropdown-item" href="../utilizador/ver_encomendas_material.php">Ver Encomendas</a>
               <a class="dropdown-item" href="../utilizador/hist_encomendas_material.php">Histórico de Encomendas</a>
             </div>

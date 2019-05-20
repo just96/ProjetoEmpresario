@@ -59,7 +59,7 @@ if ($_SESSION['role'] != 'Gestor'){
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="../admin/adicionar_produto.php">Adicionar</a>
               <a class="dropdown-item" href="../admin/gerir_produtos.php">Gerir</a>
-              <a class="dropdown-item" href="../admin/encomendar_produtos.php">Encomendar</a>
+              <a class="dropdown-item" href="../admin/encomendar_produtos.php">Nota de Encomenda</a>
               <a class="dropdown-item" href="../admin/ver_encomendas_produtos.php">Ver Encomendas</a>
               <a class="dropdown-item" href="../admin/hist_encomendas_produtos.php">Histórico de Encomendas</a>
             </div>
@@ -71,7 +71,7 @@ if ($_SESSION['role'] != 'Gestor'){
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="../admin/adicionar_material.php">Adicionar</a>
               <a class="dropdown-item" href="../admin/gerir_material.php">Gerir</a>
-              <a class="dropdown-item" href="../admin/encomendar_material.php">Encomendar</a>
+              <a class="dropdown-item" href="../admin/encomendar_material.php">Nota de Encomenda</a>
               <a class="dropdown-item" href="../admin/ver_encomendas_material.php">Ver Encomendas</a>
               <a class="dropdown-item" href="../admin/hist_encomendas_material.php">Histórico de Encomendas</a>
             </div>

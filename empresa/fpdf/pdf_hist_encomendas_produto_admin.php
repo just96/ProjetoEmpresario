@@ -1,7 +1,7 @@
 <?php 
 require "fpdf.php";
 $db = new PDO('mysql:host=localhost;dbname=bd_empresa','root','');
-
+define('EURO',chr(128));
 
 class myPDF extends FPDF{
     function header(){
@@ -22,17 +22,21 @@ class myPDF extends FPDF{
         $this->Cell(40,10,'Numero da Encomenda',1,0,'C');
         $this->Cell(32,10,'Data',1,0,'C');
         $this->Cell(60,10,'Comentario',1,0,'C');
-        $this->Cell(60,10,'Cliente',1,0,'C');
+        $this->Cell(30,10,'Cliente',1,0,'C');
+        $this->Cell(30,10,'Utilizador',1,0,'C');
+        $this->Cell(30,10,'Total s/IVA'.EURO,1,0,'C');
         $this->Ln();
     }
     function viewTable($db){
         $this->SetFont('Times','',10);
-        $stmt = $db->query('SELECT id_encomenda, nome_fiscal,data_encomenda,comentario,autorizada FROM `encomendas` INNER JOIN `clientes` ON encomendas.id_cliente = clientes.id_cliente WHERE autorizada LIKE 1 AND id_material IS NULL GROUP BY id_encomenda ASC;');
+        $stmt = $db->query('SELECT id_encomenda,nome,nome_fiscal,data_encomenda,comentario,autorizada,total_s_iva FROM `encomendas` INNER JOIN `clientes` ON encomendas.id_cliente = clientes.id_cliente INNER JOIN `utilizadores` ON encomendas.id_utilizador = utilizadores.id_user WHERE autorizada LIKE 1 AND id_material IS NULL GROUP BY id_encomenda ASC;');
         while($data = $stmt->fetch(PDO::FETCH_OBJ)){
             $this->Cell(40,10,$data->id_encomenda,1,0,'L');
             $this->Cell(32,10,$data->data_encomenda,1,0,'L');
             $this->Cell(60,10,$data->comentario,1,0,'L');
-            $this->Cell(60,10,$data->nome_fiscal,1,0,'L');
+            $this->Cell(30,10,$data->nome_fiscal,1,0,'L');
+            $this->Cell(30,10,$data->nome,1,0,'L');
+            $this->Cell(30,10,$data->total_s_iva.EURO,1,0,'L');
             $this->Ln();
         }
     }

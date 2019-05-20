@@ -33,7 +33,6 @@ if ($result->num_rows > 0) {
 						<th>Comentário</th>
 						<th>Cliente</th>
 						<th>Ver Encomenda</th>
-						<th>Pdf</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -47,14 +46,27 @@ if ($result->num_rows > 0) {
 							<td><?php echo $row["data_encomenda"]; ?></td>
 							<td><?php echo $row["comentario"]; ?></td>
 							<td><?php echo $row["nome_fiscal"]; ?></td>
-							<td><a onclick="return confirm('Ver esta encomenda?')" href="../funcoes_utilizador/ver_encomenda_produto.php?&id_geral=<?php echo $row["id_encomenda"];?>"><img height="35" width="35" border="0" src="../img/ver_encomenda.png"></a></td>
-							<td><a onclick="return confirm('Gerar pdf?')" href="../fpdf/pdf_encomenda_produto_utilizador.php?&id_geral=<?php echo $row["id_encomenda"];?>"><img height="35" width="35" border="0" src="../img/pdf.png"></a></td></tr>
+							<td><a onclick="return confirm('Ver esta encomenda?')" href="../funcoes_utilizador/ver_encomenda_produto.php?&id_geral=<?php echo $row["id_encomenda"];?>"><img height="35" width="35" border="0" src="../img/ver_encomenda.png"></a></td></tr>
 							<?php
 						}?> 
 					</tbody>
 				</table>
-				<div class="d-flex justify-content-center">
-					<h4>Valor total de encomendas:</h4>
+				<?php
+				$total = 0;
+				// SQL PARA CALCULAR TOTAL S/ IVA , select distinct não pode ser(a resolver..)
+				$sql_total = "SELECT DISTINCT total_s_iva FROM `encomendas` WHERE autorizada = 1 AND id_utilizador = '$id_utilizador'";
+				$result_total = mysqli_query($connection,$sql_total);
+				if (mysqli_num_rows($result_total) > 0 ){
+					while($row_total = mysqli_fetch_array($result_total)){
+						$total = $total + $row_total['total_s_iva'];
+					}
+				}
+				?>
+				<div class="container form-group row">
+					<h4>Valor total em encomendas(s/IVA):</h4>
+					<div class="container form-group row">
+						<h6><?php echo $total;?>&euro;</h6>
+					</div>
 				</div>
 			<?php }else{?>
 				<div class="container alert alert-danger" style="top:10px;" role="alert">

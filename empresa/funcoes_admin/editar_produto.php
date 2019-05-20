@@ -8,8 +8,9 @@ include("../admin/topfooterA.php");
 
 $id = $_GET["id_geral"];   
 
-$sqldata ="SELECT nome_produto,imagem,valor,codigo_produto,descricao FROM `produtos` WHERE id_produto='$id'";
+$sqldata ="SELECT nome_produto,imagem,valor_s_iva,codigo_produto,descricao FROM `produtos` WHERE id_produto='$id'";
 $result= mysqli_query($connection,$sqldata);
+$row=mysqli_fetch_assoc($result);
 // EDITAR PRODUTO
 if(isset($_POST['edit_prod'])) { 
 
@@ -63,7 +64,7 @@ if(isset($_POST['edit_prod'])) {
 		return;
 	}
 
-	$sqleditproduto = "UPDATE `produtos` SET nome_produto='$nome_produto', valor='$valor', codigo_produto='$codigo_produto', descricao='$descricao' , editado = '$editado' WHERE id_produto='$id'";
+	$sqleditproduto = "UPDATE `produtos` SET nome_produto='$nome_produto', valor_s_iva='$valor', codigo_produto='$codigo_produto', descricao='$descricao' , editado = '$editado' WHERE id_produto='$id'";
 	mysqli_query($connection,$sqleditproduto);
 	?>  
 	<div class="container alert alert-success" role="alert">
@@ -96,31 +97,28 @@ if(isset($_POST['btnAI'])){
 ?>
 <body>
 	<h1 align="center">Editar Produto</h1>
-	<hr><?php
-	if(mysqli_num_rows($result)>0){
-		?>
-		<div class="container">
-			<a href="#" data-target="#exampleModAvatar" data-toggle="modal">Alterar imagem do produto</a>
-			<form method="POST" action="#" enctype="multipart/form-data">
-				<div class="modal fade" id="exampleModAvatar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">Alterar imagem do produto</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<div class="col-md-12">
-									<div class="panel panel-default">
-										<div class="panel-body">
-											<div class="text-center">
-												<div class="panel-body">
-													<div class="form-row">
-														<div class="form-group col-md-6">
-															<input type="file" name="uploadfile">
-														</div>
+	<hr>
+	<div class="container">
+		<a href="#" data-target="#exampleModAvatar" data-toggle="modal">Alterar imagem do produto</a>
+		<form method="POST" action="#" enctype="multipart/form-data">
+			<div class="modal fade" id="exampleModAvatar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Alterar imagem do produto</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="col-md-12">
+								<div class="panel panel-default">
+									<div class="panel-body">
+										<div class="text-center">
+											<div class="panel-body">
+												<div class="form-row">
+													<div class="form-group col-md-6">
+														<input type="file" name="uploadfile">
 													</div>
 												</div>
 											</div>
@@ -128,45 +126,42 @@ if(isset($_POST['btnAI'])){
 									</div>
 								</div>
 							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-								<button onclick="return confirm('Alterar imagem do produto?')" type="submit" class="btn btn-primary" id="btnAI" name="btnAI">Alterar imagem do produto</button>
-							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+							<button onclick="return confirm('Alterar imagem do produto?')" type="submit" class="btn btn-primary" id="btnAI" name="btnAI">Alterar imagem do produto</button>
 						</div>
 					</div>
 				</div>
-			</form>
-			<form method="POST" action="#" enctype="multipart/form-data">
-				<?php while($row=mysqli_fetch_assoc($result)){
-					?>
-					<div class="form-row">
-						<div class="form-group col-md-3">
-							<img class="rounded" height='180' width='200' src='../img/<?php echo $row["imagem"]?>'>
-							<p></p>
-						</div>
-					</div>
-					<div class="form-row">
-						<div class="form-group col-md-6">
-							<label for="nome_produto">Nome do Produto</label>
-							<input name ="nome_produto" type="text" class="form-control" value="<?php echo $row["nome_produto"]; ?>"required>
-						</div>
-						<div class="form-group col-md-6">
-							<label for="valor">Preço</label>
-							<input name ="valor" class="form-control" value="<?php echo $row["valor"]; ?>" type="number" min="1" max="10000" step="any" required>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="codigo_produto">Referência</label>
-						<input name ="codigo_produto" type="text" class="form-control" value="<?php echo $row["codigo_produto"]; ?>" required>
-					</div>
-					<div class="form-group row">
-						<label for="descricao" class="col-4 col-form-label">Descrição do Produto</label> 
-						<textarea class="form-control here" row="10" cols="60" name="descricao"><?php echo $row["descricao"]; ?></textarea>
-					</div>
-					<button name ="edit_prod" type="submit" class="btn btn-primary" onclick="return confirm('De certeza que quer editar?')">Editar Produto</button>
-				</form>
 			</div>
+		</form>
+		<form method="POST" action="#" enctype="multipart/form-data">
+			<div class="form-row">
+				<div class="form-group col-md-3">
+					<img class="rounded" height='180' width='200' src='../img/<?php echo $row["imagem"]?>'>
+					<p></p>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="nome_produto">Nome do Produto</label>
+					<input name ="nome_produto" type="text" class="form-control" value="<?php echo $row["nome_produto"]; ?>"required>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="valor">Preço</label>
+					<input name ="valor" class="form-control" value="<?php echo $row["valor_s_iva"]; ?>" type="number" min="1" max="10000" step="any" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="codigo_produto">Referência</label>
+				<input name ="codigo_produto" type="text" class="form-control" value="<?php echo $row["codigo_produto"]; ?>" required>
+			</div>
+			<div class="form-group row">
+				<label for="descricao" class="col-4 col-form-label">Descrição do Produto</label> 
+				<textarea class="form-control here" row="10" cols="60" name="descricao"><?php echo $row["descricao"]; ?></textarea>
+			</div>
+			<button name ="edit_prod" type="submit" class="btn btn-primary" onclick="return confirm('De certeza que quer editar?')">Editar Produto</button>
+		</form>
+	</div>
 
-		<?php }}
-
-		?>
+	?>

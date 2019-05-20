@@ -6,7 +6,7 @@ if ($_SESSION['role'] != 'Gestor'){
 }
 include("../conectar_bd.php");
 // SELECT no SQL para selecionar os dados a serem imprimidos na tabela
-$sql = "SELECT id_produto,nome_produto,imagem,valor,codigo_produto,descricao,criado,editado FROM `produtos` ORDER BY id_produto ASC;";
+$sql = "SELECT id_produto,nome_produto,imagem,valor_s_iva,codigo_produto,descricao,criado,editado FROM `produtos` ORDER BY id_produto ASC;";
 $result = mysqli_query($connection, $sql) or die(mysql_error());
 ?>
 
@@ -31,7 +31,7 @@ if ($result->num_rows > 0) {
 						<th>Referência</th>
 						<th>Nome do Produto</th>
 						<th>Descrição do Produto</th>
-						<th>Preço €</th>
+						<th>Valor s/ IVA</th>
 						<th>Data em que foi adicionado</th>
 						<th>Data em que foi editado</th>
 						<th>Editar</th>
@@ -45,7 +45,7 @@ if ($result->num_rows > 0) {
 						. $row["codigo_produto"]. "</td><td>" 
 						. $row["nome_produto"]. "</td><td>" 
 						. $row["descricao"]. "</td><td>"
-						. $row["valor"]."&euro;</td><td>" 
+						. $row["valor_s_iva"]."&euro;</td><td>" 
 						. $row["criado"]. "</td><td>"
 					.$row["editado"]."</td>"?><td>
 						<a onclick="return confirm('Editar este produto?')" href="../funcoes_admin/editar_produto.php?&id_geral=<?php echo $row["id_produto"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png"></a></td>

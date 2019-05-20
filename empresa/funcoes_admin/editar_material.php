@@ -10,6 +10,7 @@ $id = $_GET["id_geral"];
 
 $sql = "SELECT nome_material,imagem,tipo FROM material_apoio WHERE id_material='$id'";
 $result= mysqli_query($connection,$sql);
+$row=mysqli_fetch_assoc($result);
 
 if(isset($_POST['edit_material'])) { 
 
@@ -107,41 +108,31 @@ if(isset($_POST['btnAIM'])){
 			</div>
 		</div>
 	</form>
-	<?php if ($result->num_rows > 0) { 
-		?>
-		<form align="center" class ="form-inline" method="POST" action="#" enctype="multipart/form-data">
-			<?php while($row=mysqli_fetch_assoc($result)){
-				?>
-				<div class="form-group mx-sm-3 mb-2">
-					<div class="form-group mx-sm-3 mb-2">
-						<img class="rounded" height='150' width='200' src='../img/<?php echo $row["imagem"]?>'>
-					</div>
-				</div>
-				<div class="form-group mx-sm-3 mb-2">
-					<h6 align="center" for="imagem">Nome do Material</h6><br>
-					<div class="form-group mx-sm-3 mb-2">
-						<input size="50" name ="nome_material" type="text" class="form-control" value="<?php echo $row["nome_material"]; ?>" required>
-					</div>
-					<div class="form-group mx-sm-3 mb-2">
-						<h6 align="center" for="imagem">Tipo</h6><br>
-						<div class="col-8">
-							<select id="tipo" name="tipo" class="custom-select" required="required">
-								<option value="Mostruarios" <?php if($row["tipo"]=="Mostruarios") echo 'selected="selected"';?>>Mostruarios</option>
-								<option value="Expositores" <?php if($row["tipo"]=="Expositores") echo 'selected="selected"';?>>Expositores</option>
-								<option value="Folhetos" <?php if($row["tipo"]=="Folhetos") echo 'selected="selected"';?>>Folhetos</option>
-								<option value="MaterialTecnico" <?php if($row["tipo"]=="MaterialTecnico") echo 'selected="selected"';?>>Material Tecnico</option>
-							</select>
-						</div>
-					</div>
-					<button onclick="return confirm('Tem a certeza que quer editar?')" name ="edit_material" type="submit" class="btn btn-primary mb-2">Editar material</button>
-				</form>
+	<form align="center" class ="form-inline" method="POST" action="#" enctype="multipart/form-data">
+		<div class="form-group mx-sm-3 mb-2">
+			<div class="form-group mx-sm-3 mb-2">
+				<img class="rounded" height='150' width='200' src='../img/<?php echo $row["imagem"]?>'>
 			</div>
 		</div>
+		<div class="form-group mx-sm-3 mb-2">
+			<h6 align="center" for="imagem">Nome do Material</h6><br>
+			<div class="form-group mx-sm-3 mb-2">
+				<input size="50" name ="nome_material" type="text" class="form-control" value="<?php echo $row["nome_material"]; ?>" required>
+			</div>
+			<div class="form-group mx-sm-3 mb-2">
+				<h6 align="center" for="imagem">Tipo</h6><br>
+				<div class="col-8">
+					<select id="tipo" name="tipo" class="custom-select" required="required">
+						<option value="Mostruarios" <?php if($row["tipo"]=="Mostruarios") echo 'selected="selected"';?>>Mostruarios</option>
+						<option value="Expositores" <?php if($row["tipo"]=="Expositores") echo 'selected="selected"';?>>Expositores</option>
+						<option value="Folhetos" <?php if($row["tipo"]=="Folhetos") echo 'selected="selected"';?>>Folhetos</option>
+						<option value="MaterialTecnico" <?php if($row["tipo"]=="MaterialTecnico") echo 'selected="selected"';?>>Material Tecnico</option>
+					</select>
+				</div>
+			</div>
+			<button onclick="return confirm('Tem a certeza que quer editar?')" name ="edit_material" type="submit" class="btn btn-primary mb-2">Editar material</button>
+		</form>
 	</div>
-
-
-	<?php
-}
-}
-
+</div>
+</div>
 ?>

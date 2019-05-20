@@ -46,7 +46,7 @@
 		foreach($_POST['qntP'] as $index=>$value){
 			if($value > 0){
 				$total = $index * $value;
-				mysqli_query($connection,"INSERT INTO `encomendas`(`id_encomenda`,`id_utilizador`,`id_cliente`,`id_material`,`quantidadeP`,`data_encomenda`,`comentario`,`total`,`autorizada`) VALUES ('$id_encomenda','$id','$cliente',".$_POST['id_material'][$index].",".$value.",'$data_encomenda','$comentario_encomenda','$total','0')") or die(mysqli_error($connection));
+				mysqli_query($connection,"INSERT INTO `encomendas`(`id_encomenda`,`id_utilizador`,`id_cliente`,`id_material`,`quantidadeP`,`data_encomenda`,`comentario`,`total_s_iva`,`autorizada`) VALUES ('$id_encomenda','$id','$cliente',".$_POST['id_material'][$index].",".$value.",'$data_encomenda','$comentario_encomenda','$total','0')") or die(mysqli_error($connection));
 			}
 		}
 		?><div class="container">
@@ -62,7 +62,7 @@
 	?>
 	<title>Menu Utilizador - Encomendar Material de Apoio</title>
 	<body>
-		<h1 align="center">Encomendar Material de Apoio</h1>
+		<h1 align="center">Nota de Encomenda - Material de Apoio</h1>
 		<hr>
 		<?php 
 		if ($result_clientes->num_rows > 0) {?>

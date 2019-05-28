@@ -5,20 +5,21 @@ require_once '../vendor/autoload.php';
 include("../conectar_bd.php");
 
 $id = $_GET["id_geral"]; 
-$v_total_s_iva = $_GET['v_total'];
-$v_iva_total = $_GET['v_iva_total'];
-$v_tcheque = $_GET['v_tcheque'];
-$v_tliquido = $_GET['v_tliquido'];
-$v_iva_liquido = $_GET['v_iva_liquido'];
-$v_total_geral = $_GET['v_total_geral'];
-$autorizada = $_GET['autorizada'];
 
 // SQL ENCOMENDA
 $sql_encomenda = "SELECT * FROM `encomendas` INNER JOIN `clientes` ON encomendas.id_cliente = clientes.id_cliente INNER JOIN `produtos` ON encomendas.id_produto = produtos.id_produto WHERE id_encomenda='$id'"; // query inner join para ir buscar id do cliente com determinado id encomenda
 $result_encomenda = mysqli_query($connection, $sql_encomenda);
+
 // buscar cliente
 $row_cliente= mysqli_fetch_array($result_encomenda);
 $tipo_pagamento = $row_cliente['tipo_pagamento'];
+$v_total_s_iva = $row_cliente['total_s_iva'];
+$v_iva_total = $row_cliente['iva_total'];
+$v_tcheque = $row_cliente['total_geral_cheque'];
+$v_tliquido = $row_cliente['total_liquido_pp'];
+$v_iva_liquido = $row_cliente['iva_liquido'];
+$v_total_geral = $row_cliente['total_geral_pp'];
+$autorizada = $row_cliente['autorizada'];
 
 // Criar novo PDF
 $mpdf = new \Mpdf\Mpdf();
@@ -28,10 +29,13 @@ $mpdf = new \Mpdf\Mpdf();
 // ADD DATA
 $data = '';
 if($autorizada == '0'){
-	$data .='<strong>Encomenda não autorizada!</strong>';
+	$data .='<strong>Encomenda não autorizada!</strong><br>';
 }else{
-	$data .='<strong>Encomenda autorizada!</strong>';
+	$data .='<strong>Encomenda autorizada!</strong><br>';
 };
+$data .='<br><strong>Empresa:</strong>Manzoni & Vasconcelos - Representações Lda';
+$data .='<br><strong>Endereço:</strong> R. Conde Moser 312, 2765-392 Estoril<br>';
+$data .='<strong>Telefone:</strong>21 467 2125';
 $data .='<h1>Encomenda nº'.$id.'</h1>';
 
 // ADD DATA

@@ -7,11 +7,25 @@ include("../conectar_bd.php");
 include("../utilizador/topfooterU.php"); 
 
 $id = $_GET["id_geral"]; 
-
+$id_user = $_SESSION['id'];
 
 	// SQL ENCOMENDA
 	$sql_encomenda = "SELECT * FROM `encomendas` INNER JOIN `clientes` ON encomendas.id_cliente = clientes.id_cliente INNER JOIN `material_apoio` ON encomendas.id_material = material_apoio.id_material WHERE id_encomenda='$id'"; // query inner join para ir buscar id do cliente com determinado id encomenda
 	$result_encomenda = mysqli_query($connection, $sql_encomenda);
+	// sql para ver se tem permissão na pagina, o utilizador
+	$sql_check_admin = "SELECT * FROM `encomendas` INNER JOIN `utilizadores` ON encomendas.id_utilizador = utilizadores.id_user WHERE id_encomenda = '$id'";
+	$result_check= mysqli_query($connection,$sql_check_admin);
+	$row=mysqli_fetch_assoc($result_check);
+	
+	if(($row['user_type'] == 'Gestor') || ($row['id_user'] != $id_user)){
+		?>
+		<div class="container alert alert-danger" role="alert">
+			Não tem permissão para ver esta encomenda!
+		</div>
+		<?php
+		header("refresh:2;url=../utilizador/ver_encomendas_produtos.php");
+		return;
+	}
 	// get cliente
 	$row_cliente= mysqli_fetch_array($result_encomenda);
 	$id_cliente = $row_cliente['nome_fiscal'];
@@ -36,6 +50,8 @@ $id = $_GET["id_geral"];
 		<hr>
 		<br>
 		<div class="container">
+			<strong>Encomenda nº<?php echo $id;?></strong>
+			<hr>
 			<h5>Cliente a que foi feito a encomenda</h5>	
 			<div class="form-group row">
 				<div class="col-4">	

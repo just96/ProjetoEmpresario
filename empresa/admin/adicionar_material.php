@@ -30,7 +30,9 @@ require('filtros.php');
 					</select>
 				</div>
 			</div>
-			<button onclick="return confirm('Tem a certeza que quer adicionar?')" name ="add_material" type="submit" class="btn btn-primary mb-2">Adicionar material</button>
+			<div class="form-group mx-sm-3 mb-2">
+				<button onclick="return confirm('Tem a certeza que quer adicionar?')" name ="add_material" type="submit" class="btn btn-primary mb-2">Adicionar material</button>
+			</div>
 		</form>
 	</div>
 

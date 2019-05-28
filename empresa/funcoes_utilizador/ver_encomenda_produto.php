@@ -7,12 +7,26 @@ include("../conectar_bd.php");
 include("../utilizador/topfooterU.php"); 
 
 $id = $_GET["id_geral"]; 
+$id_user = $_SESSION['id'];
 
 
 	// SQL ENCOMENDA
 	$sql_encomenda = "SELECT * FROM `encomendas` INNER JOIN `clientes` ON encomendas.id_cliente = clientes.id_cliente INNER JOIN `produtos` ON encomendas.id_produto = produtos.id_produto WHERE id_encomenda='$id'"; // query inner join para ir buscar id do cliente com determinado id encomenda
 	$result_encomenda = mysqli_query($connection, $sql_encomenda);
-	// get cliente
+	// sql para ver se tem permissão na pagina, o utilizador
+	$sql_check_admin = "SELECT * FROM `encomendas` INNER JOIN `utilizadores` ON encomendas.id_utilizador = utilizadores.id_user WHERE id_encomenda = '$id'";
+	$result_check= mysqli_query($connection,$sql_check_admin);
+	$row=mysqli_fetch_assoc($result_check);
+
+	if(($row['user_type'] == 'Gestor') || ($row['id_user'] != $id_user)){
+		?>
+		<div class="container alert alert-danger" role="alert">
+			Não tem permissão para ver esta encomenda!
+		</div>
+		<?php
+		header("refresh:2;url=../utilizador/ver_encomendas_produtos.php");
+		return;
+	}
 	$row_cliente= mysqli_fetch_array($result_encomenda);
 	$id_cliente = $row_cliente['nome_fiscal'];
 	$data = $row_cliente['data_encomenda'];
@@ -43,6 +57,8 @@ $id = $_GET["id_geral"];
 		<hr>
 		<br>
 		<div class="container">
+			<strong>Encomenda nº<?php echo $id;?></strong>
+			<hr>
 			<h5>Cliente a que foi feito a encomenda</h5>
 			<div class="form-group row">
 				<div class="col-4">	
@@ -130,11 +146,11 @@ $id = $_GET["id_geral"];
 				</div>
 				<?php
 			}
-			mysqli_query($connection,"UPDATE `encomendas` SET total_s_iva = '$total' , total_geral_cheque = '$total_cheque' , total_liquido_pp = '$total_liquido' , total_geral_pp = '$total_geral' WHERE id_encomenda = '$id'");?>
+			mysqli_query($connection,"UPDATE `encomendas` SET total_s_iva = '$total' , total_geral_cheque = '$total_cheque' , total_liquido_pp = '$total_liquido' , total_geral_pp = '$total_geral' , iva_total = '$iva_total' , iva_liquido = '$iva_liquido'  WHERE id_encomenda = '$id'");?>
 			<hr>
 			<div class="container">
 				<h3>Gerar PDF</h3>
-				<a onclick="return confirm('Gerar pdf?')" href="../pdf/encomenda_individual_produto.php?&id_geral=<?php echo $id;?>&v_total=<?php echo $total;?>&v_iva_total=<?php echo $iva_total;?>&v_tcheque=<?php echo $total_cheque;?>&v_tliquido=<?php echo $total_liquido;?>&v_iva_liquido=<?php echo $iva_liquido;?>&v_total_geral=<?php echo $total_geral;?>"><img height="35" width="35" border="0" src="../img/pdf.png"></a>
+				<a onclick="return confirm('Gerar pdf?')" href="../pdf/encomenda_individual_produto.php?&id_geral=<?php echo $id;?>"><img height="35" width="35" border="0" src="../img/pdf.png"></a>
 				<div class="form-group row">
 					<label for="text" class="col-4 col-form-label">Observações</label> 
 					<textarea disabled class="form-control here" row="10" cols="60" name="comentario_encomenda" ><?php echo $row_cliente["comentario"]; ?></textarea>

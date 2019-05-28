@@ -36,6 +36,8 @@ if(mysqli_num_rows($result_encomenda) > 0 )
 	<hr>
 	<br>
 	<div class="container">
+		<strong>Encomenda nº<?php echo $id;?></strong>
+		<hr>
 		<h5>Cliente a que foi feito a encomenda</h5>	
 		<div class="form-group row">
 			<div class="col-4">	
@@ -86,7 +88,7 @@ if(mysqli_num_rows($result_encomenda) > 0 )
 		<hr>
 		<div class="container">
 			<h3>Gerar PDF</h3>
-			<a onclick="return confirm('Gerar pdf?')" href="../pdf/encomenda_individual_material.php?&id_geral=<?php echo $id;?>&autorizada=<?php echo $autorizada;?>"><img height="35" width="35" border="0" src="../img/pdf.png"></a>
+			<a onclick="return confirm('Gerar pdf?')" href="../pdf/encomenda_individual_material.php?&id_geral=<?php echo $id;?>"><img height="35" width="35" border="0" src="../img/pdf.png"></a>
 			<div class="form-group row">
 				<label for="text" class="col-4 col-form-label">Observações</label> 
 				<textarea disabled class="form-control here" row="10" cols="60" name="comentario_encomenda" ><?php echo $row_cliente["comentario"]; ?></textarea>

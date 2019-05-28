@@ -6,8 +6,9 @@ if ($_SESSION['role'] != 'Gestor'){
 }
 include("../conectar_bd.php");
 // SELECT no SQL para selecionar os dados a serem imprimidos na tabela
-$sql = "SELECT id_encomenda,nome,nome_fiscal,data_encomenda,comentario,autorizada FROM `encomendas` INNER JOIN `clientes` ON encomendas.id_cliente = clientes.id_cliente INNER JOIN `utilizadores` ON encomendas.id_utilizador = utilizadores.id_user WHERE autorizada LIKE '1' AND id_material IS NULL GROUP BY id_encomenda ASC;";
+$sql = "SELECT id_encomenda,nome,nome_fiscal,data_encomenda,comentario,autorizada,total_s_iva FROM `encomendas` INNER JOIN `clientes` ON encomendas.id_cliente = clientes.id_cliente INNER JOIN `utilizadores` ON encomendas.id_utilizador = utilizadores.id_user WHERE autorizada LIKE '1' AND id_material IS NULL GROUP BY id_encomenda ASC;";
 $result = mysqli_query($connection, $sql) or die(mysql_error());
+$total = 0;
 ?>
 
 <title>Menu Gestor-Histórico de Encomendas-Produtos</title>
@@ -47,22 +48,13 @@ if ($result->num_rows > 0) {
 							<td><?php echo $row["comentario"]; ?></td>
 							<td><?php echo $row["nome_fiscal"]; ?></td>
 							<td><?php echo $row["nome"]; ?></td>
+							<?php 
+							$total = $total + $row['total_s_iva'];?>
 							<td><a onclick="return confirm('Ver esta encomenda?')" href="../funcoes_admin/ver_encomenda_produto.php?&id_geral=<?php echo $row["id_encomenda"];?>"><img height="35" width="35" border="0" src="../img/ver_encomenda.png"></a></td></tr>
 							<?php
 						}?> 
 					</tbody>
 				</table>
-				<?php
-				$total = 0;
-				// SQL PARA CALCULAR TOTAL S/ IVA , select distinct não pode ser(a resolver..)
-				$sql_total = "SELECT DISTINCT total_s_iva FROM `encomendas` WHERE autorizada = 1";
-				$result_total = mysqli_query($connection,$sql_total);
-				if (mysqli_num_rows($result_total) > 0 ){
-					while($row_total = mysqli_fetch_array($result_total)){
-						$total = $total + $row_total['total_s_iva'];
-					}
-				}
-				?>
 				<div class="container form-group row">
 					<h4>Valor total em encomendas(s/IVA):</h4>
 					<div class="container form-group row">

@@ -61,7 +61,6 @@ if(isset($_POST['add_produto'])){
 		header("Refresh:2;url=adicionar_produto.php");
 		return;
 	}
-
 	mysqli_query($connection,"INSERT INTO `produtos`(`nome_produto`,`imagem`,`valor_s_iva`, `codigo_produto`, `descricao` , `criado`) VALUES ('$nome_produto','$filename','$valor','$codigo_produto','$descricao','$criado')") or die(mysqli_error($connection));
 	?>
 	<div class="container alert alert-success" role="alert">

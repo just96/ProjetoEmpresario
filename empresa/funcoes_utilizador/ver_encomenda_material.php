@@ -101,8 +101,11 @@ $id_user = $_SESSION['id'];
 			</div>
 			<hr>
 			<div class="container">
+				<h3>Gerar PDF</h3>
+				<a onclick="return confirm('Gerar pdf?')" href="../pdf/encomenda_individual_material.php?&id_geral=<?php echo $id;?>"><img height="35" width="35" border="0" src="../img/pdf.png"></a>
 				<div class="form-group row">
 					<label for="text" class="col-4 col-form-label">Observações</label> 
 					<textarea disabled class="form-control here" row="10" cols="60" name="comentario_encomenda" ><?php echo $row_cliente["comentario"]; ?></textarea>
 				</div>
 			</div>
+

@@ -27,6 +27,7 @@ $id_user = $_SESSION['id'];
 		header("refresh:2;url=../utilizador/ver_encomendas_produtos.php");
 		return;
 	}
+	
 	$row_cliente= mysqli_fetch_array($result_encomenda);
 	$id_cliente = $row_cliente['nome_fiscal'];
 	$data = $row_cliente['data_encomenda'];

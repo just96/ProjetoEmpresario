@@ -18,7 +18,7 @@ $sql_check_admin = "SELECT user_type FROM `clientes` INNER JOIN `utilizadores` O
 $result_check= mysqli_query($connection,$sql_check_admin);
 $row=mysqli_fetch_assoc($result_check);
 
-if($row['user_type'] == 'Gestor'){
+if($row['user_type'] == 'Gestor' || $row['id_user'] != $id_user){
 	?>
 	<div class="container alert alert-danger" role="alert">
 		Não tem permissão para editar este cliente!
@@ -27,7 +27,6 @@ if($row['user_type'] == 'Gestor'){
 	header("refresh:2;url=../utilizador/gerir_clientes.php");
 	return;
 }
-
 if(isset($_POST['edit_client'])) { 
 	$nome_fiscal = $_POST['nome_fiscal']; 
 	$nome_comercial = $_POST['nome_comercial'];

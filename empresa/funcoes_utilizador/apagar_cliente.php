@@ -6,13 +6,14 @@ if ($_SESSION['role'] != 'Utilizador'){
 include("../conectar_bd.php");
 include("../utilizador/topfooterU.php"); 
 
-$id = $_GET["id_geral"];  
+$id = $_GET["id_geral"];
+$id_user = $_SESSION['id'];
 
 $sql_check_admin = "SELECT * FROM `clientes` INNER JOIN `utilizadores` ON clientes.id_utilizador = utilizadores.id_user WHERE id_cliente = '$id'";
 $result_check= mysqli_query($connection,$sql_check_admin);
 $row=mysqli_fetch_assoc($result_check);
 
-if($row['user_type'] == 'Gestor'){
+if($row['user_type'] == 'Gestor' || $row['id_user'] != $id_user){
 	?>
 	<div class="container alert alert-danger" role="alert">
 		Não tem permissão para apagar este cliente!

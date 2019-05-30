@@ -133,7 +133,7 @@ if(isset($_POST['edit_client'])) {
 <body>
 	<h1 align="center">Editar Cliente</h1>
 	<hr>
-	<div class="container" style="margin-top: 70px;margin-right:250px;">
+	<div class="container">
 		<div class="row">
 			<div class="col-md-9">
 				<div class="card">

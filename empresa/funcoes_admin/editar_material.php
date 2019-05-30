@@ -71,7 +71,7 @@ if(isset($_POST['btnAIM'])){
 ?>
 <h1 align="center">Material de Apoio</h1>
 <hr>
-<div class="container-fluid" align="center">
+<div class="container-fluid">
 	<a href="#" data-target="#exampleModAvatar" data-toggle="modal">Alterar imagem do material</a>
 	<form method="POST" action="#" enctype="multipart/form-data">
 		<div class="modal fade" id="exampleModAvatar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

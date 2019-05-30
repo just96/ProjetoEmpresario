@@ -207,7 +207,7 @@ header("Refresh:1; url=gerir_utilizadores.php");
 
   <h1 align="center">Adicionar Utilizadores</h1>
   <hr>
-  <div class="container" style="margin-top: 70px;margin-right:250px;">
+  <div class="container">
     <button type="button" class="btn btn-light dropdown-toggle" data-target="#collapseExample" aria-controls="collapseExample" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
      Ver política de dados
    </button>

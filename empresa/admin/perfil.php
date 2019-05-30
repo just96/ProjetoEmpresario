@@ -303,7 +303,8 @@ if(isset($_POST['btnApw'])){
 
   </style>
   <body>
-    <div class="container" style="margin-top: 70px;margin-right:250px;">
+    <hr>
+    <div class="container">
       <div class="row">
         <div class="col-md-9">
           <div class="card">

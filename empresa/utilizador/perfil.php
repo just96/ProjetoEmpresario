@@ -210,6 +210,7 @@ if(isset($_POST['btnApw'])){
       Password atual errada!
     </div>
     <?php
+    header("Refresh:2; url=perfil.php");
   }
 
 }
@@ -227,7 +228,7 @@ if(isset($_POST['btnApw'])){
         Insira a sua password!
       </div>
       <?php
-      return;
+      header("Refresh:2; url=perfil.php");
     }
 
     if($password == $bd_password){
@@ -247,7 +248,7 @@ if(isset($_POST['btnApw'])){
         Password errada!
       </div>
       <?php
-      return;
+      header("Refresh:2; url=perfil.php");
     }
   }
   if(isset($_POST['btnAI'])){

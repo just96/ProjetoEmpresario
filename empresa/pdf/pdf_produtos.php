@@ -46,7 +46,7 @@ $data .='<br><strong>Data</strong><br><textarea>' .$row_cliente['data_encomenda'
 $data .='<strong>Tipo de Pagamento</strong><br><textarea>' .$row_cliente['tipo_pagamento'] . '</textarea><br />';
 $data.='
 <h4>Produtos</h4>
-<table id="minhaTabela" class="table table-bordered">
+<table class="table table-bordered">
 <thead class="thead-dark">
 <tr>
 <th>Id</th>
@@ -55,16 +55,16 @@ $data.='
 <th>Valor s/ IVA &euro;</th>
 <th>Quantidade</th>
 </tr>
+</thead>
 <tr>
+<tbody>
 <td>'. $row_cliente["id_produto"]. '</td>
 <td>'.$row_cliente["codigo_produto"].'</td>
 <td>'.$row_cliente["nome_produto"].'</td>
 <td>'.$row_cliente["valor_s_iva"].'&euro;</td>
-<td>'.$row_cliente["quantidadeP"].'</td></tr>
-</thead>';
+<td>'.$row_cliente["quantidadeP"].'</td></tr>';
 while($row_encomenda = mysqli_fetch_array($result_encomenda)){
 	$data .='
-	<tbody>
 	<tr>
 	<td>'. $row_encomenda["id_produto"]. '</td>
 	<td>'. $row_encomenda["codigo_produto"] .'</td>

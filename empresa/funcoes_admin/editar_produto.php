@@ -160,8 +160,7 @@ if(isset($_POST['btnAI'])){
 				<label for="descricao" class="col-4 col-form-label">Descrição do Produto</label> 
 				<textarea class="form-control here" row="10" cols="60" name="descricao"><?php echo $row["descricao"]; ?></textarea>
 			</div>
-			<button name ="edit_prod" type="submit" class="btn btn-primary" onclick="return confirm('De certeza que quer editar?')">Editar Produto</button>
+			<button name ="edit_prod" type="submit" class="btn btn-primary" onclick="return confirm('De certeza que quer editar?')">Submeter Alterações</button>
 		</form>
 	</div>
 
-	?>

@@ -130,7 +130,7 @@ if(isset($_POST['btnAIM'])){
 					</select>
 				</div>
 			</div>
-			<button onclick="return confirm('Tem a certeza que quer editar?')" name ="edit_material" type="submit" class="btn btn-primary mb-2">Editar material</button>
+			<button onclick="return confirm('Tem a certeza que quer editar?')" name ="edit_material" type="submit" class="btn btn-primary mb-2">Submeter Alterações</button>
 		</form>
 	</div>
 </div>

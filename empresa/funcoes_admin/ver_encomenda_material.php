@@ -20,13 +20,13 @@ $autorizada = $row_cliente['autorizada'];
 
 if($autorizada == '1'){?>
 	<div class="container alert alert-primary" role="alert">
-		Esta encomenda já foi aprovada pelo gestor!
+		Já foi aprovado pelo gestor!
 	</div>
 	<?php
 }else{
 	?>
 	<div class="container alert alert-info" role="alert">
-		Encomenda em espera para ser aprovada pelo gestor!
+		Em espera para ser aprovada pelo gestor!
 	</div>
 	<?php
 }
@@ -36,16 +36,16 @@ if(mysqli_num_rows($result_encomenda) > 0 )
 	<hr>
 	<br>
 	<div class="container">
-		<strong>Encomenda nº<?php echo $id;?></strong>
+		<strong>Material de apoio nº<?php echo $id;?></strong>
 		<hr>
-		<h5>Cliente a que foi feito a encomenda</h5>	
+		<h5>Nome do Cliente</h5>	
 		<div class="form-group row">
 			<div class="col-4">	
 				<input class="form-control" type="text" disabled="" value="<?php echo $id_cliente ?>">
 			</div>
 		</div>
 		<hr>
-		<h5>Data em que foi feita a encomenda</h5>
+		<h5>Data</h5>
 		<div class="form-group row">
 			<div class="col-4">	
 				<input class="form-control" type="text" disabled="" value="<?php echo $data ?>">

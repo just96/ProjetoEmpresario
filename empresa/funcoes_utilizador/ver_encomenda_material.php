@@ -34,13 +34,13 @@ $id_user = $_SESSION['id'];
 
 	if($autorizada == '1'){?>
 		<div class="container alert alert-primary" role="alert">
-			Esta encomenda já foi aprovada pelo gestor!
+			Já foi aprovada pelo gestor!
 		</div>
 		<?php
 	}else{
 		?>
 		<div class="container alert alert-info" role="alert">
-			Encomenda em espera para ser aprovada pelo gestor!
+			Em espera para ser aprovada pelo gestor!
 		</div>
 		<?php
 	}
@@ -50,16 +50,16 @@ $id_user = $_SESSION['id'];
 		<hr>
 		<br>
 		<div class="container">
-			<strong>Encomenda nº<?php echo $id;?></strong>
+			<strong>Material de Apoio nº<?php echo $id;?></strong>
 			<hr>
-			<h5>Cliente a que foi feito a encomenda</h5>	
+			<h5>Nome do Cliente</h5>	
 			<div class="form-group row">
 				<div class="col-4">	
 					<input class="form-control" type="text" disabled="" value="<?php echo $id_cliente ?>">
 				</div>
 			</div>
 			<hr>
-			<h5>Data da encomenda</h5>
+			<h5>Data</h5>
 			<div class="form-group row">
 				<div class="col-4">	
 					<input class="form-control" type="text" disabled="" value="<?php echo $data ?>">

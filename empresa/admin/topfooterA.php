@@ -71,9 +71,9 @@ if ($_SESSION['role'] != 'Gestor'){
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="../admin/adicionar_material.php">Adicionar</a>
               <a class="dropdown-item" href="../admin/gerir_material.php">Gerir</a>
-              <a class="dropdown-item" href="../admin/encomendar_material.php">Nota de Encomenda</a>
-              <a class="dropdown-item" href="../admin/ver_encomendas_material.php">Ver Encomendas</a>
-              <a class="dropdown-item" href="../admin/hist_encomendas_material.php">Histórico de Encomendas</a>
+              <a class="dropdown-item" href="../admin/encomendar_material.php">Enviar</a>
+              <a class="dropdown-item" href="../admin/ver_encomendas_material.php">Ver Material Enviado</a>
+              <a class="dropdown-item" href="../admin/hist_encomendas_material.php">Histórico de Material Enviado</a>
             </div>
           </li> 
           <li class="nav-item dropdown">

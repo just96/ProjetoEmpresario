@@ -210,7 +210,7 @@ if(isset($_POST['edit_client'])) {
 									</div>
 									<div class="form-group row">
 										<div class="offset-4 col-8">
-											<button name="edit_client" type="submit" class="btn btn-primary" onclick="return confirm('De certeza que quer editar?')">Editar Cliente</button>
+											<button name="edit_client" type="submit" class="btn btn-primary" onclick="return confirm('De certeza que quer editar?')">Submeter Alterações</button>
 										</div>
 									</div>
 									<hr>

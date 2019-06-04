@@ -235,7 +235,7 @@ if(isset($_POST['edit_user'])) {
 									</div> 
 									<div class="form-group row">
 										<div class="offset-4 col-8">
-											<button onclick="return confirm('Tem a certeza que quer editar este utilizador?')" name="edit_user" type="submit" class="btn btn-primary">Editar Utilizador</button>
+											<button onclick="return confirm('Tem a certeza que quer editar este utilizador?')" name="edit_user" type="submit" class="btn btn-primary">Submeter Alterações</button>
 										</div>
 									</div>
 								</form>

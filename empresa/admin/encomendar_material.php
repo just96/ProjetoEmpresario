@@ -50,7 +50,7 @@
 		?>
 		<div class="container">
 			<div class="alert alert-success" role="alert">
-				<strong>Encomenda feita com sucesso!</strong>
+				<strong>Material de Apoio submetido com sucesso!</strong>
 			</div> 
 		</div>
 		<?php
@@ -60,9 +60,9 @@
 	};
 
 	?>
-	<title>Menu Gestor - Encomendar Material de Apoio</title>
+	<title>Menu Gestor - Enviar Material de Apoio</title>
 	<body>
-		<h1 align="center">Nota de Encomenda - Material de Apoio</h1>
+		<h1 align="center">Enviar - Material de Apoio</h1>
 		<hr>
 		<?php 
 		if ($result_clientes->num_rows > 0) {?>
@@ -128,11 +128,11 @@
 					<div class="container">
 						<div class="form-group row">
 							<label for="text" class="col-4 col-form-label">Observações</label> 
-							<textarea class="form-control here" row="10" cols="60" maxlength="50" name="comentario_encomenda"></textarea>
+							<textarea class="form-control here" row="10" cols="60" name="comentario_encomenda"></textarea>
 						</div>
 						<div class="form-group row">
 							<div class="offset-4 col-8">
-								<button onclick="return confirm('Tem a certeza que quer fazer a encomenda?')" name="add_encomenda" type="submit" class="btn btn-primary" value="Fazer encomenda">Submeter Encomenda</button>
+								<button onclick="return confirm('Tem a certeza que quer submeter?')" name="add_encomenda" type="submit" class="btn btn-primary" value="Fazer encomenda">Submeter</button>
 							</div>
 						</div>
 					</div>

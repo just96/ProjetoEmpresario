@@ -11,7 +11,7 @@ $sql = "SELECT id_encomenda,id_material,nome_fiscal,data_encomenda,comentario,au
 $result = mysqli_query($connection, $sql) or die(mysql_error());
 ?>
 
-<title>Menu Utilizador-Ver encomendas-Material de apoio</title>
+<title>Menu Utilizador-Ver Material Enviado<</title>
 
 <?php require('topfooterU.php');
 require('filtros.php');
@@ -25,11 +25,11 @@ if ($result->num_rows > 0) {
 			<table id="minhaTabela" class="table table-bordered">
 				<thead class="thead-dark">
 					<tr>
-						<th>Número da Encomenda</th>
-						<th>Data em que foi feita</th>
-						<th>Comentário</th>
+						<th>Número do Envio</th>
+						<th>Data</th>
+						<th>Observações</th>
 						<th>Cliente</th>
-						<th>Ver Encomenda</th>
+						<th>Visualizar</th>
 						<th>Apagar</th>
 					</tr>
 				</thead>

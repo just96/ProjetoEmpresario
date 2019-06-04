@@ -356,7 +356,7 @@ if(isset($_POST['btnApw'])){
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                            <button onclick="return confirm('Alterar imagem de perfil?')" type="submit" class="btn btn-primary" id="btnAI" name="btnAI">Alterar imagem de perfil</button>
+                            <button onclick="return confirm('Alterar imagem de perfil?')" type="submit" class="btn btn-primary" id="btnAI" name="btnAI">Submeter Alteração</button>
                           </div>
                         </div>
                       </div>
@@ -405,7 +405,7 @@ if(isset($_POST['btnApw'])){
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                            <button onclick="return confirm('Alterar a password?')" type="submit" class="btn btn-primary" id="btnApw" name="btnApw">Alterar password</button>
+                            <button onclick="return confirm('Alterar a password?')" type="submit" class="btn btn-primary" id="btnApw" name="btnApw">Submeter Alteração</button>
                           </div>
                         </div>
                       </div>

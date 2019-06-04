@@ -10,27 +10,27 @@ $sql = "SELECT id_encomenda,nome,id_material,nome_fiscal,data_encomenda,comentar
 $result = mysqli_query($connection, $sql) or die(mysql_error());
 ?>
 
-<title>Menu Gestor-Ver encomendas-Material de apoio</title>
+<title>Menu Gestor-Ver Material Enviado</title>
 
 <?php require('topfooterA.php');
 require('filtros.php');
 if ($result->num_rows > 0) {
 	?>
 	<body>
-		<h1 align="center">Encomendas-Material de apoio</h1>
+		<h1 align="center">Material Enviado</h1>
 		<hr>
 		<br>
 		<div class="container-fluid">
 			<table id="minhaTabela" class="table table-bordered">
 				<thead class="thead-dark">
 					<tr>
-						<th>Número da Encomenda</th>
-						<th>Data em que foi feita</th>
-						<th>Comentário</th>
+						<th>Número do Envio</th>
+						<th>Data</th>
+						<th>Observações</th>
 						<th>Cliente</th>
 						<th>Utilizador</th>
-						<th>Ver Encomenda</th>
-						<th>Autorizar Encomenda</th>	
+						<th>Visualizar</th>
+						<th>Autorizar</th>	
 						<th>Apagar</th>
 					</tr>
 				</thead>

@@ -31,7 +31,7 @@ if ($result->num_rows > 0) {
 					<tr>
 						<th>Número da Encomenda</th>
 						<th>Data em que foi feita</th>
-						<th>Comentário</th>
+						<th>Observações</th>
 						<th>Cliente</th>
 						<th>Ver Encomenda</th>
 					</tr>

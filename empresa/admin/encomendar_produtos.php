@@ -156,7 +156,7 @@ if (isset($_POST['add_encomenda']) && $_POST['add_encomenda']=="Fazer encomenda"
 			<div class="container">
 				<div class="form-group row">
 					<label for="text" class="col-4 col-form-label">Observações</label> 
-					<textarea class="form-control here" row="10" cols="60" maxlength="50" name="comentario_encomenda"></textarea>
+					<textarea class="form-control here" row="5" cols="50" name="comentario_encomenda"></textarea>
 				</div>
 				<div class="form-group row">
 					<div class="offset-4 col-8">

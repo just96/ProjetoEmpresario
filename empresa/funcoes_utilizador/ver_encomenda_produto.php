@@ -60,7 +60,7 @@ $id_user = $_SESSION['id'];
 		<div class="container">
 			<strong>Encomenda nº<?php echo $id;?></strong>
 			<hr>
-			<h5>Cliente a que foi feito a encomenda</h5>
+			<h5>Nome do Cliente</h5>
 			<div class="form-group row">
 				<div class="col-4">	
 					<input class="form-control" type="text" disabled="" value="<?php echo $id_cliente ?>">

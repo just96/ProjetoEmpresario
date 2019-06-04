@@ -28,11 +28,11 @@ if ($result->num_rows > 0) {
 			<table id="minhaTabela" class="table table-bordered">
 				<thead class="thead-dark">
 					<tr>
-						<th>Número da Encomenda</th>
-						<th>Data em que foi feita</th>
-						<th>Comentário</th>
+						<th>Número do Envio</th>
+						<th>Data</th>
+						<th>Observações</th>
 						<th>Cliente</th>
-						<th>Ver Encomenda</th>
+						<th>Visualizar</th>
 					</tr>
 				</thead>
 				<tbody>

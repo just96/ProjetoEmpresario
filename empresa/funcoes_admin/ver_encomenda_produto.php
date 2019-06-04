@@ -45,7 +45,7 @@ $id = $_GET["id_geral"];
 		<div class="container">
 			<strong>Encomenda nº<?php echo $id;?></strong>
 			<hr>
-			<h5>Cliente a que foi feito a encomenda</h5>
+			<h5>Nome do Cliente</h5>
 			<div class="form-group row">
 				<div class="col-4">		
 					<input class="form-control" type="text" disabled="" value="<?php echo $id_cliente ?>">
@@ -120,13 +120,17 @@ $id = $_GET["id_geral"];
 				}
 				if($tipo_pagamento == 'Pronto Pagamento Contra Entrega - c/ Desconto'){ 
 					?>
-					<h4>Total Liquído a Pronto Pagamento(3% desconto):</h4>
+					<h6>Valor total sem IVA:</h6>
+					<?php echo $total;?>&euro;
+					<h6>Desconto(3%):</h6>
+					<?php echo number_format((float) $total*0.03,2,'.','');?>&euro;
+					<h6>Total Liquído a Pronto Pagamento:</h6>
 					<?php $total_liquido= number_format((float) $total*0.97,2,'.','');
 					echo $total_liquido;?>&euro;
-					<h4>IVA:</h4>
+					<h6>IVA:</h6>
 					<?php $iva_liquido = number_format((float) $total_liquido*0.23,2,'.','');
 					echo $iva_liquido;?>&euro;
-					<h4>Total Geral a Pronto Pagamento:	</h4>
+					<h6>Total Geral a Pronto Pagamento:	</h6>
 					<?php $total_geral = number_format((float)$total_liquido + $iva_liquido,2,'.','');
 					echo $total_geral;?>&euro;
 				</div>

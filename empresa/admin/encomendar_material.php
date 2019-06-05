@@ -60,9 +60,9 @@
 	};
 
 	?>
-	<title>Menu Gestor - Enviar Material de Apoio</title>
+	<title>Menu Gestor - Encomendar Material de Apoio</title>
 	<body>
-		<h1 align="center">Enviar - Material de Apoio</h1>
+		<h1 align="center">Encomendar - Material de Apoio</h1>
 		<hr>
 		<?php 
 		if ($result_clientes->num_rows > 0) {?>

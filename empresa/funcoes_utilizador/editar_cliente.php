@@ -6,7 +6,6 @@ if ($_SESSION['role'] != 'Utilizador'){
 include("../utilizador/topfooterU.php"); 
 include("../conectar_bd.php");
 
-
 $id = $_GET["id_geral"];
 $id_utilizador = $_SESSION['id'];
 
@@ -14,11 +13,11 @@ $sqldata ="SELECT nome_fiscal,nome_comercial,tipo,morada,localidade,codigo_posta
 $result= mysqli_query($connection,$sqldata);
 $row_c=mysqli_fetch_assoc($result);
 
-$sql_check_admin = "SELECT user_type FROM `clientes` INNER JOIN `utilizadores` ON clientes.id_utilizador = utilizadores.id_user WHERE id_cliente = '$id'";
+$sql_check_admin = "SELECT user_type,id_utilizador FROM `clientes` INNER JOIN `utilizadores` ON clientes.id_utilizador = utilizadores.id_user WHERE id_cliente = '$id'";
 $result_check= mysqli_query($connection,$sql_check_admin);
 $row=mysqli_fetch_assoc($result_check);
 
-if($row['user_type'] == 'Gestor' || $row['id_user'] != $id_user){
+if($row['user_type'] == 'Gestor' || $row['id_utilizador'] != $id_utilizador){
 	?>
 	<div class="container alert alert-danger" role="alert">
 		Não tem permissão para editar este cliente!
@@ -140,6 +139,7 @@ if(isset($_POST['edit_client'])) {
 					<div class="card-body">
 						<div class="row">
 							<div class="col-md-12">
+								<strong>*Campos obrigatórios</strong>
 								<hr>
 							</div>
 						</div>
@@ -213,8 +213,6 @@ if(isset($_POST['edit_client'])) {
 											<button name="edit_client" type="submit" class="btn btn-primary" onclick="return confirm('De certeza que quer editar?')">Submeter Alterações</button>
 										</div>
 									</div>
-									<hr>
-									<strong>*Campos obrigatórios</strong>
 								</form>
 							</div>
 						</div>

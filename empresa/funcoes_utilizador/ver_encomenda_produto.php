@@ -135,13 +135,17 @@ $id_user = $_SESSION['id'];
 				}
 				if($tipo_pagamento == 'Pronto Pagamento Contra Entrega - c/ Desconto'){ 
 					?>
-					<h4>Total Liquído a Pronto Pagamento(3% desconto):</h4>
+					<h6>Valor total sem IVA:</h6>
+					<?php echo $total;?>&euro;
+					<h6>Desconto(3%):</h6>
+					<?php echo number_format((float) $total*0.03,2,'.','');?>&euro;
+					<h6>Total Liquído a Pronto Pagamento:</h6>
 					<?php $total_liquido= number_format((float) $total*0.97,2,'.','');
 					echo $total_liquido;?>&euro;
-					<h4>IVA:</h4>
+					<h6>IVA:</h6>
 					<?php $iva_liquido = number_format((float) $total_liquido*0.23,2,'.','');
 					echo $iva_liquido;?>&euro;
-					<h4>Total Geral a Pronto Pagamento:	</h4>
+					<h6>Total Geral a Pronto Pagamento:	</h6>
 					<?php $total_geral = number_format((float)$total_liquido + $iva_liquido,2,'.','');
 					echo $total_geral;?>&euro;
 				</div>

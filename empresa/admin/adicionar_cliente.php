@@ -156,7 +156,6 @@ header('Refresh:2; url=gerir_clientes.php');
 ?>
 <title>Menu Gestor-Adicionar Clientes</title>
 <body>
-
   <h1 align="center">Adicionar Clientes</h1>
   <hr>
   <div class="container">

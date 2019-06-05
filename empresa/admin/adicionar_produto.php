@@ -3,6 +3,7 @@ session_start();
 if ($_SESSION['role'] != 'Gestor'){
 	header( "Location:../utilizador/log.php" );
 }
+require('topfooterA.php');
 
 // ADICIONAR PRODUTO
 if(isset($_POST['add_produto'])){
@@ -72,9 +73,6 @@ if(isset($_POST['add_produto'])){
 ?>
 
 <title>Menu Gestor - Adicionar produtos</title>
-
-<?php require('topfooterA.php');
-?>
 <body>
 	<h1 align="center">Adicionar produtos</h1>
 	<hr>

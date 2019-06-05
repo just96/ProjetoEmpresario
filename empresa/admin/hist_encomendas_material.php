@@ -10,14 +10,14 @@ $sql = "SELECT id_encomenda,nome,nome_fiscal,data_encomenda,comentario,autorizad
 $result = mysqli_query($connection, $sql) or die(mysql_error());
 ?>
 
-<title>Menu Gestor-Histórico de Material Enviado</title>
+<title>Menu Gestor-Histórico de Encomendas</title>
 
 <?php require('topfooterA.php');
 require('filtros.php');
 if ($result->num_rows > 0) {
 	?>
 	<body>
-		<h1 align="center">Histórico de Material Enviado</h1>
+		<h1 align="center">Histórico de Encomendas - Material</h1>
 		<hr>
 		<br>
 		<div class="d-flex justify-content-center">
@@ -27,7 +27,7 @@ if ($result->num_rows > 0) {
 			<table id="minhaTabela" class="table table-bordered">
 				<thead class="thead-dark">
 					<tr>
-						<th>Número do Envio</th>
+						<th>Número da Encomenda</th>
 						<th>Data</th>
 						<th>Observações</th>
 						<th>Cliente</th>

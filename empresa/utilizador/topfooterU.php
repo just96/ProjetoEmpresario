@@ -67,9 +67,9 @@ if ($_SESSION['role'] != 'Utilizador'){
               Material de Apoio
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="../utilizador/encomendar_material.php">Enviar</a>
-              <a class="dropdown-item" href="../utilizador/ver_encomendas_material.php">Ver Material Enviado</a>
-              <a class="dropdown-item" href="../utilizador/hist_encomendas_material.php">Histórico de Material Enviado</a>
+              <a class="dropdown-item" href="../utilizador/encomendar_material.php">Encomendar Material</a>
+              <a class="dropdown-item" href="../utilizador/ver_encomendas_material.php">Ver Encomendas </a>
+              <a class="dropdown-item" href="../utilizador/hist_encomendas_material.php">Histórico de Encomendas</a>
             </div>
           </li> 
           <li class="nav-item dropdown">

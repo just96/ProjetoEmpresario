@@ -17,7 +17,7 @@ require('filtros.php');
 if ($result->num_rows > 0) {
 	?>
 	<body>
-		<h1 align="center">Ver Encomendas-Produtos</h1>
+		<h1 align="center">Encomendas de Produtos</h1>
 		<hr>
 		<br>
 		<div class="container-fluid">

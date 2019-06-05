@@ -15,7 +15,7 @@ $mpdf = new \Mpdf\Mpdf();
 // Dados do PDF
 // ADD DATA
 $data = '';
-$data .='<h1>Material de Apoio nº'.$id.'</h1>';
+$data .='<h1>Encomenda de Material de Apoio nº'.$id.'</h1>';
 if($autorizada == '0'){
 	$data .='<strong>Não autorizada!</strong><br>';
 }else{

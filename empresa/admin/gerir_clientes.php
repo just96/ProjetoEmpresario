@@ -6,7 +6,7 @@ if ($_SESSION['role'] != 'Gestor'){
 }
 include("../conectar_bd.php");
 // SELECT no SQL para selecionar os dados a serem imprimidos na tabela
-$sql = "SELECT id_cliente,nome_fiscal,nome_comercial,tipo,morada,localidade,codigo_postal,num_fiscal,num_telefone,email FROM `clientes`";
+$sql = "SELECT id_cliente,nome_fiscal,nome_comercial,tipo,morada,localidade,codigo_postal,num_fiscal,num_telefone,email FROM `clientes` ORDER BY nome_fiscal ASC";
 $result = mysqli_query($connection, $sql);
 ?>
 

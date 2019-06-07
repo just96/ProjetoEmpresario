@@ -151,7 +151,7 @@ if(isset($_POST['login_btn'])) {      // LOGIN
       <h2>Área Pessoal</h2>
       <p></p>
       <h2 class="sr-only">Login Form</h2>
-      <div class="form-group"><i class="fa fa-user icon"></i><input class="form-control" required="required" type="text" name="nome" placeholder="Nome"></div>
+      <div class="form-group"><i class="fa fa-user icon"></i><input class="form-control" required="required" type="text" name="nome" placeholder="Username"></div>
       <div class="form-group"><i class="fa fa-key icon"></i><input class="form-control" required="required" type="password" name="password" placeholder="Password"></div>
       <div class="form-group"><button class="btn btn-primary btn-block" type="submit" name ="login_btn" >Log In</button></div>
     </div>

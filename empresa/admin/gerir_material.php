@@ -7,7 +7,7 @@ if ($_SESSION['role'] != 'Gestor'){
 require('topfooterA.php');
 require('filtros.php');
 include("../conectar_bd.php");
-$sql = "SELECT id_material,nome_material,imagem,tipo,criado,editado FROM `material_apoio` ORDER BY id_material ASC;";
+$sql = "SELECT id_material,nome_material,imagem,tipo,criado,editado FROM `material_apoio` ORDER BY tipo ASC;";
 $result = mysqli_query($connection, $sql) or die(mysql_error());
 
 if ($result->num_rows > 0) {

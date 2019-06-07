@@ -215,19 +215,19 @@ header("Refresh:1; url=gerir_utilizadores.php");
    <div class="collapse" id="collapseExample">
     <div class="card card-body">
       <dl>
-        <dt>Nome de Utilizador</dt>
+        <dt>Username</dt>
         <dd>-Tem de ter pelo menos 5 carateres.</dd>
       </dl>
       <dl>
         <dt>Password</dt>
         <dd>-Password entre 8 e 20 carateres e tem de ter pelo menos um símbolo,número,letra minúscula e maiúscula. </dd>
       </dl>
-      <strong>*Campos obrigatórios</strong>
     </div>
   </div> 
   <div class="row">
     <div class="col-md-9">
       <div class="card">
+        <strong>*Campos obrigatórios</strong>
         <div class="card-body">
           <div class="row">
           </div>
@@ -241,9 +241,9 @@ header("Refresh:1; url=gerir_utilizadores.php");
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="name" class="col-4 col-form-label">Email*</label> 
+                  <label for="name" class="col-4 col-form-label">Email</label> 
                   <div class="col-8">
-                    <input name="email" placeholder="Email" class="form-control here" type="email" required>
+                    <input name="email" placeholder="Email" class="form-control here" type="email">
                   </div>
                 </div>
                 <div class="form-group row">
@@ -256,15 +256,15 @@ header("Refresh:1; url=gerir_utilizadores.php");
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="username" class="col-4 col-form-label">NIF*</label> 
+                  <label for="username" class="col-4 col-form-label">NIF</label> 
                   <div class="col-8">
-                    <input name="n_fiscal" placeholder="Número de Identificação Fiscal" class="form-control here" type="int" maxlength="9" required>
+                    <input name="n_fiscal" placeholder="Número de Identificação Fiscal" class="form-control here" type="int" maxlength="9">
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="username" class="col-4 col-form-label">Telefone*</label> 
+                  <label for="username" class="col-4 col-form-label">Telefone</label> 
                   <div class="col-8">
-                    <input name="n_telefone"  placeholder="Número de Telefone" class="form-control here" type="int" maxlength="9" required>
+                    <input name="n_telefone"  placeholder="Número de Telefone" class="form-control here" type="int" maxlength="9">
                   </div>
                 </div>
                 <div class="form-group row">

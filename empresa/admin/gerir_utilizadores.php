@@ -40,7 +40,7 @@ if ($result->num_rows > 0) {?>
         </thead>
         <tbody>
           <?php while($row = $result->fetch_assoc()) {
-            echo "<tr><td><img class='rounded' height='100' width='150' src='../img/"
+            echo "<tr><td><img class='rounded' height='65' width='80' src='../img/"
             .$row["imagem"]."'></td><td>"
             . $row["nome"]. "</td><td>" 
             . $row["email"]. "</td><td>" 

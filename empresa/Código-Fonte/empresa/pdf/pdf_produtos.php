@@ -42,8 +42,8 @@ $data .='<br><strong>NIF:</strong>'.$nif_cliente. '';
 $data .='<br><strong>Morada:</strong>'.$morada. '<br>';
 $data .='<strong>Localidade:</strong>'.$localidade. '<br>';
 
-$data .='<br><strong>Data</strong><br><textarea>' .$row_cliente['data_encomenda'] . '</textarea><br />';
-$data .='<strong>Tipo de Pagamento</strong><br><textarea>' .$row_cliente['tipo_pagamento'] . '</textarea><br />';
+$data .='<br><strong>Data</strong><br><textarea rows="1" cols="30">' .$row_cliente['data_encomenda'] . '</textarea><br />';
+$data .='<strong>Tipo de Pagamento</strong><br><textarea rows="1" cols="50">' .$row_cliente['tipo_pagamento'] . '</textarea><br />';
 $data.='
 <h4>Produtos</h4>
 <table class="table table-bordered">

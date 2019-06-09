@@ -6,6 +6,7 @@ if ($_SESSION['role'] != 'Utilizador'){
 require "../vendor/setasign/fpdf/fpdf.php";
 $db = new PDO('mysql:host=localhost;dbname=bd_empresa','root','');
 $id_utilizador = $_SESSION['id'];
+define('EURO',chr(128));
 
 if($_SESSION['id'] != $id_utilizador){
     echo "ERRO";
@@ -31,17 +32,19 @@ class myPDF extends FPDF{
         $this->Cell(40,10,'Numero da Encomenda',1,0,'C');
         $this->Cell(32,10,'Data',1,0,'C');
         $this->Cell(60,10,'Comentario',1,0,'C');
-        $this->Cell(60,10,'Cliente',1,0,'C');
+        $this->Cell(70,10,'Cliente',1,0,'C');
+        $this->Cell(20,10,'Total s/IVA'.EURO,1,0,'C');
         $this->Ln();
     }
     function viewTable($db){
         $this->SetFont('Times','',10);
-        $stmt = $db->query('SELECT * FROM `encomendas` INNER JOIN `clientes` ON encomendas.id_cliente = clientes.id_cliente INNER JOIN `utilizadores` ON encomendas.id_utilizador = utilizadores.id_user WHERE autorizada LIKE 1 AND encomendas.id_utilizador = "$id_utilizador" AND "id_material" IS NULL GROUP BY id_encomenda ASC;');
+        $stmt = $db->query('SELECT encomendas.id_encomenda, encomendas.data_encomenda, encomendas.comentario,clientes.nome_fiscal,encomendas.total_s_iva FROM `encomendas` INNER JOIN `clientes` ON encomendas.id_cliente = clientes.id_cliente INNER JOIN `utilizadores` ON encomendas.id_utilizador = utilizadores.id_user WHERE autorizada LIKE 1 AND encomendas.id_utilizador = "$id_utilizador" AND "id_material" IS NULL GROUP BY id_encomenda ASC;');
         while($data = $stmt->fetch(PDO::FETCH_OBJ)){
             $this->Cell(40,10,$data->id_encomenda,1,0,'L');
             $this->Cell(32,10,$data->data_encomenda,1,0,'L');
-            $this->Cell(60,10,$data->comentario,1,0,'L');
-            $this->Cell(60,10,$data->nome_fiscal,1,0,'L');
+            $this->Cell(60,10,iconv("UTF-8", "ISO-8859-1",$data->comentario),1,0,'L');
+            $this->Cell(70,10,iconv("UTF-8", "ISO-8859-1",$data->nome_fiscal),1,0,'L');
+            $this->Cell(20,10,$data->total_s_iva.EURO,1,0,'L');
             $this->Ln();
         }
     }

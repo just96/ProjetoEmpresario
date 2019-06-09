@@ -24,9 +24,9 @@ class myPDF extends FPDF{
         $this->SetFont('Times','B',10);
         $this->Cell(40,10,'Nome Fiscal',1,0,'C');
         $this->Cell(40,10,'Nome Comercial',1,0,'C');
-        $this->Cell(70,10,'Morada',1,0,'C');
-        $this->Cell(30,10,'Codigo-Postal',1,0,'C');
-        $this->Cell(30,10,'NIF',1,0,'C');
+        $this->Cell(75,10,'Morada',1,0,'C');
+        $this->Cell(25,10,'Codigo-Postal',1,0,'C');
+        $this->Cell(30,10,'Contribuinte',1,0,'C');
         $this->Cell(30,10,'Telefone',1,0,'C');
         $this->Cell(45,10,'Email',1,0,'C');
         $this->Ln();
@@ -37,8 +37,8 @@ class myPDF extends FPDF{
         while($data = $stmt->fetch(PDO::FETCH_OBJ)){
             $this->Cell(40,10,iconv("UTF-8", "ISO-8859-1",$data->nome_fiscal),1,0,'L');
             $this->Cell(40,10,iconv("UTF-8", "ISO-8859-1",$data->nome_comercial),1,0,'L');
-            $this->Cell(70,10,iconv("UTF-8", "ISO-8859-1",$data->morada),1,0,'L');
-            $this->Cell(30,10,$data->codigo_postal,1,0,'L');
+            $this->Cell(75,10,iconv("UTF-8", "ISO-8859-1",$data->morada),1,0,'L');
+            $this->Cell(25,10,$data->codigo_postal,1,0,'L');
             $this->Cell(30,10,$data->num_fiscal,1,0,'L');
             $this->Cell(30,10,$data->num_telefone,1,0,'L');
             $this->Cell(45,10,$data->email,1,0,'L');

@@ -7,7 +7,7 @@ if ($_SESSION['role'] != 'Utilizador'){
 $id_utilizador = $_SESSION['id'];
 include("../conectar_bd.php");
 // SELECT no SQL para selecionar os dados a serem imprimidos na tabela
-$sql = "SELECT id_encomenda,id_material,nome_fiscal,data_encomenda,comentario,autorizada,total_s_iva FROM `encomendas` INNER JOIN `clientes` ON encomendas.id_cliente = clientes.id_cliente INNER JOIN `utilizadores` ON encomendas.id_utilizador = utilizadores.id_user WHERE autorizada LIKE '1' AND encomendas.id_utilizador = '$id_utilizador' AND id_material IS NULL GROUP BY id_encomenda ASC;";
+$sql = "SELECT encomendas.id_encomenda, encomendas.data_encomenda, encomendas.comentario,clientes.nome_fiscal,encomendas.total_s_iva FROM `encomendas` INNER JOIN `clientes` ON encomendas.id_cliente = clientes.id_cliente INNER JOIN `utilizadores` ON encomendas.id_utilizador = utilizadores.id_user WHERE autorizada LIKE '1' AND encomendas.id_utilizador = '$id_utilizador' AND id_material IS NULL GROUP BY id_encomenda ASC;";
 $result = mysqli_query($connection, $sql) or die(mysql_error());
 $total = 0;
 ?>

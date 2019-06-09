@@ -26,9 +26,9 @@ class myPDF extends FPDF{
         $this->Cell(40,10,'Numero da Encomenda',1,0,'C');
         $this->Cell(32,10,'Data',1,0,'C');
         $this->Cell(60,10,'Comentario',1,0,'C');
-        $this->Cell(30,10,'Cliente',1,0,'C');
+        $this->Cell(70,10,'Cliente',1,0,'C');
         $this->Cell(30,10,'Utilizador',1,0,'C');
-        $this->Cell(30,10,'Total s/IVA'.EURO,1,0,'C');
+        $this->Cell(20,10,'Total s/IVA'.EURO,1,0,'C');
         $this->Ln();
     }
     function viewTable($db){
@@ -37,10 +37,10 @@ class myPDF extends FPDF{
         while($data = $stmt->fetch(PDO::FETCH_OBJ)){
             $this->Cell(40,10,$data->id_encomenda,1,0,'L');
             $this->Cell(32,10,$data->data_encomenda,1,0,'L');
-            $this->Cell(60,10,$data->comentario,1,0,'L');
-            $this->Cell(30,10,$data->nome_fiscal,1,0,'L');
+            $this->Cell(60,10,iconv("UTF-8", "ISO-8859-1",$data->comentario),1,0,'L');
+            $this->Cell(70,10,iconv("UTF-8", "ISO-8859-1",$data->nome_fiscal),1,0,'L');
             $this->Cell(30,10,$data->nome,1,0,'L');
-            $this->Cell(30,10,$data->total_s_iva.EURO,1,0,'L');
+            $this->Cell(20,10,$data->total_s_iva.EURO,1,0,'L');
             $this->Ln();
         }
     }

@@ -36,8 +36,8 @@ class myPDF extends FPDF{
         while($data = $stmt->fetch(PDO::FETCH_OBJ)){
             $this->Cell(40,10,$data->id_encomenda,1,0,'L');
             $this->Cell(32,10,$data->data_encomenda,1,0,'L');
-            $this->Cell(60,10,$data->comentario,1,0,'L');
-            $this->Cell(30,10,$data->nome_fiscal,1,0,'L');
+            $this->Cell(60,10,iconv("UTF-8", "ISO-8859-1",$data->comentario),1,0,'L');
+            $this->Cell(30,10,iconv("UTF-8", "ISO-8859-1",$data->nome_fiscal),1,0,'L');
             $this->Cell(30,10,$data->nome,1,0,'L');
             $this->Ln();
         }

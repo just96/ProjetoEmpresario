@@ -32,7 +32,7 @@ $data .='<br><strong>NIF:</strong>'.$nif_cliente. '';
 $data .='<br><strong>Morada:</strong>'.$morada. '<br>';
 $data .='<strong>Localidade:</strong>'.$localidade. '<br>';
 
-$data .='<br><strong>Data</strong><br><textarea>' .$row_cliente['data_encomenda'] . '</textarea><br />';
+$data .='<br><strong>Data</strong><br><textarea rows="1" cols="30">' .$row_cliente['data_encomenda'] . '</textarea><br />';
 
 $data.='
 <h4>Material de Apoio</h4>

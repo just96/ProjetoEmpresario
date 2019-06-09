@@ -32,20 +32,20 @@ class myPDF extends FPDF{
     $this->Cell(40,10,'Nome Fiscal',1,0,'C');
     $this->Cell(40,10,'Nome Comercial',1,0,'C');
     $this->Cell(70,10,'Morada',1,0,'C');
-    $this->Cell(30,10,'Codigo-Postal',1,0,'C');
-    $this->Cell(30,10,'NIF',1,0,'C');
+    $this->Cell(20,10,'Codigo-Postal',1,0,'C');
+    $this->Cell(30,10,'Contribuinte',1,0,'C');
     $this->Cell(30,10,'Telefone',1,0,'C');
     $this->Cell(45,10,'Email',1,0,'C');
     $this->Ln();
   }
   function viewTable($db){
     $this->SetFont('Times','',10);
-    $stmt = $db->query('SELECT id_cliente,nome_fiscal,nome_comercial,tipo,morada,localidade,codigo_postal,clientes.num_fiscal,clientes.num_telefone,clientes.email FROM `clientes` INNER JOIN `utilizadores` ON clientes.id_utilizador = utilizadores.id_user WHERE utilizadores.user_type = "Gestor" OR id_utilizador="$id"');
+    $stmt = $db->query('SELECT clientes.id_cliente,clientes.nome_fiscal,clientes.nome_comercial,clientes.tipo,clientes.morada,clientes.localidade,clientes.codigo_postal,clientes.num_fiscal,clientes.num_telefone,clientes.email FROM `clientes` INNER JOIN `utilizadores` ON clientes.id_utilizador = utilizadores.id_user WHERE utilizadores.user_type = "Gestor" OR id_utilizador="$id"');
     while($data = $stmt->fetch(PDO::FETCH_OBJ)){
      $this->Cell(40,10,iconv("UTF-8", "ISO-8859-1",$data->nome_fiscal),1,0,'L');
      $this->Cell(40,10,iconv("UTF-8", "ISO-8859-1",$data->nome_comercial),1,0,'L');
      $this->Cell(70,10,iconv("UTF-8", "ISO-8859-1",$data->morada),1,0,'L');
-     $this->Cell(30,10,$data->codigo_postal,1,0,'L');
+     $this->Cell(20,10,$data->codigo_postal,1,0,'L');
      $this->Cell(30,10,$data->num_fiscal,1,0,'L');
      $this->Cell(30,10,$data->num_telefone,1,0,'L');
      $this->Cell(45,10,$data->email,1,0,'L');

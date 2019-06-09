@@ -6,7 +6,6 @@
 	}
 	require('topfooterU.php');
 	include("../conectar_bd.php");
-	require('filtros.php');
 	$id_utilizador = $_SESSION['id'];
 	// SQL DO Material de Apoio
 	$query = "SELECT * FROM material_apoio ORDER BY id_material ASC";
@@ -97,8 +96,9 @@
 				<hr>
 				<br>
 				<div class="container">
-					<h4>Produtos</h4>	
-					<table id="minhaTabela" class="table table-bordered">
+					<h4>Produtos</h4>
+					<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Pesquisar Material" title="Material">		
+					<table id="myTable" class="table table-bordered">
 						<thead class="thead-dark">
 							<tr>
 								<th>Id</th>
@@ -141,3 +141,14 @@
 			</div>
 		</body>
 		</html>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$("#myInput").on("keyup", function() {
+					var value = $(this).val().toLowerCase();
+					$("#myTable tr").filter(function() {
+						$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+					});
+				});
+			});
+		</script>

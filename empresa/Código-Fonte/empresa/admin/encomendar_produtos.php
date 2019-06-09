@@ -1,7 +1,6 @@
 <?php
 session_start();
 require('topfooterA.php');
-require('filtros.php');
 
 if ($_SESSION['role'] != 'Gestor'){
 	header( "Location:../utilizador/log.php" );
@@ -13,7 +12,7 @@ $sql_clientes = "SELECT * FROM `clientes`";
 $result_clientes = mysqli_query($connection, $sql_clientes);
 $row_clientes=mysqli_fetch_array($result_clientes);
 // SQL DOS produtos
-$qury = "SELECT * FROM produtos ORDER BY id_produto ASC";
+$qury = "SELECT * FROM produtos ORDER BY codigo_produto ASC";
 $result = mysqli_query($connection,$qury);
 
 $id = $_SESSION ['id'];
@@ -121,8 +120,9 @@ if (isset($_POST['add_encomenda']) && $_POST['add_encomenda']=="Fazer encomenda"
 			<hr>
 			<br>
 			<div class="container">
-				<h4>Produtos</h4>	
-				<table id="minhaTabela" class="table table-bordered">
+				<h4>Produtos</h4>
+				<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Pesquisar produtos" title="produtos">	
+				<table id="myTable" class="table table-bordered">
 					<thead class="thead-dark">
 						<tr>
 							<th>Id</th>
@@ -168,3 +168,14 @@ if (isset($_POST['add_encomenda']) && $_POST['add_encomenda']=="Fazer encomenda"
 	</div>
 </body>
 </html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#myInput").on("keyup", function() {
+			var value = $(this).val().toLowerCase();
+			$("#myTable tr").filter(function() {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
+		});
+	});
+</script>

@@ -22,8 +22,8 @@ class myPDF extends FPDF{
     }
     function headerTable(){
         $this->SetFont('Times','B',10);
-        $this->Cell(30,10,'Nome',1,0,'C');
-        $this->Cell(32,10,'Email',1,0,'C');
+        $this->Cell(40,10,'Nome',1,0,'C');
+        $this->Cell(45,10,'Email',1,0,'C');
         $this->Cell(30,10,'Cargo',1,0,'C');
         $this->Cell(30,10,'NIF',1,0,'C');
         $this->Cell(30,10,'Telefone',1,0,'C');
@@ -33,8 +33,8 @@ class myPDF extends FPDF{
         $this->SetFont('Times','',10);
         $stmt = $db->query('select * from utilizadores ORDER BY nome ASC');
         while($data = $stmt->fetch(PDO::FETCH_OBJ)){
-            $this->Cell(30,10,$data->nome,1,0,'L');
-            $this->Cell(32,10,$data->email,1,0,'L');
+            $this->Cell(40,10,$data->nome,1,0,'L');
+            $this->Cell(45,10,$data->email,1,0,'L');
             $this->Cell(30,10,$data->user_type,1,0,'L');
             $this->Cell(30,10,$data->num_fiscal,1,0,'L');
             $this->Cell(30,10,$data->num_telefone,1,0,'L');

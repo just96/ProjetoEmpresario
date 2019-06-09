@@ -25,18 +25,18 @@ class myPDF extends FPDF{
     function headerTable(){
         $this->SetFont('Times','B',10);
         $this->Cell(20,10,'Referencia',1,0,'C');
-        $this->Cell(40,10,'Nome do Produto',1,0,'C');
-        $this->Cell(40,10,'Descricao do Produto',1,0,'C');
+        $this->Cell(65,10,'Nome do Produto',1,0,'C');
+        $this->Cell(65,10,'Descricao do Produto',1,0,'C');
         $this->Cell(30,10,'Valor s/ IVA'.EURO,1,0,'C');
         $this->Ln();
     }
     function viewTable($db){
         $this->SetFont('Times','',10);
-        $stmt = $db->query('select * from produtos ORDER BY nome_produto ASC');
+        $stmt = $db->query('select * from produtos ORDER BY codigo_produto ASC');
         while($data = $stmt->fetch(PDO::FETCH_OBJ)){
             $this->Cell(20,10,$data->codigo_produto,1,0,'L');
-            $this->Cell(40,10,$data->nome_produto,1,0,'L');
-            $this->Cell(40,10,$data->descricao,1,0,'L');
+            $this->Cell(65,10,iconv("UTF-8", "ISO-8859-1",$data->nome_produto),1,0,'L');
+            $this->Cell(65,10,iconv("UTF-8", "ISO-8859-1",$data->descricao),1,0,'L');
             $this->Cell(30,10,$data->valor_s_iva.EURO,1,0,'L');
             $this->Ln();
         }

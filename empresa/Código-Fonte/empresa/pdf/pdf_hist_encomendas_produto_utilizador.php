@@ -7,6 +7,11 @@ require "../vendor/setasign/fpdf/fpdf.php";
 $db = new PDO('mysql:host=localhost;dbname=bd_empresa','root','');
 $id_utilizador = $_SESSION['id'];
 
+if($_SESSION['id'] != $id_utilizador){
+    echo "ERRO";
+    header("refresh:1;url=../utilizador/hist_encomendas_produtos.php");
+}
+
 class myPDF extends FPDF{
     function header(){
         $this->image('../img/white-logo.png',10,6);

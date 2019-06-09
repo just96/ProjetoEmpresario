@@ -29,7 +29,7 @@ if ($result->num_rows > 0) {
 						<th>Data</th>
 						<th>Observações</th>
 						<th>Cliente</th>
-						<th>Visualizar</th>
+						<th>Ver Encomenda</th>
 						<th>Apagar</th>
 					</tr>
 				</thead>

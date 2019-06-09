@@ -50,7 +50,7 @@ $id_user = $_SESSION['id'];
 		<hr>
 		<br>
 		<div class="container">
-			<strong>Encomenda de Material de Apoio nº<?php echo $id;?></strong>
+			<strong>Encomenda nº<?php echo $id;?></strong>
 			<hr>
 			<h5>Nome do Cliente</h5>	
 			<div class="form-group row">

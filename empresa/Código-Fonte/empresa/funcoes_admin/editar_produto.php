@@ -129,7 +129,7 @@ if(isset($_POST['btnAI'])){
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-							<button onclick="return confirm('Alterar imagem do produto?')" type="submit" class="btn btn-primary" id="btnAI" name="btnAI">Alterar imagem do produto</button>
+							<button onclick="return confirm('Alterar imagem do produto?')" type="submit" class="btn btn-primary" id="btnAI" name="btnAI">Submeter alteração</button>
 						</div>
 					</div>
 				</div>

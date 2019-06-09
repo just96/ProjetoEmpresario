@@ -34,7 +34,7 @@ if ($result->num_rows > 0) {
 				</thead>
 				<tbody>
 					<?php while($row = $result->fetch_assoc()) {
-						echo "<tr><td><img class='rounded' height='65' width='80' src='../img/"
+						echo "<tr><td><img class='rounded' height='100' width='120' src='../img/"
 						.$row["imagem"]."'></td><td>"
 						. $row["nome_material"]. "</td><td>" 
 						. $row["tipo"]."</td><td>"

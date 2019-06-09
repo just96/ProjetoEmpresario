@@ -125,6 +125,7 @@ if(isset($_POST['edit_client'])) {
 					<div class="card-body">
 						<div class="row">
 							<div class="col-md-12">
+								<strong>*Campos obrigatórios</strong>
 								<hr>
 							</div>
 						</div>
@@ -199,7 +200,6 @@ if(isset($_POST['edit_client'])) {
 										</div>
 									</div>
 									<hr>
-									<strong>*Campos obrigatórios</strong>
 								</form>
 							</div>
 						</div>

@@ -23,10 +23,10 @@ require('filtros.php');
 				<label for="select" class="col-1 col-form-label">Tipo</label> 
 				<div class="col-8">
 					<select id="tipo" name="tipo" class="custom-select" required="required">
-						<option value="Mostruarios">Mostruarios</option>
+						<option value="Mostruários">Mostruários</option>
 						<option value="Expositores">Expositores</option>
 						<option value="Folhetos">Folhetos</option>
-						<option value="MaterialTecnico">Material Tecnico</option>
+						<option value="Material Técnico">Material Técnico</option>
 					</select>
 				</div>
 			</div>

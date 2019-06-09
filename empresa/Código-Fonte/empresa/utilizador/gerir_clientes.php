@@ -7,7 +7,7 @@ if ($_SESSION['role'] != 'Utilizador'){
 $id_utilizador = $_SESSION['id'];
 include("../conectar_bd.php");
 // SELECT no SQL para selecionar os dados a serem imprimidos na tabela
-$sql = "SELECT * FROM `clientes` INNER JOIN `utilizadores` ON clientes.id_utilizador = utilizadores.id_user WHERE utilizadores.user_type = 'Gestor' OR id_utilizador='$id_utilizador'";
+$sql = "SELECT id_cliente,nome_fiscal,nome_comercial,tipo,morada,localidade,codigo_postal,clientes.num_fiscal,clientes.num_telefone,clientes.email FROM `clientes` INNER JOIN `utilizadores` ON clientes.id_utilizador = utilizadores.id_user WHERE utilizadores.user_type = 'Gestor' OR id_utilizador='$id_utilizador'";
 $result = mysqli_query($connection, $sql);
 ?>
 
@@ -42,7 +42,7 @@ if ($result->num_rows > 0) {?>
         </thead>
         <tbody>
           <?php while($row = $result->fetch_assoc()) {
-            echo "<tr><td>". $row["nome_fiscal"]. "</td><td>" . $row["nome_comercial"]. "</td><td>" . $row["tipo"]. "</td><td>". $row["morada"]. "</td><td>" . $row["localidade"]. "</td><td>" . $row["codigo_postal"]. "</td><td>" . $row["num_fiscal"]. "</td><td>" . $row["num_telefone"]."</td><td>" . $row["email"] ."</td>"?><td><a onclick="return confirm('Editar este cliente?')" href="../funcoes_utilizador/editar_cliente.php?&id_geral=<?php echo $row["id_cliente"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png" href="#"></a></td>
+            echo "<tr><td>". $row["nome_fiscal"]. "</td><td>" . $row["nome_comercial"]. "</td><td>" . $row["tipo"]. "</td><td>". $row["morada"]. "</td><td>" . $row["localidade"]. "</td><td>" . $row["codigo_postal"]. "</td><td>" . $row["num_fiscal"]. "</td><td>" . $row["num_telefone"]."</td><td>" . $row["email"]."</td>"?><td><a onclick="return confirm('Editar este cliente?')" href="../funcoes_utilizador/editar_cliente.php?&id_geral=<?php echo $row["id_cliente"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png" href="#"></a></td>
               <td><a onclick="return confirm('Deseja apagar este cliente?')" href="../funcoes_utilizador/apagar_cliente.php?&id_geral=<?php echo $row["id_cliente"]?>"><img border="0" src="../img/baseline_delete_black_18dp.png" href="#"></a></td></tr><?php
             };?>
           </tbody>

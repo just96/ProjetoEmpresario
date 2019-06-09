@@ -504,7 +504,7 @@ if(isset($_POST['btnApw'])){
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button name ="btnEacc" id="btnEacc" type="submit" class="btn btn-primary" onclick="return confirm('De certeza que quer apagar o seu perfil?');" >Eliminar conta</button>
+                        <button name ="btnEacc" id="btnEacc" type="submit" class="btn btn-primary" onclick="return confirm('De certeza que quer apagar o seu perfil?');" >Submeter</button>
                       </div>
                     </form>
                   </div>

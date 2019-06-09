@@ -186,8 +186,8 @@ header('Refresh:2; url=gerir_clientes.php');
                     <label for="select" class="col-4 col-form-label">Tipo*</label> 
                     <div class="col-8">
                       <select name="tipo" name="tipo" class="custom-select" required>
-                        <option value="Farmacia">Farmácia</option>
-                        <option value="Parafarmacia">Parafarmácia</option>
+                        <option value="Farmácia">Farmácia</option>
+                        <option value="Parafarmácia">Parafarmácia</option>
                         <option value="Ouriversaria">Ouriversaria</option>
                       </select>
                     </div>

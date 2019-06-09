@@ -55,7 +55,8 @@
 			</div> 
 		</div>
 		<?php
-		header('Refresh:2; url=ver_encomendas_material.php');
+		$url= "ver_encomenda_material.php?id_geral=$id_encomenda";
+		header('Refresh:2; url=../funcoes_utilizador/'.$url);
 		return;
 	};
 

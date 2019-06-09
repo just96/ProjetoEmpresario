@@ -223,5 +223,3 @@ if(isset($_POST['edit_client'])) {
 	</div>
 	<p></p>
 </body>
-
-?>

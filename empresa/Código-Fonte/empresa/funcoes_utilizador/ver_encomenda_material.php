@@ -23,7 +23,7 @@ $id_user = $_SESSION['id'];
 			Não tem permissão para ver esta encomenda!
 		</div>
 		<?php
-		header("refresh:2;url=../utilizador/ver_encomendas_produtos.php");
+		header("refresh:2;url=../utilizador/ver_encomendas_material.php");
 		return;
 	}
 	// get cliente

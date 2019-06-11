@@ -14,10 +14,14 @@ $row=mysqli_fetch_assoc($result);
 
 if(isset($_POST['edit_material'])) { 
 
-	$nome_material = $_POST['nome_material']; 
+	$nome_material = strip_tags($_POST['nome_material']); 
 	$tipo = $_POST['tipo'];
 	date_default_timezone_set('Europe/Lisbon');
 	$editado = date('Y-m-d H:i:s');
+
+	$nome_material = stripcslashes($nome_material);
+
+	$nome_material = mysqli_real_escape_string($connection,$nome_material);
 
 	// COMPARAR DADOS NA EDIÇÃO
 	//Instrução SQL para selecionar diferentes dados
@@ -71,8 +75,13 @@ if(isset($_POST['btnAIM'])){
 ?>
 <h1 align="center">Material de Apoio</h1>
 <hr>
-<div class="container-fluid">
-	<a href="#" data-target="#exampleModAvatar" data-toggle="modal">Alterar imagem do material</a>
+<div class="container">
+	<div class="form-group row">
+		<strong>*Campos obrigatórios</strong>
+	</div>
+	<div class="form-group mx-sm-3 mb-2">
+		<a href="#" data-target="#exampleModAvatar" data-toggle="modal">Alterar imagem do material</a>
+	</div>
 	<form method="POST" action="#" enctype="multipart/form-data">
 		<div class="modal fade" id="exampleModAvatar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
@@ -110,19 +119,17 @@ if(isset($_POST['btnAIM'])){
 	</form>
 	<form align="center" class ="form-inline" method="POST" action="#" enctype="multipart/form-data">
 		<div class="form-group mx-sm-3 mb-2">
-			<div class="form-group mx-sm-3 mb-2">
-				<img class="rounded" height='150' width='200' src='../img/<?php echo $row["imagem"]?>'>
-			</div>
+			<img class="rounded" height='150' width='200' src='../img/<?php echo $row["imagem"]?>'>
 		</div>
 		<div class="form-group mx-sm-3 mb-2">
-			<h6 align="center" for="imagem">Nome do Material</h6><br>
+			<h6 align="center" for="imagem">Nome do Material*</h6><br>
 			<div class="form-group mx-sm-3 mb-2">
-				<input size="50" name ="nome_material" type="text" class="form-control" value="<?php echo $row["nome_material"]; ?>" required>
+				<input required size="50" name ="nome_material" type="text" class="form-control" value="<?php echo $row["nome_material"]; ?>">
 			</div>
 			<div class="form-group mx-sm-3 mb-2">
-				<h6 align="center" for="imagem">Tipo</h6><br>
+				<h6 align="center" for="imagem">Tipo*</h6><br>
 				<div class="col-8">
-					<select id="tipo" name="tipo" class="custom-select" required="required">
+					<select id="tipo" name="tipo" class="custom-select" required>
 						<option value="Mostruarios" <?php if($row["tipo"]=="Mostruarios") echo 'selected="selected"';?>>Mostruarios</option>
 						<option value="Expositores" <?php if($row["tipo"]=="Expositores") echo 'selected="selected"';?>>Expositores</option>
 						<option value="Folhetos" <?php if($row["tipo"]=="Folhetos") echo 'selected="selected"';?>>Folhetos</option>

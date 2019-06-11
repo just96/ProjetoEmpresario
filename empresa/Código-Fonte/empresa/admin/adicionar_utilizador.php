@@ -98,8 +98,7 @@ if (mysqli_num_rows($query_username)){
   header("Refresh:2;url=adicionar_utilizador.php");
   return;
 }
-
-if (mysqli_num_rows($query_email)){
+if(!empty($email) AND mysqli_num_rows($query_email)){
   ?>
   <div class="container alert alert-danger" role="alert">
    <strong>Email já em uso!</strong>
@@ -108,8 +107,7 @@ if (mysqli_num_rows($query_email)){
  header("Refresh:2;url=adicionar_utilizador.php");
  return;
 }
-
-if (mysqli_num_rows($query_n_telefone)){
+if(!empty($n_telefone) AND mysqli_num_rows($query_n_telefone)){
   ?>
   <div class="container alert alert-danger" role="alert">
    <strong>Número de Telefone já em uso!</strong>
@@ -118,8 +116,7 @@ if (mysqli_num_rows($query_n_telefone)){
  header("Refresh:2;url=adicionar_utilizador.php");
  return;
 }
-
-if (mysqli_num_rows($query_n_fiscal)){
+if(!empty($n_fiscal) AND mysqli_num_rows($query_n_fiscal)){
   ?>
   <div class="container alert alert-danger" role="alert">
     <strong>Número de Identificação Fiscal já em uso!</strong>
@@ -174,6 +171,7 @@ if($error){
   </div>
   <?php
   header("Refresh:2;url=adicionar_utilizador.php");
+  return;
 }
 
 

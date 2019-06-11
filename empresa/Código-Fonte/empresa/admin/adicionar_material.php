@@ -10,30 +10,37 @@ require('filtros.php');
 <body>
 	<h1 align="center">Adicionar Material de Apoio</h1>
 	<hr>
-	<div class="container-fluid">
-		<form align="center" class ="form-inline" method="POST" action="#" enctype="multipart/form-data">
-			<div class="form-group mx-sm-3 mb-2">
-				<h4 align="center" for="imagem">Adicionar Imagem</h4>
-				<input type="file" name="uploadfile">
-			</div>
-			<div class="form-group mx-sm-3 mb-2">
-				<input  size="50" name ="nome_material" type="text" class="form-control" placeholder="Nome do Material" required>
-			</div>
-			<div class="form-group mx-sm-3 mb-2">
-				<label for="select" class="col-1 col-form-label">Tipo</label> 
-				<div class="col-8">
-					<select id="tipo" name="tipo" class="custom-select" required="required">
-						<option value="Mostruários">Mostruários</option>
-						<option value="Expositores">Expositores</option>
-						<option value="Folhetos">Folhetos</option>
-						<option value="Material Técnico">Material Técnico</option>
-					</select>
+	<div class="container">
+		<form method="POST" action="#" enctype="multipart/form-data">
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="imagem">Adicionar Imagem</label>
+					<input type="file" name="uploadfile">
 				</div>
 			</div>
-			<div class="form-group mx-sm-3 mb-2">
-				<button onclick="return confirm('Tem a certeza que quer adicionar?')" name ="add_material" type="submit" class="btn btn-primary mb-2">Adicionar material</button>
+			<div class="form-row">
+				<strong>*Campos obrigatórios</strong>
 			</div>
-		</form>
+			<br>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="select">Nome*</label>
+					<input size="50" name ="nome_material" type="text" class="form-control" placeholder="Nome do Material" required>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="select">Tipo*</label> 
+					<div class="col-8">
+						<select id="tipo" name="tipo" class="custom-select" required="required">
+							<option value="Mostruários">Mostruários</option>
+							<option value="Expositores">Expositores</option>
+							<option value="Folhetos">Folhetos</option>
+							<option value="Material Técnico">Material Técnico</option>
+						</select>
+					</div>
+				</div>
+				<button onclick="return confirm('Tem a certeza que quer adicionar?')" name ="add_material" type="submit" class="btn btn-primary mb-2">Adicionar material</button>
+			</form>
+		</div>
 	</div>
 
 </body>

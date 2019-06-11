@@ -19,13 +19,25 @@ $row = mysqli_fetch_array($query);
 
 //Instrução SQL para selecionar diferentes dados
 
-$nome = $_POST['name']; // definir as variáveis , POST
-$username = $_POST['user'];
-$email = $_POST['email'];
-$nif = $_POST['nif'];
-$ntele = $_POST['ntele'];
+$nome = strip_tags($_POST['name']); // definir as variáveis , POST
+$username =  strip_tags($_POST['user']);
+$email =  strip_tags($_POST['email']);
+$nif =  strip_tags($_POST['nif']);
+$ntele = strip_tags($_POST['ntele']);
 date_default_timezone_set('Europe/Lisbon');
 $editado = date('Y-m-d H:i:s');
+
+$nome = stripcslashes($nome);
+$username = stripcslashes($username);
+$email = stripcslashes($email);
+$nif = stripcslashes($nif);
+$ntele = stripcslashes($ntele);
+
+$nome = mysqli_real_escape_string($connection,$nome);
+$username = mysqli_real_escape_string($connection,$username);
+$email = mysqli_real_escape_string($connection,$email);
+$nif = mysqli_real_escape_string($connection,$nif);
+$ntele = mysqli_real_escape_string($connection,$ntele);
 
 // COMPARAR DADOS NA EDIÇÃO
 

@@ -85,17 +85,21 @@ if(isset($_POST['add_produto'])){
 				</div>
 			</div>
 			<div class="form-row">
+				<strong>*Campos obrigatórios</strong>
+			</div>
+			<br>
+			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="nome_produto">Nome do Produto</label>
+					<label for="nome_produto">Nome do Produto*</label>
 					<input name ="nome_produto" type="text" class="form-control" placeholder="Nome do Produto" required>
 				</div>
 				<div class="form-group col-md-6">
-					<label for="valor">Preço &euro;</label>
+					<label for="valor">Preço* &euro;</label>
 					<input name ="valor" class="form-control"placeholder="Preço &euro;" type="number" min="1" max="10000" step="any" required>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="codigo_produto">Referência</label>
+				<label for="codigo_produto">Referência*</label>
 				<input name ="codigo_produto" type="text" class="form-control" placeholder="Referência" required>
 			</div>
 			<div class="form-group row">

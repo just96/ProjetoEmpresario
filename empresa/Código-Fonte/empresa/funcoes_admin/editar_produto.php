@@ -14,10 +14,20 @@ $row=mysqli_fetch_assoc($result);
 // EDITAR PRODUTO
 if(isset($_POST['edit_prod'])) { 
 
-	$nome_produto = $_POST['nome_produto']; 
-	$valor = $_POST['valor'];
-	$codigo_produto = $_POST['codigo_produto'];
-	$descricao = $_POST['descricao'];
+	$nome_produto = strip_tags($_POST['nome_produto']); 
+	$valor = strip_tags($_POST['valor']);
+	$codigo_produto = strip_tags($_POST['codigo_produto']);
+	$descricao = strip_tags($_POST['descricao']);
+
+ 	$nome_produto =stripcslashes($nome_produto);	// esta função remove a barra invertida da string
+ 	$valor =stripcslashes($valor);
+ 	$codigo_produto =stripcslashes($codigo_produto);
+ 	$descricao =stripcslashes($descricao);
+
+	$nome_produto = mysqli_real_escape_string($connection,$nome_produto); // esta função esquece os carateres especiais para a string ser usada numa instrução de SQL
+	$valor = mysqli_real_escape_string($connection,$valor);
+	$codigo_produto = mysqli_real_escape_string($connection,$codigo_produto);
+	$descricao = mysqli_real_escape_string($connection,$descricao);
 
 	date_default_timezone_set('Europe/Lisbon');
 	$editado = date('Y-m-d H:i:s');
@@ -145,16 +155,16 @@ if(isset($_POST['btnAI'])){
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="nome_produto">Nome do Produto</label>
-					<input name ="nome_produto" type="text" class="form-control" value="<?php echo $row["nome_produto"]; ?>"required>
+					<input name ="nome_produto" type="text" class="form-control" value="<?php echo $row["nome_produto"]; ?>">
 				</div>
 				<div class="form-group col-md-6">
 					<label for="valor">Preço</label>
-					<input name ="valor" class="form-control" value="<?php echo $row["valor_s_iva"]; ?>" type="number" min="1" max="10000" step="any" required>
+					<input name ="valor" class="form-control" value="<?php echo $row["valor_s_iva"]; ?>" type="number" min="1" max="10000" step="any">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="codigo_produto">Referência</label>
-				<input name ="codigo_produto" type="text" class="form-control" value="<?php echo $row["codigo_produto"]; ?>" required>
+				<input name ="codigo_produto" type="text" class="form-control" value="<?php echo $row["codigo_produto"]; ?>">
 			</div>
 			<div class="form-group row">
 				<label for="descricao" class="col-4 col-form-label">Descrição do Produto</label> 

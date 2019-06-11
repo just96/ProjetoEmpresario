@@ -11,7 +11,7 @@ if(isset($_POST['add_client'])){
 
   include("../conectar_bd.php");
 
-  $nome_fiscal = strip_tags($_POST['nome_fiscal']);
+  $nome_fiscal = strip_tags($_POST['nome_fiscal']);   // remove tags de html e php exemplo <br>
   $nome_comercial = strip_tags($_POST['nome_comercial']);
   $tipo = strip_tags($_POST['tipo']);
   $morada = strip_tags($_POST['morada']);
@@ -22,7 +22,7 @@ if(isset($_POST['add_client'])){
   $email = strip_tags($_POST['email']);
   $comentario = strip_tags($_POST['comentario']);
 
-  $nome_fiscal = stripcslashes($nome_fiscal);
+  $nome_fiscal = stripcslashes($nome_fiscal);     // esta função remove a barra invertida da string
   $nome_comercial = stripcslashes($nome_comercial);
   $tipo = stripcslashes($tipo);
   $morada = stripcslashes($morada);
@@ -33,7 +33,7 @@ if(isset($_POST['add_client'])){
   $email = stripcslashes($email);
   $comentario = stripcslashes($comentario);
 
-  $nome_fiscal = mysqli_real_escape_string($connection,$nome_fiscal); 
+  $nome_fiscal = mysqli_real_escape_string($connection,$nome_fiscal);     // esta função esquece os carateres especiais para a string ser usada numa instrução de SQL
   $nome_comercial = mysqli_real_escape_string($connection,$nome_comercial); 
   $tipo = mysqli_real_escape_string($connection,$tipo); 
   $morada = mysqli_real_escape_string($connection,$morada); 

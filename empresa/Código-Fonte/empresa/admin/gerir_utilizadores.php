@@ -7,7 +7,7 @@ if ($_SESSION['role'] != 'Gestor'){
 }
 include("../conectar_bd.php");
 // SELECT no SQL para selecionar os dados a serem imprimidos na tabela
-$sql = "SELECT id_user,nome,imagem,email,user_type,num_fiscal,num_telefone FROM `utilizadores` ORDER BY nome ASC";
+$sql = "SELECT id_user,nome,imagem,email,user_type,num_fiscal,num_telefone,obs FROM `utilizadores` ORDER BY nome ASC";
 $result = mysqli_query($connection, $sql);
 ?>
 
@@ -34,6 +34,7 @@ if ($result->num_rows > 0) {?>
             <th>Cargo</th>
             <th>NIF</th>
             <th>Telefone</th>
+            <th>Obs</th>
             <th>Editar</th>
             <th>Apagar</th>
           </tr>
@@ -46,7 +47,8 @@ if ($result->num_rows > 0) {?>
             . $row["email"]. "</td><td>" 
             . $row["user_type"]. "</td><td>" 
             . $row["num_fiscal"]. "</td><td>" 
-          . $row["num_telefone"]. "</td>"?><td><a onclick="return confirm('Deseja editar este utilizador?')" href="../funcoes_admin/editar_utilizador.php?&id_geral=<?php echo $row["id_user"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png" href="#"></a></td>
+            . $row["num_telefone"]. "</td><td>"
+          .$row["obs"]. "</td>"?><td><a onclick="return confirm('Deseja editar este utilizador?')" href="../funcoes_admin/editar_utilizador.php?&id_geral=<?php echo $row["id_user"] ?>"><img border="0" src="../img/baseline_edit_black_18dp.png" href="#"></a></td>
           <td><a onclick="return confirm('Deseja apagar este utilizador?')" href="../funcoes_admin/apagar_utilizador.php?&id_geral=<?php echo $row["id_user"] ?>"><img border="0" src="../img/baseline_delete_black_18dp.png" href="#"></a></td></tr><?php
         };?>
       </tbody>

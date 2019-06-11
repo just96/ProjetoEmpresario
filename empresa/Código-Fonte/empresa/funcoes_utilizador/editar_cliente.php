@@ -27,16 +27,38 @@ if($row['user_type'] == 'Gestor' || $row['id_utilizador'] != $id_utilizador){
 	return;
 }
 if(isset($_POST['edit_client'])) { 
-	$nome_fiscal = $_POST['nome_fiscal']; 
-	$nome_comercial = $_POST['nome_comercial'];
-	$tipo = $_POST['tipo'];
-	$morada = $_POST['morada'];
-	$localidade = $_POST['localidade']; 
-	$codigo_postal = $_POST['codigo_postal'];
-	$num_fiscal = $_POST['num_fiscal'];
-	$num_telefone = $_POST['num_telefone'];
-	$email = $_POST['email']; 
-	$comentario = $_POST['comentario'];
+	$nome_fiscal = strip_tags($_POST['nome_fiscal']); 		// remove tags de html e php exemplo <br>
+	$nome_comercial = strip_tags($_POST['nome_comercial']);
+	$tipo =  strip_tags($_POST['tipo']);
+	$morada =  strip_tags($_POST['morada']);
+	$localidade =  strip_tags($_POST['localidade']); 
+	$codigo_postal =  strip_tags($_POST['codigo_postal']);
+	$num_fiscal =  strip_tags($_POST['num_fiscal']);
+	$num_telefone =  strip_tags($_POST['num_telefone']);
+	$email =  strip_tags($_POST['email']); 
+	$comentario =  strip_tags($_POST['comentario']);
+
+	$nome_fiscal = stripcslashes($nome_fiscal);			// esta função remove a barra invertida da string
+	$nome_comercial = stripcslashes($nome_comercial);
+	$tipo = stripcslashes($tipo);
+	$morada = stripcslashes($morada);
+	$localidade = stripcslashes($localidade);
+	$codigo_postal = stripcslashes($codigo_postal);
+	$num_fiscal = stripcslashes($num_fiscal);
+	$num_telefone = stripcslashes($num_telefone);
+	$email = stripcslashes($email);
+	$comentario = stripcslashes($comentario);
+
+	$nome_fiscal = mysqli_real_escape_string($connection,$nome_fiscal); // esta função esquece os carateres especiais para a string ser usada numa instrução de SQL
+	$nome_comercial = mysqli_real_escape_string($connection,$nome_comercial); 
+	$tipo = mysqli_real_escape_string($connection,$tipo); 
+	$morada = mysqli_real_escape_string($connection,$morada); 
+	$localidade = mysqli_real_escape_string($connection,$localidade); 
+	$codigo_postal = mysqli_real_escape_string($connection,$codigo_postal); 
+	$num_fiscal = mysqli_real_escape_string($connection,$num_fiscal); 
+	$num_telefone = mysqli_real_escape_string($connection,$num_telefone); 
+	$email = mysqli_real_escape_string($connection,$email); 
+	$comentario = mysqli_real_escape_string($connection,$comentario); 
 
 	date_default_timezone_set('Europe/Lisbon');
 	$editado = date('Y-m-d H:i:s');
@@ -138,30 +160,26 @@ if(isset($_POST['edit_client'])) {
 				<div class="card">
 					<div class="card-body">
 						<div class="row">
-							<div class="col-md-12">
-								<strong>*Campos obrigatórios</strong>
-								<hr>
-							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-12">
 								<form method="POST" action="#">
 									<div class="form-group row">
-										<label for="text" class="col-4 col-form-label">Nome Fiscal*</label> 
+										<label for="text" class="col-4 col-form-label">Nome Fiscal</label> 
 										<div class="col-8">
-											<input value="<?php echo $row_c["nome_fiscal"]; ?>" name="nome_fiscal" class="form-control here" required="required" type="text">
+											<input value="<?php echo $row_c["nome_fiscal"]; ?>" name="nome_fiscal" class="form-control here" type="text">
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="text" class="col-4 col-form-label">Nome Comercial*</label> 
+										<label for="text" class="col-4 col-form-label">Nome Comercial</label> 
 										<div class="col-8">
-											<input value="<?php echo $row_c["nome_comercial"]; ?>" name="nome_comercial" class="form-control here" type="text" required="required">
+											<input value="<?php echo $row_c["nome_comercial"]; ?>" name="nome_comercial" class="form-control here" type="text">
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="select" class="col-4 col-form-label">Tipo*</label> 
+										<label for="select" class="col-4 col-form-label">Tipo</label> 
 										<div class="col-8">
-											<select name="tipo" class="custom-select" required="required">
+											<select name="tipo" class="custom-select">
 												<option value="Farmacia"<?php if($row_c["tipo"]=="Farmácia") echo 'selected="selected"';?>>Farmácia</option>
 												<option value="Parafarmacia"<?php if($row_c["tipo"]=="Parafarmácia") echo 'selected="selected"';?>>Parafarmácia</option>
 												<option value="Ouriversaria"<?php if($row_c["tipo"]=="Ouriversaria") echo 'selected="selected"';?>>Ouriversaria</option>
@@ -169,7 +187,7 @@ if(isset($_POST['edit_client'])) {
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="text" class="col-4 col-form-label">Morada*</label> 
+										<label for="text" class="col-4 col-form-label">Morada</label> 
 										<div class="col-8">
 											<input value="<?php echo $row_c["morada"]; ?>"name="morada" class="form-control here" type="text">
 										</div>
@@ -187,21 +205,21 @@ if(isset($_POST['edit_client'])) {
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="text" class="col-4 col-form-label">NIF*</label> 
+										<label for="text" class="col-4 col-form-label">NIF</label> 
 										<div class="col-8">
-											<input value="<?php echo $row_c["num_fiscal"]; ?>" name="num_fiscal" class="form-control here" required="required" type="int" maxlength="9">
+											<input value="<?php echo $row_c["num_fiscal"]; ?>" name="num_fiscal" class="form-control here" type="int" maxlength="9">
 										</div>
 									</div>  
 									<div class="form-group row">
-										<label for="text" class="col-4 col-form-label">Telefone*</label> 
+										<label for="text" class="col-4 col-form-label">Telefone</label> 
 										<div class="col-8">
-											<input value="<?php echo $row_c["num_telefone"]; ?>" name="num_telefone" class="form-control here" required="required" type="int" maxlength="9">
+											<input value="<?php echo $row_c["num_telefone"]; ?>" name="num_telefone" class="form-control here" type="int" maxlength="9">
 										</div>
 									</div> 
 									<div class="form-group row">
-										<label for="text" class="col-4 col-form-label">Email*</label> 
+										<label for="text" class="col-4 col-form-label">Email</label> 
 										<div class="col-8">
-											<input value="<?php echo $row_c["email"]; ?>" name="email" class="form-control here" type="email" required="required">
+											<input value="<?php echo $row_c["email"]; ?>" name="email" class="form-control here" type="email">
 										</div>
 									</div>
 									<div class="form-group row">

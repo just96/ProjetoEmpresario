@@ -49,7 +49,7 @@ if (isset($_POST['add_encomenda']) && $_POST['add_encomenda']=="Fazer encomenda"
 	?>
 	<div class="container">
 		<div class="alert alert-success" role="alert">
-			<strong>Material de Apoio submetido com sucesso!</strong>
+			<strong>Nota de Encomenda de Material de Apoio submetida com sucesso!</strong>
 		</div> 
 	</div>
 	<?php

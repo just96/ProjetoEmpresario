@@ -8,7 +8,7 @@ include("../admin/topfooterA.php");
 
 $id = $_GET["id_geral"];   
 
-$sqldata ="SELECT id_user,nome_completo,nome,email,num_fiscal,num_telefone,user_type,password FROM `utilizadores` WHERE id_user ='$id'";
+$sqldata ="SELECT id_user,nome_completo,nome,email,num_fiscal,num_telefone,user_type,password,obs FROM `utilizadores` WHERE id_user ='$id'";
 $result= mysqli_query($connection,$sqldata);
 $row=mysqli_fetch_assoc($result);
 
@@ -24,14 +24,35 @@ if($row['nome'] == 'admin'){
 
 if(isset($_POST['edit_user'])) { 
 
-	$nome_completo = $_POST['nome_completo']; 
-	$username = $_POST['username'];
-	$email = $_POST['email'];
-	$num_fiscal = $_POST['num_fiscal'];
-	$num_telefone = $_POST['num_telefone']; 
-	$pw1 = $_POST['pw1'];
-	$pw2 = $_POST['pw2'];
-	$role = $_POST['role'];
+	$nome_completo = strip_tags($_POST['nome_completo']); 
+	$username = strip_tags($_POST['username']);
+	$email = strip_tags($_POST['email']);
+	$num_fiscal = strip_tags($_POST['num_fiscal']);
+	$num_telefone = strip_tags($_POST['num_telefone']); 
+	$pw1 = strip_tags($_POST['pw1']);
+	$pw2 = strip_tags($_POST['pw2']);
+	$role = strip_tags($_POST['role']);
+	$comentario = strip_tags($_POST['comentario']);
+
+	$nome_completo = stripcslashes($nome_completo);
+	$username = stripcslashes($username);
+	$email = stripcslashes($email);
+	$num_fiscal = stripcslashes($num_fiscal);
+	$num_telefone = stripcslashes($num_telefone);
+	$pw1 = stripcslashes($pw1);
+	$pw2 = stripcslashes($pw2);
+	$role = stripcslashes($role);
+	$comentario = stripcslashes($comentario);
+
+	$nome_completo = mysqli_real_escape_string($connection,$nome_completo); 
+	$username = mysqli_real_escape_string($connection,$username); 
+	$email = mysqli_real_escape_string($connection,$email); 
+	$num_fiscal = mysqli_real_escape_string($connection,$num_fiscal); 
+	$num_telefone = mysqli_real_escape_string($connection,$num_telefone); 
+	$pw1 = mysqli_real_escape_string($connection,$pw1); 
+	$pw2 = mysqli_real_escape_string($connection,$pw2); 
+	$role = mysqli_real_escape_string($connection,$role); 
+	$comentario = mysqli_real_escape_string($connection,$comentario); 
 
 	date_default_timezone_set('Europe/Lisbon');
 	$editado = date('Y-m-d H:i:s');
@@ -131,7 +152,7 @@ if(isset($_POST['edit_user'])) {
 
 	if((empty($pw1)) || (empty($pw2))){
 
-		$sqledituser1 = "UPDATE `utilizadores` SET nome_completo='$nome_completo', nome='$username', email='$email', num_fiscal='$num_fiscal', num_telefone='$num_telefone', password='$pw' , editado = '$editado' , user_type = '$role' WHERE id_user='$id'";
+		$sqledituser1 = "UPDATE `utilizadores` SET nome_completo='$nome_completo', nome='$username', email='$email', num_fiscal='$num_fiscal', num_telefone='$num_telefone', password='$pw' , editado = '$editado' , user_type = '$role' , obs = '$comentario' WHERE id_user='$id'";
 		mysqli_query($connection,$sqledituser1);
 		?>  
 		<div class="container alert alert-success" role="alert">
@@ -145,9 +166,67 @@ if(isset($_POST['edit_user'])) {
 			header('refresh:2;url=../admin/gerir_utilizadores.php');
 		}
 	}else{
+		$error="";
+
+		if(strlen($pw1) < 8 ){
+			$error .= "Password muito curta! 
+			";
+		}
+
+		if(strlen($pw1) > 20 ){
+			$error .= "Password muito longa! 
+			";
+		}
+
+		if( !preg_match("#[0-9]+#", $pw1)){
+			$error .= "Password tem de incluir pelo menos um número! 
+			";
+		}
+
+
+		if( !preg_match("#[a-z]+#", $pw1)){
+			$error .= "Password tem de incluir pelo menos uma letra minúscula!
+			";
+		}
+
+
+		if( !preg_match("#[A-Z]+#", $pw1)){
+			$error .= "Password tem de incluir pelo menos uma letra maiúscula!
+			";
+		}
+
+
+		if( !preg_match("#\W+#", $pw1)){
+			$error .= "Password tem de incluir pelo menos um símbolo!
+			";
+		}
+
+		if($error){
+			?>
+			<div class="container alert alert-danger alert-dismissible fade show" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<strong>Validação da Password(password fraca):</strong><?php echo "<dd>$error</dd>" ;?>
+			</div>
+			<?php
+			header("Refresh:2;url=../admin/gerir_utilizadores.php");
+			return;
+		}
+
+		if($pw1 != $pw2){
+			?>
+			<div class="container alert alert-danger" role="alert">
+				<strong>Passwords diferentes!</strong>
+			</div>
+			<?php 
+			header("Refresh:2;url=../admin/gerir_utilizadores.php"); 
+			return;
+		}
+
 		$pw1= md5($pw1);
 		$pw2 = md5($pw2);
-		$sqledituser2 = "UPDATE `utilizadores` SET nome_completo='$nome_completo', nome='$username', email='$email', num_fiscal='$num_fiscal', num_telefone='$num_telefone', password='$pw1' , editado = '$editado' , user_type = '$role' WHERE id_user='$id'";
+		$sqledituser2 = "UPDATE `utilizadores` SET nome_completo='$nome_completo', nome='$username', email='$email', num_fiscal='$num_fiscal', num_telefone='$num_telefone', password='$pw1' , editado = '$editado' , user_type = '$role' , obs = '$comentario' WHERE id_user='$id'";
 		mysqli_query($connection,$sqledituser2);
 		?>  
 		<div class="container alert alert-success" role="alert">
@@ -233,6 +312,10 @@ if(isset($_POST['edit_user'])) {
 											<span id="confirmMessage" class="confirmMessage"></span>
 										</div>
 									</div> 
+									<div class="form-group row">
+										<label for="text" class="col-4 col-form-label" maxlength="50">Observações</label> 
+										<textarea class="form-control here" row="10" cols="60" name="comentario" ><?php echo $row['obs'];?></textarea>
+									</div>
 									<div class="form-group row">
 										<div class="offset-4 col-8">
 											<button onclick="return confirm('Tem a certeza que quer editar este utilizador?')" name="edit_user" type="submit" class="btn btn-primary">Submeter Alterações</button>

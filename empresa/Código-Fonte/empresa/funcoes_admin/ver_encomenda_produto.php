@@ -44,6 +44,11 @@ $id = $_GET["id_geral"];
 		<br>
 		<div class="container">
 			<strong>Encomenda nº<?php echo $id;?></strong>
+			<?php if($autorizada == '0'){?>
+				<a type="text/html" href="../funcoes_admin/editar_encomenda.php?&id_geral=<?php echo $id?>">Alterar Encomenda</a>
+				<?php
+			}
+			?>
 			<hr>
 			<h5>Nome do Cliente</h5>
 			<div class="form-group row">
@@ -83,7 +88,7 @@ $id = $_GET["id_geral"];
 						<td><?php echo $row_cliente["codigo_produto"]; ?></td>
 						<td><?php echo $row_cliente["nome_produto"]; ?></td>
 						<td><?php echo $row_cliente["valor_s_iva"];?>&euro;</td>
-						<td><input size='1' disabled type="text" value="<?php echo $row_cliente["quantidadeP"]; ?>" min='0' name="qntP[]" max='10'></td></tr>
+						<td><input size='1' disabled type="text" value="<?php echo $row_cliente["quantidadeP"]; ?>" min='0' name="qntP[]" max='100'></td></tr>
 						<?php $total = ($row_cliente["valor_s_iva"] * $row_cliente["quantidadeP"]) +$total;?>
 					</thead>
 					<tbody>
@@ -96,7 +101,7 @@ $id = $_GET["id_geral"];
 								<td><?php echo $row_encomenda["codigo_produto"]; ?></td>
 								<td><?php echo $row_encomenda["nome_produto"]; ?></td>
 								<td><?php echo $row_encomenda["valor_s_iva"];?>&euro;</td>
-								<td><input size='1' disabled type="text" value="<?php echo $row_encomenda["quantidadeP"]; ?>" min='0' name="qntP[]" max='10'></td></tr>
+								<td><input size='1' disabled type="text" value="<?php echo $row_encomenda["quantidadeP"]; ?>" min='0' name="qntP[]" max='100'></td></tr>
 								<?php $total = ($row_encomenda["valor_s_iva"] * $row_encomenda["quantidadeP"]) +$total;
 							}
 						}?>

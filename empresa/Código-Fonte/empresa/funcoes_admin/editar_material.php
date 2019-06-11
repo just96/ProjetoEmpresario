@@ -126,7 +126,7 @@ if(isset($_POST['btnAIM'])){
 						<option value="Mostruarios" <?php if($row["tipo"]=="Mostruarios") echo 'selected="selected"';?>>Mostruarios</option>
 						<option value="Expositores" <?php if($row["tipo"]=="Expositores") echo 'selected="selected"';?>>Expositores</option>
 						<option value="Folhetos" <?php if($row["tipo"]=="Folhetos") echo 'selected="selected"';?>>Folhetos</option>
-						<option value="MaterialTecnico" <?php if($row["tipo"]=="MaterialTecnico") echo 'selected="selected"';?>>Material Tecnico</option>
+						<option value="Material Técnico" <?php if($row["tipo"]=="Material Técnico") echo 'selected="selected"';?>>Material Técnico</option>
 					</select>
 				</div>
 			</div>

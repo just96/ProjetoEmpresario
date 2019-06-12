@@ -315,6 +315,7 @@ if(isset($_POST['edit_user'])) {
 					<div class="card-body">
 						<div class="row">
 							<div class="col-md-12">
+								<strong>*Campos obrigatórios</strong>
 								<hr>
 							</div>
 						</div>
@@ -328,13 +329,13 @@ if(isset($_POST['edit_user'])) {
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="username" class="col-4 col-form-label">Username</label> 
+										<label for="username" class="col-4 col-form-label">Username*</label> 
 										<div class="col-8">
 											<input value="<?php echo $row["nome"]; ?>" name="username" class="form-control here" type="text">
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="select" class="col-4 col-form-label">Cargo</label> 
+										<label for="select" class="col-4 col-form-label">Cargo*</label> 
 										<div class="col-8">
 											<select id="role" name="role" class="custom-select">
 												<option value="Utilizador" <?php if($row["user_type"]=="Utilizador") echo 'selected="selected"';?>>Utilizador</option>

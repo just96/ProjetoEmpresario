@@ -97,32 +97,31 @@ if (mysqli_num_rows($query_username)){
   return;
 }
 
-if (mysqli_num_rows($query_email)){
+if(!empty($email) AND mysqli_num_rows($query_email)){
   ?>
   <div class="container alert alert-danger" role="alert">
     <strong>Email já em uso!</strong>
   </div>
   <?php
-  header("Refresh:2");
+  header("Refresh:2;");
   return;
 }
-
-if (mysqli_num_rows($query_n_telefone)){
+if(!empty($ntele) AND mysqli_num_rows($query_n_telefone)){
   ?>
   <div class="container alert alert-danger" role="alert">
     <strong>Número de Telefone já em uso!</strong>
   </div>
   <?php
-  header("Refresh:2");
+  header("Refresh:2;");
   return;
 }
-if (mysqli_num_rows($query_n_fiscal)){
+if(!empty($nif) AND mysqli_num_rows($query_n_fiscal)){
   ?>
   <div class="container alert alert-danger" role="alert">
     <strong>Número de Identificação Fiscal já em uso!</strong>
   </div>
   <?php
-  header("Refresh:2");
+  header("Refresh:2;");
   return;
 }
 

@@ -17,7 +17,7 @@ if ($row_search['nome'] == 'admin'){
 		Não tem permissão para apagar este utilizador!
 	</div>
 	<?php
-	header('refresh:1;url=../admin/gerir_utilizadores.php');
+	header('refresh:2;url=../admin/gerir_utilizadores.php');
 }
 else
 { 

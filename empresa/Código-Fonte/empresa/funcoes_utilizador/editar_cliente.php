@@ -158,6 +158,7 @@ if(isset($_POST['edit_client'])) {
 		<div class="row">
 			<div class="col-md-9">
 				<div class="card">
+					<strong>*Campos obrigatórios</strong>
 					<div class="card-body">
 						<div class="row">
 						</div>
@@ -165,21 +166,21 @@ if(isset($_POST['edit_client'])) {
 							<div class="col-md-12">
 								<form method="POST" action="#">
 									<div class="form-group row">
-										<label for="text" class="col-4 col-form-label">Nome Fiscal</label> 
+										<label for="text" class="col-4 col-form-label">Nome Fiscal*</label> 
 										<div class="col-8">
-											<input value="<?php echo $row_c["nome_fiscal"]; ?>" name="nome_fiscal" class="form-control here" type="text">
+											<input required value="<?php echo $row_c["nome_fiscal"]; ?>" name="nome_fiscal" class="form-control here" type="text">
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="text" class="col-4 col-form-label">Nome Comercial</label> 
+										<label for="text" class="col-4 col-form-label">Nome Comercial*</label> 
 										<div class="col-8">
-											<input value="<?php echo $row_c["nome_comercial"]; ?>" name="nome_comercial" class="form-control here" type="text">
+											<input required value="<?php echo $row_c["nome_comercial"]; ?>" name="nome_comercial" class="form-control here" type="text">
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="select" class="col-4 col-form-label">Tipo</label> 
+										<label for="select" class="col-4 col-form-label">Tipo*</label> 
 										<div class="col-8">
-											<select name="tipo" class="custom-select">
+											<select name="tipo" class="custom-select" required>
 												<option value="Farmacia"<?php if($row_c["tipo"]=="Farmácia") echo 'selected="selected"';?>>Farmácia</option>
 												<option value="Parafarmacia"<?php if($row_c["tipo"]=="Parafarmácia") echo 'selected="selected"';?>>Parafarmácia</option>
 												<option value="Ouriversaria"<?php if($row_c["tipo"]=="Ouriversaria") echo 'selected="selected"';?>>Ouriversaria</option>
@@ -187,9 +188,9 @@ if(isset($_POST['edit_client'])) {
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="text" class="col-4 col-form-label">Morada</label> 
+										<label for="text" class="col-4 col-form-label">Morada*</label> 
 										<div class="col-8">
-											<input value="<?php echo $row_c["morada"]; ?>"name="morada" class="form-control here" type="text">
+											<input required value="<?php echo $row_c["morada"]; ?>"name="morada" class="form-control here" type="text">
 										</div>
 									</div>
 									<div class="form-group row">
@@ -205,21 +206,21 @@ if(isset($_POST['edit_client'])) {
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="text" class="col-4 col-form-label">NIF</label> 
+										<label for="text" class="col-4 col-form-label">NIF*</label> 
 										<div class="col-8">
-											<input value="<?php echo $row_c["num_fiscal"]; ?>" name="num_fiscal" class="form-control here" type="int" maxlength="9">
+											<input required value="<?php echo $row_c["num_fiscal"]; ?>" name="num_fiscal" class="form-control here" type="int" maxlength="9">
 										</div>
 									</div>  
 									<div class="form-group row">
-										<label for="text" class="col-4 col-form-label">Telefone</label> 
+										<label for="text" class="col-4 col-form-label">Telefone*</label> 
 										<div class="col-8">
-											<input value="<?php echo $row_c["num_telefone"]; ?>" name="num_telefone" class="form-control here" type="int" maxlength="9">
+											<input required value="<?php echo $row_c["num_telefone"]; ?>" name="num_telefone" class="form-control here" type="int" maxlength="9">
 										</div>
 									</div> 
 									<div class="form-group row">
-										<label for="text" class="col-4 col-form-label">Email</label> 
+										<label for="text" class="col-4 col-form-label">Email*</label> 
 										<div class="col-8">
-											<input value="<?php echo $row_c["email"]; ?>" name="email" class="form-control here" type="email">
+											<input required value="<?php echo $row_c["email"]; ?>" name="email" class="form-control here" type="email">
 										</div>
 									</div>
 									<div class="form-group row">

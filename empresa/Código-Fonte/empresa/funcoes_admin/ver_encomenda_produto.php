@@ -45,7 +45,7 @@ $id = $_GET["id_geral"];
 		<div class="container">
 			<strong>Encomenda nº<?php echo $id;?></strong>
 			<?php if($autorizada == '0'){?>
-				<a type="text/html" href="../funcoes_admin/editar_encomenda.php?&id_geral=<?php echo $id?>">Alterar Encomenda</a>
+				<a disabled="disabled" type="text/html" href="../funcoes_admin/editar_encomenda.php?&id_geral=<?php echo $id?>">Alterar Encomenda</a>
 				<?php
 			}
 			?>

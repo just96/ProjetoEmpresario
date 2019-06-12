@@ -153,18 +153,21 @@ if(isset($_POST['btnAI'])){
 				</div>
 			</div>
 			<div class="form-row">
+				<strong>*Campos obrigatórios</strong>
+			</div>
+			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="nome_produto">Nome do Produto</label>
-					<input name ="nome_produto" type="text" class="form-control" value="<?php echo $row["nome_produto"]; ?>">
+					<label for="nome_produto">Nome do Produto*</label>
+					<input required name ="nome_produto" type="text" class="form-control" value="<?php echo $row["nome_produto"]; ?>">
 				</div>
 				<div class="form-group col-md-6">
-					<label for="valor">Preço</label>
-					<input name ="valor" class="form-control" value="<?php echo $row["valor_s_iva"]; ?>" type="number" min="1" max="10000" step="any">
+					<label for="valor">Preço*</label>
+					<input required name ="valor" class="form-control" value="<?php echo $row["valor_s_iva"]; ?>" type="number" min="1" max="10000" step="any">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="codigo_produto">Referência</label>
-				<input name ="codigo_produto" type="text" class="form-control" value="<?php echo $row["codigo_produto"]; ?>">
+				<label for="codigo_produto">Referência*</label>
+				<input required name ="codigo_produto" type="text" class="form-control" value="<?php echo $row["codigo_produto"]; ?>">
 			</div>
 			<div class="form-group row">
 				<label for="descricao" class="col-4 col-form-label">Descrição do Produto</label> 

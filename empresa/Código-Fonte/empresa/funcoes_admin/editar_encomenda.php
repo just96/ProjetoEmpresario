@@ -180,7 +180,7 @@ $id_utilizador = $_SESSION['id'];
 					</div>
 					<div class="form-group row">
 						<div class="offset-4 col-8">
-							<button onclick="return confirm('Tem a certeza que quer editar a encomenda?')" name="edit_encomenda" type="submit" class="btn btn-primary" value="Fazer encomenda">Submeter Alterações</button>
+							<button disabled onclick="return confirm('Tem a certeza que quer editar a encomenda?')" name="edit_encomenda" type="submit" class="btn btn-primary" value="Fazer encomenda">Submeter Alterações</button>
 						</div>
 					</div>
 				</form>

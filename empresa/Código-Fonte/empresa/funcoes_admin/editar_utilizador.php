@@ -73,77 +73,6 @@ if(isset($_POST['edit_user'])) {
 	$query_n_fiscal = mysqli_query($connection,$sql_fetch_n_fiscal);
 	$query_n_telefone = mysqli_query($connection,$sql_fetch_n_telefone);
 
-  // if statments para verificar campos
-	if(!empty($num_fiscal) AND strlen($num_fiscal)<9)
-	{
-		?>
-		<div class="container alert alert-danger" role="alert">
-			NIF tem de ter 9 digitos!
-		</div>
-		<?php
-		header("Refresh:2");
-		return;
-	}
-
-	if(!empty($num_telefone) AND strlen($num_telefone)<9){
-		?>
-		<div class="container alert alert-danger" role="alert">
-			Número de telefone tem de ter 9 digitos!
-		</div>
-		<?php
-		header("Refresh:2");
-		return;
-	}
-
-	if (strlen($username)<=4){
-		?>
-		<div class="container alert alert-danger" role="alert">
-			O nome de utilizador tem de ter pelo menos 5 caracteres.
-		</div>
-		<?php
-		header("Refresh:2");
-		return;
-	}
-
-	if (mysqli_num_rows($query_username)){
-		?>
-		<div class="container alert alert-danger" role="alert">
-			<strong>Nome de utilizador em uso!</strong> 
-		</div>
-		<?php
-		header("Refresh:2");
-		return;
-	}
-
-	if (mysqli_num_rows($query_email)){
-		?>
-		<div class="container alert alert-danger" role="alert">
-			<strong>Email já em uso!</strong>
-		</div>
-		<?php
-		header("Refresh:2");
-		return;
-	}
-
-	if (mysqli_num_rows($query_n_telefone)){
-		?>
-		<div class="container alert alert-danger" role="alert">
-			<strong>Número de Telefone já em uso!</strong>
-		</div>
-		<?php
-		header("Refresh:2");
-		return;
-	}
-	if (mysqli_num_rows($query_n_fiscal)){
-		?>
-		<div class="container alert alert-danger" role="alert">
-			<strong>Número de Identificação Fiscal já em uso!</strong>
-		</div>
-		<?php
-		header("Refresh:2");
-		return;
-	}
-
 	// guarda a password antiga se os campos desta estiverem vazios
 	$sql_pw = "SELECT * FROM `utilizadores` WHERE id_user='$id'";
 	$result_pw=mysqli_query($connection,$sql_pw);
@@ -152,6 +81,76 @@ if(isset($_POST['edit_user'])) {
 
 	if((empty($pw1)) || (empty($pw2))){
 
+		  // if statments para verificar campos
+		if(!empty($num_fiscal) AND strlen($num_fiscal)<9)
+		{
+			?>
+			<div class="container alert alert-danger" role="alert">
+				NIF tem de ter 9 digitos!
+			</div>
+			<?php
+			header("Refresh:2");
+			return;
+		}
+
+		if(!empty($num_telefone) AND strlen($num_telefone)<9){
+			?>
+			<div class="container alert alert-danger" role="alert">
+				Número de telefone tem de ter 9 digitos!
+			</div>
+			<?php
+			header("Refresh:2");
+			return;
+		}
+
+		if (strlen($username)<=4){
+			?>
+			<div class="container alert alert-danger" role="alert">
+				O nome de utilizador tem de ter pelo menos 5 caracteres.
+			</div>
+			<?php
+			header("Refresh:2");
+			return;
+		}
+
+		if (mysqli_num_rows($query_username)){
+			?>
+			<div class="container alert alert-danger" role="alert">
+				<strong>Nome de utilizador em uso!</strong> 
+			</div>
+			<?php
+			header("Refresh:2");
+			return;
+		}
+
+		if(!empty($email) AND mysqli_num_rows($query_email)){
+			?>
+			<div class="container alert alert-danger" role="alert">
+				<strong>Email já em uso!</strong>
+			</div>
+			<?php
+			header("Refresh:2;");
+			return;
+		}
+		if(!empty($n_telefone) AND mysqli_num_rows($query_n_telefone)){
+			?>
+			<div class="container alert alert-danger" role="alert">
+				<strong>Número de Telefone já em uso!</strong>
+			</div>
+			<?php
+			header("Refresh:2;");
+			return;
+		}
+		if(!empty($n_fiscal) AND mysqli_num_rows($query_n_fiscal)){
+			?>
+			<div class="container alert alert-danger" role="alert">
+				<strong>Número de Identificação Fiscal já em uso!</strong>
+			</div>
+			<?php
+			header("Refresh:2;");
+			return;
+		}
+
 		$sqledituser1 = "UPDATE `utilizadores` SET nome_completo='$nome_completo', nome='$username', email='$email', num_fiscal='$num_fiscal', num_telefone='$num_telefone', password='$pw' , editado = '$editado' , user_type = '$role' , obs = '$comentario' WHERE id_user='$id'";
 		mysqli_query($connection,$sqledituser1);
 		?>  
@@ -159,12 +158,8 @@ if(isset($_POST['edit_user'])) {
 			Alterações guardadas!
 		</div>
 		<?php
-		$_SESSION['role'] = $role;
-		if($_SESSION['id'] == '$id' && $role == 'Utilizador'){
-			header('Location:../admin/logout.php');
-		}else{
-			header('refresh:2;url=../admin/gerir_utilizadores.php');
-		}
+		header('refresh:2;url=../admin/gerir_utilizadores.php');
+		return;
 	}else{
 		$error="";
 
@@ -224,6 +219,76 @@ if(isset($_POST['edit_user'])) {
 			return;
 		}
 
+		  // if statments para verificar campos
+		if(!empty($num_fiscal) AND strlen($num_fiscal)<9)
+		{
+			?>
+			<div class="container alert alert-danger" role="alert">
+				NIF tem de ter 9 digitos!
+			</div>
+			<?php
+			header("Refresh:2");
+			return;
+		}
+
+		if(!empty($num_telefone) AND strlen($num_telefone)<9){
+			?>
+			<div class="container alert alert-danger" role="alert">
+				Número de telefone tem de ter 9 digitos!
+			</div>
+			<?php
+			header("Refresh:2");
+			return;
+		}
+
+		if (strlen($username)<=4){
+			?>
+			<div class="container alert alert-danger" role="alert">
+				O nome de utilizador tem de ter pelo menos 5 caracteres.
+			</div>
+			<?php
+			header("Refresh:2");
+			return;
+		}
+
+		if (mysqli_num_rows($query_username)){
+			?>
+			<div class="container alert alert-danger" role="alert">
+				<strong>Nome de utilizador em uso!</strong> 
+			</div>
+			<?php
+			header("Refresh:2");
+			return;
+		}
+
+		if(!empty($email) AND mysqli_num_rows($query_email)){
+			?>
+			<div class="container alert alert-danger" role="alert">
+				<strong>Email já em uso!</strong>
+			</div>
+			<?php
+			header("Refresh:2;");
+			return;
+		}
+		if(!empty($n_telefone) AND mysqli_num_rows($query_n_telefone)){
+			?>
+			<div class="container alert alert-danger" role="alert">
+				<strong>Número de Telefone já em uso!</strong>
+			</div>
+			<?php
+			header("Refresh:2;");
+			return;
+		}
+		if(!empty($n_fiscal) AND mysqli_num_rows($query_n_fiscal)){
+			?>
+			<div class="container alert alert-danger" role="alert">
+				<strong>Número de Identificação Fiscal já em uso!</strong>
+			</div>
+			<?php
+			header("Refresh:2;");
+			return;
+		}
+
 		$pw1= md5($pw1);
 		$pw2 = md5($pw2);
 		$sqledituser2 = "UPDATE `utilizadores` SET nome_completo='$nome_completo', nome='$username', email='$email', num_fiscal='$num_fiscal', num_telefone='$num_telefone', password='$pw1' , editado = '$editado' , user_type = '$role' , obs = '$comentario' WHERE id_user='$id'";
@@ -233,12 +298,8 @@ if(isset($_POST['edit_user'])) {
 			Alterações guardadas!
 		</div>
 		<?php
-		$_SESSION['role'] = $role;
-		if($_SESSION['id'] == '$id' && $role == 'Utilizador'){
-			header('refresh:2;url=../admin/logout.php');
-		}else{
-			header('refresh:2;url=../admin/gerir_utilizadores.php');
-		}
+		header('refresh:2;url=../admin/gerir_utilizadores.php');
+		return;
 	}
 }
 
